@@ -1,12 +1,12 @@
 module.exports = {
   siteMetadata: {
-    title: `Personal curriculum vitae`,
+    title: `Chomat.tech blog`,
     author: {
       name: `Daniel Chomat`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      summary: `Overall playground for all things code and web development`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
+    description: `This is a blog with quick tips, information about it's creator and his journey through the world. Also his playground to try stuff.`,
+    siteUrl: `https://chomat.tech`,
     social: {
       instagram: `dribbbletocode`,
     },
@@ -57,14 +57,14 @@ module.exports = {
         //trackingId: `ADD YOUR TRACKING ID HERE`,
       },
     },
-    `gatsby-plugin-feed`,
+    // `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `chomat.tech Blog`,
+        short_name: `chomat.tech`,
         start_url: `/`,
-        background_color: `#ffffff`,
+        background_color: `#000`,
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `content/assets/gatsby-icon.png`,
@@ -72,9 +72,11 @@ module.exports = {
     },
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-plugin-typography`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        pathToConfigModule: `src/utils/typography`,
+        defaultLayouts: {
+          default: require.resolve(`./src/components/layout.js`),
+        },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

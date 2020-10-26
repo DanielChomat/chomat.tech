@@ -1,26 +1,26 @@
 import React from "react"
+import styled from "styled-components"
 
-import { rhythm } from "../utils/typography"
 import Footer from "./Footer"
 import Header from "./Header"
 import GlobalStyles from "../styles/GlobalStyles"
 
 const Layout = ({ location, title, children }) => {
+  const Main = styled.main`
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  `
+
   return (
     <>
       <GlobalStyles />
-      <div
-        style={{
-          marginLeft: `auto`,
-          marginRight: `auto`,
-          maxWidth: rhythm(24),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-        }}
-      >
-        <Header location={location} title={title} />
-        <main>{children}</main>
-        <Footer />
-      </div>
+      <Header location={location} title={title} />
+      <Main>{children}</Main>
+      <Footer />
     </>
   )
 }
