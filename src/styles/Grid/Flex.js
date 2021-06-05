@@ -2,5 +2,6 @@ import styled from "styled-components"
 
 export const Flex = styled.div`
   display: flex;
-  background-color: green;
+  justify-content: ${prop => prop.justifyContent ?? "stretch"};
+  align-items: ${prop => prop.alignItems ?? "stretch"};
 `

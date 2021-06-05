@@ -2,27 +2,41 @@ import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 
-const Header = ({ location, title }) => {
-  const rootPath = `${__PATH_PREFIX__}/`
-  let header
+const HeaderContainer = styled.nav`
+  position: absolute;
+  width: 100%;
 
-  const HeaderContainer = styled.nav`
-    position: absolute;
-    width: 100%;
-    height: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 
+  padding: 2.4rem 3rem;
+
+  .header__logo {
+    font-size: 4rem;
+  }
+
+  ul {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
 
-    padding-right: 2rem;
-    padding-left: 2rem;
+    gap: 4ch;
 
-    .header__logo {
-      font-size: 4rem;
+    li {
+      a {
+        font-size: 2.8rem;
+
+        font-weight: 500;
+      }
     }
-  `
+  }
+`
+
+const Header = ({ location, title }) => {
+  const rootPath = `${__PATH_PREFIX__}/`
+  let header
 
   if (location.pathname === rootPath) {
     header = (
@@ -66,13 +80,13 @@ const Header = ({ location, title }) => {
   return (
     <HeaderContainer>
       <Link to={"/"} className={"header__logo"}>
-        <span role={"img"} aria-label={"Shaka!"}>
+        <span role={"img"} aria-label={"Shaka!"} id={header}>
           🤙
         </span>
       </Link>
-      <ul>
+      {/*<ul>
         <li>
-          <Link to={"#words"}>Words</Link>
+          <Link to={"#about"}>About</Link>
         </li>
         <li>
           <Link to={"#experience"}>Experience</Link>
@@ -83,7 +97,7 @@ const Header = ({ location, title }) => {
         <li>
           <Link to={"/blog"}>Blog</Link>
         </li>
-      </ul>
+      </ul>*/}
     </HeaderContainer>
   )
 }

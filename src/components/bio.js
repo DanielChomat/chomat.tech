@@ -6,8 +6,9 @@
  */
 
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import Image from "gatsby-image"
+import { graphql, useStaticQuery } from "gatsby"
+import { Github, Instagram, LinkedIn, OneUp } from "./Icons"
+import { Flex } from "../styles/Grid"
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -26,6 +27,8 @@ const Bio = () => {
             summary
           }
           social {
+            linkedin
+            github
             instagram
           }
         }
@@ -35,31 +38,70 @@ const Bio = () => {
 
   const { author, social } = data.site.siteMetadata
   return (
-    <div
-      style={{
-        display: `flex`,
-      }}
-    >
-      <Image
-        fixed={data.avatar.childImageSharp.fixed}
-        alt={author.name}
-        style={{
-          marginBottom: 0,
-          minWidth: 50,
-          borderRadius: `100%`,
-        }}
-        imgStyle={{
-          borderRadius: `50%`,
-        }}
-      />
-      <p>
-        Written by <strong>{author.name}</strong> {author.summary}
-        {` `}
-        <a href={`https://instagram.com/${social.instagram}`}>
-          You should follow him on Instagram
-        </a>
-      </p>
-    </div>
+    <section>
+      {/*<Image*/}
+      {/*  fixed={data.avatar.childImageSharp.fixed}*/}
+      {/*  alt={author.name}*/}
+      {/*  style={{*/}
+      {/*    marginBottom: 0,*/}
+      {/*    minWidth: 50,*/}
+      {/*    borderRadius: `100%`,*/}
+      {/*  }}*/}
+      {/*  imgStyle={{*/}
+      {/*    borderRadius: `50%`,*/}
+      {/*  }}*/}
+      {/*/>*/}
+      <h1>Hi, I'm Daniel</h1>
+      <h3>A front-end Dev based in Prague</h3>
+      <h4>
+        Currently working{" "}
+        <a
+          href={"https://refresh.cz/"}
+          rel={"noopener noreferrer"}
+          target={"_blank"}
+        >
+          @Refresh.cz
+        </a>{" "}
+        <br />
+        and <OneUp />
+        -ping my online presence with{" "}
+        <a href={"#projects"}>personal projects</a>.
+      </h4>
+
+      <Flex
+        style={{ width: "50%", marginTop: "3rem" }}
+        justifyContent={"space-evenly"}
+        alignItems={"center"}
+      >
+        {social.linkedin && (
+          <a
+            href={`https://linkedin.com/in/${social.linkedin}/`}
+            rel={"noopener noreferrer"}
+            target={"_blank"}
+          >
+            <LinkedIn width={"4.8rem"} height={"4.8rem"} />
+          </a>
+        )}
+        {social.github && (
+          <a
+            href={`https://github.com/${social.github}/`}
+            rel={"noopener noreferrer"}
+            target={"_blank"}
+          >
+            <Github width={"4.8rem"} height={"4.8rem"} />
+          </a>
+        )}
+        {social.instagram && (
+          <a
+            href={`https://instagram.com/${social.instagram}/`}
+            rel={"noopener noreferrer"}
+            target={"_blank"}
+          >
+            <Instagram width={"4.8rem"} height={"4.8rem"} />
+          </a>
+        )}
+      </Flex>
+    </section>
   )
 }
 

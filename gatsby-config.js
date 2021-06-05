@@ -8,10 +8,19 @@ module.exports = {
     description: `This is a blog with quick tips, information about it's creator and his journey through the world. Also his playground to try stuff.`,
     siteUrl: `https://chomat.tech`,
     social: {
-      instagram: `dribbbletocode`,
+      linkedin: "danielchomat",
+      github: "DanielChomat",
+      instagram: ``,
     },
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Yanone Kaffeesatz: 100, 200, 300, 400, 500, 600, 700`],
+        display: `swap`,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -51,12 +60,6 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-styled-components`,
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
-      },
-    },
     // `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
