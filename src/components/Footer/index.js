@@ -6,7 +6,7 @@ const FooterContainer = styled.footer`
   bottom: 0;
   left: 0;
 
-  padding: 1rem 2.4rem;
+  padding: 1rem 2.4rem 1rem 0;
 `
 
 const Footer = () => {

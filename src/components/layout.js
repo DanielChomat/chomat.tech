@@ -6,11 +6,13 @@ import Header from "./Header"
 import GlobalStyles from "../styles/GlobalStyles"
 
 const Main = styled.main`
-  min-height: 100%;
+  min-height: calc(84vh - 60px);
   width: 100%;
   max-width: 90vw;
   margin: 0 auto;
   padding-top: 16vh;
+  padding-bottom: 60px;
+  position: relative;
   gap: 3.6rem;
 
   display: flex;
