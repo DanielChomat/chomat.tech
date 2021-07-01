@@ -134,12 +134,6 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
-  section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
   h1, h2, h3, h4 {
     text-align: center;
 
@@ -162,7 +156,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   h3 {
-    font-size: 4.8rem;
+    font-size: 3.6rem;
     line-height: 1.2;
     margin-bottom: 1rem;
   }

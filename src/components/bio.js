@@ -36,9 +36,9 @@ const Bio = () => {
     }
   `)
 
-  const { author, social } = data.site.siteMetadata
+  const { social } = data.site.siteMetadata
   return (
-    <section>
+    <Flex as={"section"} flexDirection={"column"} alignItems={"center"}>
       {/*<Image*/}
       {/*  fixed={data.avatar.childImageSharp.fixed}*/}
       {/*  alt={author.name}*/}
@@ -52,7 +52,7 @@ const Bio = () => {
       {/*  }}*/}
       {/*/>*/}
       <h1>Hi, I'm Daniel</h1>
-      <h3>A front-end Dev based in Prague</h3>
+      <h2>A front-end Dev based in Prague</h2>
       <h4>
         Currently working{" "}
         <a
@@ -101,7 +101,7 @@ const Bio = () => {
           </a>
         )}
       </Flex>
-    </section>
+    </Flex>
   )
 }
 

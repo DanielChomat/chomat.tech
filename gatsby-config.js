@@ -17,7 +17,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`Yanone Kaffeesatz: 100, 200, 300, 400, 500, 600, 700`],
+        fonts: [`Yanone Kaffeesatz: 200, 300, 400, 500, 600, 700`],
         display: `swap`,
       },
     },
@@ -70,7 +70,7 @@ module.exports = {
         background_color: `#000`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/shaka-emoji.png`,
       },
     },
     `gatsby-plugin-react-helmet`,
