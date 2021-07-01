@@ -79,8 +79,6 @@ export const Experience = styled.article`
         width: 16px;
         height: 16px;
         display: block;
-        background-image: url(${require("../../../content/assets/triangle.svg")
-          .default});
         background-image: url(${require("../../../content/assets/arrow-sketch.svg")
           .default});
         background-size: contain;
