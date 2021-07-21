@@ -1,12 +1,25 @@
 import styled from "styled-components"
 
 export const Experience = styled.article`
-  max-width: calc(33% - 20px);
-  flex: 0 1 calc(33% - 20px);
+  flex: 1 1 calc(33% - 20px);
   background-color: #fff;
   border-radius: 20px;
   padding: 1.6rem 2.4rem;
   position: relative;
+
+  color: var(--color-black);
+
+  &:first-of-type {
+    flex-basis: 100%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    flex-basis: calc(50% - 20px);
+  }
+
+  @media only screen and (max-width: 567px) {
+    flex-basis: 100%;
+  }
 
   h3,
   h4,
@@ -27,6 +40,8 @@ export const Experience = styled.article`
   }
 
   h4 {
+    color: var(--color-purple);
+
     small {
       font-size: 0.5em;
     }
@@ -68,6 +83,8 @@ export const Experience = styled.article`
       gap: 4px;
       cursor: pointer;
 
+      color: var(--color-purple);
+
       &:hover {
         &::before {
           transform: rotate(-55deg) scale(1.2);
@@ -104,8 +121,8 @@ export const Experience = styled.article`
     margin-bottom: 0.8rem;
 
     span {
-      color: #00d4ff;
-      background-color: #a25fe4;
+      color: var(--color-purple);
+      background-color: var(--color-yellow);
       border-radius: 5px;
       text-align: center;
       padding: 6px 8px;

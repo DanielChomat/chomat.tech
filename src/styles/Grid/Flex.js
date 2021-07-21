@@ -6,4 +6,5 @@ export const Flex = styled.div`
   align-items: ${prop => prop.alignItems ?? "stretch"};
   flex-direction: ${prop => prop.flexDirection ?? "row"};
   flex-wrap: ${prop => prop.flexWrap ?? "wrap"};
+  gap: ${prop => prop.gap ?? 0};
 `

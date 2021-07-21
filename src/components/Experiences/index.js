@@ -10,6 +10,7 @@ const Experiences = () => {
       justifyContent={"space-between"}
       alignItems={"flex-start"}
       width={"100%"}
+      gap={"30px"}
     >
       <Experience>
         <h3>
@@ -57,8 +58,11 @@ const Experiences = () => {
 
         <h5>Tech used</h5>
         <section>
-          <span>Wordpress</span>
+          <span>SCSS</span>
+          <span>CSS Grid</span>
           <span>Bootstrap</span>
+          <span>Vanilla JS</span>
+          <span>Wordpress plugins</span>
         </section>
 
         <h5>Projects</h5>
@@ -75,7 +79,7 @@ const Experiences = () => {
         </h3>
 
         <h4>
-          Unicorn <small>(International 🇨🇿 Software Company)</small>
+          Unicorn <small>(🇨🇿 International Software Company)</small>
         </h4>
         <h5>2017 - 2018</h5>
 
@@ -87,11 +91,11 @@ const Experiences = () => {
         </details>
         <h5>Tech used</h5>
         <section>
+          <span>Java</span>
           <span>JIRA</span>
           <span>Confluence</span>
           <span>Bitbucket</span>
           <span>Bamboo</span>
-          <span>Java</span>
         </section>
       </Experience>
     </Flex>

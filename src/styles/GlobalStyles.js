@@ -54,18 +54,27 @@ const GlobalStyles = createGlobalStyle`
   }
 
   html {
-    --colorMain: purple;
+    --color-purple: purple;
 
     --colorPrimary: #FFF;
 
-    // Background gradient colors 
-    --bgColorGreen: #1CC761;
-    --bgColorYellow: #FFDC10;
-    --bgColorBlack: #1A1A18;
-    --bgColorRed: #FE8280;
-    --bgColorBlueLight: #00D4FF;
-    --bgColorBlue: #34CEFF;
-    --bgColorPurple: #A25FE4;
+    --amethyst: #9b5de5ff;
+    --magenta-crayola: #f15bb5ff;
+    --minion-yellow: #fee440ff;
+    --capri: #00bbf9ff;
+    --sea-green-crayola: #00f5d4ff;
+    --raisin-black: #212738ff;
+    --lavender-web: #e1dee9ff;
+    --red-orange-color-wheel: #fb5012ff;
+    
+    --color-white: var(--lavender-web);
+    --color-black: var(--raisin-black);
+    --color-green: var(--sea-green-crayola);
+    --color-yellow: var(--minion-yellow);
+    --color-blue: var(--capri);
+    --color-blue-light: var(--capri);
+    --color-red: var(--magenta-crayola);
+    --color-purple: var(--amethyst);
 
     --baseFontSize: 62.5%;
 
@@ -80,7 +89,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     min-height: 100vh;
     height: 100%;
-    color: purple;
+    color: var(--color-purple);
 
     font-family: 'Yanone Kaffeesatz', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -90,12 +99,12 @@ const GlobalStyles = createGlobalStyle`
 
     font-size: 1.6rem;
 
-    background: linear-gradient(195deg, transparent 0%, var(--bgColorRed, #FCD45C) 0%, var(--bgColorRed, #FCD45C) 220px, transparent 221px) no-repeat,
-    linear-gradient(145deg, transparent 0%, var(--bgColorPurple, #A25FE4) 0%, var(--bgColorPurple, #A25FE4) 170px, transparent 171px) no-repeat,
-    linear-gradient(10deg, transparent 0%, var(--bgColorYellow, #1CC761) 0%, var(--bgColorYellow, #1CC761) 170px, transparent 171px) no-repeat,
-    linear-gradient(60deg, transparent 0%, var(--bgColorBlueLight, #00D4FF) 0%, var(--bgColorBlueLight, #00D4FF) 230px, transparent 231px) no-repeat,
-    linear-gradient(-70deg, transparent 0%, var(--bgColorGreen, #FE8280) 0%, var(--bgColorGreen, #FE8280) 170px, transparent 171px) no-repeat,
-    #d1efed no-repeat;
+    background: linear-gradient(195deg, transparent 0%, var(--color-red, #FCD45C) 0%, var(--color-red, #FCD45C) 220px, transparent 221px) no-repeat,
+    linear-gradient(145deg, transparent 0%, var(--color-purple, #A25FE4) 0%, var(--color-purple, #A25FE4) 170px, transparent 171px) no-repeat,
+    linear-gradient(10deg, transparent 0%, var(--color-yellow, #1CC761) 0%, var(--color-yellow, #1CC761) 170px, transparent 171px) no-repeat,
+    linear-gradient(60deg, transparent 0%, var(--color-blue-light, #00D4FF) 0%, var(--color-blue-light, #00D4FF) 230px, transparent 231px) no-repeat,
+    linear-gradient(-70deg, transparent 0%, var(--color-green, #FE8280) 0%, var(--color-green, #FE8280) 170px, transparent 171px) no-repeat,
+    var(--color-white) no-repeat;
   }
 
   a {
@@ -119,7 +128,7 @@ const GlobalStyles = createGlobalStyle`
       width: 0;
       height: .15em;
 
-      background-color: var(--bgColorGreen);
+      background-color: var(--color-green);
       transition: all 250ms ease-in-out;
       border-radius: .2em;
     }
@@ -166,6 +175,16 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.3;
     margin-bottom: 1rem;
   }
+
+  /*svg circle {
+    stroke-dasharray: 301.59px 301.59px;
+    stroke-dashoffset: 301.59px;
+    transition: all 0.8s;
+    transition-timing-function: cubic-bezier(.4,.08,0,.97);
+  }
+  svg:hover circle {
+    stroke-dashoffset: 0;
+  }*/
 `
 
 export default GlobalStyles
