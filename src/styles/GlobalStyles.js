@@ -54,9 +54,6 @@ const GlobalStyles = createGlobalStyle`
   }
 
   html {
-    --color-purple: purple;
-
-    --colorPrimary: #FFF;
 
     --amethyst: #9b5de5ff;
     --magenta-crayola: #f15bb5ff;
@@ -64,10 +61,10 @@ const GlobalStyles = createGlobalStyle`
     --capri: #00bbf9ff;
     --sea-green-crayola: #00f5d4ff;
     --raisin-black: #212738ff;
-    --lavender-web: #e1dee9ff;
+    --ghost-white: #f7f7ffff;
     --red-orange-color-wheel: #fb5012ff;
     
-    --color-white: var(--lavender-web);
+    --color-white: var(--ghost-white);
     --color-black: var(--raisin-black);
     --color-green: var(--sea-green-crayola);
     --color-yellow: var(--minion-yellow);
@@ -99,12 +96,22 @@ const GlobalStyles = createGlobalStyle`
 
     font-size: 1.6rem;
 
-    background: linear-gradient(195deg, transparent 0%, var(--color-red, #FCD45C) 0%, var(--color-red, #FCD45C) 220px, transparent 221px) no-repeat,
+    background: linear-gradient(195deg, transparent 0%, var(--color-green, #FCD45C) 0%, var(--color-green, #FCD45C) 220px, transparent 221px) no-repeat,
     linear-gradient(145deg, transparent 0%, var(--color-purple, #A25FE4) 0%, var(--color-purple, #A25FE4) 170px, transparent 171px) no-repeat,
     linear-gradient(10deg, transparent 0%, var(--color-yellow, #1CC761) 0%, var(--color-yellow, #1CC761) 170px, transparent 171px) no-repeat,
     linear-gradient(60deg, transparent 0%, var(--color-blue-light, #00D4FF) 0%, var(--color-blue-light, #00D4FF) 230px, transparent 231px) no-repeat,
-    linear-gradient(-70deg, transparent 0%, var(--color-green, #FE8280) 0%, var(--color-green, #FE8280) 170px, transparent 171px) no-repeat,
+    linear-gradient(-70deg, transparent 0%, var(--color-red, #FE8280) 0%, var(--color-red, #FE8280) 170px, transparent 171px) no-repeat,
     var(--color-white) no-repeat;
+    
+    
+    @media only screen and (max-width: 567px) {
+      background: linear-gradient(195deg, transparent 0%, var(--color-green, #FCD45C) 0%, var(--color-green, #FCD45C) 28vw, transparent calc(28vw + 1px)) no-repeat,
+      linear-gradient(145deg, transparent 0%, var(--color-purple, #A25FE4) 0%, var(--color-purple, #A25FE4) 20vw, transparent calc(20vw + 1px)) no-repeat,
+      linear-gradient(10deg, transparent 0%, var(--color-yellow, #1CC761) 0%, var(--color-yellow, #1CC761) 170px, transparent 171px) no-repeat,
+      linear-gradient(60deg, transparent 0%, var(--color-blue-light, #00D4FF) 0%, var(--color-blue-light, #00D4FF) 230px, transparent 231px) no-repeat,
+      linear-gradient(-70deg, transparent 0%, var(--color-red, #FE8280) 0%, var(--color-red, #FE8280) 170px, transparent 171px) no-repeat,
+      var(--color-white) no-repeat;
+    }
   }
 
   a {
@@ -174,6 +181,10 @@ const GlobalStyles = createGlobalStyle`
     font-size: 2.4rem;
     line-height: 1.3;
     margin-bottom: 1rem;
+  }
+  
+  .text-left {
+    text-align: left;
   }
 
   /*svg circle {

@@ -5,6 +5,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Experiences from "../components/Experiences"
+import Projects from "../components/Projects"
 
 const titleClaims = "Why u here?! Wanna hire me?! 🥴 Hit me up on my socials!"
 
@@ -27,6 +28,7 @@ const HomePage = ({ data, location }) => {
       <Seo title={titleClaims} />
       <Bio />
       <Experiences />
+      <Projects />
     </Layout>
   )
 }

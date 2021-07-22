@@ -4,7 +4,7 @@ import { Experience } from "../../styles/Experiences"
 import Refresh from "../Icons/assets/Refresh"
 import { Unicorn } from "../Icons"
 
-const experiencesData = [
+const projectsData = [
   {
     position: "Front-End Web Developer",
     company: {
@@ -61,17 +61,17 @@ const experiencesData = [
   },
 ]
 
-const Experiences = () => {
+const Projects = () => {
   return (
     <section>
-      <h2 className={"text-left"}>Experiences</h2>
+      <h2 className={"text-left"}>Projects to show-off with</h2>
       <Flex
         justifyContent={"space-between"}
         alignItems={"flex-start"}
         width={"100%"}
         gap={"30px"}
       >
-        {experiencesData.map(experience => (
+        {projectsData.map(experience => (
           <Experience>
             <h3>
               {experience.position} {experience.company?.logo}
@@ -122,4 +122,4 @@ const Experiences = () => {
   )
 }
 
-export default Experiences
+export default Projects

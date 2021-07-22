@@ -9,8 +9,38 @@ export const Experience = styled.article`
 
   color: var(--color-black);
 
+  box-shadow: #64646f33 0px 7px 29px 0px;
+
   &:first-of-type {
     flex-basis: 100%;
+
+    animation-name: boxShadowRainbow;
+    animation-fill-mode: both;
+    animation-duration: 7000ms;
+    animation-delay: 500ms;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes boxShadowRainbow {
+    0% {
+      box-shadow: var(--color-green) 0px 7px 29px 0px;
+    }
+
+    33% {
+      box-shadow: var(--color-red) 0px 7px 29px 0px;
+    }
+
+    66% {
+      box-shadow: var(--color-purple) 0px 7px 29px 0px;
+    }
+
+    99% {
+      box-shadow: var(--color-green) 0px 7px 29px 0px;
+    }
+
+    100% {
+      box-shadow: var(--color-green) 0px 7px 29px 0px;
+    }
   }
 
   @media only screen and (max-width: 768px) {
