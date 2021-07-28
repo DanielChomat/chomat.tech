@@ -9,17 +9,24 @@ export const Experience = styled.article`
 
   color: var(--color-black);
 
+  --experience-box-shadow: var(--color-green) 0px 7px 29px 0px;
+
   box-shadow: #64646f33 0px 7px 29px 0px;
 
-  &:first-of-type {
+  ${props =>
+    props.featured
+      ? `
     flex-basis: 100%;
+
+    box-shadow: var(--color-green) 0px 7px 29px 0px;
 
     animation-name: boxShadowRainbow;
     animation-fill-mode: both;
     animation-duration: 7000ms;
     animation-delay: 500ms;
     animation-iteration-count: infinite;
-  }
+  `
+      : ""}
 
   @keyframes boxShadowRainbow {
     0% {
@@ -61,11 +68,17 @@ export const Experience = styled.article`
 
   h3 {
     display: flex;
-    justify-content: space-between;
+    align-items: flex-start;
     flex-wrap: nowrap;
 
+    div {
+      display: flex;
+      gap: 1.6rem;
+      margin-left: auto;
+    }
+
     svg {
-      height: 4rem;
+      height: ${props => (props.project ? "2.4rem" : "4rem")};
     }
   }
 

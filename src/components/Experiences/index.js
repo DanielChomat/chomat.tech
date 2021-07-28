@@ -7,9 +7,11 @@ import { Unicorn } from "../Icons"
 const experiencesData = [
   {
     position: "Front-End Web Developer",
+    featured: true,
     company: {
       name: "Refresh",
       logo: <Refresh />,
+      link: "https://refresh.cz/",
       description: "Prague Digital Agency",
     },
     time: {
@@ -26,8 +28,9 @@ const experiencesData = [
   },
   {
     position: "Freelance Web Developer",
+    featured: false,
     company: {
-      name: "SocialSharks",
+      name: "Various clients",
     },
     time: {
       start: 2018,
@@ -42,9 +45,11 @@ const experiencesData = [
   },
   {
     position: "Developer",
+    featured: false,
     company: {
       name: "Unicorn",
       logo: <Unicorn />,
+      link: "https://unicorn.com/",
       description: "🇨🇿 International Software Company",
     },
     time: {
@@ -72,9 +77,20 @@ const Experiences = () => {
         gap={"30px"}
       >
         {experiencesData.map(experience => (
-          <Experience>
+          <Experience featured={experience.featured}>
             <h3>
-              {experience.position} {experience.company?.logo}
+              {experience.position}
+              {(experience.company?.link || experience.company?.logo) && (
+                <div>
+                  <a
+                    href={experience.company?.link}
+                    target={"_blank"}
+                    rel={"noopener noreferrer"}
+                  >
+                    {experience.company?.logo}
+                  </a>
+                </div>
+              )}
             </h3>
             {experience.company ? (
               <h4>

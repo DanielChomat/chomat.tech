@@ -7,7 +7,8 @@ import Seo from "../components/seo"
 import Experiences from "../components/Experiences"
 import Projects from "../components/Projects"
 
-const titleClaims = "Why u here?! Wanna hire me?! 🥴 Hit me up on my socials!"
+const titleClaims =
+  "Hi there! Welcome! Please be patient, this page is still a WIP. Thank you! "
 
 const HomePage = ({ data, location }) => {
   // const posts = data.allMarkdownRemark.edges

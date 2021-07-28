@@ -63,7 +63,7 @@ const GlobalStyles = createGlobalStyle`
     --raisin-black: #212738ff;
     --ghost-white: #f7f7ffff;
     --red-orange-color-wheel: #fb5012ff;
-    
+
     --color-white: var(--ghost-white);
     --color-black: var(--raisin-black);
     --color-green: var(--sea-green-crayola);
@@ -102,8 +102,8 @@ const GlobalStyles = createGlobalStyle`
     linear-gradient(60deg, transparent 0%, var(--color-blue-light, #00D4FF) 0%, var(--color-blue-light, #00D4FF) 230px, transparent 231px) no-repeat,
     linear-gradient(-70deg, transparent 0%, var(--color-red, #FE8280) 0%, var(--color-red, #FE8280) 170px, transparent 171px) no-repeat,
     var(--color-white) no-repeat;
-    
-    
+
+
     @media only screen and (max-width: 567px) {
       background: linear-gradient(195deg, transparent 0%, var(--color-green, #FCD45C) 0%, var(--color-green, #FCD45C) 28vw, transparent calc(28vw + 1px)) no-repeat,
       linear-gradient(145deg, transparent 0%, var(--color-purple, #A25FE4) 0%, var(--color-purple, #A25FE4) 20vw, transparent calc(20vw + 1px)) no-repeat,
@@ -138,6 +138,24 @@ const GlobalStyles = createGlobalStyle`
       background-color: var(--color-green);
       transition: all 250ms ease-in-out;
       border-radius: .2em;
+    }
+
+    &[target="_blank"] {
+      &::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 1.8rem;
+        height: 1.8rem;
+        //background-color: red;
+        border-radius: 4px;
+
+        background: url(${
+          require("../../content/assets/resize.svg").default
+        }) no-repeat 65% / 14px 14px, #21273880;
+      }
+
     }
 
     &:hover {
@@ -182,7 +200,7 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.3;
     margin-bottom: 1rem;
   }
-  
+
   .text-left {
     text-align: left;
   }
