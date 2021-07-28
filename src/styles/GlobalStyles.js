@@ -151,9 +151,21 @@ const GlobalStyles = createGlobalStyle`
         //background-color: red;
         border-radius: 4px;
 
+        opacity: 0;
+        visibility: hidden;
+
+        transition: all 250ms ease-in-out;
+
         background: url(${
           require("../../content/assets/resize.svg").default
         }) no-repeat 65% / 14px 14px, #21273880;
+      }
+
+      &:hover {
+        &::before {
+          opacity: 1;
+          visibility: visible;
+        }
       }
 
     }

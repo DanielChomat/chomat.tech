@@ -1,8 +1,6 @@
 import React from "react"
 import { Flex } from "../../styles/Grid"
 import { Experience } from "../../styles/Experiences"
-import Refresh from "../Icons/assets/Refresh"
-import { Unicorn } from "../Icons"
 
 const projectsData = [
   {
