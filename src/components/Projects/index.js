@@ -17,8 +17,8 @@ const projectsData = [
     },
     details: {
       summary: "Creating a bunch of Landing Pages for a social media agency",
-      content:
-        "Thanks to my contacts I had the opportunity to put my CSS skills to the test with some landing pages for a media agency SocialSharks. As we all know, these agencies don't create easy to code landing pages, but more complex, design-focused ones. Due to a tight deadline, I spent a long consecutive time creating them. Some of the clients include Freedom Music, Marilla or Lloyd.",
+      content: `
+      Thanks to my contacts I have had the opportunity to put my CSS skills to the test with some landing pages for a media agency SocialSharks. <br/><br/>As we all know, these agencies don't create easy to code landing pages, but rather more complex, design-focused ones. Due to a tight deadline, I spent a long consecutive time creating them. <br/><br/>Some of the clients include Freedom Music, Marilla or Lloyd.`,
     },
     projects: ["Design-focused Landing Pages", "Working in a tight deadline"],
     tech: ["SCSS", "PHP"],
@@ -184,10 +184,12 @@ const Projects = () => {
             <details>
               <summary
                 title={"Planning to implement WAAPI for smoother openning"}
-              >
-                {project.details.summary}
-              </summary>
-              <div className="content">{project.details.content}</div>
+                dangerouslySetInnerHTML={{ __html: project.details.summary }}
+              />
+              <div
+                className="content"
+                dangerouslySetInnerHTML={{ __html: project.details.content }}
+              />
             </details>
 
             <h5>Projects</h5>

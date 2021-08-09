@@ -63,6 +63,8 @@ const GlobalStyles = createGlobalStyle`
     --raisin-black: #212738ff;
     --ghost-white: #f7f7ffff;
     --red-orange-color-wheel: #fb5012ff;
+    --orange-soda: #F55D3E;
+    --davys-grey: #585C5Fff;
 
     --color-white: var(--ghost-white);
     --color-black: var(--raisin-black);
@@ -72,6 +74,8 @@ const GlobalStyles = createGlobalStyle`
     --color-blue-light: var(--capri);
     --color-red: var(--magenta-crayola);
     --color-purple: var(--amethyst);
+    --color-orange: var(--orange-soda);
+    --color-grey: var(--davys-grey);
 
     --baseFontSize: 62.5%;
 
@@ -203,12 +207,18 @@ const GlobalStyles = createGlobalStyle`
 
   h3 {
     font-size: 3.6rem;
-    line-height: 1.2;
+    line-height: 1.3;
     margin-bottom: 1rem;
   }
 
   h4 {
-    font-size: 2.4rem;
+    font-size: 2.8rem;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+
+  h5 {
+    font-size: 2rem;
     line-height: 1.3;
     margin-bottom: 1rem;
   }
