@@ -144,7 +144,7 @@ const GlobalStyles = createGlobalStyle`
       border-radius: .2em;
     }
 
-    &[target="_blank"] {
+      /*&[target="_blank"] {
       &::before {
         content: "";
         position: absolute;
@@ -172,7 +172,7 @@ const GlobalStyles = createGlobalStyle`
         }
       }
 
-    }
+    }*/
 
     &:hover {
       &::after {
@@ -236,6 +236,94 @@ const GlobalStyles = createGlobalStyle`
   svg:hover circle {
     stroke-dashoffset: 0;
   }*/
+
+
+  @keyframes boxShadowRainbow {
+    0% {
+      box-shadow: var(--color-green) 0px 7px 29px 0px;
+    }
+
+    33% {
+      box-shadow: var(--color-red) 0px 7px 29px 0px;
+    }
+
+    66% {
+      box-shadow: var(--color-purple) 0px 7px 29px 0px;
+    }
+
+    99% {
+      box-shadow: var(--color-green) 0px 7px 29px 0px;
+    }
+
+    100% {
+      box-shadow: var(--color-green) 0px 7px 29px 0px;
+    }
+  }
+
+  @keyframes borderRainbow {
+    0% {
+      box-shadow: inset var(--color-green) 0px 0 0 5px, ${props =>
+        props.theme.shadows.default};
+    }
+    16.6667% {
+      box-shadow: inset var(--color-yellow) 0px 0 0 5px, ${props =>
+        props.theme.shadows.default};
+    }
+
+    33.3334% {
+      box-shadow: inset var(--color-orange) 0px 0 0 5px, ${props =>
+        props.theme.shadows.default};
+    }
+
+    50.0001% {
+      box-shadow: inset var(--color-red) 0px 0 0 5px, ${props =>
+        props.theme.shadows.default};
+    }
+
+    66.6668% {
+      box-shadow: inset var(--color-purple) 0px 0 0 5px, ${props =>
+        props.theme.shadows.default};
+    }
+
+    83.3335% {
+      box-shadow: inset var(--color-blue) 0px 0 0 5px, ${props =>
+        props.theme.shadows.default};
+    }
+
+    100% {
+      box-shadow: inset var(--color-green) 0px 0 0 5px, ${props =>
+        props.theme.shadows.default};
+    }
+  }
+
+  @keyframes bgColorRainbow {
+    0% {
+      background-color: var(--color-green);
+    }
+    16.6667% {
+      background-color: var(--color-yellow);
+    }
+
+    33.3334% {
+      background-color: var(--color-orange);
+    }
+
+    50.0001% {
+      background-color: var(--color-red);
+    }
+
+    66.6668% {
+      background-color: var(--color-purple);
+    }
+
+    83.3335% {
+      background-color: var(--color-blue);
+    }
+
+    100% {
+      background-color: var(--color-green);
+    }
+  }
 `
 
 export default GlobalStyles

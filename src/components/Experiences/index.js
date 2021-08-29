@@ -1,138 +1,149 @@
 import React from "react"
+import { graphql, useStaticQuery } from "gatsby"
+import dayjs from "dayjs"
+
 import { Flex } from "../../styles/Grid"
 import { Experience } from "../../styles/Experiences"
-import Refresh from "../Icons/assets/Refresh"
-import { Unicorn } from "../Icons"
-
-const experiencesData = [
-  {
-    position: "Front-End Web Developer",
-    featured: true,
-    company: {
-      name: "Refresh",
-      logo: <Refresh />,
-      link: "https://refresh.cz/",
-      description: "Prague Digital Agency",
-    },
-    time: {
-      start: 2019,
-      end: null,
-    },
-    details: {
-      summary: "Great team. Loooads of progress and experience!",
-      content:
-        "Started as an HTML/CSS coder during my studies. Working with a great team in interesting technologies on some nice projects.",
-    },
-    projects: ["Intranet React application", "Presentation websites"],
-    tech: ["React", "GatsbyJS", "CSS Modules", "Styled Components", "Docker"],
-  },
-  {
-    position: "Freelance Web Developer",
-    featured: false,
-    company: {
-      name: "Various clients",
-    },
-    time: {
-      start: 2018,
-      end: 2019,
-    },
-    details: {
-      summary: "The beginnings of freelance are fun!",
-      content: "Wordpress projects for digital agencies",
-    },
-    projects: ["LPs for digital agencies", "Train seat booking system"],
-    tech: ["SCSS", "CSS Grid", "Bootstrap", "Vanilla JS", "Wordpress plugins"],
-  },
-  {
-    position: "Developer",
-    featured: false,
-    company: {
-      name: "Unicorn",
-      logo: <Unicorn />,
-      link: "https://unicorn.com/",
-      description: "🇨🇿 International Software Company",
-    },
-    time: {
-      start: 2017,
-      end: 2018,
-    },
-    details: {
-      summary: "Gotta start somewhere!",
-      content:
-        "Mainly administrating and developing plugins for Atlassian products",
-    },
-    projects: ["Implementation of Bamboo and Bitbucket"],
-    tech: ["Java", "JIRA", "Confluence", "Bitbucket", "Bamboo"],
-  },
-]
 
 const Experiences = () => {
+  const {
+    allSanityProject: { nodes: data },
+  } = useStaticQuery(graphql`
+    query AllExperiences {
+      allSanityProject(
+        filter: { type: { eq: "experience" } }
+        sort: { fields: timeOfEmployment___start, order: DESC }
+      ) {
+        nodes {
+          id
+          featured
+          position
+          company {
+            link
+            name
+            description
+            logo {
+              asset {
+                url
+              }
+            }
+          }
+          timeOfEmployment {
+            end(formatString: "MMMM of YYYY")
+            start(formatString: "MMMM of YYYY")
+          }
+          type
+          tags
+          tech
+          id
+          details {
+            content {
+              children {
+                text
+              }
+            }
+            summary
+          }
+        }
+      }
+    }
+  `)
+
   return (
     <section>
       <h2 className={"text-left"}>Experiences</h2>
-      <Flex
-        justifyContent={"space-between"}
-        alignItems={"flex-start"}
-        width={"100%"}
-        gap={"30px"}
-      >
-        {experiencesData.map(experience => (
-          <Experience featured={experience.featured}>
-            <h3>
-              {experience.position}
-              {(experience.company?.link || experience.company?.logo) && (
-                <div>
-                  <a
-                    href={experience.company?.link}
-                    target={"_blank"}
-                    rel={"noopener noreferrer"}
-                  >
-                    {experience.company?.logo}
-                  </a>
-                </div>
-              )}
-            </h3>
-            {experience.company ? (
-              <h4>
-                {experience.company?.name}{" "}
-                {experience.company?.description ? (
-                  <small>({experience.company.description})</small>
+      <Flex justifyContent={"space-between"} width={"100%"} gap={"30px"}>
+        {data.map(experience => {
+          const startTime = dayjs(experience.timeOfEmployment.start)
+          const endTime = dayjs(experience.timeOfEmployment.end ?? undefined)
+
+          const diff = Math.round(
+            endTime.diff(startTime) / 1000 / 60 / 60 / 24 / 30
+          )
+          // TODO: FIX the import of dayjs and it's "duration" function (likely to be fixed with TypeScript)
+          let duration
+
+          switch (diff) {
+            case 12:
+              duration = "1 year"
+              break
+            case 9:
+              duration = "9 months"
+              break
+            default:
+              duration = "2 years and counting"
+              break
+          }
+          return (
+            <Experience featured={experience.featured} key={experience.id}>
+              <h3>
+                {experience.position}
+                {(experience.company?.link || experience.company?.logo) && (
+                  <div>
+                    <a
+                      href={experience.company?.link ?? "#"}
+                      target={"_blank"}
+                      rel={"noopener noreferrer"}
+                    >
+                      <img src={experience.company.logo.asset.url} alt="" />
+                    </a>
+                  </div>
+                )}
+              </h3>
+              <Flex justifyContent={"space-between"} alignItems={"center"}>
+                {experience.company ? (
+                  <h4>
+                    {experience.company?.name}{" "}
+                    {experience.company?.description ? (
+                      <small>({experience.company.description})</small>
+                    ) : (
+                      ""
+                    )}
+                  </h4>
                 ) : (
                   ""
                 )}
-              </h4>
-            ) : (
-              ""
-            )}
 
-            <h5>
-              {experience.time.start} - {experience.time.end ?? "..."}
-            </h5>
+                {experience.timeOfEmployment ? (
+                  <h5>
+                    {experience.timeOfEmployment.start} -{" "}
+                    {experience.timeOfEmployment.end ?? "..."}{" "}
+                    <small>({duration})</small>
+                  </h5>
+                ) : (
+                  ""
+                )}
+              </Flex>
 
-            <details>
-              <summary
-                title={"Planning to implement WAAPI for smoother openning"}
-              >
-                {experience.details.summary}
-              </summary>
-              <div className="content">{experience.details.content}</div>
-            </details>
+              <details>
+                <summary
+                  title={"Planning to implement WAAPI for smoother openning"}
+                >
+                  {experience.details.summary}
+                </summary>
+                <div className="content">
+                  {experience.details.content[0].children[0].text}
+                </div>
+              </details>
 
-            <h5>Projects</h5>
-            <section>
-              {experience.projects.map(project => (
-                <span>{project}</span>
-              ))}
-            </section>
+              <section>
+                <h5>Projects</h5>
+                <div>
+                  {experience?.tags?.map(project => (
+                    <span>{project}</span>
+                  ))}
+                </div>
 
-            <h5>Tech used</h5>
-            <section>
-              {experience.tech.map(tech => (
-                <span>{tech}</span>
-              ))}
-            </section>
-          </Experience>
-        ))}
+                <h5>Tech used</h5>
+                <div>
+                  {experience?.tech.map(tech => (
+                    <span>{tech}</span>
+                  ))}
+                </div>
+              </section>
+            </Experience>
+          )
+        })}
       </Flex>
     </section>
   )

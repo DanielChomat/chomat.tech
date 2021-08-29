@@ -11,8 +11,6 @@ const titleClaims =
   "Hi there! Welcome! Please be patient, this page is still a WIP. Thank you! "
 
 const HomePage = ({ data, location }) => {
-  // const posts = data.allMarkdownRemark.edges
-
   useEffect(() => {
     const titleScroller = text => {
       document.title = text
@@ -41,21 +39,6 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
-      }
-    }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
-          }
-        }
       }
     }
   }

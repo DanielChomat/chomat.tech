@@ -1,9 +1,8 @@
 import styled from "styled-components"
-
-const defaultShadow = "#64646f33 0px 7px 29px 0px"
+import { variant } from "styled-system"
 
 export const Experience = styled.article`
-  flex: 1 1 calc(33% - 20px);
+  flex: 1 1 calc(33% - 2rem);
   background-color: #fff;
   border-radius: 20px;
   padding: 1.6rem 2.4rem;
@@ -13,78 +12,62 @@ export const Experience = styled.article`
 
   --experience-box-shadow: var(--color-green) 0px 7px 29px 0px;
 
-  box-shadow: #64646f33 0px 7px 29px 0px;
+  box-shadow: ${props => props.theme.shadows.default};
 
-  ${props =>
-    props.featured
-      ? `
-    flex-basis: 100%;
-
-    box-shadow: var(--color-green) 0px 7px 29px 0px;
-
-    // animation-name: boxShadowRainbow;
-    animation-name: borderRainbow;
-    animation-fill-mode: both;
-    animation-duration: 7000ms;
-    animation-delay: 500ms;
-    animation-iteration-count: infinite;
-  `
-      : ""} @keyframes boxShadowRainbow {
-    0% {
-      box-shadow: var(--color-green) 0px 7px 29px 0px;
-    }
-
-    33% {
-      box-shadow: var(--color-red) 0px 7px 29px 0px;
-    }
-
-    66% {
-      box-shadow: var(--color-purple) 0px 7px 29px 0px;
-    }
-
-    99% {
-      box-shadow: var(--color-green) 0px 7px 29px 0px;
-    }
-
-    100% {
-      box-shadow: var(--color-green) 0px 7px 29px 0px;
-    }
-  }
-  @keyframes borderRainbow {
-    0% {
-      box-shadow: inset var(--color-green) 0px 0 0 5px, ${defaultShadow};
-    }
-    16.6667% {
-      box-shadow: inset var(--color-yellow) 0px 0 0 5px, ${defaultShadow};
-    }
-
-    33.3334% {
-      box-shadow: inset var(--color-orange) 0px 0 0 5px, ${defaultShadow};
-    }
-
-    50.0001% {
-      box-shadow: inset var(--color-red) 0px 0 0 5px, ${defaultShadow};
-    }
-
-    66.6668% {
-      box-shadow: inset var(--color-purple) 0px 0 0 5px, ${defaultShadow};
-    }
-
-    83.3335% {
-      box-shadow: inset var(--color-blue) 0px 0 0 5px, ${defaultShadow};
-    }
-
-    100% {
-      box-shadow: inset var(--color-green) 0px 0 0 5px, ${defaultShadow};
-    }
-  }
-  @media only screen and(max-width: 768 px) {
-    flex-basis: calc(50% - 20px);
+  @media only screen and (max-width: 768px) {
+    flex-basis: calc(50% - 2rem);
   }
 
   @media only screen and (max-width: 567px) {
     flex-basis: 100%;
   }
+
+  ${variant({
+    prop: "featured",
+    variants: {
+      true: {
+        flexBasis: "100%",
+        maxWidth: 960,
+        marginLeft: "auto",
+        marginRight: "auto",
+
+        boxShadow: "var(--color-green) 0px 7px 29px 0px",
+
+        // animationName: "borderRainbow",
+        // animationFillMode: "both",
+        // animationDuration: "10000ms",
+        // animationDelay: "500ms",
+        // animationIterationCount: "infinite",
+
+        overflow: "hidden",
+
+        "@media only screen and (max-width: 768px)": {
+          flexBasis: "100%",
+        },
+        "&::after": {
+          content: `"Current"`,
+          position: "absolute",
+          bottom: -22,
+          right: -36,
+
+          padding: "1.6rem 6rem 4rem",
+
+          fontSize: "2.4rem",
+          lineHeight: 1.2,
+          fontWeight: 600,
+          letterSpacing: "0.05em",
+
+          textAlign: "center",
+          textTransform: "uppercase",
+
+          transform: "rotate3d(0, 0, 1, -45deg)",
+          transformOrigin: "top",
+
+          backgroundColor: "var(--color-green)",
+        },
+      },
+    },
+  })};
 
   h3,
   h4,
@@ -103,10 +86,12 @@ export const Experience = styled.article`
       display: flex;
       gap: 1.6rem;
       margin-left: auto;
-    }
+      max-height: 4rem;
 
-    svg {
-      height: ${props => (props.project ? "2.4rem" : "4rem")};
+      img,
+      svg {
+        height: ${props => (props.project ? "2.4rem" : "4rem")};
+      }
     }
   }
 
@@ -122,12 +107,31 @@ export const Experience = styled.article`
     color: var(--color-purple);
   }
 
+  small {
+    font-size: 1.4rem;
+  }
+
   a {
+    transition: all 750ms cubic-bezier(0.33, 4, 0.3, 0.985);
+
     svg {
-      transition: cubic-bezier(0.33, 4, 0.3, 0.985);
+      path {
+        transition: all 300ms ease-in-out;
+      }
     }
+
+    &::after {
+      content: none;
+    }
+
     &:hover {
-      transform: scale(1.2);
+      svg {
+        path {
+          fill: var(--color-green);
+        }
+      }
+
+      transform: scale(1.1);
     }
   }
 
@@ -147,18 +151,18 @@ export const Experience = styled.article`
         }
 
         &:after {
-          width: 18px;
-          height: 18px;
+          width: 1.8rem;
+          height: 1.8rem;
           transform: rotate(0deg);
         }
       }
 
-      .content {
+      & > div {
         opacity: 1;
       }
     }
 
-    .content {
+    & > div {
       transition: all 1250ms ease-in-out;
       opacity: 0;
 
@@ -167,15 +171,17 @@ export const Experience = styled.article`
       font-weight: 100;
       color: #585c5f;
       padding: 0.8rem 0;
+
+      white-space: pre-wrap;
     }
 
     summary {
       font-size: 1.8rem;
       line-height: 1.2;
-      padding: 4px 0;
+      padding: 0.4rem 0;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 0.4rem;
       cursor: pointer;
 
       color: var(--color-purple);
@@ -190,14 +196,14 @@ export const Experience = styled.article`
 
       &::after {
         content: "";
-        width: 16px;
-        height: 16px;
+        width: 1.6rem;
+        height: 1.6rem;
         display: block;
         background-image: url(${require("../../../content/assets/arrow-sketch.svg")
           .default});
         background-repeat: no-repeat;
         background-size: contain;
-        margin-bottom: 4px;
+        margin-bottom: 0.4rem;
 
         transform: rotate(-90deg);
         transition: 0.3s transform ease-in-out;
@@ -212,18 +218,21 @@ export const Experience = styled.article`
   }
 
   section {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-bottom: 0.8rem;
+    padding-right: 8rem;
+    div {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
 
-    span {
-      color: var(--color-purple);
-      background-color: var(--color-yellow);
-      border-radius: 5px;
-      text-align: center;
-      padding: 6px 8px;
+      span {
+        color: var(--color-purple);
+        background-color: var(--color-yellow);
+        border-radius: 5px;
+        text-align: center;
+        padding: 0.6rem 0.8rem;
+      }
     }
   }
 `

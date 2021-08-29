@@ -28,6 +28,14 @@ const Footer = () => {
       >
         Gatsby Mate Starter
       </a>
+      , connected to{" "}
+      <a
+        href={"https://www.sanity.io/studio"}
+        rel={"noopener noreferrer"}
+        target={"_blank"}
+      >
+        Sanity Studio
+      </a>
       .
       <div>
         Icons made by{" "}
