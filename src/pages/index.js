@@ -28,7 +28,6 @@ const HomePage = ({ data, location }) => {
       <Bio />
       <ExperiencesContainer />
       <ProjectsContainer />
-      <Projects />
     </Layout>
   )
 }
