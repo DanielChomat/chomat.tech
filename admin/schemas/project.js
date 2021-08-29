@@ -32,6 +32,11 @@ export default {
       type: "company",
     },
     {
+      name: "links",
+      title: "Links",
+      type: "links",
+    },
+    {
       name: "timeOfEmployment",
       title: "Time Of Employment",
       type: "timeOfEmployment",
