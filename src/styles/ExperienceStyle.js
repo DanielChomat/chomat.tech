@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { variant } from "styled-system"
 
-export const Experience = styled.article`
+export const ExperienceStyle = styled.article`
   flex: 1 1 calc(33% - 2rem);
   background-color: #fff;
   border-radius: 20px;
@@ -85,12 +85,13 @@ export const Experience = styled.article`
     div {
       display: flex;
       gap: 1.6rem;
+      padding-left: 1.6rem;
       margin-left: auto;
       max-height: 4rem;
 
       img,
       svg {
-        height: ${props => (props.project ? "2.4rem" : "4rem")};
+        height: ${props => (props.project ? "2.8rem" : "4rem")};
       }
     }
   }
@@ -114,7 +115,12 @@ export const Experience = styled.article`
   a {
     transition: all 750ms cubic-bezier(0.33, 4, 0.3, 0.985);
 
+    img,
     svg {
+      filter: invert(40%) sepia(49%) saturate(2045%) hue-rotate(239deg)
+        brightness(94%) contrast(91%);
+
+      transition: all 300ms ease-in-out;
       path {
         transition: all 300ms ease-in-out;
       }
@@ -125,9 +131,12 @@ export const Experience = styled.article`
     }
 
     &:hover {
+      img,
       svg {
+        filter: invert(78%) sepia(59%) saturate(2854%) hue-rotate(118deg)
+          brightness(99%) contrast(105%);
         path {
-          fill: var(--color-green);
+          //fill: var(--color-green);
         }
       }
 
@@ -199,7 +208,7 @@ export const Experience = styled.article`
         width: 1.6rem;
         height: 1.6rem;
         display: block;
-        background-image: url(${require("../../../content/assets/arrow-sketch.svg")
+        background-image: url(${require("../../content/assets/arrow-sketch.svg")
           .default});
         background-repeat: no-repeat;
         background-size: contain;

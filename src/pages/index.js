@@ -4,8 +4,8 @@ import { graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import Experiences from "../components/Experiences"
-import Projects from "../components/Projects"
+import ExperiencesContainer from "../containers/ExperiencesContainer"
+import ProjectsContainer from "../containers/ProjectsContainer"
 
 const titleClaims =
   "Hi there! Welcome! Please be patient, this page is still a WIP. Thank you! "
@@ -26,7 +26,8 @@ const HomePage = ({ data, location }) => {
     <Layout location={location} title={titleClaims}>
       <Seo title={titleClaims} />
       <Bio />
-      <Experiences />
+      <ExperiencesContainer />
+      <ProjectsContainer />
       <Projects />
     </Layout>
   )
