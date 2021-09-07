@@ -11,7 +11,7 @@ const Projects = () => {
     query AllProjects {
       allSanityProject(
         filter: { type: { eq: "project" } }
-        sort: { fields: timeOfEmployment___start, order: DESC }
+        sort: { fields: timeOfEmployment___end, order: DESC }
       ) {
         nodes {
           id

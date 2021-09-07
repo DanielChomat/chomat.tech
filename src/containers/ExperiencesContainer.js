@@ -11,7 +11,7 @@ const Experiences = () => {
     query AllExperiences {
       allSanityProject(
         filter: { type: { eq: "experience" } }
-        sort: { fields: timeOfEmployment___start, order: DESC }
+        sort: { fields: timeOfEmployment___end, order: DESC }
       ) {
         nodes {
           id
