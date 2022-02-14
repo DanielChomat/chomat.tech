@@ -17,8 +17,11 @@ const Experience = ({ item, project }) => {
     case 9:
       item.duration = "9 months"
       break
+    case 24:
+      item.duration = "2 years"
+      break
     default:
-      item.duration = "2 years and counting"
+      item.duration = "around half a year"
       break
   }
 
