@@ -73,14 +73,7 @@ const Bio = () => {
         )}
       </LinksContainer>
       <h4>
-        Currently working{" "}
-        <a
-          href={"https://refresh.cz/"}
-          rel={"noopener noreferrer"}
-          target={"_blank"}
-        >
-          @Refresh.cz
-        </a>{" "}
+        Currently working @PBK-Tech
         <br />
         and <OneUp />
         -ping my online presence with personal projects.

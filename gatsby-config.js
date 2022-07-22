@@ -49,8 +49,9 @@ module.exports = {
         name: `assets`,
       },
     },
-    `gatsby-transformer-sharp`,
+    `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-styled-components`,
     // `gatsby-plugin-feed`,
     {

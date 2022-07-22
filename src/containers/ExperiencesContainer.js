@@ -7,6 +7,7 @@ import Experience from "../components/Experience"
 const Experiences = () => {
   const {
     allSanityProject: { nodes: data },
+    ...rest
   } = useStaticQuery(graphql`
     query AllExperiences {
       allSanityProject(
@@ -47,6 +48,10 @@ const Experiences = () => {
       }
     }
   `)
+
+  console.log({ rest })
+
+  console.log({ data })
 
   return (
     <section>
