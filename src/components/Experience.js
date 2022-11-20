@@ -21,7 +21,7 @@ const Experience = ({ item, project }) => {
       item.duration = "2 years"
       break
     default:
-      item.duration = "around half a year"
+      item.duration = undefined
       break
   }
 
@@ -101,7 +101,7 @@ const Experience = ({ item, project }) => {
         {item.timeOfEmployment && !project ? (
           <h5>
             {item.timeOfEmployment.start} - {item.timeOfEmployment.end ?? "..."}{" "}
-            <small>({item.duration})</small>
+            {item.duration && <small>({item.duration})</small>}
           </h5>
         ) : (
           ""
