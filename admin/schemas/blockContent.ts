@@ -1,4 +1,4 @@
-import { defineArrayMember, defineType } from "sanity";
+import { defineArrayMember, defineType } from "@sanity-typed/types";
 
 export const blockContentSchema =  defineType({
   title: "Block Content",

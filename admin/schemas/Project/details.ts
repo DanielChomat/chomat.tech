@@ -1,4 +1,4 @@
-import { defineType } from "sanity";
+import { defineType } from "@sanity-typed/types";
 
 export const detailsSchema =  defineType({
   name: "details",

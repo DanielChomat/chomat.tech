@@ -1,16 +1,5 @@
-import { defineType } from "sanity";
-import { defineField } from "@sanity/types/src/schema/define";
-import { PreviewValue } from "@sanity/types/src/schema/preview";
-
-enum Emojis {
-  EXPERIENCE= "EXPERIENCE",
-  PROJECT= "PROJECT",
-}
-
-const TYPE_EMOJIS_MAP: Record<Emojis, string> = {
-  [Emojis.EXPERIENCE] : '💼',
-  [Emojis.PROJECT]: '💻'
-}
+import { defineArrayMember, defineField, defineType } from "@sanity-typed/types";
+import { Emojis, TYPE_EMOJIS_MAP } from "./constants";
 
 export const projectSchema = defineType({
   name: "project",
@@ -23,61 +12,61 @@ export const projectSchema = defineType({
       type: "string",
       options: {
         list: [
-          { title: "Project", value: Emojis.PROJECT  },
+          { title: "Project", value: Emojis.PROJECT,   },
           { title: "Work experience", value: Emojis.EXPERIENCE },
         ],
         layout: "radio",
         direction: "horizontal",
       },
     }),
-    {
+    defineField({
       name: "position",
       title: "Position",
       type: "string",
-    },
-    {
+    }),
+    defineField({
       name: "featured",
       title: "Featured project?",
       type: "boolean",
-    },
-    {
+    }),
+    defineField({
       name: "company",
       title: "Company",
       type: "company",
-    },
-    {
+    }),
+    defineField({
       name: "links",
       title: "Links",
       type: "links",
-    },
-    {
+    }),
+    defineField({
       name: "timeOfEmployment",
       title: "Time Of Employment",
       type: "timeOfEmployment",
-    },
-    {
+    }),
+    defineField({
       name: "details",
       title: "Details of the position",
       type: "details",
-    },
-    {
+    }),
+    defineField({
       title: "Projects",
       name: "tags",
       type: "array",
-      of: [{ type: "string" }],
+      of: [defineArrayMember({ type: "string" })],
       options: {
         layout: "tags",
       },
-    },
-    {
+    }),
+    defineField({
       title: "Tech Used",
       name: "tech",
       type: "array",
-      of: [{ type: "string" }],
+      of: [defineArrayMember({ type: "string" })],
       options: {
         layout: "tags",
       },
-    },
+    }),
   ],
 
   preview: {
@@ -95,7 +84,7 @@ export const projectSchema = defineType({
 
       const subtitle = `${emojiSubtitle}${companySubtitle}`
 
-      const preparedPreview: PreviewValue =  Object.assign({}, value, {
+      const preparedPreview =  Object.assign({}, value, {
         subtitle,
       })
 
