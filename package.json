@@ -8,31 +8,37 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
-    "@sanity/client": "4.0.1",
-    "dayjs": "^1.11.6",
+    "@sanity-typed/client": "^1.9.6",
+    "@sanity-typed/types": "^5.8.3",
+    "@sanity/client": "6.7.0",
+    "@sanity/vision": "^3.18.1",
+    "dayjs": "^1.11.10",
     "dotenv": "^16.0.3",
-    "gatsby": "^5.0.1",
-    "gatsby-plugin-feed": "^5.0.0",
+    "gatsby": "^5.12.9",
+    "gatsby-plugin-feed": "^5.12.3",
     "gatsby-plugin-google-fonts": "^1.0.1",
-    "gatsby-plugin-image": "^3.0.0",
-    "gatsby-plugin-manifest": "^5.0.0",
-    "gatsby-plugin-offline": "^6.0.0",
-    "gatsby-plugin-react-helmet": "^6.0.0",
-    "gatsby-plugin-sharp": "^5.0.0",
-    "gatsby-plugin-styled-components": "^6.0.0",
-    "gatsby-source-filesystem": "^5.0.0",
-    "gatsby-source-sanity": "^7.5.1",
-    "gatsby-transformer-sharp": "^5.0.0",
+    "gatsby-plugin-image": "^3.12.3",
+    "gatsby-plugin-manifest": "^5.12.3",
+    "gatsby-plugin-offline": "^6.12.3",
+    "gatsby-plugin-react-helmet": "^6.12.0",
+    "gatsby-plugin-sharp": "5.8.1",
+    "gatsby-plugin-styled-components": "^6.12.0",
+    "gatsby-source-filesystem": "^5.12.1",
+    "gatsby-source-sanity": "^7.9.1",
+    "gatsby-transformer-sharp": "^5.12.3",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "styled-components": "^5.3.6",
-    "styled-system": "^5.1.5"
+    "sanity": "^3.18.1",
+    "styled-components": "^5.2.0",
+    "styled-system": "^5.1.5",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
     "husky": "^8.0.2",
-    "lint-staged": "^13.0.3",
-    "prettier": "2.7.1"
+    "lint-staged": "^15.0.2",
+    "prettier": "3.0.3"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
   "keywords": [
@@ -52,7 +58,12 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "prepare": "husky install"
+    "prepare": "husky install",
+
+    "sanity:start": "sanity start",
+    "sanity:build": "sanity build",
+    "sanity:dev": "sanity dev",
+    "check:ts": "tsc --noEmit"
   },
   "lint-staged": {
     "*.{js,jsx,json,md}": "prettier --write"
