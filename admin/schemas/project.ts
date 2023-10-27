@@ -1,21 +1,35 @@
-export default {
+import { defineType } from "sanity";
+import { defineField } from "@sanity/types/src/schema/define";
+import { PreviewValue } from "@sanity/types/src/schema/preview";
+
+enum Emojis {
+  EXPERIENCE= "EXPERIENCE",
+  PROJECT= "PROJECT",
+}
+
+const TYPE_EMOJIS_MAP: Record<Emojis, string> = {
+  [Emojis.EXPERIENCE] : '💼',
+  [Emojis.PROJECT]: '💻'
+}
+
+export const projectSchema = defineType({
   name: "project",
   title: "Project",
   type: "document",
   fields: [
-    {
+    defineField({
       name: "type",
       title: "Type",
       type: "string",
       options: {
         list: [
-          { title: "Project", value: "project" },
-          { title: "Work experience", value: "experience" },
+          { title: "Project", value: Emojis.PROJECT  },
+          { title: "Work experience", value: Emojis.EXPERIENCE },
         ],
         layout: "radio",
         direction: "horizontal",
       },
-    },
+    }),
     {
       name: "position",
       title: "Position",
@@ -73,17 +87,19 @@ export default {
       type: "type",
       company: "company.name",
     },
-    prepare(selection) {
-      const EMOJIS = {
-        experience: "💼",
-        project: "💻",
-      }
-      const { type, company } = selection
-      return Object.assign({}, selection, {
-        subtitle: `${type ? EMOJIS[type] + ` | ` : ""}${
-          company ? "@ " + company : ""
-        }`,
+    prepare(value,) {
+      const { type, company } = value
+      const typeEmojiGuarded = type && Object.keys(Emojis).includes(type) ? type as Emojis : undefined;
+      const emojiSubtitle = typeEmojiGuarded ? TYPE_EMOJIS_MAP[typeEmojiGuarded] + ' | ' : ''
+      const companySubtitle = company ? "@ " + company : ''
+
+      const subtitle = `${emojiSubtitle}${companySubtitle}`
+
+      const preparedPreview: PreviewValue =  Object.assign({}, value, {
+        subtitle,
       })
+
+      return preparedPreview
     },
   },
-}
+})

@@ -1,4 +1,6 @@
-export default {
+import { defineType } from "sanity";
+
+export const companySchema = defineType( {
   name: "company",
   title: "Company",
   type: "object",
@@ -24,4 +26,4 @@ export default {
       type: "string",
     },
   ],
-}
+})

@@ -1,4 +1,6 @@
-export default {
+import { defineType } from "sanity";
+
+export const timeOfEmploymentSchema = defineType({
   name: "timeOfEmployment",
   title: "Time Of Employment",
   type: "object",
@@ -20,4 +22,4 @@ export default {
       },
     },
   ],
-}
+})
