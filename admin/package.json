@@ -8,17 +8,22 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
-    "build": "sanity build"
+    "build": "sanity build",
+    "dev": "sanity dev",
+    "check:ts": "tsc --noEmit"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/generate-help-url": "^3.0.0",
-    "@sanity/vision": "3.2.6",
-    "prop-types": "^15.8",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "styled-components": "^5.3.6"
+    "@sanity-typed/client": "^1.9.6",
+    "@sanity-typed/types": "^5.8.3",
+    "@sanity/vision": "^3.18.1",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sanity": "^3.18.1",
+    "styled-components": "^5.2.0",
+    "typescript": "^5.2.2"
   }
 }

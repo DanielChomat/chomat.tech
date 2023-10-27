@@ -1,4 +1,6 @@
-export default {
+import { defineType } from "@sanity-typed/types";
+
+export const detailsSchema =  defineType({
   name: "details",
   title: "Details of the position",
   type: "object",
@@ -22,4 +24,4 @@ export default {
       ],
     },
   ],
-}
+})

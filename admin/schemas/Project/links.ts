@@ -1,4 +1,6 @@
-export default {
+import { defineType } from "@sanity-typed/types";
+
+export const linksSchema = defineType( {
   name: "links",
   title: "Links",
   type: "object",
@@ -14,4 +16,4 @@ export default {
       type: "url",
     },
   ],
-}
+})
