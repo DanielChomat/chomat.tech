@@ -42,31 +42,31 @@ module.exports = {
         watchMode: process.env.SANITY_WATCH_MODE,
       },
     },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     path: `${__dirname}/content/assets`,
-    //     name: `assets`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/assets`,
+        name: `assets`,
+      },
+    },
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
-    // `gatsby-plugin-styled-components`,
-    // `gatsby-plugin-feed`,
-    // {
-    //   resolve: `gatsby-plugin-manifest`,
-    //   options: {
-    //     name: `chomat.tech Blog`,
-    //     short_name: `chomat.tech`,
-    //     start_url: `/`,
-    //     background_color: `#000`,
-    //     theme_color: `#663399`,
-    //     display: `minimal-ui`,
-    //     icon: `content/assets/shaka-emoji.png`,
-    //   },
-    // },
-    // `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-feed`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `chomat.tech Blog`,
+        short_name: `chomat.tech`,
+        start_url: `/`,
+        background_color: `#000`,
+        theme_color: `#663399`,
+        display: `minimal-ui`,
+        icon: `content/assets/shaka-emoji.png`,
+      },
+    },
+    `gatsby-plugin-react-helmet`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
