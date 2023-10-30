@@ -4,13 +4,14 @@ import { graphql, useStaticQuery } from "gatsby"
 import { Flex } from "../styles/Grid"
 import Experience from "../components/Experience"
 
-const Projects = () => {
+export const Experiences = () => {
   const {
     allSanityProject: { nodes: data },
+    ...rest
   } = useStaticQuery(graphql`
-    query AllProjects {
+    query AllExperiences {
       allSanityProject(
-        filter: { type: { eq: "project" } }
+        filter: { type: { eq: "experience" } }
         sort: { fields: timeOfEmployment___end, order: DESC }
       ) {
         nodes {
@@ -26,10 +27,6 @@ const Projects = () => {
                 url
               }
             }
-          }
-          links {
-            live
-            code
           }
           timeOfEmployment {
             end(formatString: "MMMM of YYYY")
@@ -52,23 +49,24 @@ const Projects = () => {
     }
   `)
 
+  console.log({ rest })
+
+  console.log({ data })
+
   return (
-    <>
-      <section>
-        <h2 className={"text-left"}>Projects to show-off with</h2>
-        <Flex
-          justifyContent={"space-between"}
-          alignItems={"flex-start"}
-          width={"100%"}
-          gap={"30px"}
-        >
-          {data.map(project => {
-            return <Experience item={project} project />
-          })}
-        </Flex>
-      </section>
-    </>
+    <section>
+      <h2 className={"text-left"}>Experiences</h2>
+      <Flex
+        justifyContent={"space-between"}
+        alignItems={"flex-start"}
+        width={"100%"}
+        gap={"30px"}
+      >
+        {data.map(experience => {
+          return <Experience item={experience} />
+        })}
+      </Flex>
+    </section>
   )
 }
 
-export default Projects

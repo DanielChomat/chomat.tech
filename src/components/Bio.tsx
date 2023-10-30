@@ -11,7 +11,7 @@ import { Github, Instagram, LinkedIn, OneUp } from "./Icons"
 import { Flex } from "../styles/Grid"
 import LinksContainer from "../styles/LinksContainer"
 
-const Bio = () => {
+export const Bio = () => {
   const data = useStaticQuery(graphql`
     query BioQuery {
       avatar: file(absolutePath: { regex: "/profile-pic.jpeg/" }) {
@@ -48,7 +48,7 @@ const Bio = () => {
           <a
             href={`https://linkedin.com/in/${social.linkedin}/`}
             rel={"noopener noreferrer"}
-            target={"_blank"}
+            
           >
             <LinkedIn width={"4.8rem"} height={"4.8rem"} />
           </a>
@@ -57,7 +57,7 @@ const Bio = () => {
           <a
             href={`https://github.com/${social.github}/`}
             rel={"noopener noreferrer"}
-            target={"_blank"}
+            
           >
             <Github width={"4.8rem"} height={"4.8rem"} />
           </a>
@@ -66,7 +66,7 @@ const Bio = () => {
           <a
             href={`https://instagram.com/${social.instagram}/`}
             rel={"noopener noreferrer"}
-            target={"_blank"}
+            
           >
             <Instagram width={"4.8rem"} height={"4.8rem"} />
           </a>
@@ -81,5 +81,3 @@ const Bio = () => {
     </Flex>
   )
 }
-
-export default Bio

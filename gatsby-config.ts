@@ -1,15 +1,10 @@
-const {
-  SANITY_STUDIO_TITLE,
-  SANITY_STUDIO_PROJECT_ID,
-  SANITY_STUDIO_DATASET,
-} = require("./src/environment")
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
 module.exports = {
   siteMetadata: {
-    title: SANITY_STUDIO_TITLE,
+    title: process.env.SANITY_STUDIO_TITLE,
     author: {
       name: `Daniel Chomat`,
       summary: `Overall playground for all things code and web development`,
@@ -33,8 +28,8 @@ module.exports = {
     {
       resolve: `gatsby-source-sanity`,
       options: {
-        projectId: SANITY_STUDIO_PROJECT_ID,
-        dataset: SANITY_STUDIO_DATASET,
+        projectId: process.env.SANITY_STUDIO_PROJECT_ID,
+        dataset: process.env.SANITY_STUDIO_DATASET,
         // apiVersion: "2021-03-25",
         // a token with read permissions is required
         // if you have a private dataset

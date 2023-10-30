@@ -33,7 +33,6 @@ const Experience = ({ item, project }) => {
           <div>
             <a
               href={item.company?.link ?? "#"}
-              target={"_blank"}
               rel={"noopener noreferrer"}
             >
               <img src={item.company.logo.asset.url} alt="" />
@@ -46,7 +45,7 @@ const Experience = ({ item, project }) => {
             {item?.links?.code ? (
               <a
                 href={item?.links?.code}
-                target={"_blank"}
+                
                 rel={"noopener noreferrer"}
               >
                 <svg
@@ -65,7 +64,7 @@ const Experience = ({ item, project }) => {
             {item?.links?.live ? (
               <a
                 href={item?.links?.live}
-                target={"_blank"}
+                
                 rel={"noopener noreferrer"}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

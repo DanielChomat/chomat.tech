@@ -9,14 +9,14 @@ const FooterContainer = styled.footer`
   padding: 1rem 2.4rem 1rem 0;
 `
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <FooterContainer>
       Built with{" "}
       <a
         href="https://www.gatsbyjs.org"
         rel={"noopener noreferrer"}
-        target={"_blank"}
+        
       >
         Gatsby
       </a>
@@ -24,7 +24,7 @@ const Footer = () => {
       <a
         href={"https://github.com/EmaSuriano/gatsby-starter-mate"}
         rel={"noopener noreferrer"}
-        target={"_blank"}
+        
       >
         Gatsby Mate Starter
       </a>
@@ -32,7 +32,7 @@ const Footer = () => {
       <a
         href={"https://www.sanity.io/studio"}
         rel={"noopener noreferrer"}
-        target={"_blank"}
+        
       >
         Sanity Studio
       </a>
@@ -64,5 +64,3 @@ const Footer = () => {
     </FooterContainer>
   )
 }
-
-export default Footer
