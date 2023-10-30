@@ -1,13 +1,13 @@
 import React from "react"
 import { ThemeProvider } from "styled-components"
 
-import Footer from "./Footer"
-import Header from "./Header"
+import { Footer } from "./Footer"
+import { Header } from "./Header"
 import GlobalStyles from "../styles/GlobalStyles"
 import theme from "../styles/theme"
 import { Main } from "../styles/Layout"
 
-const Layout = ({ location, title, children }) => {
+export const Layout = ({ location, title, children }) => {
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -21,5 +21,3 @@ const Layout = ({ location, title, children }) => {
     </>
   )
 }
-
-export default Layout

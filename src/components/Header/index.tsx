@@ -34,7 +34,7 @@ const HeaderContainer = styled.nav`
   }
 `
 
-const Header = ({ location, title }) => {
+export const Header = ({ location, title }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   let header
 
@@ -101,5 +101,3 @@ const Header = ({ location, title }) => {
     </HeaderContainer>
   )
 }
-
-export default Header
