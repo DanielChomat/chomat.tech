@@ -4,10 +4,12 @@ import { Layout } from "../components/Layout";
 import { Bio } from "../components/Bio";
 import { Experiences } from "../containers/ExperiencesContainer";
 import { Projects } from "../containers/ProjectsContainer";
+import { graphql } from "gatsby";
+
 const titleClaims =
   "Hi there! Welcome! Please be patient, this page is still a WIP. Thank you! "
 
-const HomePage = ({ data, location }: PageProps) => {
+const HomePage = ({  location }: PageProps) => {
   // useEffect(() => {
   //   const titleScroller = text => {
   //     document.title = text
@@ -19,7 +21,6 @@ const HomePage = ({ data, location }: PageProps) => {
   //   titleScroller(titleClaims)
   // }, [])
 
-  // @ts-ignore
   return (
     <Layout location={location} title={titleClaims}>
       {/*<Seo title={titleClaims} />*/}
@@ -32,12 +33,12 @@ const HomePage = ({ data, location }: PageProps) => {
 
 export default HomePage
 
-// export const pageQuery = graphql`
-//   query {
-//     site {
-//       siteMetadata {
-//         title
-//       }
-//     }
-//   }
-// `
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`
