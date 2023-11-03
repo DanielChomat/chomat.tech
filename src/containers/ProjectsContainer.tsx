@@ -10,7 +10,7 @@ export const Projects = () => {
   } = useStaticQuery(graphql`
       query AllProjects {
           allSanityProject(
-              filter: {type: {eq: "project"}}
+              filter: {type: {eq: "PROJECT"}}
               sort: {timeOfEmployment: {end: DESC}}
           ) {
               nodes {
@@ -50,7 +50,6 @@ export const Projects = () => {
               }
           }
       }
-
   `)
 
   return (

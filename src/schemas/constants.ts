@@ -1,6 +1,6 @@
 export enum Emojis {
-  EXPERIENCE= "EXPERIENCE",
-  PROJECT= "PROJECT",
+  EXPERIENCE = "EXPERIENCE",
+  PROJECT = "PROJECT",
 }
 
 export const TYPE_EMOJIS_MAP: Record<Emojis, string> = {

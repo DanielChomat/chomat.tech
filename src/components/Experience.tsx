@@ -112,7 +112,7 @@ const Experience = ({ item, project }) => {
           {item.details.summary}
         </summary>
         <div className="content">
-          {item.details.content[0].children[0].text}
+          {item.details.content?.[0].children[0].text}
         </div>
       </details>
 
