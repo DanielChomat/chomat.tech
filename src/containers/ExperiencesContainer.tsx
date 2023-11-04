@@ -37,9 +37,16 @@ export const Experiences = () => {
           id
           details {
             content {
-              children {
-                text
-              }
+                _rawChildren
+                style
+                _type
+                list
+                children {
+                    marks
+                    text
+                    _type
+                    __typename
+                }
             }
             summary
           }
