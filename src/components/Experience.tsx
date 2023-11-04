@@ -1,7 +1,8 @@
-import React from "react"
-import { Flex } from "../styles/Grid"
-import { ExperienceStyle } from "../styles/ExperienceStyle"
-import dayjs from "dayjs"
+import React from "react";
+import { Flex } from "../styles/Grid";
+import { ExperienceStyle } from "../styles/ExperienceStyle";
+import dayjs from "dayjs";
+import { PortableText } from "@portabletext/react";
 
 const Experience = ({ item, project }) => {
   const startTime = dayjs(item?.timeOfEmployment?.start ?? undefined)
@@ -24,6 +25,8 @@ const Experience = ({ item, project }) => {
       item.duration = undefined
       break
   }
+
+  const content = item.details.content
 
   return (
     <ExperienceStyle featured={item.featured} key={item.id} project>
@@ -112,7 +115,7 @@ const Experience = ({ item, project }) => {
           {item.details.summary}
         </summary>
         <div className="content">
-          {item.details.content?.[0].children[0].text}
+          <PortableText value={content} />
         </div>
       </details>
 

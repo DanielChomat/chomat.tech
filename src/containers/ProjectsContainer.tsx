@@ -41,8 +41,15 @@ export const Projects = () => {
                   id
                   details {
                       content {
+                          _rawChildren
+                          style
+                          _type
+                          list
                           children {
+                              marks
                               text
+                              _type
+                              __typename
                           }
                       }
                       summary

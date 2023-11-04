@@ -182,6 +182,10 @@ export const ExperienceStyle = styled.article`
       padding: 0.8rem 0;
 
       white-space: pre-wrap;
+      
+      strong {
+        font-weight: bold;
+      }
     }
 
     summary {
