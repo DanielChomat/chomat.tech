@@ -1,7 +1,16 @@
-import styled from "styled-components"
-import { variant } from "styled-system"
+import styled from "styled-components";
+import { variant } from "styled-system";
 
-export const ExperienceStyle = styled.article`
+interface ExperienceStyleProps {
+  readonly isFeatured: boolean;
+  readonly isProject: boolean;
+  // readonly alignItems: Property.AlignItems;
+  // readonly flexDirection: Property.FlexDirection;
+  // readonly flexWrap: Property.FlexWrap;
+  // readonly gap: Property.Gap;
+}
+
+export const ExperienceStyle = styled.article<ExperienceStyleProps>`
   flex: 1 1 calc(33% - 2rem);
   background-color: #fff;
   border-radius: 20px;
@@ -23,7 +32,7 @@ export const ExperienceStyle = styled.article`
   }
 
   ${variant({
-    prop: "featured",
+    prop: "isFeatured",
     variants: {
       true: {
         flexBasis: "100%",
@@ -82,6 +91,10 @@ export const ExperienceStyle = styled.article`
     align-items: flex-start;
     flex-wrap: nowrap;
 
+    & > a {
+      margin-left: auto;
+    }
+
     div {
       display: flex;
       gap: 1.6rem;
@@ -89,10 +102,10 @@ export const ExperienceStyle = styled.article`
       margin-left: auto;
       max-height: 4rem;
 
-      img,
-      svg {
-        height: ${props => (props.project ? "2.8rem" : "4rem")};
-      }
+    }
+    img,
+    svg {
+      height: ${props => (props.isProject ? "2.8rem" : "4rem")};
     }
   }
 

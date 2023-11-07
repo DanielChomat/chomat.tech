@@ -1,17 +1,14 @@
-/**
- * Bio component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
+import React from "react";
+import { graphql, useStaticQuery } from "gatsby";
 
-import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
-import { Github, Instagram, LinkedIn, OneUp } from "./Icons"
-import { Flex } from "../styles/Grid"
-import LinksContainer from "../styles/LinksContainer"
+import { GithubIcon, InstagramIcon, LinkedInIcon, OneUpIcon } from "./Icons";
+import { IconLink } from "./IconLink";
+
+import { Flex } from "../styles/Grid";
+import { LinksContainer } from "../styles/LinksContainer";
 
 export const Bio = () => {
+  // TODO: Dissect this query into more constants
   const data = useStaticQuery(graphql`
     query BioQuery {
       avatar: file(absolutePath: { regex: "/profile-pic.jpeg/" }) {
@@ -38,6 +35,11 @@ export const Bio = () => {
   `)
 
   const { social } = data.site.siteMetadata
+
+  const linkedInLink = `https://linkedin.com/in/${social.linkedin}/`
+  const githubLink = `https://github.com/${social.github}/`
+  const instagramLink = `https://instagram.com/${social.instagram}/`
+
   return (
     <Flex as={"section"} flexDirection={"column"} alignItems={"center"}>
       <h1>Hi, I'm Daniel</h1>
@@ -45,38 +47,17 @@ export const Bio = () => {
       <h3>Welcome to my playground!</h3>
       <LinksContainer>
         {social.linkedin && (
-          <a
-            href={`https://linkedin.com/in/${social.linkedin}/`}
-            rel={"noopener noreferrer"}
-            
-          >
-            <LinkedIn width={"4.8rem"} height={"4.8rem"} />
-          </a>
+          <IconLink link={linkedInLink} Icon={LinkedInIcon} />
         )}
         {social.github && (
-          <a
-            href={`https://github.com/${social.github}/`}
-            rel={"noopener noreferrer"}
-            
-          >
-            <Github width={"4.8rem"} height={"4.8rem"} />
-          </a>
+          <IconLink link={githubLink} Icon={GithubIcon} />
         )}
         {social.instagram && (
-          <a
-            href={`https://instagram.com/${social.instagram}/`}
-            rel={"noopener noreferrer"}
-            
-          >
-            <Instagram width={"4.8rem"} height={"4.8rem"} />
-          </a>
+          <IconLink link={instagramLink} Icon={InstagramIcon} />
         )}
       </LinksContainer>
       <h4>
-        Currently working @PBK-Tech
-        <br />
-        and <OneUp />
-        -ping my online presence with personal projects.
+        Currently <OneUpIcon />-ing my online presence with personal projects.
       </h4>
     </Flex>
   )

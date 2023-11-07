@@ -34,70 +34,14 @@ const HeaderContainer = styled.nav`
   }
 `
 
-export const Header = ({ location, title }) => {
-  const rootPath = `${__PATH_PREFIX__}/`
-  let header
-
-  if (location.pathname === rootPath) {
-    header = (
-      <h1
-        style={{
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h1>
-    )
-  } else {
-    header = (
-      <h3
-        style={{
-          fontFamily: `Montserrat, sans-serif`,
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h3>
-    )
-  }
-
+export const Header = () => {
   return (
     <HeaderContainer>
       <Link to={"/"} className={"header__logo"}>
-        <span role={"img"} aria-label={"Shaka!"} id={header}>
+        <span role={"img"} aria-label={"Shaka!"}>
           🤙
         </span>
       </Link>
-      {/*<ul>
-        <li>
-          <Link to={"#about"}>About</Link>
-        </li>
-        <li>
-          <Link to={"#experience"}>Experience</Link>
-        </li>
-        <li>
-          <Link to={"#projects"}>Projects</Link>
-        </li>
-        <li>
-          <Link to={"/blog"}>Blog</Link>
-        </li>
-      </ul>*/}
     </HeaderContainer>
   )
 }

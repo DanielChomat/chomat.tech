@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Flex } from "./Grid"
 
-const LinksContainer = styled(Flex)`
+export const LinksContainer = styled(Flex)`
   min-width: 260px;
   margin-top: 1.6rem;
   margin-bottom: 1.6rem;
@@ -12,5 +12,3 @@ const LinksContainer = styled(Flex)`
 
   gap: 30px;
 `
-
-export default LinksContainer

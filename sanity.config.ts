@@ -7,8 +7,6 @@ import { SANITY_STUDIO_DATASET, SANITY_STUDIO_PROJECT_ID, SANITY_STUDIO_TITLE } 
 
 const devOnlyPlugins = [visionTool(), deskTool()]
 
-console.log({SANITY_STUDIO_TITLE});
-
 const config = defineConfig({
   title: SANITY_STUDIO_TITLE,
   projectId: SANITY_STUDIO_PROJECT_ID,
