@@ -1,9 +1,9 @@
 import React from "react"
 
-const Github = ({ width, height }) => (
+export const GithubIcon = () => (
   <svg
-    width={width}
-    height={height}
+    width={'4.8rem'}
+    height={'4.8rem'}
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -11,4 +11,3 @@ const Github = ({ width, height }) => (
   </svg>
 )
 
-export default Github

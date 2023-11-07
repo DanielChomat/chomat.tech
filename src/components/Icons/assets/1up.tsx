@@ -1,6 +1,6 @@
 import React from "react"
 
-const OneUp = () => (
+export const OneUpIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
     <g xmlns="http://www.w3.org/2000/svg">
       <path
@@ -32,5 +32,3 @@ const OneUp = () => (
     </g>
   </svg>
 )
-
-export default OneUp

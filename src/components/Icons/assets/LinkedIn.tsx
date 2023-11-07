@@ -1,9 +1,9 @@
 import React from "react"
 
-const LinkedIn = ({ width, height }) => (
+export const LinkedInIcon = () => (
   <svg
-    width={width}
-    height={height}
+    width={'4.8rem'}
+    height={'4.8rem'}
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 112.196 112.196"
   >
@@ -14,5 +14,3 @@ const LinkedIn = ({ width, height }) => (
     />
   </svg>
 )
-
-export default LinkedIn

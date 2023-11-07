@@ -1,32 +1,24 @@
 import React from "react";
-import type { PageProps } from "gatsby";
+import { graphql } from "gatsby";
 import { Layout } from "../components/Layout";
 import { Bio } from "../components/Bio";
-import { Experiences } from "../containers/ExperiencesContainer";
-import { Projects } from "../containers/ProjectsContainer";
-import { graphql } from "gatsby";
+import { WorkExperiencesSection } from "../containers/WorkExperiencesSection";
+import { ProjectsSection } from "../containers/ProjectsSection";
 
-const titleClaims =
-  "Hi there! Welcome! Please be patient, this page is still a WIP. Thank you! "
+// const _titleClaims =
+//   "Hi there! Welcome! Please be patient, this page is still a WIP. Thank you! "
 
-const HomePage = ({  location }: PageProps) => {
-  // useEffect(() => {
-  //   const titleScroller = text => {
-  //     document.title = text
-  //     setTimeout(function () {
-  //       titleScroller(text.substr(1) + text.substr(0, 1))
-  //     }, 500)
-  //   }
-  //
-  //   titleScroller(titleClaims)
-  // }, [])
+const HomePage = () => {
 
   return (
-    <Layout location={location} title={titleClaims}>
-      {/*<Seo title={titleClaims} />*/}
+    <Layout >
+      {/*
+        // TODO: Refactor the Seo component using new approach with Gatsby and Head component
+        <Seo title={titleClaims} />
+      */}
       <Bio />
-      <Experiences />
-      <Projects />
+      <WorkExperiencesSection />
+      <ProjectsSection />
     </Layout>
   )
 }

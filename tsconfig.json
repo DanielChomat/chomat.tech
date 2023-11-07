@@ -24,5 +24,11 @@
     "strictNullChecks": true,
     "target": "esnext",
     "declarationMap": true
-  }
+  },
+  "include": [
+    "./src/**/*",
+    "./gatsby-node.ts",
+    "./gatsby-config.ts",
+    "./plugins/**/*"
+  ]
 }

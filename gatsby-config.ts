@@ -17,6 +17,7 @@ module.exports = {
       instagram: ``,
     },
   },
+  graphqlTypegen: true,
   plugins: [
     {
       resolve: `gatsby-plugin-google-fonts`,
@@ -40,6 +41,7 @@ module.exports = {
         graphqlTag: "default",
 
         watchMode: process.env.SANITY_WATCH_MODE,
+
       },
     },
     {

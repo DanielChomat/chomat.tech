@@ -1,8 +1,6 @@
-import OneUp from "./assets/1up"
-import LinkedIn from "./assets/LinkedIn"
-import Github from "./assets/Github"
-import Instagram from "./assets/Instagram"
-import Refresh from "./assets/Refresh"
-import Unicorn from "./assets/Unicorn"
+import { OneUpIcon } from "./assets/1up";
+import { LinkedInIcon } from "./assets/LinkedIn";
+import { GithubIcon } from "./assets/Github";
+import { InstagramIcon } from "./assets/Instagram";
 
-export { OneUp, LinkedIn, Github, Instagram, Refresh, Unicorn }
+export { OneUpIcon, LinkedInIcon, GithubIcon, InstagramIcon }
