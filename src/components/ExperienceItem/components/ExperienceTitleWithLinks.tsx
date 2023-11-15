@@ -1,5 +1,5 @@
 import { ExperienceLinks } from "./ExperienceLinks";
-import React from "react";
+
 import { Project } from "../../../types";
 
 type Props = {

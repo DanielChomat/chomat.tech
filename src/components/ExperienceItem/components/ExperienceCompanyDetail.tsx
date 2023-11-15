@@ -1,4 +1,4 @@
-import React from "react";
+
 import { ProjectCompany } from "../../../types";
 
 type Props = {

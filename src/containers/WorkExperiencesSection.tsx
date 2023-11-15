@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Project } from "../types";
 import { SectionListWithTitle } from "./SectionListWithTitle";
 import { ExperienceItem } from "../components/ExperienceItem/ExperienceItem";
@@ -10,7 +10,7 @@ export const WorkExperiencesSection = () => {
   } = useStaticQuery(getWorkExperiencesQuery)
 
   const workExperiencesListElement = data.map((experience: Project) =>
-    <ExperienceItem item={experience} />
+    <ExperienceItem key={experience.id} item={experience} />
   )
 
   return (

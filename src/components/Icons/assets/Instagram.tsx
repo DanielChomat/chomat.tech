@@ -1,5 +1,3 @@
-import React from "react";
-
 export const InstagramIcon = () => (
   <svg width={"4.8rem"} height={"4.8rem"} viewBox="0 0 512 512">
     <radialGradient id="a" cx="104.957" cy="447.447" r="564.646" gradientUnits="userSpaceOnUse">
