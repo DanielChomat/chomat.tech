@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 
 const FooterContainer = styled.footer`
@@ -13,27 +12,18 @@ export const Footer = () => {
   return (
     <FooterContainer>
       Built with{" "}
-      <a
-        href="https://www.gatsbyjs.org"
-        rel={"noopener noreferrer"}
-        
-      >
+      <a href="https://www.gatsbyjs.org" rel={"noopener noreferrer"}>
         Gatsby
       </a>
       , heavily inspired by{" "}
       <a
         href={"https://github.com/EmaSuriano/gatsby-starter-mate"}
         rel={"noopener noreferrer"}
-        
       >
         Gatsby Mate Starter
       </a>
       , connected to{" "}
-      <a
-        href={"https://www.sanity.io/studio"}
-        rel={"noopener noreferrer"}
-        
-      >
+      <a href={"https://www.sanity.io/studio"} rel={"noopener noreferrer"}>
         Sanity Studio
       </a>
       .

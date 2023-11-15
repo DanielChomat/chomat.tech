@@ -1,12 +1,12 @@
-import { ReactNode } from "react";
-import { ThemeProvider } from "styled-components";
+import { ReactNode } from "react"
+import { ThemeProvider } from "styled-components"
 
-import { Footer } from "./Footer";
-import { Header } from "./Header";
+import { Footer } from "./Footer"
+import { Header } from "./Header"
 
-import GlobalStyles from "../styles/GlobalStyles";
-import theme from "../styles/theme";
-import { Main } from "../styles/Layout";
+import GlobalStyles from "../styles/GlobalStyles"
+import theme from "../styles/theme"
+import { Main } from "../styles/Layout"
 
 type Props = {
   children: ReactNode

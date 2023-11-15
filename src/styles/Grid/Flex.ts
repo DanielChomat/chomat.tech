@@ -1,13 +1,13 @@
-import styled from "styled-components";
-import { flexbox } from "styled-system";
-import { Property } from "csstype";
+import styled from "styled-components"
+import { flexbox } from "styled-system"
+import { Property } from "csstype"
 
 export interface FlexProps {
-  readonly justifyContent?: Property.JustifyContent;
-  readonly alignItems?: Property.AlignItems;
-  readonly flexDirection?: Property.FlexDirection;
-  readonly flexWrap?: Property.FlexWrap;
-  readonly gap?: Property.Gap;
+  readonly justifyContent?: Property.JustifyContent
+  readonly alignItems?: Property.AlignItems
+  readonly flexDirection?: Property.FlexDirection
+  readonly flexWrap?: Property.FlexWrap
+  readonly gap?: Property.Gap
 }
 
 export const Flex = styled.div<FlexProps>`

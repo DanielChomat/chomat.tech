@@ -1,17 +1,15 @@
-
-import { graphql } from "gatsby";
-import { Layout } from "../components/Layout";
-import { Bio } from "../components/Bio";
-import { WorkExperiencesSection } from "../containers/WorkExperiencesSection";
-import { ProjectsSection } from "../containers/ProjectsSection";
+import { graphql } from "gatsby"
+import { Layout } from "../components/Layout"
+import { Bio } from "../components/Bio"
+import { WorkExperiencesSection } from "../containers/WorkExperiencesSection"
+import { ProjectsSection } from "../containers/ProjectsSection"
 
 // const _titleClaims =
 //   "Hi there! Welcome! Please be patient, this page is still a WIP. Thank you! "
 
 const HomePage = () => {
-
   return (
-    <Layout >
+    <Layout>
       {/*
         // TODO: Refactor the Seo component using new approach with Gatsby and Head component
         <Seo title={titleClaims} />

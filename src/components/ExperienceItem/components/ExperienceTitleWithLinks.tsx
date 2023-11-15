@@ -1,36 +1,27 @@
-import { ExperienceLinks } from "./ExperienceLinks";
+import { ExperienceLinks } from "./ExperienceLinks"
 
-import { Project } from "../../../types";
+import { Project } from "../../../types"
 
 type Props = {
   experience: Project
 }
 
-export const ExperienceTitleWithLinks = ({experience}: Props) => {
-  const {
-    position,
-    company,
-    links
-  } = experience
+export const ExperienceTitleWithLinks = ({ experience }: Props) => {
+  const { position, company, links } = experience
 
-  const companyLink = company?.link;
+  const companyLink = company?.link
   const companyName = company?.name
   const companyLogoUrl = company?.logo?.asset?.url
 
-  const companyNameElement =
-    companyLogoUrl
-      ? <img src={companyLogoUrl} alt={companyName ?? ''} />
-      : undefined;
+  const companyNameElement = companyLogoUrl ? (
+    <img src={companyLogoUrl} alt={companyName ?? ""} />
+  ) : undefined
 
   const getCompanyElement = () => {
-    if ((!companyName && !companyLogoUrl) || !companyLink) return undefined;
+    if ((!companyName && !companyLogoUrl) || !companyLink) return undefined
 
     return (
-      <a
-        href={companyLink}
-        target={'_blank'}
-        rel={"noopener noreferrer"}
-      >
+      <a href={companyLink} target={"_blank"} rel={"noopener noreferrer"}>
         {companyNameElement}
       </a>
     )
@@ -38,9 +29,7 @@ export const ExperienceTitleWithLinks = ({experience}: Props) => {
 
   const companyInnerElement = getCompanyElement()
 
-  const companyElement = !!companyInnerElement
-    ? companyInnerElement
-    : undefined
+  const companyElement = companyInnerElement ? companyInnerElement : undefined
 
   return (
     <h3>

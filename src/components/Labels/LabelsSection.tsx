@@ -1,13 +1,11 @@
-
-import { Label } from "./Label";
+import { Label } from "./Label"
 
 type Props = {
-  title: string;
+  title: string
   labels: readonly string[]
 }
 
-export const LabelsSection = ({title, labels}: Props) => {
-
+export const LabelsSection = ({ title, labels }: Props) => {
   return (
     <>
       <h5>{title}</h5>
