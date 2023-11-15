@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Project } from "../../types";
 import { ExperienceTitleWithLinks } from "./components/ExperienceTitleWithLinks";
 import { ExperienceCompanyDetail } from "./components/ExperienceCompanyDetail";
@@ -48,7 +46,6 @@ export const ExperienceItem = ({ item }: Props) => {
           {showEmploymentTimeSection && <ExperienceEmploymentDuration timeOfEmployment={timeOfEmployment} />}
         </Flex>
       }
-
 
       {details &&
         <ExperienceDetails details={details} />

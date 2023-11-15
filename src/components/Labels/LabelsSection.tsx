@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Label } from "./Label";
 
 type Props = {
@@ -13,7 +13,7 @@ export const LabelsSection = ({title, labels}: Props) => {
       <h5>{title}</h5>
       <div>
         {labels.map(label => (
-          <Label label={label} />
+          <Label key={label} label={label} />
         ))}
       </div>
     </>

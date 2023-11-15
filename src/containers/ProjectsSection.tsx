@@ -1,4 +1,3 @@
-import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { SectionListWithTitle } from "./SectionListWithTitle";
 import { ExperienceItem } from "../components/ExperienceItem/ExperienceItem";

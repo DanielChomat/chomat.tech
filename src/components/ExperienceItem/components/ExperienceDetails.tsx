@@ -1,5 +1,5 @@
 import { PortableText } from "@portabletext/react";
-import React from "react";
+
 import { ProjectDetails } from "../../../types";
 import { PortableTextBlock } from "@portabletext/types";
 

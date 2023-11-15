@@ -6,7 +6,7 @@ const theme = {
     navy: "#004175",
   },
   shadows: {
-    default: "#64646f33 0px 7px 29px 0px",
+    default: "var(--box-shadow-color-default) 0px 7px 29px 0px",
   },
 }
 

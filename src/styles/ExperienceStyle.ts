@@ -12,14 +12,14 @@ interface ExperienceStyleProps {
 
 export const ExperienceStyle = styled.article<ExperienceStyleProps>`
   flex: 1 1 calc(33% - 2rem);
-  background-color: #fff;
+  background-color: var(--bg-color-main);
   border-radius: 20px;
   padding: 1.6rem 2.4rem;
   position: relative;
 
-  color: var(--color-black);
+  color: var(--typo-color-black);
 
-  --experience-box-shadow: var(--color-green) 0px 7px 29px 0px;
+  --experience-box-shadow: var(--bg-color-green) 0px 7px 29px 0px;
 
   box-shadow: ${props => props.theme.shadows.default};
 
@@ -40,13 +40,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
         marginLeft: "auto",
         marginRight: "auto",
 
-        boxShadow: "var(--color-green) 0px 7px 29px 0px",
-
-        // animationName: "borderRainbow",
-        // animationFillMode: "both",
-        // animationDuration: "10000ms",
-        // animationDelay: "500ms",
-        // animationIterationCount: "infinite",
+        boxShadow: "var(--bg-color-green) 0px 7px 29px 0px",
 
         overflow: "hidden",
 
@@ -72,7 +66,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
           transform: "rotate3d(0, 0, 1, -45deg)",
           transformOrigin: "top",
 
-          backgroundColor: "var(--color-green)",
+          backgroundColor: "var(--bg-color-green)",
         },
       },
     },
@@ -110,7 +104,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
   }
 
   h4 {
-    color: var(--color-purple);
+    color: var(--typo-color-purple);
 
     small {
       font-size: 0.55em;
@@ -118,7 +112,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
   }
 
   h5 {
-    color: var(--color-purple);
+    color: var(--typo-color-purple);
   }
 
   small {
@@ -149,22 +143,26 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
         filter: invert(78%) sepia(59%) saturate(2854%) hue-rotate(118deg)
           brightness(99%) contrast(105%);
         path {
-          //fill: var(--color-green);
+          //fill: var(--bg-color-green);
         }
       }
 
-      transform: scale(1.1);
+      transform: scale(1.02);
     }
   }
 
   details {
-    border-bottom: 2px solid var(--color-orange);
-    border-top: 2px solid var(--color-orange);
+    border-bottom: 2px solid var(--border-color-details);
+    border-top: 2px solid var(--border-color-details);
     padding: 0.8rem 0;
     margin-top: 0.8rem;
     margin-bottom: 0.8rem;
 
     &[open] {
+      & > div {
+        opacity: 1;
+      }
+      
       & > summary {
         &:hover {
           &::after {
@@ -178,10 +176,6 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
           transform: rotate(0deg);
         }
       }
-
-      & > div {
-        opacity: 1;
-      }
     }
 
     & > div {
@@ -191,7 +185,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
       font-size: 1.8rem;
       line-height: 1.2;
       font-weight: 100;
-      color: #585c5f;
+      color: var(--typo-color-grey);
       padding: 0.8rem 0;
 
       white-space: pre-wrap;
@@ -210,7 +204,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
       gap: 0.4rem;
       cursor: pointer;
 
-      color: var(--color-purple);
+      color: var(--typo-color-purple);
 
       justify-content: space-between;
 
@@ -253,8 +247,8 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
       margin-bottom: 0.8rem;
 
       span {
-        color: var(--color-purple);
-        background-color: var(--color-yellow);
+        color: var(--typo-color-tag);
+        background-color: var(--bg-color-tag);
         border-radius: 5px;
         text-align: center;
         padding: 0.6rem 0.8rem;
