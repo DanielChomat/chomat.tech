@@ -1,7 +1,7 @@
 export const GithubIcon = () => (
   <svg
-    width={'4.8rem'}
-    height={'4.8rem'}
+    width={"4.8rem"}
+    height={"4.8rem"}
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -11,4 +11,3 @@ export const GithubIcon = () => (
     />
   </svg>
 )
-

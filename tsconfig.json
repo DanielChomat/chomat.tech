@@ -29,6 +29,9 @@
     "./src/**/*",
     "./gatsby-node.ts",
     "./gatsby-config.ts",
-    "./plugins/**/*"
+    "./gatsby-browser.ts",
+    "./graphql.config.ts",
+    "./plugins/**/*",
+    "./sanity.*.ts"
   ]
 }

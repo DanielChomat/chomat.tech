@@ -1,17 +1,14 @@
-import React, { ComponentType } from "react";
+import { ComponentType } from "react"
 
 type Props = {
-  link: string;
+  link: string
   Icon: ComponentType
 }
 
-export const IconLink = ({link, Icon}: Props) => {
-
-  return ( <a
-    href={link}
-    target={'_blank'}
-    rel={"noopener noreferrer"}
-  >
-    <Icon />
-  </a>)
+export const IconLink = ({ link, Icon }: Props) => {
+  return (
+    <a href={link} target={"_blank"} rel={"noopener noreferrer"}>
+      <Icon />
+    </a>
+  )
 }

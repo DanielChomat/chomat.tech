@@ -1,6 +1,6 @@
-import { defineType } from "@sanity-typed/types";
+import { defineType } from "@sanity-typed/types"
 
-export const companySchema = defineType( {
+export const companySchema = defineType({
   name: "company",
   title: "Company",
   type: "object",

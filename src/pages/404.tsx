@@ -1,11 +1,9 @@
+import { graphql } from "gatsby"
 
-import { graphql } from "gatsby";
-
-import { Layout } from "../components/Layout";
+import { Layout } from "../components/Layout"
 // import Seo from "../components/seo"
 
 const NotFoundPage = () => {
-
   return (
     <Layout>
       {/*<Seo title="404: Not Found" />*/}

@@ -4,6 +4,6 @@ export enum Emojis {
 }
 
 export const TYPE_EMOJIS_MAP: Record<Emojis, string> = {
-  [Emojis.EXPERIENCE] : '💼',
-  [Emojis.PROJECT]: '💻'
+  [Emojis.EXPERIENCE]: "💼",
+  [Emojis.PROJECT]: "💻",
 }

@@ -1,11 +1,10 @@
-import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby"
 
-import { GithubIcon, InstagramIcon, LinkedInIcon, OneUpIcon } from "./Icons";
-import { IconLink } from "./IconLink";
+import { GithubIcon, InstagramIcon, LinkedInIcon, OneUpIcon } from "../icons"
+import { IconLink } from "./IconLink"
 
-import { Flex } from "../styles/Grid";
-import { LinksContainer } from "../styles/LinksContainer";
+import { Flex } from "../styles/Grid"
+import { LinksContainer } from "../styles/LinksContainer"
 
 export const Bio = () => {
   // TODO: Dissect this query into more constants
@@ -49,15 +48,14 @@ export const Bio = () => {
         {social.linkedin && (
           <IconLink link={linkedInLink} Icon={LinkedInIcon} />
         )}
-        {social.github && (
-          <IconLink link={githubLink} Icon={GithubIcon} />
-        )}
+        {social.github && <IconLink link={githubLink} Icon={GithubIcon} />}
         {social.instagram && (
           <IconLink link={instagramLink} Icon={InstagramIcon} />
         )}
       </LinksContainer>
       <h4>
-        Currently <OneUpIcon />-ing my online presence with personal projects.
+        Currently <OneUpIcon />
+        -ing my online presence with personal projects.
       </h4>
     </Flex>
   )

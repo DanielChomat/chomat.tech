@@ -1,10 +1,12 @@
-import { GatsbyNode } from 'gatsby';
+import { GatsbyNode } from "gatsby"
 
-export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions }) => {
+export const onCreateBabelConfig: GatsbyNode["onCreateBabelConfig"] = ({
+  actions,
+}) => {
   actions.setBabelPreset({
-    name: 'babel-preset-gatsby',
+    name: "babel-preset-gatsby",
     options: {
-      reactRuntime: 'automatic',
+      reactRuntime: "automatic",
     },
-  });
-};
+  })
+}

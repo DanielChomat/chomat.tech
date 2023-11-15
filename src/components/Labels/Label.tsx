@@ -1,8 +1,7 @@
 type Props = {
-  label: string;
+  label: string
 }
 
-export const Label = ({label}: Props) => {
-
+export const Label = ({ label }: Props) => {
   return <span>{label}</span>
 }

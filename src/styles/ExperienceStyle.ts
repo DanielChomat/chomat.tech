@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { variant } from "styled-system";
+import styled from "styled-components"
+import { variant } from "styled-system"
 
 interface ExperienceStyleProps {
-  readonly isFeatured: boolean;
-  readonly isProject: boolean;
+  readonly isFeatured: boolean
+  readonly isProject: boolean
   // readonly alignItems: Property.AlignItems;
   // readonly flexDirection: Property.FlexDirection;
   // readonly flexWrap: Property.FlexWrap;
@@ -95,7 +95,6 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
       padding-left: 1.6rem;
       margin-left: auto;
       max-height: 4rem;
-
     }
     img,
     svg {
@@ -162,7 +161,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
       & > div {
         opacity: 1;
       }
-      
+
       & > summary {
         &:hover {
           &::after {
@@ -189,7 +188,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
       padding: 0.8rem 0;
 
       white-space: pre-wrap;
-      
+
       strong {
         font-weight: bold;
       }

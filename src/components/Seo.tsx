@@ -17,7 +17,8 @@ export const Seo = () => {
 
   // const metaDescription = description || site.siteMetadata.description
 
-  return (<></>
+  return (
+    <></>
     // <Helmet
     //   htmlAttributes={{
     //     lang,
@@ -60,4 +61,3 @@ export const Seo = () => {
     // />
   )
 }
-

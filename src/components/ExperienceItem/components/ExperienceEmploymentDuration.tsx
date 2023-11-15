@@ -1,6 +1,5 @@
-import React from "react";
-import dayjs from "dayjs";
-import { Project } from "../../../types";
+import dayjs from "dayjs"
+import { Project } from "../../../types"
 
 const getDurationInText = (diffInMonths: number) => {
   switch (diffInMonths) {
@@ -16,26 +15,26 @@ const getDurationInText = (diffInMonths: number) => {
 }
 
 type Props = {
-  timeOfEmployment: Project['timeOfEmployment']
+  timeOfEmployment: Project["timeOfEmployment"]
 }
 
-export const ExperienceEmploymentDuration = ({timeOfEmployment}: Props) => {
-
+export const ExperienceEmploymentDuration = ({ timeOfEmployment }: Props) => {
   const startTime = dayjs(timeOfEmployment?.start ?? undefined)
   const endTime = dayjs(timeOfEmployment?.end ?? undefined)
 
-  const diffInMonths = Math.round(endTime.diff(startTime) / 1000 / 60 / 60 / 24 / 30)
+  const diffInMonths = Math.round(
+    endTime.diff(startTime) / 1000 / 60 / 60 / 24 / 30,
+  )
   // TODO: FIX the import of dayjs and it's "duration" function (likely to be fixed with TypeScript)
 
   const durationInText = getDurationInText(diffInMonths)
 
-
-  return (timeOfEmployment ? (
-      <h5>
-        {timeOfEmployment.start} - {timeOfEmployment.end ?? "..."}{" "}
-        {durationInText && <small>({durationInText})</small>}
-      </h5>
-    ) : (
-      ""
-    ))
+  return timeOfEmployment ? (
+    <h5>
+      {timeOfEmployment.start} - {timeOfEmployment.end ?? "..."}{" "}
+      {durationInText && <small>({durationInText})</small>}
+    </h5>
+  ) : (
+    ""
+  )
 }

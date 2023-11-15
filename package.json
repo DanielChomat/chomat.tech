@@ -28,7 +28,6 @@
     "gatsby-source-filesystem": "^5.12.1",
     "gatsby-source-sanity": "^7.9.1",
     "gatsby-transformer-sharp": "^5.12.3",
-    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
@@ -40,6 +39,16 @@
   "devDependencies": {
     "@types/styled-components": "^5.1.29",
     "@types/styled-system": "^5.1.20",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint": "^8.53.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-config-universe": "^11.3.0",
+    "eslint-webpack-plugin": "^4.0.1",
+    "gatsby-plugin-eslint": "^4.0.4",
     "husky": "^8.0.2",
     "lint-staged": "^15.0.2",
     "prettier": "3.0.3"
@@ -52,8 +61,6 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
@@ -61,10 +68,11 @@
     "sanity:start": "sanity start",
     "sanity:build": "sanity build",
     "sanity:dev": "sanity dev",
-    "check:ts": "tsc --noEmit"
+    "check:ts": "tsc --noEmit",
+    "check:lint-fix": "eslint ./**/*.ts ./**/*.tsx --fix"
   },
   "lint-staged": {
-    "*.{js,jsx,json,md}": "prettier --write"
+    "*.{ts,tsx}": "npm run check:lint-fix"
   },
   "resolutions": {
     "@types/react": "^18.2.0"
