@@ -3,9 +3,9 @@ import { Layout } from "../components/Layout"
 import { Bio } from "../components/Bio"
 import { WorkExperiencesSection } from "../containers/WorkExperiencesSection"
 import { ProjectsSection } from "../containers/ProjectsSection"
+import { Seo } from "../components/Seo/Seo"
 
-// const _titleClaims =
-//   "Hi there! Welcome! Please be patient, this page is still a WIP. Thank you! "
+const titleClaims = "Daniel Chomat | 📱 Front End Dev | chomat.tech"
 
 const HomePage = () => {
   return (
@@ -20,6 +20,8 @@ const HomePage = () => {
     </Layout>
   )
 }
+
+export const Head = () => <Seo title={titleClaims} />
 
 export default HomePage
 
