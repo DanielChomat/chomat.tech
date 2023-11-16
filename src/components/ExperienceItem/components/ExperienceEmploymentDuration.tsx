@@ -1,38 +1,34 @@
 import dayjs from "dayjs"
+import duration from "dayjs/plugin/duration"
+import relativeTime from "dayjs/plugin/relativeTime"
+
 import { Project } from "../../../types"
 
-const getDurationInText = (diffInMonths: number) => {
-  switch (diffInMonths) {
-    case 12:
-      return "1 year"
-    case 9:
-      return "9 months"
-    case 24:
-      return "2 years"
-    default:
-      return undefined
-  }
-}
+dayjs.extend(duration)
+dayjs.extend(relativeTime)
 
 type Props = {
   timeOfEmployment: Project["timeOfEmployment"]
 }
 
 export const ExperienceEmploymentDuration = ({ timeOfEmployment }: Props) => {
-  const startTime = dayjs(timeOfEmployment?.start ?? undefined)
-  const endTime = dayjs(timeOfEmployment?.end ?? undefined)
+  const startTimeString = timeOfEmployment?.start ?? undefined
+  const endTimeString = timeOfEmployment?.end ?? undefined
 
-  const diffInMonths = Math.round(
-    endTime.diff(startTime) / 1000 / 60 / 60 / 24 / 30,
-  )
-  // TODO: FIX the import of dayjs and it's "duration" function (likely to be fixed with TypeScript)
+  const startTime = dayjs(startTimeString)
+  const endTime = dayjs(endTimeString).endOf("month")
 
-  const durationInText = getDurationInText(diffInMonths)
+  const durationInText = dayjs.duration(endTime.diff(startTime)).humanize()
 
   return timeOfEmployment ? (
     <h5>
-      {timeOfEmployment.start} - {timeOfEmployment.end ?? "..."}{" "}
-      {durationInText && <small>({durationInText})</small>}
+      {startTimeString} - {endTimeString ?? "..."}
+      {durationInText && (
+        <>
+          {" "}
+          <small>({durationInText})</small>
+        </>
+      )}
     </h5>
   ) : (
     ""

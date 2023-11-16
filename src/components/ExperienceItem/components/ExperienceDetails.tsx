@@ -19,7 +19,7 @@ export const ExperienceDetails = ({ details }: Props) => {
   return (
     <details>
       <summary title={"Planning to implement WAAPI for smoother opening"}>
-        {summary}
+        <span>{summary}</span>
       </summary>
       {hasContent && (
         <div className="content">

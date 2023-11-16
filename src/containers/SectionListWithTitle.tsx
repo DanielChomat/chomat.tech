@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Flex } from "../styles/Grid"
+import { ExperienceGrid } from "../styles/Grid/ExperienceGrid"
 
 type Props = {
   title: string
@@ -10,13 +10,7 @@ export const SectionListWithTitle = ({ title, children }: Props) => {
   return (
     <section>
       <h2 className={"text-left"}>{title}</h2>
-      <Flex
-        justifyContent={"space-between"}
-        alignItems={"flex-start"}
-        gap={"30px"}
-      >
-        {children}
-      </Flex>
+      <ExperienceGrid>{children}</ExperienceGrid>
     </section>
   )
 }

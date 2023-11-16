@@ -40,7 +40,7 @@ export const Bio = () => {
   const instagramLink = `https://instagram.com/${social.instagram}/`
 
   return (
-    <Flex as={"section"} flexDirection={"column"} alignItems={"center"}>
+    <Flex as={"section"} $flexDirection={"column"} $alignItems={"center"}>
       <h1>Hi, I'm Daniel</h1>
       <h2>A front-end Dev based in Prague</h2>
       <h3>Welcome to my playground!</h3>
