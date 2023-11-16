@@ -24,6 +24,7 @@ export const Seo = ({ title, description, pathname = "", children }: Props) => {
     twitterUsername,
   } = useSiteMetadata()
 
+  // TODO: Create an image and implement it below
   // const imageUrl: string = siteUrl + image
   const staticUrl: string = siteUrl + pathname
 
