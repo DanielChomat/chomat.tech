@@ -1,15 +1,17 @@
+import type { GatsbyConfig } from "gatsby"
+
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-module.exports = {
+const config: GatsbyConfig = {
   siteMetadata: {
     title: process.env.SANITY_STUDIO_TITLE,
     author: {
       name: `Daniel Chomat`,
       summary: `Overall playground for all things code and web development`,
     },
-    description: `This is a blog with quick tips, information about it's creator and his journey through the world. Also his playground to try stuff.`,
+    description: `Developer's personal website and public playground to try new & cool stuff`,
     siteUrl: `https://chomat.tech`,
     social: {
       linkedin: "danielchomat",
@@ -54,7 +56,6 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-styled-components`,
-    // `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -67,9 +68,10 @@ module.exports = {
         icon: `content/assets/shaka-emoji.png`,
       },
     },
-    `gatsby-plugin-react-helmet`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
 }
+
+export default config
