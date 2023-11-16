@@ -41,13 +41,13 @@ export const ExperienceItem = ({ item }: Props) => {
   return (
     <ExperienceStyle
       key={item.id}
-      isFeatured={!!isItemFeatured}
-      isProject={isItemProject}
+      $isFeatured={!!isItemFeatured}
+      $isProject={isItemProject}
     >
       <ExperienceTitleWithLinks experience={item} />
 
       {showEmploymentInfoSection && (
-        <Flex justifyContent={"space-between"} alignItems={"center"}>
+        <Flex $justifyContent={"space-between"} $alignItems={"center"}>
           {showCompanySection && <ExperienceCompanyDetail company={company} />}
           {showEmploymentTimeSection && (
             <ExperienceEmploymentDuration timeOfEmployment={timeOfEmployment} />

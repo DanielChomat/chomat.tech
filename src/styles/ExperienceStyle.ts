@@ -2,12 +2,8 @@ import styled from "styled-components"
 import { variant } from "styled-system"
 
 interface ExperienceStyleProps {
-  readonly isFeatured: boolean
-  readonly isProject: boolean
-  // readonly alignItems: Property.AlignItems;
-  // readonly flexDirection: Property.FlexDirection;
-  // readonly flexWrap: Property.FlexWrap;
-  // readonly gap: Property.Gap;
+  readonly $isFeatured: boolean
+  readonly $isProject: boolean
 }
 
 export const ExperienceStyle = styled.article<ExperienceStyleProps>`
@@ -32,7 +28,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
   }
 
   ${variant({
-    prop: "isFeatured",
+    prop: "$isFeatured",
     variants: {
       true: {
         flexBasis: "100%",
@@ -98,7 +94,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
     }
     img,
     svg {
-      height: ${props => (props.isProject ? "2.8rem" : "4rem")};
+      height: ${props => (props.$isProject ? "2.8rem" : "4rem")};
     }
   }
 
@@ -206,6 +202,10 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
       color: var(--typo-color-purple);
 
       justify-content: space-between;
+
+      span {
+        width: 100%;
+      }
 
       &:hover {
         &::after {
