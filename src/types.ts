@@ -6,3 +6,8 @@ export type ProjectTimeOfEmployment = Project["timeOfEmployment"]
 export type ProjectDetails = Project["details"]
 
 export type ProjectType = Project["type"]
+
+export type BioContent = Queries.SanityBio
+export type BioStuff = Queries.SanityBioStuff
+export type BioSocialItem = Queries.SanitySocialsSingular
+export type BioSocialItemLocal = { iconUrl: string; name: string; url: string }

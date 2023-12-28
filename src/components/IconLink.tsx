@@ -1,14 +1,30 @@
 import { ComponentType } from "react"
 
-type Props = {
-  link: string
+type WithIconComponent = {
+  iconUrl?: string
   Icon: ComponentType
 }
 
-export const IconLink = ({ link, Icon }: Props) => {
+type WithIconUrl = {
+  iconUrl: string
+  Icon?: ComponentType
+}
+
+type Props = {
+  link: string
+  inverted?: boolean
+} & (WithIconComponent | WithIconUrl)
+
+export const IconLink = ({ link, inverted = false, iconUrl, Icon }: Props) => {
+  const iconLinkElement = Icon ? (
+    <Icon />
+  ) : (
+    <img src={iconUrl} alt={link} className={inverted ? "inverted" : ""} />
+  )
+
   return (
     <a href={link} target={"_blank"} rel={"noopener noreferrer"}>
-      <Icon />
+      {iconLinkElement}
     </a>
   )
 }

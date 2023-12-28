@@ -18,10 +18,13 @@ type SeoData = {
 
 export const Seo = ({ title, description, pathname = "", children }: Props) => {
   const {
-    title: defaultTitle,
-    description: defaultDescription,
-    siteUrl,
-    twitterUsername,
+    gatsbyMetadata: {
+      title: defaultTitle,
+      description: defaultDescription,
+      siteUrl,
+      twitterUsername,
+    },
+    sanityMetadata: { title: bioTitle, description: bioDescription },
   } = useSiteMetadata()
 
   // TODO: Create an image and implement it below
@@ -29,8 +32,8 @@ export const Seo = ({ title, description, pathname = "", children }: Props) => {
   const staticUrl: string = siteUrl + pathname
 
   const seoData: SeoData = {
-    title: title || defaultTitle,
-    description: description || defaultDescription,
+    title: title || bioTitle || defaultTitle,
+    description: description || bioDescription || defaultDescription,
     // image: imageUrl,
     url: staticUrl,
     twitterUsername,
