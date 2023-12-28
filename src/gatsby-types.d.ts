@@ -1307,6 +1307,7 @@ type Query = {
   readonly allDirectory: DirectoryConnection;
   readonly allFile: FileConnection;
   readonly allImageSharp: ImageSharpConnection;
+  readonly allSanityBio: SanityBioConnection;
   readonly allSanityFileAsset: SanityFileAssetConnection;
   readonly allSanityImageAsset: SanityImageAssetConnection;
   readonly allSanityProject: SanityProjectConnection;
@@ -1318,6 +1319,7 @@ type Query = {
   readonly directory: Maybe<Directory>;
   readonly file: Maybe<File>;
   readonly imageSharp: Maybe<ImageSharp>;
+  readonly sanityBio: Maybe<SanityBio>;
   readonly sanityFileAsset: Maybe<SanityFileAsset>;
   readonly sanityImageAsset: Maybe<SanityImageAsset>;
   readonly sanityProject: Maybe<SanityProject>;
@@ -1350,6 +1352,14 @@ type Query_allImageSharpArgs = {
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
   sort: InputMaybe<ReadonlyArray<InputMaybe<ImageSharpSortInput>>>;
+};
+
+
+type Query_allSanityBioArgs = {
+  filter: InputMaybe<SanityBioFilterInput>;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<SanityBioSortInput>>>;
 };
 
 
@@ -1510,6 +1520,27 @@ type Query_imageSharpArgs = {
   original: InputMaybe<ImageSharpOriginalFilterInput>;
   parent: InputMaybe<NodeFilterInput>;
   resize: InputMaybe<ImageSharpResizeFilterInput>;
+};
+
+
+type Query_sanityBioArgs = {
+  _createdAt: InputMaybe<DateQueryOperatorInput>;
+  _id: InputMaybe<StringQueryOperatorInput>;
+  _key: InputMaybe<StringQueryOperatorInput>;
+  _rawAbout: InputMaybe<JSONQueryOperatorInput>;
+  _rawBioStuff: InputMaybe<JSONQueryOperatorInput>;
+  _rawPageMetadata: InputMaybe<JSONQueryOperatorInput>;
+  _rev: InputMaybe<StringQueryOperatorInput>;
+  _type: InputMaybe<StringQueryOperatorInput>;
+  _updatedAt: InputMaybe<DateQueryOperatorInput>;
+  about: InputMaybe<SanityBlockFilterListInput>;
+  bioStuff: InputMaybe<SanityBioStuffFilterInput>;
+  children: InputMaybe<NodeFilterListInput>;
+  id: InputMaybe<StringQueryOperatorInput>;
+  internal: InputMaybe<InternalFilterInput>;
+  pageMetadata: InputMaybe<SanityPageMetadataFilterInput>;
+  parent: InputMaybe<NodeFilterInput>;
+  position: InputMaybe<StringQueryOperatorInput>;
 };
 
 
@@ -1813,12 +1844,260 @@ type SanityAssetSourceDataSortInput = {
   readonly url: InputMaybe<SortOrderEnum>;
 };
 
+type SanityBio = Node & SanityDocument & {
+  readonly _createdAt: Maybe<Scalars['Date']>;
+  readonly _id: Maybe<Scalars['String']>;
+  readonly _key: Maybe<Scalars['String']>;
+  readonly _rawAbout: Maybe<Scalars['JSON']>;
+  readonly _rawBioStuff: Maybe<Scalars['JSON']>;
+  readonly _rawPageMetadata: Maybe<Scalars['JSON']>;
+  readonly _rev: Maybe<Scalars['String']>;
+  readonly _type: Maybe<Scalars['String']>;
+  readonly _updatedAt: Maybe<Scalars['Date']>;
+  readonly about: Maybe<ReadonlyArray<Maybe<SanityBlock>>>;
+  readonly bioStuff: Maybe<SanityBioStuff>;
+  readonly children: ReadonlyArray<Node>;
+  readonly id: Scalars['ID'];
+  readonly internal: Internal;
+  readonly pageMetadata: Maybe<SanityPageMetadata>;
+  readonly parent: Maybe<Node>;
+  readonly position: Maybe<Scalars['String']>;
+};
+
+
+type SanityBio__createdAtArgs = {
+  difference: InputMaybe<Scalars['String']>;
+  formatString: InputMaybe<Scalars['String']>;
+  fromNow: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<Scalars['String']>;
+};
+
+
+type SanityBio__rawAboutArgs = {
+  resolveReferences: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
+
+type SanityBio__rawBioStuffArgs = {
+  resolveReferences: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
+
+type SanityBio__rawPageMetadataArgs = {
+  resolveReferences: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
+
+type SanityBio__updatedAtArgs = {
+  difference: InputMaybe<Scalars['String']>;
+  formatString: InputMaybe<Scalars['String']>;
+  fromNow: InputMaybe<Scalars['Boolean']>;
+  locale: InputMaybe<Scalars['String']>;
+};
+
+type SanityBioConnection = {
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly edges: ReadonlyArray<SanityBioEdge>;
+  readonly group: ReadonlyArray<SanityBioGroupConnection>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly nodes: ReadonlyArray<SanityBio>;
+  readonly pageInfo: PageInfo;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly totalCount: Scalars['Int'];
+};
+
+
+type SanityBioConnection_distinctArgs = {
+  field: SanityBioFieldSelector;
+};
+
+
+type SanityBioConnection_groupArgs = {
+  field: SanityBioFieldSelector;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+};
+
+
+type SanityBioConnection_maxArgs = {
+  field: SanityBioFieldSelector;
+};
+
+
+type SanityBioConnection_minArgs = {
+  field: SanityBioFieldSelector;
+};
+
+
+type SanityBioConnection_sumArgs = {
+  field: SanityBioFieldSelector;
+};
+
+type SanityBioEdge = {
+  readonly next: Maybe<SanityBio>;
+  readonly node: SanityBio;
+  readonly previous: Maybe<SanityBio>;
+};
+
+type SanityBioFieldSelector = {
+  readonly _createdAt: InputMaybe<FieldSelectorEnum>;
+  readonly _id: InputMaybe<FieldSelectorEnum>;
+  readonly _key: InputMaybe<FieldSelectorEnum>;
+  readonly _rawAbout: InputMaybe<FieldSelectorEnum>;
+  readonly _rawBioStuff: InputMaybe<FieldSelectorEnum>;
+  readonly _rawPageMetadata: InputMaybe<FieldSelectorEnum>;
+  readonly _rev: InputMaybe<FieldSelectorEnum>;
+  readonly _type: InputMaybe<FieldSelectorEnum>;
+  readonly _updatedAt: InputMaybe<FieldSelectorEnum>;
+  readonly about: InputMaybe<SanityBlockFieldSelector>;
+  readonly bioStuff: InputMaybe<SanityBioStuffFieldSelector>;
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly pageMetadata: InputMaybe<SanityPageMetadataFieldSelector>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly position: InputMaybe<FieldSelectorEnum>;
+};
+
+type SanityBioFilterInput = {
+  readonly _createdAt: InputMaybe<DateQueryOperatorInput>;
+  readonly _id: InputMaybe<StringQueryOperatorInput>;
+  readonly _key: InputMaybe<StringQueryOperatorInput>;
+  readonly _rawAbout: InputMaybe<JSONQueryOperatorInput>;
+  readonly _rawBioStuff: InputMaybe<JSONQueryOperatorInput>;
+  readonly _rawPageMetadata: InputMaybe<JSONQueryOperatorInput>;
+  readonly _rev: InputMaybe<StringQueryOperatorInput>;
+  readonly _type: InputMaybe<StringQueryOperatorInput>;
+  readonly _updatedAt: InputMaybe<DateQueryOperatorInput>;
+  readonly about: InputMaybe<SanityBlockFilterListInput>;
+  readonly bioStuff: InputMaybe<SanityBioStuffFilterInput>;
+  readonly children: InputMaybe<NodeFilterListInput>;
+  readonly id: InputMaybe<StringQueryOperatorInput>;
+  readonly internal: InputMaybe<InternalFilterInput>;
+  readonly pageMetadata: InputMaybe<SanityPageMetadataFilterInput>;
+  readonly parent: InputMaybe<NodeFilterInput>;
+  readonly position: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SanityBioGroupConnection = {
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly edges: ReadonlyArray<SanityBioEdge>;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+  readonly group: ReadonlyArray<SanityBioGroupConnection>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly nodes: ReadonlyArray<SanityBio>;
+  readonly pageInfo: PageInfo;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly totalCount: Scalars['Int'];
+};
+
+
+type SanityBioGroupConnection_distinctArgs = {
+  field: SanityBioFieldSelector;
+};
+
+
+type SanityBioGroupConnection_groupArgs = {
+  field: SanityBioFieldSelector;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+};
+
+
+type SanityBioGroupConnection_maxArgs = {
+  field: SanityBioFieldSelector;
+};
+
+
+type SanityBioGroupConnection_minArgs = {
+  field: SanityBioFieldSelector;
+};
+
+
+type SanityBioGroupConnection_sumArgs = {
+  field: SanityBioFieldSelector;
+};
+
+type SanityBioSortInput = {
+  readonly _createdAt: InputMaybe<SortOrderEnum>;
+  readonly _id: InputMaybe<SortOrderEnum>;
+  readonly _key: InputMaybe<SortOrderEnum>;
+  readonly _rawAbout: InputMaybe<SortOrderEnum>;
+  readonly _rawBioStuff: InputMaybe<SortOrderEnum>;
+  readonly _rawPageMetadata: InputMaybe<SortOrderEnum>;
+  readonly _rev: InputMaybe<SortOrderEnum>;
+  readonly _type: InputMaybe<SortOrderEnum>;
+  readonly _updatedAt: InputMaybe<SortOrderEnum>;
+  readonly about: InputMaybe<SanityBlockSortInput>;
+  readonly bioStuff: InputMaybe<SanityBioStuffSortInput>;
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly pageMetadata: InputMaybe<SanityPageMetadataSortInput>;
+  readonly parent: InputMaybe<NodeSortInput>;
+  readonly position: InputMaybe<SortOrderEnum>;
+};
+
+type SanityBioStuff = {
+  readonly _key: Maybe<Scalars['String']>;
+  readonly _rawPrelog: Maybe<Scalars['JSON']>;
+  readonly _rawSocials: Maybe<Scalars['JSON']>;
+  readonly _type: Maybe<Scalars['String']>;
+  readonly mainTitle: Maybe<Scalars['String']>;
+  readonly prelog: Maybe<ReadonlyArray<Maybe<SanityBlock>>>;
+  readonly socials: Maybe<ReadonlyArray<Maybe<SanitySocialsSingular>>>;
+};
+
+
+type SanityBioStuff__rawPrelogArgs = {
+  resolveReferences: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
+
+type SanityBioStuff__rawSocialsArgs = {
+  resolveReferences: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
+type SanityBioStuffFieldSelector = {
+  readonly _key: InputMaybe<FieldSelectorEnum>;
+  readonly _rawPrelog: InputMaybe<FieldSelectorEnum>;
+  readonly _rawSocials: InputMaybe<FieldSelectorEnum>;
+  readonly _type: InputMaybe<FieldSelectorEnum>;
+  readonly mainTitle: InputMaybe<FieldSelectorEnum>;
+  readonly prelog: InputMaybe<SanityBlockFieldSelector>;
+  readonly socials: InputMaybe<SanitySocialsSingularFieldSelector>;
+};
+
+type SanityBioStuffFilterInput = {
+  readonly _key: InputMaybe<StringQueryOperatorInput>;
+  readonly _rawPrelog: InputMaybe<JSONQueryOperatorInput>;
+  readonly _rawSocials: InputMaybe<JSONQueryOperatorInput>;
+  readonly _type: InputMaybe<StringQueryOperatorInput>;
+  readonly mainTitle: InputMaybe<StringQueryOperatorInput>;
+  readonly prelog: InputMaybe<SanityBlockFilterListInput>;
+  readonly socials: InputMaybe<SanitySocialsSingularFilterListInput>;
+};
+
+type SanityBioStuffSortInput = {
+  readonly _key: InputMaybe<SortOrderEnum>;
+  readonly _rawPrelog: InputMaybe<SortOrderEnum>;
+  readonly _rawSocials: InputMaybe<SortOrderEnum>;
+  readonly _type: InputMaybe<SortOrderEnum>;
+  readonly mainTitle: InputMaybe<SortOrderEnum>;
+  readonly prelog: InputMaybe<SanityBlockSortInput>;
+  readonly socials: InputMaybe<SanitySocialsSingularSortInput>;
+};
+
 type SanityBlock = {
   readonly _key: Maybe<Scalars['String']>;
   readonly _rawChildren: Maybe<Scalars['JSON']>;
   readonly _type: Maybe<Scalars['String']>;
   readonly children: Maybe<ReadonlyArray<Maybe<SanitySpan>>>;
-  readonly list: Maybe<Scalars['String']>;
+  readonly level: Maybe<Scalars['Float']>;
+  readonly listItem: Maybe<Scalars['String']>;
   readonly style: Maybe<Scalars['String']>;
 };
 
@@ -1832,7 +2111,8 @@ type SanityBlockFieldSelector = {
   readonly _rawChildren: InputMaybe<FieldSelectorEnum>;
   readonly _type: InputMaybe<FieldSelectorEnum>;
   readonly children: InputMaybe<SanitySpanFieldSelector>;
-  readonly list: InputMaybe<FieldSelectorEnum>;
+  readonly level: InputMaybe<FieldSelectorEnum>;
+  readonly listItem: InputMaybe<FieldSelectorEnum>;
   readonly style: InputMaybe<FieldSelectorEnum>;
 };
 
@@ -1841,7 +2121,8 @@ type SanityBlockFilterInput = {
   readonly _rawChildren: InputMaybe<JSONQueryOperatorInput>;
   readonly _type: InputMaybe<StringQueryOperatorInput>;
   readonly children: InputMaybe<SanitySpanFilterListInput>;
-  readonly list: InputMaybe<StringQueryOperatorInput>;
+  readonly level: InputMaybe<FloatQueryOperatorInput>;
+  readonly listItem: InputMaybe<StringQueryOperatorInput>;
   readonly style: InputMaybe<StringQueryOperatorInput>;
 };
 
@@ -1849,14 +2130,13 @@ type SanityBlockFilterListInput = {
   readonly elemMatch: InputMaybe<SanityBlockFilterInput>;
 };
 
-type SanityBlockOrImage = SanityBlock | SanityImage;
-
 type SanityBlockSortInput = {
   readonly _key: InputMaybe<SortOrderEnum>;
   readonly _rawChildren: InputMaybe<SortOrderEnum>;
   readonly _type: InputMaybe<SortOrderEnum>;
   readonly children: InputMaybe<SanitySpanSortInput>;
-  readonly list: InputMaybe<SortOrderEnum>;
+  readonly level: InputMaybe<SortOrderEnum>;
+  readonly listItem: InputMaybe<SortOrderEnum>;
   readonly style: InputMaybe<SortOrderEnum>;
 };
 
@@ -1903,6 +2183,15 @@ type SanityCompanySortInput = {
   readonly link: InputMaybe<SortOrderEnum>;
   readonly logo: InputMaybe<SanityImageSortInput>;
   readonly name: InputMaybe<SortOrderEnum>;
+};
+
+type SanityCrossDatasetReference = {
+  readonly _dataset: Maybe<Scalars['String']>;
+  readonly _key: Maybe<Scalars['String']>;
+  readonly _projectId: Maybe<Scalars['String']>;
+  readonly _ref: Maybe<Scalars['String']>;
+  readonly _type: Maybe<Scalars['String']>;
+  readonly _weak: Maybe<Scalars['Boolean']>;
 };
 
 type SanityDetails = {
@@ -2945,6 +3234,34 @@ type SanityLinksSortInput = {
   readonly live: InputMaybe<SortOrderEnum>;
 };
 
+type SanityPageMetadata = {
+  readonly _key: Maybe<Scalars['String']>;
+  readonly _type: Maybe<Scalars['String']>;
+  readonly description: Maybe<Scalars['String']>;
+  readonly title: Maybe<Scalars['String']>;
+};
+
+type SanityPageMetadataFieldSelector = {
+  readonly _key: InputMaybe<FieldSelectorEnum>;
+  readonly _type: InputMaybe<FieldSelectorEnum>;
+  readonly description: InputMaybe<FieldSelectorEnum>;
+  readonly title: InputMaybe<FieldSelectorEnum>;
+};
+
+type SanityPageMetadataFilterInput = {
+  readonly _key: InputMaybe<StringQueryOperatorInput>;
+  readonly _type: InputMaybe<StringQueryOperatorInput>;
+  readonly description: InputMaybe<StringQueryOperatorInput>;
+  readonly title: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SanityPageMetadataSortInput = {
+  readonly _key: InputMaybe<SortOrderEnum>;
+  readonly _type: InputMaybe<SortOrderEnum>;
+  readonly description: InputMaybe<SortOrderEnum>;
+  readonly title: InputMaybe<SortOrderEnum>;
+};
+
 type SanityProject = Node & SanityDocument & {
   readonly _createdAt: Maybe<Scalars['Date']>;
   readonly _id: Maybe<Scalars['String']>;
@@ -3180,6 +3497,52 @@ type SanitySlug = {
   readonly _key: Maybe<Scalars['String']>;
   readonly _type: Maybe<Scalars['String']>;
   readonly current: Maybe<Scalars['String']>;
+  readonly source: Maybe<Scalars['String']>;
+};
+
+type SanitySocialsSingular = {
+  readonly _key: Maybe<Scalars['String']>;
+  readonly _rawIcon: Maybe<Scalars['JSON']>;
+  readonly _type: Maybe<Scalars['String']>;
+  readonly icon: Maybe<SanityImage>;
+  readonly name: Maybe<Scalars['String']>;
+  readonly url: Maybe<Scalars['String']>;
+};
+
+
+type SanitySocialsSingular__rawIconArgs = {
+  resolveReferences: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
+type SanitySocialsSingularFieldSelector = {
+  readonly _key: InputMaybe<FieldSelectorEnum>;
+  readonly _rawIcon: InputMaybe<FieldSelectorEnum>;
+  readonly _type: InputMaybe<FieldSelectorEnum>;
+  readonly icon: InputMaybe<SanityImageFieldSelector>;
+  readonly name: InputMaybe<FieldSelectorEnum>;
+  readonly url: InputMaybe<FieldSelectorEnum>;
+};
+
+type SanitySocialsSingularFilterInput = {
+  readonly _key: InputMaybe<StringQueryOperatorInput>;
+  readonly _rawIcon: InputMaybe<JSONQueryOperatorInput>;
+  readonly _type: InputMaybe<StringQueryOperatorInput>;
+  readonly icon: InputMaybe<SanityImageFilterInput>;
+  readonly name: InputMaybe<StringQueryOperatorInput>;
+  readonly url: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SanitySocialsSingularFilterListInput = {
+  readonly elemMatch: InputMaybe<SanitySocialsSingularFilterInput>;
+};
+
+type SanitySocialsSingularSortInput = {
+  readonly _key: InputMaybe<SortOrderEnum>;
+  readonly _rawIcon: InputMaybe<SortOrderEnum>;
+  readonly _type: InputMaybe<SortOrderEnum>;
+  readonly icon: InputMaybe<SanityImageSortInput>;
+  readonly name: InputMaybe<SortOrderEnum>;
+  readonly url: InputMaybe<SortOrderEnum>;
 };
 
 type SanitySpan = {
@@ -4102,14 +4465,20 @@ type WebPOptions = {
   readonly quality: InputMaybe<Scalars['Int']>;
 };
 
+type BioItemFragment = { readonly id: string, readonly bioStuff: { readonly mainTitle: string | null, readonly prelog: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly listItem: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null, readonly socials: ReadonlyArray<{ readonly url: string | null, readonly name: string | null, readonly icon: { readonly asset: { readonly url: string | null } | null } | null } | null> | null } | null, readonly about: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly listItem: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null, readonly pageMetadata: { readonly title: string | null, readonly description: string | null } | null };
+
 type BioQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type BioQueryQuery = { readonly avatar: { readonly childImageSharp: { readonly fixed: { readonly base64: string | null, readonly width: number, readonly height: number, readonly src: string, readonly srcSet: string } | null } | null } | null, readonly site: { readonly siteMetadata: { readonly author: { readonly name: string | null, readonly summary: string | null } | null, readonly social: { readonly linkedin: string | null, readonly github: string | null, readonly instagram: string | null } | null } | null } | null };
+type BioQueryQuery = { readonly allSanityBio: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly bioStuff: { readonly mainTitle: string | null, readonly prelog: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly listItem: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null, readonly socials: ReadonlyArray<{ readonly url: string | null, readonly name: string | null, readonly icon: { readonly asset: { readonly url: string | null } | null } | null } | null> | null } | null, readonly about: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly listItem: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null, readonly pageMetadata: { readonly title: string | null, readonly description: string | null } | null }> } };
+
+type BioSiteItemFragment = { readonly siteMetadata: { readonly title: string | null, readonly description: string | null, readonly siteUrl: string | null, readonly author: { readonly name: string | null, readonly summary: string | null } | null, readonly social: { readonly linkedin: string | null, readonly github: string | null, readonly instagram: string | null } | null } | null };
+
+type BlockTextItemFragment = { readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly listItem: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null };
 
 type CompanyItemFragment = { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null };
 
-type DetailsItemFragment = { readonly summary: string | null, readonly content: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly list: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null };
+type DetailsItemFragment = { readonly summary: string | null, readonly content: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly listItem: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null };
 
 type GatsbyImageSharpFixedFragment = { readonly base64: string | null, readonly width: number, readonly height: number, readonly src: string, readonly srcSet: string };
 
@@ -4140,18 +4509,20 @@ type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: 
 type getProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type getProjectsQuery = { readonly allSanityProject: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly links: { readonly live: string | null, readonly code: string | null } | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly list: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null } | null }> } };
+type getProjectsQuery = { readonly allSanityProject: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly links: { readonly live: string | null, readonly code: string | null } | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly listItem: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null } | null }> } };
 
 type getWorkExperiencesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type getWorkExperiencesQuery = { readonly allSanityProject: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly list: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null } | null }> } };
+type getWorkExperiencesQuery = { readonly allSanityProject: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly listItem: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null } | null }> } };
 
-type OverallExperienceItemFragment = { readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly list: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null } | null };
+type ImageItemFragment = { readonly asset: { readonly url: string | null } | null };
 
-type ProjectItemFragment = { readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly links: { readonly live: string | null, readonly code: string | null } | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly list: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null } | null };
+type OverallExperienceItemFragment = { readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly listItem: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null } | null };
 
-type WorkExperienceItemFragment = { readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly list: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null } | null };
+type ProjectItemFragment = { readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly links: { readonly live: string | null, readonly code: string | null } | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly listItem: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null } | null };
+
+type WorkExperienceItemFragment = { readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: ReadonlyArray<{ readonly _rawChildren: Record<string, unknown> | null, readonly style: string | null, readonly _type: string | null, readonly listItem: string | null, readonly children: ReadonlyArray<{ readonly __typename: 'SanitySpan', readonly marks: ReadonlyArray<string | null> | null, readonly text: string | null, readonly _type: string | null } | null> | null } | null> | null } | null };
 
 
 }
