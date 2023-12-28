@@ -1,19 +1,15 @@
 import { graphql } from "gatsby"
 import { Layout } from "../components/Layout"
-import { Bio } from "../components/Bio"
 import { WorkExperiencesSection } from "../containers/WorkExperiencesSection"
 import { ProjectsSection } from "../containers/ProjectsSection"
 import { Seo } from "../components/Seo/Seo"
+import { Bio } from "../components/Bio/Bio"
 
 const titleClaims = "Daniel Chomat | 📱 Front End Dev | chomat.tech"
 
 const HomePage = () => {
   return (
     <Layout>
-      {/*
-        // TODO: Refactor the Seo component using new approach with Gatsby and Head component
-        <Seo title={titleClaims} />
-      */}
       <Bio />
       <WorkExperiencesSection />
       <ProjectsSection />

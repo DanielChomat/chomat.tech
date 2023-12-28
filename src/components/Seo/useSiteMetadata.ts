@@ -1,20 +1,24 @@
 import { graphql, useStaticQuery } from "gatsby"
 
 export const useSiteMetadata = () => {
-  const { site } = useStaticQuery(graphql`
+  const { site, allSanityBio } = useStaticQuery(graphql`
     query {
       site {
-        siteMetadata {
-          title
-          description
-          siteUrl
-          social {
-            instagram
+        ...BioSiteItem
+      }
+      allSanityBio {
+        nodes {
+          pageMetadata {
+            title
+            description
           }
         }
       }
     }
   `)
 
-  return site.siteMetadata
+  const sanityMetadata: Queries.SanityPageMetadata =
+    allSanityBio.nodes[0].pageMetadata
+
+  return { gatsbyMetadata: site.siteMetadata, sanityMetadata }
 }
