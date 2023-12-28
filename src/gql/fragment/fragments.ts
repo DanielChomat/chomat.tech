@@ -15,18 +15,7 @@ export const CompanyItemFragment = graphql`
 
 export const DetailsItemFragment = graphql`
   fragment DetailsItem on SanityDetails {
-    content {
-      _rawChildren
-      style
-      _type
-      list
-      children {
-        marks
-        text
-        _type
-        __typename
-      }
-    }
+    content: _rawContent(resolveReferences: { maxDepth: 5 })
     summary
   }
 `

@@ -1,7 +1,5 @@
-import { PortableText } from "@portabletext/react"
-import { PortableTextBlock } from "@portabletext/types"
-
 import { ProjectDetails } from "../../../types"
+import { FixedPortableText } from "../../FixedPortableText"
 
 type Props = {
   details: ProjectDetails
@@ -10,11 +8,7 @@ type Props = {
 export const ExperienceDetails = ({ details }: Props) => {
   const summary = details?.summary
 
-  // TODO: This could probably be solved migrating to a different framework (Next.JS)
-  //@ts-expect-error Eeeek
-  const content: PortableTextBlock[] = details?.content
-
-  const hasContent = !!content
+  const hasContent = !!details?.content
 
   return (
     <details>
@@ -23,7 +17,7 @@ export const ExperienceDetails = ({ details }: Props) => {
       </summary>
       {hasContent && (
         <div className="content">
-          <PortableText value={content} />
+          <FixedPortableText value={details?.content} />
         </div>
       )}
     </details>
