@@ -352,6 +352,10 @@ const GlobalStyles = createGlobalStyle`
     .text-left {
         text-align: left;
     }
+
+    .text-center {
+        text-align: center;
+    }
 `
 
 export default GlobalStyles

@@ -92,6 +92,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
       margin-left: auto;
       max-height: 4rem;
     }
+
     img,
     svg {
       height: ${props => (props.$isProject ? "2.8rem" : "4rem")};
@@ -123,6 +124,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
         brightness(94%) contrast(91%);
 
       transition: all 300ms ease-in-out;
+
       path {
         transition: all 300ms ease-in-out;
       }
@@ -137,6 +139,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
       svg {
         filter: invert(78%) sepia(59%) saturate(2854%) hue-rotate(118deg)
           brightness(99%) contrast(105%);
+
         path {
           //fill: var(--bg-color-green);
         }
@@ -177,17 +180,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
       transition: all 1250ms ease-in-out;
       opacity: 0;
 
-      font-size: 1.8rem;
-      line-height: 1.2;
-      font-weight: 100;
-      color: var(--typo-color-grey);
       padding: 0.8rem 0;
-
-      white-space: pre-wrap;
-
-      strong {
-        font-weight: bold;
-      }
     }
 
     summary {
@@ -238,6 +231,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
 
   section {
     padding-right: 8rem;
+
     div {
       display: flex;
       align-items: flex-start;

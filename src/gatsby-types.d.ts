@@ -1540,7 +1540,6 @@ type Query_sanityBioArgs = {
   internal: InputMaybe<InternalFilterInput>;
   pageMetadata: InputMaybe<SanityPageMetadataFilterInput>;
   parent: InputMaybe<NodeFilterInput>;
-  position: InputMaybe<StringQueryOperatorInput>;
 };
 
 
@@ -1861,7 +1860,6 @@ type SanityBio = Node & SanityDocument & {
   readonly internal: Internal;
   readonly pageMetadata: Maybe<SanityPageMetadata>;
   readonly parent: Maybe<Node>;
-  readonly position: Maybe<Scalars['String']>;
 };
 
 
@@ -1957,7 +1955,6 @@ type SanityBioFieldSelector = {
   readonly internal: InputMaybe<InternalFieldSelector>;
   readonly pageMetadata: InputMaybe<SanityPageMetadataFieldSelector>;
   readonly parent: InputMaybe<NodeFieldSelector>;
-  readonly position: InputMaybe<FieldSelectorEnum>;
 };
 
 type SanityBioFilterInput = {
@@ -1977,7 +1974,6 @@ type SanityBioFilterInput = {
   readonly internal: InputMaybe<InternalFilterInput>;
   readonly pageMetadata: InputMaybe<SanityPageMetadataFilterInput>;
   readonly parent: InputMaybe<NodeFilterInput>;
-  readonly position: InputMaybe<StringQueryOperatorInput>;
 };
 
 type SanityBioGroupConnection = {
@@ -2038,7 +2034,6 @@ type SanityBioSortInput = {
   readonly internal: InputMaybe<InternalSortInput>;
   readonly pageMetadata: InputMaybe<SanityPageMetadataSortInput>;
   readonly parent: InputMaybe<NodeSortInput>;
-  readonly position: InputMaybe<SortOrderEnum>;
 };
 
 type SanityBioStuff = {

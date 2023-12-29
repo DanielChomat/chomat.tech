@@ -4,6 +4,7 @@ import { Flex } from "../../styles/Grid"
 import { SocialLinksContainer } from "../../styles/SocialLinksContainer"
 import { useGetBioData } from "./useGetBioData"
 import { FixedPortableText } from "../FixedPortableText"
+import { BioContent } from "../../styles/Bio/BioContent"
 
 export const Bio = () => {
   const { bioStuff, prelog, bioSocials, about } = useGetBioData()
@@ -23,7 +24,9 @@ export const Bio = () => {
         ))}
       </SocialLinksContainer>
 
-      <FixedPortableText value={about} />
+      <BioContent className={"text-center"}>
+        <FixedPortableText value={about} />
+      </BioContent>
     </Flex>
   )
 }
