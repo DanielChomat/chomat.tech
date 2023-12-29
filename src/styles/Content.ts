@@ -5,7 +5,6 @@ export const Content = styled.article`
   line-height: 1.2;
   font-weight: 100;
   color: var(--typo-color-grey);
-  padding: 0.8rem 0;
 
   white-space: pre-wrap;
 
