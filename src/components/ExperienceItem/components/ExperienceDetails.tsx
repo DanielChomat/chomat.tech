@@ -1,5 +1,6 @@
 import { ProjectDetails } from "../../../types"
 import { FixedPortableText } from "../../FixedPortableText"
+import { Content } from "../../../styles/Content"
 
 type Props = {
   details: ProjectDetails
@@ -16,9 +17,9 @@ export const ExperienceDetails = ({ details }: Props) => {
         <span>{summary}</span>
       </summary>
       {hasContent && (
-        <div className="content">
+        <Content>
           <FixedPortableText value={details?.content} />
-        </div>
+        </Content>
       )}
     </details>
   )

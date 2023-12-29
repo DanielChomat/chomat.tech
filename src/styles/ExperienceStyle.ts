@@ -176,18 +176,6 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
     & > div {
       transition: all 1250ms ease-in-out;
       opacity: 0;
-
-      font-size: 1.8rem;
-      line-height: 1.2;
-      font-weight: 100;
-      color: var(--typo-color-grey);
-      padding: 0.8rem 0;
-
-      white-space: pre-wrap;
-
-      strong {
-        font-weight: bold;
-      }
     }
 
     summary {
