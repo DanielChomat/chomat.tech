@@ -66,6 +66,9 @@ export const BioItemFragment = graphql`
   fragment BioItem on SanityBio {
     id
     bioStuff {
+      profilePicture {
+        ...ImageItem
+      }
       mainTitle
       socials {
         icon {

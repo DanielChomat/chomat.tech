@@ -311,8 +311,6 @@ const GlobalStyles = createGlobalStyle`
     }
 
     h1, h2, h3, h4 {
-        text-align: center;
-
         svg {
             height: 1.2em;
             vertical-align: middle;

@@ -5,28 +5,38 @@ import { SocialLinksContainer } from "../../styles/SocialLinksContainer"
 import { useGetBioData } from "./useGetBioData"
 import { FixedPortableText } from "../FixedPortableText"
 import { BioContent } from "../../styles/Bio/BioContent"
+import { ProfilePicture } from "../../styles/Bio/ProfilePicture"
+import { BioContainer } from "../../styles/Bio/BioContainer"
 
 export const Bio = () => {
-  const { bioStuff, prelog, bioSocials, about } = useGetBioData()
+  const { bioStuff, prelog, profilePictureUrl, bioSocials, about } =
+    useGetBioData()
 
   return (
-    <Flex as={"section"} $flexDirection={"column"} $alignItems={"center"}>
-      <h1>{bioStuff?.mainTitle}</h1>
-      <FixedPortableText value={prelog} />
+    <BioContainer>
+      <Flex as={"section"} $flexDirection={"column"}>
+        <h1>{bioStuff?.mainTitle}</h1>
+        <FixedPortableText value={prelog} />
 
-      <SocialLinksContainer>
-        {bioSocials?.map(item => (
-          <IconLink
-            link={item.url}
-            inverted={item.name === "GitHub"}
-            iconUrl={item.iconUrl}
-          />
-        ))}
-      </SocialLinksContainer>
+        <SocialLinksContainer>
+          {bioSocials?.map(item => (
+            <IconLink
+              link={item.url}
+              inverted={item.name === "GitHub"}
+              iconUrl={item.iconUrl}
+            />
+          ))}
+        </SocialLinksContainer>
 
-      <BioContent className={"text-center"}>
-        <FixedPortableText value={about} />
-      </BioContent>
-    </Flex>
+        <BioContent>
+          <FixedPortableText value={about} />
+        </BioContent>
+      </Flex>
+      {profilePictureUrl && (
+        <ProfilePicture>
+          <img src={profilePictureUrl} alt={"Profile picture of the author"} />
+        </ProfilePicture>
+      )}
+    </BioContainer>
   )
 }

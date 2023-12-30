@@ -2039,15 +2039,22 @@ type SanityBioSortInput = {
 type SanityBioStuff = {
   readonly _key: Maybe<Scalars['String']>;
   readonly _rawPrelog: Maybe<Scalars['JSON']>;
+  readonly _rawProfilePicture: Maybe<Scalars['JSON']>;
   readonly _rawSocials: Maybe<Scalars['JSON']>;
   readonly _type: Maybe<Scalars['String']>;
   readonly mainTitle: Maybe<Scalars['String']>;
   readonly prelog: Maybe<ReadonlyArray<Maybe<SanityBlock>>>;
+  readonly profilePicture: Maybe<SanityImage>;
   readonly socials: Maybe<ReadonlyArray<Maybe<SanitySocialsSingular>>>;
 };
 
 
 type SanityBioStuff__rawPrelogArgs = {
+  resolveReferences: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
+
+type SanityBioStuff__rawProfilePictureArgs = {
   resolveReferences: InputMaybe<SanityResolveReferencesConfiguration>;
 };
 
@@ -2059,30 +2066,36 @@ type SanityBioStuff__rawSocialsArgs = {
 type SanityBioStuffFieldSelector = {
   readonly _key: InputMaybe<FieldSelectorEnum>;
   readonly _rawPrelog: InputMaybe<FieldSelectorEnum>;
+  readonly _rawProfilePicture: InputMaybe<FieldSelectorEnum>;
   readonly _rawSocials: InputMaybe<FieldSelectorEnum>;
   readonly _type: InputMaybe<FieldSelectorEnum>;
   readonly mainTitle: InputMaybe<FieldSelectorEnum>;
   readonly prelog: InputMaybe<SanityBlockFieldSelector>;
+  readonly profilePicture: InputMaybe<SanityImageFieldSelector>;
   readonly socials: InputMaybe<SanitySocialsSingularFieldSelector>;
 };
 
 type SanityBioStuffFilterInput = {
   readonly _key: InputMaybe<StringQueryOperatorInput>;
   readonly _rawPrelog: InputMaybe<JSONQueryOperatorInput>;
+  readonly _rawProfilePicture: InputMaybe<JSONQueryOperatorInput>;
   readonly _rawSocials: InputMaybe<JSONQueryOperatorInput>;
   readonly _type: InputMaybe<StringQueryOperatorInput>;
   readonly mainTitle: InputMaybe<StringQueryOperatorInput>;
   readonly prelog: InputMaybe<SanityBlockFilterListInput>;
+  readonly profilePicture: InputMaybe<SanityImageFilterInput>;
   readonly socials: InputMaybe<SanitySocialsSingularFilterListInput>;
 };
 
 type SanityBioStuffSortInput = {
   readonly _key: InputMaybe<SortOrderEnum>;
   readonly _rawPrelog: InputMaybe<SortOrderEnum>;
+  readonly _rawProfilePicture: InputMaybe<SortOrderEnum>;
   readonly _rawSocials: InputMaybe<SortOrderEnum>;
   readonly _type: InputMaybe<SortOrderEnum>;
   readonly mainTitle: InputMaybe<SortOrderEnum>;
   readonly prelog: InputMaybe<SanityBlockSortInput>;
+  readonly profilePicture: InputMaybe<SanityImageSortInput>;
   readonly socials: InputMaybe<SanitySocialsSingularSortInput>;
 };
 
@@ -4460,12 +4473,12 @@ type WebPOptions = {
   readonly quality: InputMaybe<Scalars['Int']>;
 };
 
-type BioItemFragment = { readonly id: string, readonly about: Record<string, unknown> | null, readonly bioStuff: { readonly mainTitle: string | null, readonly prelog: Record<string, unknown> | null, readonly socials: ReadonlyArray<{ readonly url: string | null, readonly name: string | null, readonly icon: { readonly asset: { readonly url: string | null } | null } | null } | null> | null } | null, readonly pageMetadata: { readonly title: string | null, readonly description: string | null } | null };
+type BioItemFragment = { readonly id: string, readonly about: Record<string, unknown> | null, readonly bioStuff: { readonly mainTitle: string | null, readonly prelog: Record<string, unknown> | null, readonly profilePicture: { readonly asset: { readonly url: string | null } | null } | null, readonly socials: ReadonlyArray<{ readonly url: string | null, readonly name: string | null, readonly icon: { readonly asset: { readonly url: string | null } | null } | null } | null> | null } | null, readonly pageMetadata: { readonly title: string | null, readonly description: string | null } | null };
 
 type BioQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type BioQueryQuery = { readonly allSanityBio: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly about: Record<string, unknown> | null, readonly bioStuff: { readonly mainTitle: string | null, readonly prelog: Record<string, unknown> | null, readonly socials: ReadonlyArray<{ readonly url: string | null, readonly name: string | null, readonly icon: { readonly asset: { readonly url: string | null } | null } | null } | null> | null } | null, readonly pageMetadata: { readonly title: string | null, readonly description: string | null } | null }> } };
+type BioQueryQuery = { readonly allSanityBio: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly about: Record<string, unknown> | null, readonly bioStuff: { readonly mainTitle: string | null, readonly prelog: Record<string, unknown> | null, readonly profilePicture: { readonly asset: { readonly url: string | null } | null } | null, readonly socials: ReadonlyArray<{ readonly url: string | null, readonly name: string | null, readonly icon: { readonly asset: { readonly url: string | null } | null } | null } | null> | null } | null, readonly pageMetadata: { readonly title: string | null, readonly description: string | null } | null }> } };
 
 type BioSiteItemFragment = { readonly siteMetadata: { readonly title: string | null, readonly description: string | null, readonly siteUrl: string | null, readonly author: { readonly name: string | null, readonly summary: string | null } | null, readonly social: { readonly linkedin: string | null, readonly github: string | null, readonly instagram: string | null } | null } | null };
 
