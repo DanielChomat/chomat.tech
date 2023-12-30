@@ -14,6 +14,7 @@ export const useGetBioData = () => {
   const bioStuff: BioStuff | null = bioContent.bioStuff
 
   const prelog = bioStuff?.prelog
+  const profilePictureUrl = bioStuff?.profilePicture?.asset?.url
 
   const maybeSocials: (BioSocialItem | null | undefined)[] = [
     ...(bioStuff?.socials ?? []),
@@ -35,6 +36,7 @@ export const useGetBioData = () => {
   return {
     bioStuff,
     prelog,
+    profilePictureUrl,
     bioSocials,
     about,
   }

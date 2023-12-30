@@ -25,6 +25,11 @@ export const bioStuffSchema = defineType({
       ],
     }),
     defineField({
+      name: "profilePicture",
+      title: "Profile Picture",
+      type: "image",
+    }),
+    defineField({
       title: "Socials",
       name: "socials",
       type: "array",

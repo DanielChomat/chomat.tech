@@ -8,7 +8,6 @@ export const SocialLinksContainer = styled(Flex)`
   width: 30%;
 
   align-items: center;
-  justify-content: center;
 
   gap: 30px;
 
