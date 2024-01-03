@@ -11,16 +11,22 @@ export const detailsSchema = defineType({
       type: "string",
     }),
     defineField({
+      name: "summaryExtended",
+      title: "Summary Extended",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "block",
+        }),
+      ],
+    }),
+    defineField({
       name: "content",
       title: "Content",
       type: "array",
       of: [
         defineArrayMember({
           type: "block",
-          lists: [
-            { title: "Bullet", value: "bullet" },
-            { title: "Numbered", value: "number" },
-          ],
         }),
       ],
     }),

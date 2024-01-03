@@ -11,6 +11,11 @@ export const companySchema = defineType({
       type: "string",
     },
     {
+      name: "description",
+      title: "Short description",
+      type: "string",
+    },
+    {
       name: "logo",
       title: "Logo",
       type: "image",
@@ -19,11 +24,6 @@ export const companySchema = defineType({
       name: "link",
       title: "Website link",
       type: "url",
-    },
-    {
-      name: "description",
-      title: "Short description",
-      type: "string",
     },
   ],
 })

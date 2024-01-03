@@ -50,6 +50,15 @@ export const projectSchema = defineType({
       type: "details",
     }),
     defineField({
+      title: "Key Takeaways",
+      name: "takeaways",
+      type: "array",
+      of: [defineArrayMember({ type: "string" })],
+      options: {
+        layout: "tags",
+      },
+    }),
+    defineField({
       title: "Projects",
       name: "tags",
       type: "array",
