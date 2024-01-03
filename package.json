@@ -59,17 +59,17 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "check:ts": "tsc --noEmit",
+    "check:lint-fix": "eslint ./**/*.ts ./**/*.tsx --fix",
+    "check:tests": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "gatsby:build": "gatsby build",
+    "gatsby:clean": "gatsby clean",
+    "gatsby:develop": "gatsby develop",
+    "gatsby:serve": "gatsby serve",
     "prepare": "husky install",
-    "sanity:start": "sanity start",
     "sanity:build": "sanity build",
     "sanity:dev": "sanity dev",
-    "check:ts": "tsc --noEmit",
-    "check:lint-fix": "eslint ./**/*.ts ./**/*.tsx --fix"
+    "sanity:start": "sanity start"
   },
   "lint-staged": {
     "*.{ts,tsx}": "npm run check:lint-fix"

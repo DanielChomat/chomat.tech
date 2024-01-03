@@ -1631,6 +1631,7 @@ type Query_sanityProjectArgs = {
   parent: InputMaybe<NodeFilterInput>;
   position: InputMaybe<StringQueryOperatorInput>;
   tags: InputMaybe<StringQueryOperatorInput>;
+  takeaways: InputMaybe<StringQueryOperatorInput>;
   tech: InputMaybe<StringQueryOperatorInput>;
   timeOfEmployment: InputMaybe<SanityTimeOfEmploymentFilterInput>;
   type: InputMaybe<StringQueryOperatorInput>;
@@ -2205,9 +2206,11 @@ type SanityCrossDatasetReference = {
 type SanityDetails = {
   readonly _key: Maybe<Scalars['String']>;
   readonly _rawContent: Maybe<Scalars['JSON']>;
+  readonly _rawSummaryExtended: Maybe<Scalars['JSON']>;
   readonly _type: Maybe<Scalars['String']>;
   readonly content: Maybe<ReadonlyArray<Maybe<SanityBlock>>>;
   readonly summary: Maybe<Scalars['String']>;
+  readonly summaryExtended: Maybe<ReadonlyArray<Maybe<SanityBlock>>>;
 };
 
 
@@ -2215,28 +2218,39 @@ type SanityDetails__rawContentArgs = {
   resolveReferences: InputMaybe<SanityResolveReferencesConfiguration>;
 };
 
+
+type SanityDetails__rawSummaryExtendedArgs = {
+  resolveReferences: InputMaybe<SanityResolveReferencesConfiguration>;
+};
+
 type SanityDetailsFieldSelector = {
   readonly _key: InputMaybe<FieldSelectorEnum>;
   readonly _rawContent: InputMaybe<FieldSelectorEnum>;
+  readonly _rawSummaryExtended: InputMaybe<FieldSelectorEnum>;
   readonly _type: InputMaybe<FieldSelectorEnum>;
   readonly content: InputMaybe<SanityBlockFieldSelector>;
   readonly summary: InputMaybe<FieldSelectorEnum>;
+  readonly summaryExtended: InputMaybe<SanityBlockFieldSelector>;
 };
 
 type SanityDetailsFilterInput = {
   readonly _key: InputMaybe<StringQueryOperatorInput>;
   readonly _rawContent: InputMaybe<JSONQueryOperatorInput>;
+  readonly _rawSummaryExtended: InputMaybe<JSONQueryOperatorInput>;
   readonly _type: InputMaybe<StringQueryOperatorInput>;
   readonly content: InputMaybe<SanityBlockFilterListInput>;
   readonly summary: InputMaybe<StringQueryOperatorInput>;
+  readonly summaryExtended: InputMaybe<SanityBlockFilterListInput>;
 };
 
 type SanityDetailsSortInput = {
   readonly _key: InputMaybe<SortOrderEnum>;
   readonly _rawContent: InputMaybe<SortOrderEnum>;
+  readonly _rawSummaryExtended: InputMaybe<SortOrderEnum>;
   readonly _type: InputMaybe<SortOrderEnum>;
   readonly content: InputMaybe<SanityBlockSortInput>;
   readonly summary: InputMaybe<SortOrderEnum>;
+  readonly summaryExtended: InputMaybe<SanityBlockSortInput>;
 };
 
 /** A Sanity document */
@@ -3291,6 +3305,7 @@ type SanityProject = Node & SanityDocument & {
   readonly parent: Maybe<Node>;
   readonly position: Maybe<Scalars['String']>;
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly takeaways: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly tech: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly timeOfEmployment: Maybe<SanityTimeOfEmployment>;
   readonly type: Maybe<Scalars['String']>;
@@ -3398,6 +3413,7 @@ type SanityProjectFieldSelector = {
   readonly parent: InputMaybe<NodeFieldSelector>;
   readonly position: InputMaybe<FieldSelectorEnum>;
   readonly tags: InputMaybe<FieldSelectorEnum>;
+  readonly takeaways: InputMaybe<FieldSelectorEnum>;
   readonly tech: InputMaybe<FieldSelectorEnum>;
   readonly timeOfEmployment: InputMaybe<SanityTimeOfEmploymentFieldSelector>;
   readonly type: InputMaybe<FieldSelectorEnum>;
@@ -3424,6 +3440,7 @@ type SanityProjectFilterInput = {
   readonly parent: InputMaybe<NodeFilterInput>;
   readonly position: InputMaybe<StringQueryOperatorInput>;
   readonly tags: InputMaybe<StringQueryOperatorInput>;
+  readonly takeaways: InputMaybe<StringQueryOperatorInput>;
   readonly tech: InputMaybe<StringQueryOperatorInput>;
   readonly timeOfEmployment: InputMaybe<SanityTimeOfEmploymentFilterInput>;
   readonly type: InputMaybe<StringQueryOperatorInput>;
@@ -3491,6 +3508,7 @@ type SanityProjectSortInput = {
   readonly parent: InputMaybe<NodeSortInput>;
   readonly position: InputMaybe<SortOrderEnum>;
   readonly tags: InputMaybe<SortOrderEnum>;
+  readonly takeaways: InputMaybe<SortOrderEnum>;
   readonly tech: InputMaybe<SortOrderEnum>;
   readonly timeOfEmployment: InputMaybe<SanityTimeOfEmploymentSortInput>;
   readonly type: InputMaybe<SortOrderEnum>;
@@ -4484,7 +4502,7 @@ type BioSiteItemFragment = { readonly siteMetadata: { readonly title: string | n
 
 type CompanyItemFragment = { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null };
 
-type DetailsItemFragment = { readonly summary: string | null, readonly content: Record<string, unknown> | null };
+type DetailsItemFragment = { readonly summary: string | null, readonly content: Record<string, unknown> | null, readonly summaryExtended: Record<string, unknown> | null };
 
 type GatsbyImageSharpFixedFragment = { readonly base64: string | null, readonly width: number, readonly height: number, readonly src: string, readonly srcSet: string };
 
@@ -4515,20 +4533,20 @@ type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: 
 type getProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type getProjectsQuery = { readonly allSanityProject: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly links: { readonly live: string | null, readonly code: string | null } | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: Record<string, unknown> | null } | null }> } };
+type getProjectsQuery = { readonly allSanityProject: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly links: { readonly live: string | null, readonly code: string | null } | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: Record<string, unknown> | null, readonly summaryExtended: Record<string, unknown> | null } | null }> } };
 
 type getWorkExperiencesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type getWorkExperiencesQuery = { readonly allSanityProject: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: Record<string, unknown> | null } | null }> } };
+type getWorkExperiencesQuery = { readonly allSanityProject: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: Record<string, unknown> | null, readonly summaryExtended: Record<string, unknown> | null } | null }> } };
 
 type ImageItemFragment = { readonly asset: { readonly url: string | null } | null };
 
-type OverallExperienceItemFragment = { readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: Record<string, unknown> | null } | null };
+type OverallExperienceItemFragment = { readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: Record<string, unknown> | null, readonly summaryExtended: Record<string, unknown> | null } | null };
 
-type ProjectItemFragment = { readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly links: { readonly live: string | null, readonly code: string | null } | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: Record<string, unknown> | null } | null };
+type ProjectItemFragment = { readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly links: { readonly live: string | null, readonly code: string | null } | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: Record<string, unknown> | null, readonly summaryExtended: Record<string, unknown> | null } | null };
 
-type WorkExperienceItemFragment = { readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: Record<string, unknown> | null } | null };
+type WorkExperienceItemFragment = { readonly featured: boolean | null, readonly position: string | null, readonly type: string | null, readonly tags: ReadonlyArray<string | null> | null, readonly tech: ReadonlyArray<string | null> | null, readonly company: { readonly link: string | null, readonly name: string | null, readonly description: string | null, readonly logo: { readonly asset: { readonly url: string | null } | null } | null } | null, readonly timeOfEmployment: { readonly end: string | null, readonly start: string | null } | null, readonly details: { readonly summary: string | null, readonly content: Record<string, unknown> | null, readonly summaryExtended: Record<string, unknown> | null } | null };
 
 
 }
