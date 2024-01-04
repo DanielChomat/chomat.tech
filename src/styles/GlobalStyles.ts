@@ -166,6 +166,7 @@ const GlobalStyles = createGlobalStyle`
         --bg-github-icon: rgb(31, 35, 40);
 
         --border-color-details: var(--orange-soda-500);
+        --border-color-summary-divider: var(--bg-color-green);
 
         --box-shadow-color-default: color-mix(in srgb, var(--ghost-white-800) 20%, transparent);
 
@@ -185,7 +186,8 @@ const GlobalStyles = createGlobalStyle`
             --bg-color-tag: var(--bg-color-green);
             --bg-github-icon: rgb(230, 237, 243);
 
-            --border-color-details: var(--orange-soda-700);
+            --border-color-details: var(--bg-color-red);
+            --border-color-summary-divider: var(--bg-color-green);
 
             --box-shadow-color-default: color-mix(in srgb, var(--sea-green-crayola-700) 10%, transparent);
 

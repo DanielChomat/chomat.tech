@@ -12,8 +12,6 @@ export const Content = styled.article<ContentProps>`
 
   white-space: pre-wrap;
 
-  padding-top: ${props => (props.$isDetails ? "1rem" : "0")};
-
   & > * {
     &:not(:last-child):not(h5) {
       margin-bottom: 1rem;

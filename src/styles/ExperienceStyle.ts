@@ -150,11 +150,39 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
   }
 
   details {
-    border-bottom: 2px solid var(--border-color-details);
-    border-top: 2px solid var(--border-color-details);
     padding: 0.8rem 0;
     margin-top: 0.8rem;
     margin-bottom: 0.8rem;
+
+    position: relative;
+
+    &:before,
+    &:after {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      right: 0;
+
+      border-radius: 0.15em;
+
+      height: 0.15em;
+
+      background: linear-gradient(
+        to right,
+        var(--border-color-details) 0,
+        var(--border-color-details) 75%,
+        transparent 100%
+      );
+    }
+
+    &::before {
+      top: 0;
+    }
+
+    &:after {
+      bottom: 0;
+    }
 
     &[open] {
       & > div {
@@ -225,6 +253,35 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
       &::marker {
         display: none;
         content: none;
+      }
+
+      & + article {
+        position: relative;
+
+        padding-top: 1.6rem;
+        padding-bottom: 0.8rem;
+
+        margin-top: 0.8rem;
+
+        &::before {
+          content: "";
+
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+
+          border-radius: 0.15em;
+
+          height: 0.15em;
+
+          background: linear-gradient(
+            to right,
+            var(--border-color-summary-divider) 0,
+            var(--border-color-summary-divider) 75%,
+            transparent 100%
+          );
+        }
       }
     }
   }
