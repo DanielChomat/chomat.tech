@@ -23,6 +23,7 @@ export const DetailsItemFragment = graphql`
   fragment DetailsItem on SanityDetails {
     content: _rawContent(resolveReferences: { maxDepth: 5 })
     summary
+    summaryExtended: _rawSummaryExtended(resolveReferences: { maxDepth: 5 })
   }
 `
 

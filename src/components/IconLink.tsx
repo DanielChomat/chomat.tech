@@ -23,7 +23,12 @@ export const IconLink = ({ link, inverted = false, iconUrl, Icon }: Props) => {
   )
 
   return (
-    <a href={link} target={"_blank"} rel={"noopener noreferrer"}>
+    <a
+      href={link}
+      className={"link--icon"}
+      target={"_blank"}
+      rel={"noopener noreferrer"}
+    >
       {iconLinkElement}
     </a>
   )

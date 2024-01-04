@@ -36,7 +36,7 @@ const HeaderContainer = styled.nav`
 export const Header = () => {
   return (
     <HeaderContainer>
-      <Link to={"/"} className={"header__logo"}>
+      <Link to={"/"} className={"header__logo link--icon"}>
         <span role={"img"} aria-label={"Shaka!"}>
           🤙
         </span>

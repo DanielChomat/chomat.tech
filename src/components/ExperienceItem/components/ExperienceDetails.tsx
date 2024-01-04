@@ -7,17 +7,19 @@ type Props = {
 }
 
 export const ExperienceDetails = ({ details }: Props) => {
-  const summary = details?.summary
+  const summaryExtended = details?.summaryExtended
 
   const hasContent = !!details?.content
 
   return (
     <details>
       <summary title={"Planning to implement WAAPI for smoother opening"}>
-        <span>{summary}</span>
+        <Content as={"span"}>
+          <FixedPortableText value={summaryExtended} />
+        </Content>
       </summary>
       {hasContent && (
-        <Content>
+        <Content $isDetails>
           <FixedPortableText value={details?.content} />
         </Content>
       )}
