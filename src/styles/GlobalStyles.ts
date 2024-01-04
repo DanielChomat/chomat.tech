@@ -189,7 +189,6 @@ const GlobalStyles = createGlobalStyle`
 
             --box-shadow-color-default: color-mix(in srgb, var(--sea-green-crayola-700) 10%, transparent);
 
-
             .inverted {
                 filter: invert(1);
             }

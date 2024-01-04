@@ -46,6 +46,8 @@ export const Content = styled.article<ContentProps>`
   }
 
   a {
+    color: var(--typo-color-tag);
+
     &:after {
       content: "";
 
@@ -58,7 +60,7 @@ export const Content = styled.article<ContentProps>`
       width: calc(100% + 0.2em);
       height: 0.2em;
 
-      background-color: var(--bg-color-green);
+      background-color: var(--bg-color-red);
 
       transition: all 250ms ease-in-out;
       border-radius: 0.2em;
