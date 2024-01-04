@@ -44,4 +44,35 @@ export const Content = styled.article<ContentProps>`
   strong {
     font-weight: bold;
   }
+
+  a {
+    &:after {
+      content: "";
+
+      position: absolute;
+      bottom: -0.2em;
+
+      left: -0.1em;
+      right: auto;
+
+      width: calc(100% + 0.2em);
+      height: 0.2em;
+
+      background-color: var(--bg-color-green);
+
+      transition: all 250ms ease-in-out;
+      border-radius: 0.2em;
+
+      transform: skewY(-1.5deg);
+
+      z-index: -1;
+    }
+
+    &:hover {
+      &::after {
+        opacity: 0.75;
+        height: 1.4em;
+      }
+    }
+  }
 `

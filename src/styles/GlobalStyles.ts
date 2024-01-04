@@ -266,36 +266,6 @@ const GlobalStyles = createGlobalStyle`
             border-radius: .2em;
         }
 
-            /*&[target="_blank"] {
-      &::before {
-        content: "";
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 1.8rem;
-        height: 1.8rem;
-        //background-color: red;
-        border-radius: 4px;
-
-        opacity: 0;
-        visibility: hidden;
-
-        transition: all 250ms ease-in-out;
-
-        background: url(${
-          require("../../content/assets/resize.svg").default
-        }) no-repeat 65% / 14px 14px, #21273880;
-      }
-
-      &:hover {
-        &::before {
-          opacity: 1;
-          visibility: visible;
-        }
-      }
-
-    }*/
-
         &:hover {
             &::after {
                 left: 0;
@@ -304,7 +274,38 @@ const GlobalStyles = createGlobalStyle`
 
             }
         }
+
+            /* &[target="_blank"] {
+            &::before {
+                content: "";
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 1.8rem;
+                height: 1.8rem;
+                //background-color: red;
+                border-radius: 4px;
+
+                opacity: 0;
+                visibility: hidden;
+
+                transition: all 250ms ease-in-out;
+
+                    /!*background: url(${
+                      require("../../content/assets/resize.svg").default
+                    }) no-repeat 65% / 14px 14px, #21273880;*!/
+            }
+        
+
+            &:hover {
+                &::before {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }*/
     }
+
 
     h1, h2, h3, h4 {
         svg {
