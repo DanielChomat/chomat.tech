@@ -10,7 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": false,
     "jsx": "preserve",
-    "lib": ["es2021"],
+    "lib": ["es2021", "DOM"],
     "module": "commonjs",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
