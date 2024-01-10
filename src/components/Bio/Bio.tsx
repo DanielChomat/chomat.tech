@@ -21,6 +21,7 @@ export const Bio = () => {
         <SocialLinksContainer>
           {bioSocials?.map(item => (
             <IconLink
+              key={item.url}
               link={item.url}
               inverted={item.name === "GitHub"}
               iconUrl={item.iconUrl}

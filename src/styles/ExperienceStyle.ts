@@ -150,7 +150,6 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
   }
 
   details {
-    padding: 0.8rem 0;
     margin-top: 0.8rem;
     margin-bottom: 0.8rem;
 
@@ -189,16 +188,8 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
         opacity: 1;
       }
 
-      & > summary {
-        &:hover {
-          &::after {
-            transform: rotate(0deg) scale(1.2);
-          }
-        }
-
-        &:after {
-          width: 1.8rem;
-          height: 1.8rem;
+      & > summary.summary--with-content {
+        &::after {
           transform: rotate(0deg);
         }
       }
@@ -214,11 +205,10 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
     summary {
       font-size: 1.8rem;
       line-height: 1.2;
-      padding: 0.4rem 0;
+      padding: 1.2rem 0;
       display: flex;
       align-items: center;
       gap: 0.4rem;
-      cursor: pointer;
 
       color: var(--typo-color-purple);
 
@@ -228,25 +218,32 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
         width: 100%;
       }
 
-      &:hover {
+      &.summary--with-content {
+        cursor: pointer;
+
         &::after {
-          transform: rotate(-55deg) scale(1.2);
+          content: "";
+
+          --arrow-dimension: 2rem;
+          width: var(--arrow-dimension);
+          height: var(--arrow-dimension);
+
+          display: block;
+          background-image: url(${require("../../content/assets/arrow-sketch.svg")
+            .default});
+          background-repeat: no-repeat;
+          background-size: contain;
+          margin-bottom: 0.4rem;
+
+          transform: rotate(-90deg);
+          transition: 0.3s transform ease-in-out;
         }
-      }
 
-      &::after {
-        content: "";
-        width: 1.6rem;
-        height: 1.6rem;
-        display: block;
-        background-image: url(${require("../../content/assets/arrow-sketch.svg")
-          .default});
-        background-repeat: no-repeat;
-        background-size: contain;
-        margin-bottom: 0.4rem;
-
-        transform: rotate(-90deg);
-        transition: 0.3s transform ease-in-out;
+        &:hover {
+          &::after {
+            transform: rotate(-55deg) scale(1.2);
+          }
+        }
       }
 
       &::-webkit-details-marker,
@@ -259,9 +256,7 @@ export const ExperienceStyle = styled.article<ExperienceStyleProps>`
         position: relative;
 
         padding-top: 1.6rem;
-        padding-bottom: 0.8rem;
-
-        margin-top: 0.8rem;
+        padding-bottom: 1.6rem;
 
         &::before {
           content: "";
