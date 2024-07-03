@@ -1,12 +1,11 @@
-import { IconLink } from "../IconLink"
-
 import { Flex } from "../../styles/Grid"
-import { SocialLinksContainer } from "../../styles/SocialLinksContainer"
 import { useGetBioData } from "./useGetBioData"
 import { FixedPortableText } from "../FixedPortableText"
-import { BioContent } from "../../styles/Bio/BioContent"
 import { ProfilePicture } from "../../styles/Bio/ProfilePicture"
 import { BioContainer } from "../../styles/Bio/BioContainer"
+import { SocialLinksContainer } from "../../styles/SocialLinksContainer"
+import { IconLink } from "../IconLink"
+import { BioContent } from "../../styles/Bio/BioContent"
 
 export const Bio = () => {
   const { bioStuff, prelog, profilePictureUrl, bioSocials, about } =
