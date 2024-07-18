@@ -35,8 +35,8 @@ export const OverallExperienceItemFragment = graphql`
       ...CompanyItem
     }
     timeOfEmployment {
-      end(formatString: "MMMM of YYYY")
-      start(formatString: "MMMM of YYYY")
+      end(formatString: "YYYY-MM")
+      start(formatString: "YYYY-MM")
     }
     type
     tags

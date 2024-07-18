@@ -18,14 +18,13 @@ export const ExperienceGrid = styled.div`
 
   @media (min-width: 1200px) {
     grid-template-columns: repeat(6, 1fr);
-    //row-gap: 20px;
   }
 
   & > * {
     grid-column: span 2;
 
     @media (min-width: 768px) {
-      &:first-child {
+      &:first-child:has(+ article + article) {
         grid-column: span 4;
       }
 
@@ -37,8 +36,8 @@ export const ExperienceGrid = styled.div`
     @media (min-width: 1200px) {
       grid-column: span 2;
 
-      &:first-child,
-      &:nth-child(2) {
+      &:first-child:has(+ article + article),
+      &:nth-child(2):has(+ article) {
         grid-column: span 3;
       }
     }
