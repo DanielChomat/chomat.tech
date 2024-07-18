@@ -47,7 +47,11 @@ export const ExperienceItem = ({ item }: Props) => {
       <ExperienceTitleWithLinks experience={item} />
 
       {showEmploymentInfoSection && (
-        <Flex $justifyContent={"space-between"} $alignItems={"center"}>
+        <Flex
+          $justifyContent={"space-between"}
+          $alignItems={"center"}
+          $gap={"8px"}
+        >
           {showCompanySection && <ExperienceCompanyDetail company={company} />}
           {showEmploymentTimeSection && (
             <ExperienceEmploymentDuration timeOfEmployment={timeOfEmployment} />

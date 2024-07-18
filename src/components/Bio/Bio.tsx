@@ -11,26 +11,33 @@ export const Bio = () => {
   const { bioStuff, prelog, profilePictureUrl, bioSocials, about } =
     useGetBioData()
 
+  const mainHeading = bioStuff?.mainTitle
+  const hasBioSocials = !!bioSocials.length
+
   return (
     <BioContainer>
       <Flex as={"section"} $flexDirection={"column"}>
-        <h1>{bioStuff?.mainTitle}</h1>
-        <FixedPortableText value={prelog} />
+        {!!mainHeading && <h1>{mainHeading}</h1>}
+        {prelog && <FixedPortableText value={prelog} />}
 
-        <SocialLinksContainer>
-          {bioSocials?.map(item => (
-            <IconLink
-              key={item.url}
-              link={item.url}
-              inverted={item.name === "GitHub"}
-              iconUrl={item.iconUrl}
-            />
-          ))}
-        </SocialLinksContainer>
+        {hasBioSocials && (
+          <SocialLinksContainer>
+            {bioSocials?.map(item => (
+              <IconLink
+                key={item.url}
+                link={item.url}
+                inverted={item.name === "GitHub"}
+                iconUrl={item.iconUrl}
+              />
+            ))}
+          </SocialLinksContainer>
+        )}
 
-        <BioContent>
-          <FixedPortableText value={about} />
-        </BioContent>
+        {about && (
+          <BioContent>
+            <FixedPortableText value={about} />
+          </BioContent>
+        )}
       </Flex>
       {profilePictureUrl && (
         <ProfilePicture>

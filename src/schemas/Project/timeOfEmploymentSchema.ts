@@ -1,5 +1,7 @@
 import { defineType } from "@sanity-typed/types"
 
+const SHOWN_DATE_FORMAT = "MMMM of YYYY"
+
 export const timeOfEmploymentSchema = defineType({
   name: "timeOfEmployment",
   title: "Time Of Employment",
@@ -10,7 +12,7 @@ export const timeOfEmploymentSchema = defineType({
       title: "Start",
       type: "date",
       options: {
-        dateFormat: "YYYY-MM",
+        dateFormat: SHOWN_DATE_FORMAT,
       },
     },
     {
@@ -18,7 +20,7 @@ export const timeOfEmploymentSchema = defineType({
       title: "End",
       type: "date",
       options: {
-        dateFormat: "YYYY-MM",
+        dateFormat: SHOWN_DATE_FORMAT,
       },
     },
   ],

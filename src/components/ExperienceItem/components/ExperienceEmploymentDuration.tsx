@@ -12,17 +12,20 @@ type Props = {
 }
 
 export const ExperienceEmploymentDuration = ({ timeOfEmployment }: Props) => {
-  const startTimeString = timeOfEmployment?.start ?? undefined
-  const endTimeString = timeOfEmployment?.end ?? undefined
+  const startTimeString = timeOfEmployment?.start ?? ""
+  const endTimeString = timeOfEmployment?.end ?? ""
 
   const startTime = dayjs(startTimeString)
   const endTime = dayjs(endTimeString).endOf("month")
+
+  const startTimeFormatted = startTime.format("MMMM of YYYY")
+  const endTimeFormatted = endTime.format("MMMM of YYYY")
 
   const durationInText = dayjs.duration(endTime.diff(startTime)).humanize()
 
   return timeOfEmployment ? (
     <h5>
-      {startTimeString} - {endTimeString ?? "..."}
+      {startTimeFormatted} - {endTimeFormatted ?? "..."}
       {durationInText && (
         <>
           {" "}
