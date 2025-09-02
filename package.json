@@ -1,28 +1,15 @@
 {
   "name": "chomat.tech",
-  "private": true,
-  "description": "",
-  "version": "0.1.0",
-  "author": "Daniel Chomat <daniel.chomat@proton.me>",
-  "bugs": {
-    "url": "https://chomat.tech"
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "typescript": "^5.5.3"
+    "astro": "^5.13.5"
   },
-  "devDependencies": {
-    "husky": "^9.1.1",
-    "lint-staged": "^15.2.7"
-  },
-  "license": "MIT",
-  "scripts": {
-    "check:ts": "tsc --noEmit",
-    "check:lint-fix": "eslint ./**/*.ts ./**/*.tsx --fix",
-    "prepare": "husky install"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": "npm run check:lint-fix"
-  }
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }
