@@ -1,0 +1,2 @@
+These tests use Node's built-in test runner (node:test) and assert/strict, matching an ESM project ("type": "module").
+No explicit test framework dependency (Jest/Vitest/Mocha) was detected in package.json as of September 15, 2025.
