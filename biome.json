@@ -50,12 +50,5 @@
             "semicolons": "always",
             "trailingCommas": "es5"
         }
-    },
-    "assist": {
-        "actions": {
-            "source": {
-                "organizeImports": "on"
-            }
-        }
     }
 }
