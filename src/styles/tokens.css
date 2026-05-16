@@ -1,4 +1,4 @@
-/* Design tokens — .wf root + dark + palette modifiers + v3 font features.
+/* Design tokens — .wf root + active palette + v3 font features.
    Loaded into @layer base. */
 
 @layer base {
@@ -32,45 +32,6 @@
         letter-spacing: -0.005em;
         position: relative;
 
-        &.dark {
-            --bg: #0e0d0a;
-            --surface: #15140f;
-            --surface-2: #1a1914;
-            --text: #ece8de;
-            --muted: #8e8a80;
-            --faint: #5a564f;
-            --line: rgba(255, 250, 235, 0.1);
-            --line-2: rgba(255, 250, 235, 0.05);
-            --accent: #2cada3;
-            --accent-ink: #0e0d0a;
-            --shadow:
-                0 1px 0 rgba(0, 0, 0, 0.3),
-                0 12px 28px -16px rgba(0, 0, 0, 0.6);
-        }
-
-        &.pal-cream {
-            --bg: #f1ebde;
-            --surface: #fbf6ea;
-            --surface-2: #ebe2cc;
-            --line: rgba(40, 30, 15, 0.1);
-            --line-2: rgba(40, 30, 15, 0.06);
-            --tint-butter: #f1dd8a;
-            --tint-sage: #c2d3a3;
-            --tint-rose: #e6b7a3;
-            --tint-sky: #afc6d8;
-            --tint-lavender: #cabdda;
-        }
-        &.pal-paper {
-            --bg: #f7f4ec;
-            --surface: #fffdf6;
-            --surface-2: #ece8db;
-            --line: rgba(20, 18, 12, 0.1);
-            --tint-butter: #ffe9a1;
-            --tint-sage: #cfdcbf;
-            --tint-rose: #ecc2b3;
-            --tint-sky: #c0d4e2;
-            --tint-lavender: #d2c5e0;
-        }
         &.pal-newsprint {
             --bg: #f8f5ec;
             --surface: #fffcef;
@@ -81,18 +42,6 @@
             --tint-rose: #dfa890;
             --tint-sky: #aac0d5;
             --tint-lavender: #bfb1d5;
-        }
-        &.pal-cobalt {
-            --bg: #eaeaf2;
-            --surface: #fafaff;
-            --surface-2: #d8d8e8;
-            --line: rgba(20, 18, 40, 0.1);
-            --accent: #2b4dd1;
-            --tint-butter: #f7d97a;
-            --tint-sage: #b6d3c0;
-            --tint-rose: #e9b0bb;
-            --tint-sky: #a6c6e0;
-            --tint-lavender: #bda9da;
         }
 
         &.v3 {
