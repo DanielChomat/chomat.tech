@@ -1,0 +1,76 @@
+/* Card primitive + tint/ink variants. Loaded into @layer components. */
+
+@layer components {
+    .wf {
+        & .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 1.375rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: var(--shadow);
+
+            &.faintbg {
+                background: var(--surface-2);
+            }
+
+            /* Tinted backgrounds */
+            &.tint-butter {
+                background: var(--tint-butter);
+                border-color: color-mix(in oklab, var(--tint-butter) 60%, var(--line));
+            }
+            &.tint-sage {
+                background: var(--tint-sage);
+                border-color: color-mix(in oklab, var(--tint-sage) 60%, var(--line));
+            }
+            &.tint-rose {
+                background: var(--tint-rose);
+                border-color: color-mix(in oklab, var(--tint-rose) 60%, var(--line));
+            }
+            &.tint-sky {
+                background: var(--tint-sky);
+                border-color: color-mix(in oklab, var(--tint-sky) 60%, var(--line));
+            }
+            &.tint-lavender {
+                background: var(--tint-lavender);
+                border-color: color-mix(in oklab, var(--tint-lavender) 60%, var(--line));
+            }
+            &.tint-teal {
+                background: color-mix(in oklab, var(--accent) 14%, var(--surface));
+                border-color: color-mix(in oklab, var(--accent) 30%, var(--line));
+            }
+
+            /* Inked dark-on-text card (Resume contact card) */
+            &.inked {
+                background: var(--text);
+                color: var(--bg);
+                border-color: var(--text);
+
+                & .t-mono {
+                    color: color-mix(in oklab, var(--bg) 60%, transparent);
+                }
+                & .muted {
+                    color: color-mix(in oklab, var(--bg) 55%, transparent);
+                }
+            }
+        }
+
+        & .card-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+        & .card-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 0.75rem;
+            color: var(--muted);
+        }
+    }
+}

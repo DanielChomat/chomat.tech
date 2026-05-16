@@ -1,0 +1,54 @@
+/* Design tokens — .wf root + active palette + v3 font features.
+   Loaded into @layer base. */
+
+@layer base {
+    .wf {
+        --bg: #f6f3ec;
+        --surface: #fdfbf6;
+        --surface-2: #efece4;
+        --text: #16140f;
+        --muted: #74706a;
+        --faint: #b8b2a8;
+        --line: rgba(20, 18, 12, 0.1);
+        --line-2: rgba(20, 18, 12, 0.06);
+        --accent: #0f6b66; /* teal */
+        --accent-ink: #ffffff;
+        --shadow:
+            0 1px 0 rgba(20, 18, 12, 0.04),
+            0 8px 24px -16px rgba(20, 18, 12, 0.18);
+        --radius: 0.875rem;
+        --radius-sm: 0.5rem;
+
+        --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+        --font-mono: "Geist Mono Variable", ui-monospace, "JetBrains Mono", "Menlo", monospace;
+
+        font-family: var(--font-sans);
+        color: var(--text);
+        background: var(--bg);
+        width: 100%;
+        min-height: 100%;
+        font-size: 0.875rem;
+        line-height: 1.45;
+        letter-spacing: -0.005em;
+        position: relative;
+
+        &.pal-newsprint {
+            --bg: #f8f5ec;
+            --surface: #fffcef;
+            --surface-2: #ece8d8;
+            --line: rgba(20, 18, 12, 0.12);
+            --tint-butter: #f6e090;
+            --tint-sage: #b9cf95;
+            --tint-rose: #dfa890;
+            --tint-sky: #aac0d5;
+            --tint-lavender: #bfb1d5;
+        }
+
+        &.v3 {
+            font-feature-settings:
+                "ss01" on,
+                "ss02" on,
+                "cv11" on;
+        }
+    }
+}

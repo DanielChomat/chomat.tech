@@ -1,0 +1,23 @@
+/* Document baseline. Loaded into @layer reset. */
+
+@layer reset {
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        background: #f8f5ec;
+        font-family: "Geist Variable", system-ui, sans-serif;
+        color: #16140f;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        html {
+            scroll-behavior: smooth;
+        }
+    }
+
+    section[id] {
+        scroll-margin-top: 5rem;
+        position: relative;
+    }
+}

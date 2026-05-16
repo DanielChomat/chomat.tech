@@ -1,0 +1,78 @@
+/* Type scale + v3 overrides + color helpers + lineno.
+   Everything sits under a single .wf block via native nesting.
+   Loaded into @layer base. */
+
+@layer base {
+    .wf {
+        & .t-heading {
+            font-size: clamp(1.5rem, 4vw, 1.75rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            font-weight: 500;
+            margin: 0;
+        }
+        & .t-title {
+            font-size: 1.0625rem;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            font-weight: 500;
+            margin: 0;
+        }
+        & .t-body {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            font-weight: 400;
+            color: var(--text);
+            margin: 0;
+
+            & > p {
+                margin: 0;
+            }
+            & > p + p {
+                margin-top: 0.75em;
+            }
+        }
+        & .t-mono {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        & .kicker {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+        }
+
+        /* V3 type overrides */
+        &.v3 {
+            & .t-mega {
+                font-size: clamp(3.5rem, 14vw, 8.25rem);
+                line-height: 0.86;
+                letter-spacing: -0.045em;
+                font-weight: 500;
+                margin: 0;
+            }
+            & .kicker {
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+            }
+        }
+
+        /* Color helpers */
+        & .muted { color: var(--muted); }
+        & .faint { color: var(--faint); }
+        & .accent { color: var(--accent); }
+
+        /* Line-numbered tag ("§01 →") */
+        & .lineno {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--faint);
+            letter-spacing: 0;
+        }
+    }
+}
