@@ -1,0 +1,139 @@
+---
+import { getCollection, render } from "astro:content";
+import { stickerClass, tintClass } from "../../data/format.ts";
+import { SITE } from "../../data/site.ts";
+import HandArrow from "../primitives/HandArrow.astro";
+import Kicker from "../primitives/Kicker.astro";
+import MiniUI from "../primitives/MiniUI.astro";
+import Pill from "../primitives/Pill.astro";
+import Placeholder from "../primitives/Placeholder.astro";
+
+const { now } = SITE;
+
+const building = (await getCollection("projects", (p) => p.data.status === "building")).sort(
+    (a, b) => a.data.order - b.data.order
+);
+
+const featured = building.find((p) => p.data.bentoSize === "xl");
+const smalls = building.filter((p) => p.data.bentoSize !== "xl");
+
+if (!featured) {
+    throw new Error("Now: expected a building project with bentoSize='xl' as featured.");
+}
+
+const FeaturedContent = (await render(featured)).Content;
+const smallContents = await Promise.all(
+    smalls.map(async (p) => ({ p, Content: (await render(p)).Content }))
+);
+
+const miniKindBySlug: Record<string, "igic" | "pregnancy"> = {
+    igic: "igic",
+    companion: "pregnancy",
+};
+
+const tints: Record<string, string> = {
+    igic: "tint-butter",
+    companion: "tint-sage",
+};
+---
+
+<section id="now">
+    <header>
+        <div
+            class="row"
+            style="justify-content: space-between; align-items: baseline;"
+        >
+            <div class="row" style="align-items: baseline; gap: 14px;">
+                <span class="t-mono muted">{now.number}</span>
+                <Kicker>{now.kicker}</Kicker>
+            </div>
+            <span class="t-mono muted">{now.count}</span>
+        </div>
+        <h2 class="t-heading" style="margin-top: 6px;">
+            <span>{now.headingMain}</span>
+            <span class="muted">{now.headingMuted}</span>
+        </h2>
+        <div style="height: 1px; background: var(--line); margin-top: 16px;"></div>
+    </header>
+
+    <article
+        class="card stripe-bg"
+        style="margin-top: 22px; padding: 32px; position: relative;"
+    >
+        {
+            featured.data.sticker && (
+                <div style="position: absolute; top: 24px; right: 28px;">
+                    <span class:list={["sticker", stickerClass(featured.data.sticker.tone)]}>
+                        {featured.data.sticker.text}
+                    </span>
+                </div>
+            )
+        }
+        <div
+            style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 36px; align-items: center;"
+        >
+            <div>
+                <Kicker>{now.featuredKicker}</Kicker>
+                <h3 class="t-heading" style="margin-top: 6px; font-size: 48px;">
+                    {featured.data.title}<span class="accent">.</span>
+                </h3>
+                <div
+                    class="t-body"
+                    style="margin-top: 4px; font-size: 16px; max-width: 420px;"
+                >
+                    <FeaturedContent />
+                </div>
+                <ul class="row-tight" style="margin-top: 18px;">
+                    {featured.data.tech.map((t) => <li><Pill>{t}</Pill></li>)}
+                </ul>
+                <div style="margin-top: 16px;">
+                    <a class="btn accent" href={`/projects/${featured.id}`}>
+                        {now.featuredCtaLabel} <HandArrow size={14} />
+                    </a>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                <Placeholder h={260}>home</Placeholder>
+                <Placeholder h={260}>capture</Placeholder>
+                <Placeholder h={260}>timeline</Placeholder>
+            </div>
+        </div>
+    </article>
+
+    <div
+        style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;"
+    >
+        {
+            smallContents.map(({ p, Content }) => (
+                <article
+                    class:list={["card", tints[p.id] ?? tintClass(p.data.sticker?.tone)]}
+                    style="min-height: 240px; position: relative;"
+                >
+                    {p.data.sticker && (
+                        <div style="position: absolute; top: 14px; right: 14px;">
+                            <span class:list={["sticker", stickerClass(p.data.sticker.tone)]}>
+                                {p.data.sticker.text}
+                            </span>
+                        </div>
+                    )}
+                    <Kicker>{now.cardKickers[p.id] ?? p.data.tagline}</Kicker>
+                    <h3 class="t-title">{p.data.title}</h3>
+                    <div class="t-body">
+                        <Content />
+                    </div>
+                    {miniKindBySlug[p.id] && <MiniUI kind={miniKindBySlug[p.id]} />}
+                    <div class="card-foot">
+                        <ul class="row-tight">
+                            {p.data.tech.map((t) => (
+                                <li>
+                                    <Pill>{t}</Pill>
+                                </li>
+                            ))}
+                        </ul>
+                        <span class="t-mono accent">→</span>
+                    </div>
+                </article>
+            ))
+        }
+    </div>
+</section>

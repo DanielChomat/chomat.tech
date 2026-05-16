@@ -1,0 +1,16 @@
+---
+type DotKind = "" | "pulse" | "shipped" | "archived";
+type Props = {
+    kind?: "" | "solid" | "accent" | "ghost";
+    dot?: DotKind;
+    class?: string;
+};
+
+const { kind = "", dot, class: className = "" } = Astro.props;
+const pillClass = ["pill", kind, className].filter(Boolean).join(" ");
+---
+
+<span class={pillClass}>
+    {dot !== undefined && <span class={`status-dot ${dot}`} />}
+    <slot />
+</span>

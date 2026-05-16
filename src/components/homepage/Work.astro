@@ -1,0 +1,83 @@
+---
+import { getCollection } from "astro:content";
+import { bentoCol, stickerClass } from "../../data/format.ts";
+import { SITE } from "../../data/site.ts";
+import HandArrow from "../primitives/HandArrow.astro";
+import Kicker from "../primitives/Kicker.astro";
+import Placeholder from "../primitives/Placeholder.astro";
+
+const { work } = SITE;
+
+const cards = (
+    await getCollection("projects", (p) => p.data.status !== "building" && p.data.featured)
+).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="work" style="position: relative;">
+    <div style="position: absolute; left: -38px; top: 14px; color: var(--accent);">
+        <span class="lineno">{work.number}</span>
+    </div>
+    <header>
+        <div
+            class="row"
+            style="justify-content: space-between; align-items: baseline;"
+        >
+            <Kicker>{work.kicker}</Kicker>
+            <span class="t-mono muted">{work.countNote}</span>
+        </div>
+        <h2 class="t-heading" style="margin-top: 6px;">
+            <span>{work.headingMain}</span>{" "}
+            <span class="muted">{work.headingMuted}</span>
+        </h2>
+        <div style="height: 1px; background: var(--line); margin-top: 16px;"></div>
+    </header>
+
+    <div class="bento" style="margin-top: 22px;">
+        {
+            cards.map((p) => {
+                const big = p.data.bentoSize === "lg" || p.data.bentoSize === "xl";
+                const sticker = p.data.sticker;
+                return (
+                    <div class={bentoCol(p.data.bentoSize)}>
+                        <article
+                            class="card"
+                            style={`min-height: ${big ? 360 : 240}px; position: relative;`}
+                        >
+                            {sticker && (
+                                <div style="position: absolute; top: 14px; right: 14px;">
+                                    <span class:list={["sticker", stickerClass(sticker.tone)]}>
+                                        {sticker.text}
+                                    </span>
+                                </div>
+                            )}
+                            <Placeholder h={big ? 200 : 110}>{p.data.title}</Placeholder>
+                            <div class="card-head" style="margin-top: 6px;">
+                                <h3
+                                    class="t-title"
+                                    style={`font-size: ${big ? 22 : 17}px;`}
+                                >
+                                    {p.data.title}
+                                </h3>
+                                <span class="t-mono muted">{p.data.year}</span>
+                            </div>
+                            <p class="t-body muted">{p.data.tagline}</p>
+                            <div class="card-foot">
+                                <span class="t-mono">{p.data.homeLabel ?? ""}</span>
+                                <span class="t-mono accent">
+                                    {p.data.client} <HandArrow size={12} />
+                                </span>
+                            </div>
+                        </article>
+                    </div>
+                );
+            })
+        }
+    </div>
+
+    <div class="row" style="margin-top: 18px; justify-content: space-between;">
+        <span class="t-mono muted">{work.footerNote}</span>
+        <a class="btn" href={work.linkHref}>
+            {work.linkLabel} <HandArrow size={14} />
+        </a>
+    </div>
+</section>

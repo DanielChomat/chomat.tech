@@ -1,0 +1,43 @@
+---
+import { SITE } from "../../data/site.ts";
+import HandArrow from "../primitives/HandArrow.astro";
+import Kicker from "../primitives/Kicker.astro";
+
+const { hero } = SITE;
+---
+
+<section id="hero" style="position: relative;">
+    <div style="display: grid; grid-template-columns: 1fr; gap: 28px;">
+        <Kicker>{hero.kicker}</Kicker>
+        <h1 class="t-mega" style="margin: 0; font-size: 160px;">
+            {hero.name}<span class="accent">*</span>
+        </h1>
+        <p
+            class="t-body"
+            style="max-width: 760px; font-size: 18px; line-height: 1.55; margin-top: 6px;"
+        >
+            <span class="t-mono muted">{hero.identityMono}</span>{" "}
+            {hero.bioBefore}<span class="marker">{hero.bioMark}</span>{hero.bioMid}<span
+                class="marker-sage">{hero.bioMarkAlt}</span
+            >{hero.bioAfter}
+        </p>
+    </div>
+
+    <div
+        style="display: grid; grid-template-columns: 1.6fr auto; gap: 22px; align-items: center; margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--line);"
+    >
+        <div class="row" style="gap: 14px; flex-wrap: wrap;">
+            <span class="status-dot pulse" style="width: 10px; height: 10px;"></span>
+            <span class="t-body">
+                {hero.statusLead}<strong>{hero.statusBold}</strong>{hero.statusTrail}
+                <span class="muted">&nbsp;{hero.statusMuted}</span>
+            </span>
+        </div>
+        <div class="row-tight">
+            <a class="btn accent" href={hero.ctaPrimaryHref}>
+                {hero.ctaPrimary} <HandArrow />
+            </a>
+            <a class="btn" href={hero.ctaSecondaryHref}>{hero.ctaSecondary}</a>
+        </div>
+    </div>
+</section>

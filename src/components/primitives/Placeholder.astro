@@ -1,0 +1,15 @@
+---
+type Props = {
+    h?: number;
+    dark?: boolean;
+    class?: string;
+};
+const { h = 120, dark = false, class: className = "" } = Astro.props;
+---
+
+<div
+    class:list={["ph", dark && "dark", className]}
+    style={`height: ${h}px;`}
+>
+    <slot />
+</div>

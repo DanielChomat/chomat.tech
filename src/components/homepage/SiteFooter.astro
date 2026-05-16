@@ -1,0 +1,22 @@
+---
+import { SITE } from "../../data/site.ts";
+
+const { footer } = SITE;
+---
+
+<footer style="margin-top: 80px; padding-top: 22px; border-top: 1px solid var(--line);">
+    <div
+        class="row"
+        style="justify-content: space-between; align-items: baseline;"
+    >
+        <span class="t-mono muted">
+            {footer.copyright} · Set in <strong style="color: var(--text);">{footer.setIn}</strong>
+            &amp; <strong style="color: var(--text);">{footer.setInMono}</strong> · Built with {footer.builtWith}
+        </span>
+        <span class="t-mono">
+            <a href="#hero" style="color: inherit; text-decoration: none;">
+                {footer.backToTop}
+            </a>
+        </span>
+    </div>
+</footer>
