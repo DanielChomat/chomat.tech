@@ -20,7 +20,7 @@
         --radius-sm: 0.5rem;
 
         --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
-        --font-mono: "Geist Mono Variable", ui-monospace, "JetBrains Mono", Menlo, monospace;
+        --font-mono: "Geist Mono Variable", ui-monospace, "JetBrains Mono", "Menlo", monospace;
 
         font-family: var(--font-sans);
         color: var(--text);
