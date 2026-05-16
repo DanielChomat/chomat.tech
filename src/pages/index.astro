@@ -1,16 +1,35 @@
 ---
-
+import Companies from "../components/homepage/Companies.astro";
+import Contact from "../components/homepage/Contact.astro";
+import Experience from "../components/homepage/Experience.astro";
+import Hero from "../components/homepage/Hero.astro";
+import Now from "../components/homepage/Now.astro";
+import SiteFooter from "../components/homepage/SiteFooter.astro";
+import Tech from "../components/homepage/Tech.astro";
+import Work from "../components/homepage/Work.astro";
+import NavCapsule from "../components/nav/NavCapsule.astro";
+import SoundToggle from "../components/nav/SoundToggle.astro";
+import { SITE } from "../data/site.ts";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+    <div class="wf v3 pal-newsprint">
+        <SoundToggle />
+        <NavCapsule items={SITE.nav} />
+        <div class="page">
+            <div class="page-body">
+                <div class="stack" style="gap: 100px;">
+                    <Hero />
+                    <Now />
+                    <Experience />
+                    <Work />
+                    <Tech />
+                    <Companies />
+                    <Contact />
+                </div>
+                <SiteFooter />
+            </div>
+        </div>
+    </div>
+</BaseLayout>

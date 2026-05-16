@@ -1,0 +1,88 @@
+---
+import { SITE } from "../../data/site.ts";
+import HandArrow from "../primitives/HandArrow.astro";
+import Kicker from "../primitives/Kicker.astro";
+
+const { contact } = SITE;
+const { github, linkedin, resume } = contact.cards;
+---
+
+<section id="contact" style="position: relative;">
+    <div style="position: absolute; left: -38px; top: 14px; color: var(--accent);">
+        <span class="lineno">{contact.number}</span>
+    </div>
+    <header>
+        <div
+            class="row"
+            style="justify-content: space-between; align-items: baseline;"
+        >
+            <Kicker>{contact.kicker}</Kicker>
+            <span class="t-mono muted">{contact.note}</span>
+        </div>
+        <h2 class="t-heading" style="margin-top: 6px;">
+            <span>{contact.headingMain}</span>{" "}
+            <span class="muted">{contact.headingMuted}</span>
+        </h2>
+        <div style="height: 1px; background: var(--line); margin-top: 16px;"></div>
+    </header>
+
+    <div class="bento" style="margin-top: 22px;">
+        <div class="col-4">
+            <a
+                class="card tint-sky"
+                href={github.href}
+                style="text-decoration: none; color: inherit; min-height: 160px;"
+            >
+                <Kicker>{github.kicker}</Kicker>
+                <div class="t-heading">{github.handle}</div>
+                <div class="t-body">{github.blurb}</div>
+                <div class="card-foot">
+                    <span class="t-mono">{github.foot}</span>
+                    <span class="t-mono accent">↗</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-4">
+            <a
+                class="card tint-lavender"
+                href={linkedin.href}
+                style="text-decoration: none; color: inherit; min-height: 160px;"
+            >
+                <Kicker>{linkedin.kicker}</Kicker>
+                <div class="t-heading">{linkedin.handle}</div>
+                <div class="t-body">{linkedin.blurb}</div>
+                <div class="card-foot">
+                    <span class="t-mono">{linkedin.foot}</span>
+                    <span class="t-mono accent">↗</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-4">
+            <a
+                class="card inked"
+                href={resume.href}
+                style="text-decoration: none; min-height: 160px;"
+            >
+                <Kicker>{resume.kicker}</Kicker>
+                <div class="t-heading">{resume.handle}</div>
+                <div class="t-body muted">{resume.blurb}</div>
+                <div class="card-foot">
+                    <span class="t-mono muted">{resume.foot}</span>
+                    <span class="t-mono accent">↓</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div
+        style="display: flex; gap: 14px; margin-top: 18px; align-items: center; flex-wrap: wrap;"
+    >
+        {
+            contact.wormholes.map((w) => (
+                <span class="wormhole">
+                    {w.label} <HandArrow size={14} />
+                </span>
+            ))
+        }
+    </div>
+</section>

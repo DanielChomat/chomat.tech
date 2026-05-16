@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content";
+import { formatIntervals, isCurrent, tintClass } from "../../data/format.ts";
+import { SITE } from "../../data/site.ts";
+import HandArrow from "../primitives/HandArrow.astro";
+import Kicker from "../primitives/Kicker.astro";
+import StatusPill from "../primitives/StatusPill.astro";
+
+const { experience: copy } = SITE;
+
+const entries = (await getCollection("experience")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="experience" style="position: relative;">
+    <div style="position: absolute; left: -38px; top: 14px; color: var(--accent);">
+        <span class="lineno">{copy.number}</span>
+    </div>
+    <header>
+        <div
+            class="row"
+            style="justify-content: space-between; align-items: baseline;"
+        >
+            <Kicker>{copy.kicker}</Kicker>
+            <a class="t-mono accent" href={copy.link.href}>
+                {copy.link.label} <HandArrow size={12} />
+            </a>
+        </div>
+        <h2 class="t-heading" style="margin-top: 6px;">
+            <span>{copy.headingMain}</span>{" "}
+            <span class="muted">{copy.headingMuted}</span>
+        </h2>
+        <p class="t-body muted" style="margin-top: 6px; max-width: 580px;">
+            {copy.intro}
+        </p>
+        <div style="height: 1px; background: var(--line); margin-top: 16px;"></div>
+    </header>
+
+    <div class="bento" style="margin-top: 22px;">
+        {
+            entries.map((x, i) => {
+                const current = isCurrent(x.data.intervals);
+                const tint = x.data.tint ? tintClass(x.data.tint) : "";
+                return (
+                    <div class="col-4">
+                        <div
+                            class:list={["card", tint]}
+                            style="min-height: 220px; position: relative;"
+                        >
+                            <div class="row" style="justify-content: space-between;">
+                                <span class="lineno">§0{i + 1}</span>
+                                {current && (
+                                    <StatusPill status="building" label={copy.currentLabel} />
+                                )}
+                            </div>
+                            <div class="t-mono">{formatIntervals(x.data.intervals)}</div>
+                            <div class="t-title">{x.data.company}</div>
+                            <div class="t-body muted">{x.data.title}</div>
+                            <div class="t-body" style="margin-top: auto;">
+                                {x.data.summary}
+                            </div>
+                        </div>
+                    </div>
+                );
+            })
+        }
+    </div>
+</section>

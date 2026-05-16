@@ -1,0 +1,97 @@
+---
+import { getEntry, render } from "astro:content";
+import { SITE } from "../../data/site.ts";
+import Kicker from "../primitives/Kicker.astro";
+import Pill from "../primitives/Pill.astro";
+import Placeholder from "../primitives/Placeholder.astro";
+
+const { tech } = SITE;
+
+const aboutEntry = await getEntry("about", "index");
+if (!aboutEntry) throw new Error("Tech: missing src/content/about/index.mdx");
+const { Content: AboutContent } = await render(aboutEntry);
+---
+
+<section id="tech" style="position: relative;">
+    <div style="position: absolute; left: -38px; top: 14px; color: var(--accent);">
+        <span class="lineno">{tech.number}</span>
+    </div>
+    <header>
+        <div
+            class="row"
+            style="justify-content: space-between; align-items: baseline;"
+        >
+            <Kicker>{tech.kicker}</Kicker>
+            <span class="t-mono muted">{tech.snapshotDate}</span>
+        </div>
+        <h2 class="t-heading" style="margin-top: 6px;">
+            {tech.headingMain} <span class="muted">{tech.headingMuted}</span>
+        </h2>
+        <div style="height: 1px; background: var(--line); margin-top: 16px;"></div>
+    </header>
+
+    <div class="bento" style="margin-top: 22px;">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-head">
+                    <Kicker>Stack</Kicker>
+                    <span class="t-mono muted">{tech.listingNote}</span>
+                </div>
+                <div
+                    style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 8px;"
+                >
+                    <div>
+                        <div class="t-mono accent" style="margin-bottom: 8px;">
+                            {tech.groupLabels.now}
+                        </div>
+                        <div class="row-tight">
+                            {tech.techNow.map((t) => <Pill kind="accent">{t}</Pill>)}
+                        </div>
+                    </div>
+                    <div>
+                        <div class="t-mono" style="margin-bottom: 8px;">
+                            {tech.groupLabels.production}
+                        </div>
+                        <div class="row-tight">
+                            {tech.techProduction.map((t) => <Pill>{t}</Pill>)}
+                        </div>
+                    </div>
+                    <div>
+                        <div class="t-mono muted" style="margin-bottom: 8px;">
+                            {tech.groupLabels.curious}
+                        </div>
+                        <div class="row-tight">
+                            {tech.techCurious.map((t) => <Pill kind="ghost">{t}</Pill>)}
+                        </div>
+                    </div>
+                </div>
+                <div class="divider" style="margin-top: 14px;"></div>
+                <div class="t-mono muted">
+                    <span class="accent">→</span>&nbsp;&nbsp; {tech.footnote.lead}{" "}
+                    <strong style="color: var(--text);">{tech.footnote.tool}</strong>
+                    {tech.footnote.trail}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card tint-rose" style="min-height: 100%;">
+                <Kicker>{tech.aboutKicker}</Kicker>
+                <Placeholder h={120}>portrait · or workspace photo</Placeholder>
+                <div class="t-body">
+                    <AboutContent />
+                </div>
+                <div class="row-tight" style="margin-top: auto;">
+                    {
+                        aboutEntry.data.languages.map((lang) => (
+                            <Pill kind={lang.level ? "ghost" : undefined}>
+                                {lang.code}
+                                {lang.level && ` · ${lang.level}`}
+                            </Pill>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
