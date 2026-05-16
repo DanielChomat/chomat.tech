@@ -97,18 +97,27 @@ section[id] {
     line-height: 1.1;
     letter-spacing: -0.02em;
     font-weight: 500;
+    margin: 0;
 }
 .wf .t-title {
     font-size: 17px;
     line-height: 1.2;
     letter-spacing: -0.01em;
     font-weight: 500;
+    margin: 0;
 }
 .wf .t-body {
     font-size: 14px;
     line-height: 1.5;
     font-weight: 400;
     color: var(--text);
+    margin: 0;
+}
+.wf .t-body > p {
+    margin: 0;
+}
+.wf .t-body > p + p {
+    margin-top: 0.75em;
 }
 .wf .t-mono {
     font-family: var(--font-mono);
@@ -382,6 +391,9 @@ section[id] {
     gap: 6px;
     align-items: center;
     flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .wf .divider {
@@ -421,6 +433,18 @@ section[id] {
     align-items: center;
     justify-content: space-between;
     gap: 18px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.wf .wormhole-list {
+    display: flex;
+    gap: 14px;
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+    flex-wrap: wrap;
 }
 .wf .logo-strip .logo {
     flex: 1;

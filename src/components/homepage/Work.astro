@@ -39,7 +39,7 @@ const cards = (
                 const sticker = p.data.sticker;
                 return (
                     <div class={bentoCol(p.data.bentoSize)}>
-                        <div
+                        <article
                             class="card"
                             style={`min-height: ${big ? 360 : 240}px; position: relative;`}
                         >
@@ -52,22 +52,22 @@ const cards = (
                             )}
                             <Placeholder h={big ? 200 : 110}>{p.data.title}</Placeholder>
                             <div class="card-head" style="margin-top: 6px;">
-                                <div
+                                <h3
                                     class="t-title"
                                     style={`font-size: ${big ? 22 : 17}px;`}
                                 >
                                     {p.data.title}
-                                </div>
+                                </h3>
                                 <span class="t-mono muted">{p.data.year}</span>
                             </div>
-                            <div class="t-body muted">{p.data.tagline}</div>
+                            <p class="t-body muted">{p.data.tagline}</p>
                             <div class="card-foot">
                                 <span class="t-mono">{p.data.homeLabel ?? ""}</span>
                                 <span class="t-mono accent">
                                     {p.data.client} <HandArrow size={12} />
                                 </span>
                             </div>
-                        </div>
+                        </article>
                     </div>
                 );
             })

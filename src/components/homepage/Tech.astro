@@ -44,25 +44,37 @@ const { Content: AboutContent } = await render(aboutEntry);
                         <div class="t-mono accent" style="margin-bottom: 8px;">
                             {tech.groupLabels.now}
                         </div>
-                        <div class="row-tight">
-                            {tech.techNow.map((t) => <Pill kind="accent">{t}</Pill>)}
-                        </div>
+                        <ul class="row-tight">
+                            {tech.techNow.map((t) => (
+                                <li>
+                                    <Pill kind="accent">{t}</Pill>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                     <div>
                         <div class="t-mono" style="margin-bottom: 8px;">
                             {tech.groupLabels.production}
                         </div>
-                        <div class="row-tight">
-                            {tech.techProduction.map((t) => <Pill>{t}</Pill>)}
-                        </div>
+                        <ul class="row-tight">
+                            {tech.techProduction.map((t) => (
+                                <li>
+                                    <Pill>{t}</Pill>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                     <div>
                         <div class="t-mono muted" style="margin-bottom: 8px;">
                             {tech.groupLabels.curious}
                         </div>
-                        <div class="row-tight">
-                            {tech.techCurious.map((t) => <Pill kind="ghost">{t}</Pill>)}
-                        </div>
+                        <ul class="row-tight">
+                            {tech.techCurious.map((t) => (
+                                <li>
+                                    <Pill kind="ghost">{t}</Pill>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
                 <div class="divider" style="margin-top: 14px;"></div>
@@ -81,16 +93,18 @@ const { Content: AboutContent } = await render(aboutEntry);
                 <div class="t-body">
                     <AboutContent />
                 </div>
-                <div class="row-tight" style="margin-top: auto;">
+                <ul class="row-tight" style="margin-top: auto;">
                     {
                         aboutEntry.data.languages.map((lang) => (
-                            <Pill kind={lang.level ? "ghost" : undefined}>
-                                {lang.code}
-                                {lang.level && ` · ${lang.level}`}
-                            </Pill>
+                            <li>
+                                <Pill kind={lang.level ? "ghost" : undefined}>
+                                    {lang.code}
+                                    {lang.level && ` · ${lang.level}`}
+                                </Pill>
+                            </li>
                         ))
                     }
-                </div>
+                </ul>
             </div>
         </div>
     </div>

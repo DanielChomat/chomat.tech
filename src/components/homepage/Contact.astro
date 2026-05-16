@@ -34,8 +34,8 @@ const { github, linkedin, resume } = contact.cards;
                 style="text-decoration: none; color: inherit; min-height: 160px;"
             >
                 <Kicker>{github.kicker}</Kicker>
-                <div class="t-heading">{github.handle}</div>
-                <div class="t-body">{github.blurb}</div>
+                <h3 class="t-heading">{github.handle}</h3>
+                <p class="t-body">{github.blurb}</p>
                 <div class="card-foot">
                     <span class="t-mono">{github.foot}</span>
                     <span class="t-mono accent">↗</span>
@@ -49,8 +49,8 @@ const { github, linkedin, resume } = contact.cards;
                 style="text-decoration: none; color: inherit; min-height: 160px;"
             >
                 <Kicker>{linkedin.kicker}</Kicker>
-                <div class="t-heading">{linkedin.handle}</div>
-                <div class="t-body">{linkedin.blurb}</div>
+                <h3 class="t-heading">{linkedin.handle}</h3>
+                <p class="t-body">{linkedin.blurb}</p>
                 <div class="card-foot">
                     <span class="t-mono">{linkedin.foot}</span>
                     <span class="t-mono accent">↗</span>
@@ -64,8 +64,8 @@ const { github, linkedin, resume } = contact.cards;
                 style="text-decoration: none; min-height: 160px;"
             >
                 <Kicker>{resume.kicker}</Kicker>
-                <div class="t-heading">{resume.handle}</div>
-                <div class="t-body muted">{resume.blurb}</div>
+                <h3 class="t-heading">{resume.handle}</h3>
+                <p class="t-body muted">{resume.blurb}</p>
                 <div class="card-foot">
                     <span class="t-mono muted">{resume.foot}</span>
                     <span class="t-mono accent">↓</span>
@@ -74,15 +74,15 @@ const { github, linkedin, resume } = contact.cards;
         </div>
     </div>
 
-    <div
-        style="display: flex; gap: 14px; margin-top: 18px; align-items: center; flex-wrap: wrap;"
-    >
+    <ul class="wormhole-list">
         {
             contact.wormholes.map((w) => (
-                <span class="wormhole">
-                    {w.label} <HandArrow size={14} />
-                </span>
+                <li>
+                    <a class="wormhole" href={w.href}>
+                        {w.label} <HandArrow size={14} />
+                    </a>
+                </li>
             ))
         }
-    </div>
+    </ul>
 </section>

@@ -42,7 +42,7 @@ const entries = (await getCollection("experience")).sort((a, b) => a.data.order 
                 const tint = x.data.tint ? tintClass(x.data.tint) : "";
                 return (
                     <div class="col-4">
-                        <div
+                        <article
                             class:list={["card", tint]}
                             style="min-height: 220px; position: relative;"
                         >
@@ -53,12 +53,12 @@ const entries = (await getCollection("experience")).sort((a, b) => a.data.order 
                                 )}
                             </div>
                             <div class="t-mono">{formatIntervals(x.data.intervals)}</div>
-                            <div class="t-title">{x.data.company}</div>
+                            <h3 class="t-title">{x.data.company}</h3>
                             <div class="t-body muted">{x.data.title}</div>
-                            <div class="t-body" style="margin-top: auto;">
+                            <p class="t-body" style="margin-top: auto;">
                                 {x.data.summary}
-                            </div>
-                        </div>
+                            </p>
+                        </article>
                     </div>
                 );
             })
