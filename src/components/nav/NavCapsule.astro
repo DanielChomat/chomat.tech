@@ -30,9 +30,16 @@ const { items, active = -1 } = Astro.props;
         ))
     }
     <a class="resume-cta" href="/resume.pdf"
-        >Resume<span style="margin-left: 0.25rem; opacity: 0.7;">.pdf</span></a
+        >Resume<span class="resume-ext">.pdf</span></a
     >
 </nav>
+
+<style>
+    .resume-ext {
+        margin-left: 0.25rem;
+        opacity: 0.7;
+    }
+</style>
 
 <script>
     const nav = document.querySelector<HTMLElement>("nav[data-nav-capsule]");

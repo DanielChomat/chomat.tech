@@ -1,19 +1,28 @@
 ---
 import { getCollection } from "astro:content";
 
-const companies = (await getCollection("companies")).sort((a, b) => a.data.order - b.data.order);
+const companies = (await getCollection("companies")).sort(
+    (a, b) => a.data.order - b.data.order
+);
 ---
 
-<section style="margin-top: 1.75rem;" aria-label="Companies I've worked with">
-    <div class="card faintbg" style="padding: 1.25rem 1.75rem;">
+<section class="companies-section" aria-label="Companies I've worked with">
+    <div class="card faintbg companies-card">
         <ul class="logo-strip">
             {
                 companies.map((c) => (
-                    <li class="logo" style="height: 1.75rem; font-size: 0.6875rem;">
-                        {c.data.name}
-                    </li>
+                    <li class="logo">{c.data.name}</li>
                 ))
             }
         </ul>
     </div>
 </section>
+
+<style>
+    .companies-section {
+        margin-top: 1.75rem;
+    }
+    .companies-card {
+        padding: 1.25rem 1.75rem;
+    }
+</style>

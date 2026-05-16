@@ -12,25 +12,22 @@ if (!aboutEntry) throw new Error("Tech: missing src/content/about/index.mdx");
 const { Content: AboutContent } = await render(aboutEntry);
 ---
 
-<section id="tech" style="position: relative;">
+<section id="tech">
     <div class="section-mark">
         <span class="lineno">{tech.number}</span>
     </div>
     <header>
-        <div
-            class="row"
-            style="justify-content: space-between; align-items: baseline;"
-        >
+        <div class="row row-between row-baseline">
             <Kicker>{tech.kicker}</Kicker>
             <span class="t-mono muted">{tech.snapshotDate}</span>
         </div>
-        <h2 class="t-heading" style="margin-top: 0.375rem;">
+        <h2 class="t-heading section-heading">
             {tech.headingMain} <span class="muted">{tech.headingMuted}</span>
         </h2>
-        <div style="height: 1px; background: var(--line); margin-top: 1rem;"></div>
+        <div class="section-divider"></div>
     </header>
 
-    <div class="bento" style="margin-top: 1.375rem;">
+    <div class="bento bento-pad-top">
         <div class="col-8">
             <div class="card">
                 <div class="card-head">
@@ -39,7 +36,7 @@ const { Content: AboutContent } = await render(aboutEntry);
                 </div>
                 <div class="tech-stack-grid">
                     <div>
-                        <div class="t-mono accent" style="margin-bottom: 0.5rem;">
+                        <div class="t-mono accent stack-group-label">
                             {tech.groupLabels.now}
                         </div>
                         <ul class="row-tight">
@@ -51,7 +48,7 @@ const { Content: AboutContent } = await render(aboutEntry);
                         </ul>
                     </div>
                     <div>
-                        <div class="t-mono" style="margin-bottom: 0.5rem;">
+                        <div class="t-mono stack-group-label">
                             {tech.groupLabels.production}
                         </div>
                         <ul class="row-tight">
@@ -63,7 +60,7 @@ const { Content: AboutContent } = await render(aboutEntry);
                         </ul>
                     </div>
                     <div>
-                        <div class="t-mono muted" style="margin-bottom: 0.5rem;">
+                        <div class="t-mono muted stack-group-label">
                             {tech.groupLabels.curious}
                         </div>
                         <ul class="row-tight">
@@ -75,23 +72,23 @@ const { Content: AboutContent } = await render(aboutEntry);
                         </ul>
                     </div>
                 </div>
-                <div class="divider" style="margin-top: 0.875rem;"></div>
-                <div class="t-mono muted">
+                <div class="divider stack-bottom-divider"></div>
+                <div class="t-mono muted stack-footnote">
                     <span class="accent">→</span>&nbsp;&nbsp; {tech.footnote.lead}{" "}
-                    <strong style="color: var(--text);">{tech.footnote.tool}</strong>
+                    <strong class="footnote-tool">{tech.footnote.tool}</strong>
                     {tech.footnote.trail}
                 </div>
             </div>
         </div>
 
         <div class="col-4">
-            <div class="card tint-rose" style="min-height: 100%;">
+            <div class="card tint-rose about-card">
                 <Kicker>{tech.aboutKicker}</Kicker>
                 <Placeholder h={120}>portrait · or workspace photo</Placeholder>
                 <div class="t-body">
                     <AboutContent />
                 </div>
-                <ul class="row-tight" style="margin-top: auto;">
+                <ul class="row-tight pull-bottom">
                     {
                         aboutEntry.data.languages.map((lang) => (
                             <li>
@@ -107,3 +104,24 @@ const { Content: AboutContent } = await render(aboutEntry);
         </div>
     </div>
 </section>
+
+<style>
+    .section-heading {
+        margin-top: 0.375rem;
+    }
+    .bento-pad-top {
+        margin-top: 1.375rem;
+    }
+    .stack-group-label {
+        margin-bottom: 0.5rem;
+    }
+    .stack-bottom-divider {
+        margin-top: 0.875rem;
+    }
+    .footnote-tool {
+        color: var(--text);
+    }
+    .about-card {
+        height: 100%;
+    }
+</style>

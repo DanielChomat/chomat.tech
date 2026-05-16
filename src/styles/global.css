@@ -26,6 +26,7 @@ body {
 }
 section[id] {
     scroll-margin-top: 5rem;
+    position: relative;
 }
 
 /* ===== Theme tokens, scoped to .wf root ===== */
@@ -287,6 +288,7 @@ section[id] {
     letter-spacing: 0.04em;
     position: relative;
     overflow: hidden;
+    height: var(--ph-h, 7.5rem);
 }
 .wf .ph.dark {
     background:
@@ -369,6 +371,20 @@ section[id] {
     margin: 0;
     padding: 0;
 }
+.wf .row-between {
+    justify-content: space-between;
+}
+.wf .row-baseline {
+    align-items: baseline;
+}
+.wf .section-divider {
+    height: 1px;
+    background: var(--line);
+    margin-top: 1rem;
+}
+.wf .pull-bottom {
+    margin-top: auto;
+}
 
 .wf .divider {
     height: 1px;
@@ -389,7 +405,10 @@ section[id] {
 }
 .wf .page-body {
     flex: 1;
-    padding: 5.625rem 5rem 5rem;
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding: 5.625rem 2rem 5rem;
 }
 
 /* Section heading inside a page (mono kicker + display heading) */
