@@ -1,13 +1,15 @@
 ---
 type Props = {
+    /** Size in design-px units; rendered as rem so it scales with user font-size. */
     size?: number;
 };
 const { size = 14 } = Astro.props;
+const sizeRem = `${size / 16}rem`;
 ---
 
 <svg
-    width={size}
-    height={size}
+    width={sizeRem}
+    height={sizeRem}
     viewBox="0 0 24 24"
     fill="none"
     aria-hidden="true"

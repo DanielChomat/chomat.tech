@@ -43,56 +43,54 @@ const tints: Record<string, string> = {
             class="row"
             style="justify-content: space-between; align-items: baseline;"
         >
-            <div class="row" style="align-items: baseline; gap: 14px;">
+            <div class="row" style="align-items: baseline; gap: 0.875rem;">
                 <span class="t-mono muted">{now.number}</span>
                 <Kicker>{now.kicker}</Kicker>
             </div>
             <span class="t-mono muted">{now.count}</span>
         </div>
-        <h2 class="t-heading" style="margin-top: 6px;">
+        <h2 class="t-heading" style="margin-top: 0.375rem;">
             <span>{now.headingMain}</span>
             <span class="muted">{now.headingMuted}</span>
         </h2>
-        <div style="height: 1px; background: var(--line); margin-top: 16px;"></div>
+        <div style="height: 1px; background: var(--line); margin-top: 1rem;"></div>
     </header>
 
-    <article
-        class="card stripe-bg"
-        style="margin-top: 22px; padding: 32px; position: relative;"
-    >
+    <article class="card stripe-bg now-featured">
         {
             featured.data.sticker && (
-                <div style="position: absolute; top: 24px; right: 28px;">
+                <div style="position: absolute; top: 1.5rem; right: 1.75rem;">
                     <span class:list={["sticker", stickerClass(featured.data.sticker.tone)]}>
                         {featured.data.sticker.text}
                     </span>
                 </div>
             )
         }
-        <div
-            style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 36px; align-items: center;"
-        >
+        <div class="now-featured-grid">
             <div>
                 <Kicker>{now.featuredKicker}</Kicker>
-                <h3 class="t-heading" style="margin-top: 6px; font-size: 48px;">
+                <h3
+                    class="t-heading"
+                    style="margin-top: 0.375rem; font-size: clamp(1.75rem, 6vw, 3rem);"
+                >
                     {featured.data.title}<span class="accent">.</span>
                 </h3>
                 <div
                     class="t-body"
-                    style="margin-top: 4px; font-size: 16px; max-width: 420px;"
+                    style="margin-top: 0.25rem; font-size: 1rem; max-width: 26.25rem;"
                 >
                     <FeaturedContent />
                 </div>
-                <ul class="row-tight" style="margin-top: 18px;">
+                <ul class="row-tight" style="margin-top: 1.125rem;">
                     {featured.data.tech.map((t) => <li><Pill>{t}</Pill></li>)}
                 </ul>
-                <div style="margin-top: 16px;">
+                <div style="margin-top: 1rem;">
                     <a class="btn accent" href={`/projects/${featured.id}`}>
                         {now.featuredCtaLabel} <HandArrow size={14} />
                     </a>
                 </div>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+            <div class="now-thumbs-grid">
                 <Placeholder h={260}>home</Placeholder>
                 <Placeholder h={260}>capture</Placeholder>
                 <Placeholder h={260}>timeline</Placeholder>
@@ -100,17 +98,15 @@ const tints: Record<string, string> = {
         </div>
     </article>
 
-    <div
-        style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;"
-    >
+    <div class="now-small-grid">
         {
             smallContents.map(({ p, Content }) => (
                 <article
                     class:list={["card", tints[p.id] ?? tintClass(p.data.sticker?.tone)]}
-                    style="min-height: 240px; position: relative;"
+                    style="min-height: 15rem; position: relative;"
                 >
                     {p.data.sticker && (
-                        <div style="position: absolute; top: 14px; right: 14px;">
+                        <div style="position: absolute; top: 0.875rem; right: 0.875rem;">
                             <span class:list={["sticker", stickerClass(p.data.sticker.tone)]}>
                                 {p.data.sticker.text}
                             </span>
