@@ -77,12 +77,12 @@ const tints: Record<string, string> = {
                 <h3 class="t-heading" style="margin-top: 6px; font-size: 48px;">
                     {featured.data.title}<span class="accent">.</span>
                 </h3>
-                <p
+                <div
                     class="t-body"
                     style="margin-top: 4px; font-size: 16px; max-width: 420px;"
                 >
                     <FeaturedContent />
-                </p>
+                </div>
                 <div class="row-tight" style="margin-top: 18px;">
                     {featured.data.tech.map((t) => <Pill>{t}</Pill>)}
                 </div>

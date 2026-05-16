@@ -5,7 +5,15 @@ type Props = {
 const { size = 18 } = Astro.props;
 ---
 
-<svg class="arrow" width={size} height={size} viewBox="0 0 24 24" fill="none">
+<svg
+    class="arrow"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+    focusable="false"
+>
     <path
         d="M3 13 C 9 12, 14 11, 19 11"
         stroke="currentColor"
