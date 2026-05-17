@@ -10,11 +10,11 @@ export const SITE = {
         siglum: "chomat.tech · v2 · MMXXVI",
     },
     nav: [
-        { label: "Now", href: "#now" },
-        { label: "Experience", href: "#experience" },
-        { label: "Work", href: "#work" },
-        { label: "Tech", href: "#tech" },
-        { label: "Contact", href: "#contact" },
+        { label: "Now", short: "now", href: "#now" },
+        { label: "Experience", short: "exp", href: "#experience" },
+        { label: "Work", short: "work", href: "#work" },
+        { label: "Tech", short: "tech", href: "#tech" },
+        { label: "Contact", short: "contact", href: "#contact" },
     ],
     hero: {
         kicker: "chomat.tech · v2 · MMXXVI",
