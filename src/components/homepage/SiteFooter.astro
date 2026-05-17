@@ -1,6 +1,11 @@
 ---
 import { SITE } from "../../data/site.ts";
 
+type Props = {
+    backToTopHref?: string;
+};
+
+const { backToTopHref = "#hero" } = Astro.props;
 const { footer } = SITE;
 ---
 
@@ -13,7 +18,7 @@ const { footer } = SITE;
             }
         </span>
         <span class="t-mono">
-            <a class="back-to-top" href="#hero">{footer.backToTop}</a>
+            <a class="back-to-top" href={backToTopHref}>{footer.backToTop}</a>
         </span>
     </div>
 </footer>

@@ -134,8 +134,7 @@ export const SITE = {
             },
         },
         wormholes: [
-            { label: "/lab — playground & experiments", href: "/lab" },
-            { label: "/uses — tools & setup", href: "/uses" },
+            { label: "/experience — the long version", href: "/experience" },
             { label: "/404 — yes really", href: "/404" },
         ],
     },
