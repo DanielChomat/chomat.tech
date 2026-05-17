@@ -16,23 +16,38 @@ state on the timeline.
 
 ### A. New entry (new company)
 
-Required info to ask the user:
+**Schema-required (Zod will reject the build without these):**
 
-- **Slug** (filename without `.mdx`, kebab-case).
-- **Company** — display name.
-- **Title** — role (e.g., "Mobile Engineer").
-- **Interval(s)** — start + end dates. `end: present` if it's the
-  current role. Partners Bank in this repo has two intervals because
-  the user left and came back — that's the canonical case for using
-  more than one.
-- **Location** — e.g., "Prague, CZ", "Remote".
-- **Tech** — list of stack pills.
-- **NDA?** — boolean; default `false`. Sets sticker behaviour.
-- **Summary** — one-sentence headline (shown on homepage card).
-- **Tint** — `butter | sage | rose | sky | lavender | teal | ""`.
-  Default `""`. Use `teal` for the "currently here" entry to make the
-  card stand out on both the homepage and `/experience`.
-- **Body** — 2–4 sentences of prose, MDX. Don't repeat the summary.
+- **company** — display name.
+- **title** — role (e.g., "Mobile Engineer").
+- **intervals** — at least one `{ start, end }` pair. `end: present`
+  if it's the current role. Partners Bank in this repo has two
+  intervals because the user left and came back — that's the
+  canonical case for using more than one.
+- **summary** — one-sentence headline (shown on homepage card).
+
+Plus:
+
+- **Slug** — filename without `.mdx`, kebab-case. Not a frontmatter
+  field but you can't write the file without picking one.
+- **Body** — MDX prose below the frontmatter, 2–4 sentences. Don't
+  repeat the summary.
+
+**Worth asking anyway (defaults exist, but the user usually cares):**
+
+- **location** — e.g., "Prague, CZ", "Remote". Optional; the homepage
+  card and `/experience` chapter both show it when present.
+- **tech** — list of stack pills. Defaults to `[]`. An empty tech row
+  looks incomplete on the chapter card.
+- **tint** — `butter | sage | rose | sky | lavender | teal | ""`.
+  Default `""`. Use `teal` for the "currently here" entry to make
+  the card stand out on both the homepage and `/experience`.
+
+**Pure optional (skip unless the user asks):**
+
+- **nda** — boolean; default `false`. Sets sticker behaviour.
+- **order** — sorting; default `0`. The current role is `0` and
+  earlier roles grow downward.
 
 ### B. New interval on an existing entry
 

@@ -29,7 +29,9 @@ AGENTS.md: "Prefer the correct element over a `<div>` with classes."
 CodeRabbit reliably catches:
 
 - `<div>` wrappers around lists of links → should be
-  `<nav aria-label="…">`. Examples already caught on this repo:
+  `<nav aria-label="…">`. Historical examples on this repo (verify
+  against current code before quoting them at the user — these
+  files have evolved):
   - The mobile menu dropdown panel (was `<div>`, now `<nav>`).
   - The `/experience` breadcrumb row (was `<div class="exp-crumbs">`).
   - The `/experience` timeline jump-nav (was `<aside>`).

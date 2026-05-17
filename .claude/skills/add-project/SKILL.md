@@ -11,28 +11,43 @@ Scaffold a new project for the Content Collection at
 the build will fail with a useful error, but it's faster to get it
 right the first time.
 
-## Required information
+## Schema-required (Zod will reject the build without these)
 
-Ask the user only for what you can't reasonably infer:
+Per `src/content/config.ts` (`projects` collection):
 
-- **Slug** (filename without `.mdx`). Use kebab-case. Becomes the
-  entry id.
-- **Title** — the displayed name (e.g., "Walletory").
-- **Tagline** — one short line (8–12 words).
-- **Status** — one of `shipped`, `building`, `archived`, `private`.
-- **Kind** — `personal` or `client`.
-- **Year** — short label shown on the card (e.g., `2023`, `21–23`).
-- **Tech** — array of pills (e.g., `["React Native", "TypeScript"]`).
-- **Body** — 2–4 sentences of prose for the MDX body.
+- **title** — displayed name (e.g., "Walletory").
+- **tagline** — one short line (8–12 words).
+- **status** — one of `shipped`, `building`, `archived`, `private`.
+- **kind** — `personal` or `client`.
 
-If `kind=client`, also ask for **client** (display name) and whether
-it's NDA'd (`nda: true`) — sets the privacy/sticker behaviour.
+Plus you need:
 
-## Optional fields with sensible defaults
+- **Slug** — filename without `.mdx`, kebab-case. Becomes the entry
+  id. Not a frontmatter field, but you can't write the file without
+  picking one.
+- **Body** — MDX prose, 2–4 sentences. Not in frontmatter; it's the
+  content below the `---` block.
 
-- `bentoSize`: `"sm" | "md" | "lg" | "xl"` — default `"sm"`. The
-  homepage Work bento uses `sm` (col-4) by default; `lg` is the wide
-  feature card. Only bump it if the user asks for a featured layout.
+## Worth asking anyway (defaults exist, but the user usually has an opinion)
+
+- **tech** — array of pills (`["React Native", "TypeScript"]`).
+  Defaults to `[]`. An empty tech list looks anaemic on the homepage
+  card.
+- **year** — short label on the card (`2023`, `21–23`). Optional.
+  Cards without a year look incomplete.
+
+If `kind=client`, also ask:
+
+- **client** — display name. Optional in the schema but the card's
+  meta line reads weirdly without it for client work.
+- **nda** — `true` if the project is NDA'd. Defaults to `false`.
+  Affects sticker behaviour.
+
+## Pure optional fields (skip unless the user asks)
+
+- `bentoSize`: `"sm" | "md" | "lg" | "xl"` — default `"sm"` (col-4).
+  `"lg"` is the wide feature card. Only bump if the user asks for a
+  featured layout.
 - `featured`: boolean, default `false`. Set `true` only for the
   homepage Hero/Now featured slot.
 - `sticker`: `{ tone: "butter|sage|rose|sky|lavender|teal", text: string }`.
@@ -43,6 +58,9 @@ it's NDA'd (`nda: true`) — sets the privacy/sticker behaviour.
 - `order` — sorting; default `0`. Lower numbers come first.
 - `startDate` / `endDate` — ISO dates; only needed if you want the
   homepage to sort/group by time.
+- `links.{live, repo, caseStudy}` — outbound URLs; URL-validated by
+  Zod, so `live: "TBD"` will break the build. Omit instead.
+- `cover` — image path. Skip until the project has art.
 
 ## Schema source of truth
 

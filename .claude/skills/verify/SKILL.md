@@ -42,6 +42,12 @@ CI, but stays quiet about the false positives Biome emits for
      components (per AGENTS.md).
    - **Report** everything else (real `error` and `warning` lines).
 
+   ⚠ The filter is by extension, not by analysis — if a `.astro`
+   file ever has a genuinely unused import (rare but possible:
+   stale dev import, refactored-out type), this skill will hide it.
+   Show the user the *filtered* count alongside the real findings
+   so they can spot-check if they want.
+
    When summarising, separate "real findings" from "skipped false
    positives" so the user can audit the filter.
 

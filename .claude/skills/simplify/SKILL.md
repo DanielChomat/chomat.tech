@@ -90,6 +90,10 @@ If you find CSS/JS in `src/` that only matches a *non-shipped*
 variant (e.g., bottom-dock mobile nav, sitemap-as-art 404), flag it
 for removal. Don't auto-delete — confirm with the user.
 
+> Note: `design/` is gitignored, so collaborators without the
+> original canvas can't see what was rejected. Treat the list above
+> as authoritative until the design canvas is published elsewhere.
+
 ### 6. Selectors that fight the cascade
 
 AGENTS.md enforces:
