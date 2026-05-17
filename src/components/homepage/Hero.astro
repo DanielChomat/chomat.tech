@@ -54,4 +54,27 @@ const { hero } = SITE;
     .hero-status-muted {
         margin-left: 0.25rem;
     }
+
+    @media (max-width: 45rem) {
+        .hero-status {
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 0.75rem 0.875rem;
+            background: color-mix(in oklab, var(--accent) 14%, var(--surface));
+            border: 1px solid color-mix(in oklab, var(--accent) 30%, var(--line));
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .hero-status-dot {
+            margin-top: 0.3125rem;
+        }
+        .hero-status-muted {
+            display: block;
+            margin-left: 0;
+            margin-top: 0.125rem;
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            letter-spacing: 0.04em;
+        }
+    }
 </style>

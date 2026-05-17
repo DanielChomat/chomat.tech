@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import SiteFooter from "../components/homepage/SiteFooter.astro";
 import MobileMenu from "../components/nav/MobileMenu.astro";
 import NavCapsule from "../components/nav/NavCapsule.astro";
 import SoundToggle from "../components/nav/SoundToggle.astro";
@@ -39,7 +40,7 @@ const rendered = await Promise.all(
         <NavCapsule items={copy.nav} />
         <MobileMenu items={copy.nav} />
         <div class="page">
-            <main class="page-body experience-page">
+            <main id="top" class="page-body experience-page">
                 <nav class="exp-crumbs" aria-label="Breadcrumb">
                     <a
                         class="t-mono muted exp-crumb-home"
@@ -201,6 +202,7 @@ const rendered = await Promise.all(
                         }
                     </ol>
                 </section>
+                <SiteFooter backToTopHref="#top" />
             </main>
         </div>
     </div>
