@@ -149,7 +149,17 @@
             gap: 0.75rem;
 
             @media (max-width: 45rem) {
+                /* On phones the 3-up grid + fixed 260px height makes the thumbs
+                   pencil-thin. Switch to a 9:16 aspect ratio so they shrink to
+                   match the available column width. Higher specificity than the
+                   base .ph rule, so the inline --ph-h custom property still wins
+                   on desktop but is ignored here. */
                 gap: 0.5rem;
+
+                & .ph {
+                    height: auto;
+                    aspect-ratio: 9 / 16;
+                }
             }
         }
         & .now-small-grid {

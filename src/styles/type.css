@@ -10,6 +10,7 @@
             letter-spacing: -0.02em;
             font-weight: 500;
             margin: 0;
+            overflow-wrap: break-word;
         }
         & .t-title {
             font-size: 1.0625rem;
@@ -17,6 +18,7 @@
             letter-spacing: -0.01em;
             font-weight: 500;
             margin: 0;
+            overflow-wrap: break-word;
         }
         & .t-body {
             font-size: 0.875rem;
@@ -24,6 +26,7 @@
             font-weight: 400;
             color: var(--text);
             margin: 0;
+            overflow-wrap: break-word;
 
             & > p {
                 margin: 0;
@@ -50,11 +53,15 @@
         /* V3 type overrides */
         &.v3 {
             & .t-mega {
-                font-size: clamp(3.5rem, 14vw, 8.25rem);
+                /* Floor lowered to 2rem so "Daniel Chomat*" fits the hero on
+                   ~320px-wide phones (Geist medium needs ~3rem of real estate
+                   per char × 13 chars; the 14vw curve takes over above 230px). */
+                font-size: clamp(2rem, 14vw, 8.25rem);
                 line-height: 0.86;
                 letter-spacing: -0.045em;
                 font-weight: 500;
                 margin: 0;
+                overflow-wrap: break-word;
             }
             & .kicker {
                 font-size: 0.75rem;
