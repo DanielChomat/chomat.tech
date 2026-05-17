@@ -1,5 +1,5 @@
 ---
-type NavItem = { label: string; href: string };
+type NavItem = { label: string; short?: string; href: string };
 
 type Props = {
     items: readonly NavItem[];
@@ -18,30 +18,46 @@ const { items, resumeHref = "/resume.pdf" } = Astro.props;
         aria-controls="mobile-menu-panel"
         data-mobile-menu-trigger
     >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+        <span class="mobile-menu__label" data-mobile-menu-label>menu</span>
+        <span class="mobile-menu__icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
     </button>
-    <ul
+    <div
         id="mobile-menu-panel"
         class="mobile-menu__panel"
         data-mobile-menu-panel
     >
-        {
-            items.map((item) => (
-                <li>
-                    <a href={item.href} data-mobile-menu-link>
-                        {item.label}
-                    </a>
-                </li>
-            ))
-        }
-        <li>
-            <a class="resume-cta" href={resumeHref} data-mobile-menu-link>
-                Resume.pdf
-            </a>
-        </li>
-    </ul>
+        <ul class="mobile-menu__list">
+            {
+                items.map((item) => (
+                    <li>
+                        <a
+                            href={item.href}
+                            data-mobile-menu-link
+                            data-section={item.href.replace(/^#/, "")}
+                        >
+                            <span class="mobile-menu__dot" aria-hidden="true" />
+                            <span class="mobile-menu__text">
+                                {item.short ?? item.label}
+                            </span>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+        <div class="mobile-menu__divider" aria-hidden="true"></div>
+        <a
+            class="mobile-menu__resume"
+            href={resumeHref}
+            data-mobile-menu-link
+        >
+            <span>resume.pdf</span>
+            <span aria-hidden="true">↓</span>
+        </a>
+    </div>
 </div>
 
 <script>
@@ -50,8 +66,14 @@ const { items, resumeHref = "/resume.pdf" } = Astro.props;
         const trigger = menu.querySelector<HTMLButtonElement>(
             "[data-mobile-menu-trigger]"
         );
+        const label = menu.querySelector<HTMLElement>(
+            "[data-mobile-menu-label]"
+        );
         const links = Array.from(
             menu.querySelectorAll<HTMLAnchorElement>("[data-mobile-menu-link]")
+        );
+        const sectionLinks = links.filter((l) =>
+            l.getAttribute("href")?.startsWith("#")
         );
 
         const setOpen = (open: boolean) => {
@@ -61,6 +83,7 @@ const { items, resumeHref = "/resume.pdf" } = Astro.props;
                 "aria-label",
                 open ? "Close navigation menu" : "Open navigation menu"
             );
+            if (label) label.textContent = open ? "close" : "menu";
         };
 
         trigger?.addEventListener("click", (event) => {
@@ -88,5 +111,66 @@ const { items, resumeHref = "/resume.pdf" } = Astro.props;
                 trigger?.focus();
             }
         });
+
+        // Mirror NavCapsule's active-section tracking: highlight the menu
+        // entry whose section is the bottommost one inside the top 30% of
+        // the viewport. End-of-content forces the last item.
+        const linkBySection = new Map<HTMLElement, HTMLAnchorElement>();
+        for (const link of sectionLinks) {
+            const id = link.dataset.section;
+            if (!id) continue;
+            const section = document.getElementById(id);
+            if (section) linkBySection.set(section, link);
+        }
+
+        const setActive = (next: HTMLAnchorElement | null) => {
+            for (const l of sectionLinks) l.classList.remove("active");
+            if (next) next.classList.add("active");
+        };
+
+        const visible = new Set<Element>();
+        let endReached = false;
+
+        const orderedLinks = Array.from(linkBySection.values());
+        const update = () => {
+            if (endReached) {
+                setActive(orderedLinks[orderedLinks.length - 1] ?? null);
+                return;
+            }
+            let chosen: HTMLAnchorElement | null = null;
+            let maxTop = Number.NEGATIVE_INFINITY;
+            for (const section of visible) {
+                const top = section.getBoundingClientRect().top;
+                if (top > maxTop) {
+                    maxTop = top;
+                    chosen = linkBySection.get(section as HTMLElement) ?? null;
+                }
+            }
+            setActive(chosen);
+        };
+
+        const sectionObs = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) visible.add(entry.target);
+                    else visible.delete(entry.target);
+                }
+                update();
+            },
+            { rootMargin: "0px 0px -70% 0px", threshold: 0 }
+        );
+        for (const section of linkBySection.keys()) sectionObs.observe(section);
+
+        const footer = document.querySelector<HTMLElement>("footer");
+        if (footer) {
+            const endObs = new IntersectionObserver(
+                ([entry]) => {
+                    endReached = entry.isIntersecting;
+                    update();
+                },
+                { threshold: 0 }
+            );
+            endObs.observe(footer);
+        }
     }
 </script>
