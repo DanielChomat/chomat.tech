@@ -28,3 +28,7 @@ pnpm-debug.log*
 
 # local design scratch (wireframes, screenshots, JSX playground)
 design/
+
+# Claude Code — keep shared skills, ignore session-local state
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
