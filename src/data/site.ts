@@ -184,12 +184,9 @@ export const SITE = {
         currentLabel: "Currently here",
         nav: [
             { label: "Home", short: "home", href: "/" },
-            { label: "Now", short: "now", href: "/#now" },
-            { label: "Work", short: "work", href: "/#work" },
             { label: "Experience", short: "exp", href: "/experience" },
-            { label: "Contact", short: "contact", href: "/#contact" },
         ],
-        navActiveIndex: 3,
+        navActiveIndex: 1,
     },
     notFound: {
         kicker: "error / not_found",
