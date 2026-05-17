@@ -3,10 +3,18 @@ type NavItem = { label: string; short?: string; href: string };
 
 type Props = {
     items: readonly NavItem[];
+    /**
+     * Zero-based index of the item that represents the *current page*.
+     * Set on subpages (e.g., /experience) so the dropdown shows a
+     * persistent active dot regardless of scroll position. -1 means
+     * "no static current" — used on the homepage, where the active
+     * item is computed dynamically from section visibility.
+     */
+    active?: number;
     resumeHref?: string;
 };
 
-const { items, resumeHref = "/resume.pdf" } = Astro.props;
+const { items, active = -1, resumeHref = "/resume.pdf" } = Astro.props;
 ---
 
 <div class="mobile-menu" data-mobile-menu data-open="false">
@@ -33,12 +41,14 @@ const { items, resumeHref = "/resume.pdf" } = Astro.props;
     >
         <ul class="mobile-menu__list">
             {
-                items.map((item) => (
+                items.map((item, i) => (
                     <li>
                         <a
                             href={item.href}
                             data-mobile-menu-link
                             data-section={item.href.replace(/^#/, "")}
+                            class:list={{ active: i === active }}
+                            aria-current={i === active ? "page" : undefined}
                         >
                             <span class="mobile-menu__dot" aria-hidden="true" />
                             <span class="mobile-menu__text">

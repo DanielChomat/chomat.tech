@@ -37,8 +37,8 @@ const rendered = await Promise.all(
 >
     <div class="wf v3 pal-newsprint">
         <SoundToggle />
-        <NavCapsule items={copy.nav} />
-        <MobileMenu items={copy.nav} />
+        <NavCapsule items={copy.nav} active={copy.navActiveIndex} />
+        <MobileMenu items={copy.nav} active={copy.navActiveIndex} />
         <div class="page">
             <main id="top" class="page-body experience-page">
                 <nav class="exp-crumbs" aria-label="Breadcrumb">
