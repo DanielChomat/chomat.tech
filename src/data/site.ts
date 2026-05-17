@@ -186,8 +186,10 @@ export const SITE = {
             { label: "Home", short: "home", href: "/" },
             { label: "Now", short: "now", href: "/#now" },
             { label: "Work", short: "work", href: "/#work" },
+            { label: "Experience", short: "exp", href: "/experience" },
             { label: "Contact", short: "contact", href: "/#contact" },
         ],
+        navActiveIndex: 3,
     },
     notFound: {
         kicker: "error / not_found",

@@ -132,6 +132,18 @@ const { items, active = -1 } = Astro.props;
         );
         for (const section of linkBySection.keys()) sectionObs.observe(section);
 
+        // Subpage mode: when no observable in-page sections exist (no nav
+        // items use `href^="#"`), honour the server-rendered .active class
+        // and position the pill on it once. The scroll observers above
+        // then sit idle. Without this branch the pill stays hidden on
+        // subpages even though their active item is correctly marked.
+        if (linkBySection.size === 0) {
+            const staticActive = nav.querySelector<HTMLAnchorElement>(
+                'a.active:not([data-back-to-top])'
+            );
+            if (staticActive) setActive(staticActive);
+        }
+
         // End-of-content sentinel: the page footer.
         const footer = document.querySelector<HTMLElement>("footer");
         if (footer) {
