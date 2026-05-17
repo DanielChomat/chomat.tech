@@ -1,0 +1,407 @@
+---
+import { getCollection, render } from "astro:content";
+import MobileMenu from "../components/nav/MobileMenu.astro";
+import NavCapsule from "../components/nav/NavCapsule.astro";
+import SoundToggle from "../components/nav/SoundToggle.astro";
+import Kicker from "../components/primitives/Kicker.astro";
+import Pill from "../components/primitives/Pill.astro";
+import StatusPill from "../components/primitives/StatusPill.astro";
+import { formatIntervals, isCurrent } from "../data/format.ts";
+import { SITE } from "../data/site.ts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const copy = SITE.experiencePage;
+
+const entries = (await getCollection("experience")).sort(
+    (a, b) => a.data.order - b.data.order
+);
+
+const rendered = await Promise.all(
+    entries.map(async (entry) => {
+        const { Content } = await render(entry);
+        return {
+            entry,
+            Content,
+            current: isCurrent(entry.data.intervals),
+            slug: entry.id,
+            firstYear: entry.data.intervals[0].start.getFullYear(),
+        };
+    })
+);
+---
+
+<BaseLayout
+    title="Experience — Daniel Chomat"
+    description="Six years across one agency, one bank (twice), and one freelance umbrella in between. The long version."
+>
+    <div class="wf v3 pal-newsprint">
+        <SoundToggle />
+        <NavCapsule items={copy.nav} />
+        <MobileMenu items={copy.nav} />
+        <div class="page">
+            <main class="page-body experience-page">
+                <nav class="exp-crumbs" aria-label="Breadcrumb">
+                    <a
+                        class="t-mono muted exp-crumb-home"
+                        href="/"
+                        aria-label={copy.homeCrumb}
+                    >
+                        <span class="accent" aria-hidden="true">←</span>{" "}
+                        <span class="exp-crumb-home-label">{copy.homeCrumb}</span>
+                    </a>
+                    <a class="t-mono accent" href="/resume.pdf">
+                        ↓ {copy.resumeLink}
+                    </a>
+                </nav>
+
+                <header class="exp-header">
+                    <Kicker>{copy.kicker}</Kicker>
+                    <h1 class="t-mega exp-title">
+                        {copy.headingMain}<span class="accent">{copy.headingMark}</span>
+                    </h1>
+                    <p class="t-body muted exp-intro">
+                        <span class="accent">{copy.introMarkLead}</span> {copy.intro}
+                    </p>
+                </header>
+
+                <section class="exp-about">
+                    <article class="card tint-teal exp-about-card">
+                        <div class="exp-about-text">
+                            <Kicker>{copy.about.kicker}</Kicker>
+                            <p class="t-heading exp-about-heading">
+                                {copy.about.headingLead}<span class="marker"
+                                    >{copy.about.headingMark}</span
+                                >{copy.about.headingTrail}
+                            </p>
+                        </div>
+                        <ul class="row-tight exp-about-pills" role="list">
+                            {copy.about.pills.map((p) => (
+                                <li>
+                                    <Pill>{p}</Pill>
+                                </li>
+                            ))}
+                        </ul>
+                    </article>
+                </section>
+
+                <section class="exp-summary" aria-label="Snapshot">
+                    {
+                        copy.summary.map((c) => {
+                            const hasDot = "dot" in c && c.dot === true;
+                            return (
+                                <div class:list={["card", c.tint, "exp-summary-card"]}>
+                                    <Kicker>{c.kicker}</Kicker>
+                                    <div class="t-title exp-summary-title">
+                                        {hasDot && (
+                                            <span class="status-dot pulse exp-summary-dot" />
+                                        )}
+                                        {c.title}
+                                    </div>
+                                    <div class="t-body muted">{c.blurb}</div>
+                                </div>
+                            );
+                        })
+                    }
+                </section>
+
+                <section class="exp-timeline" aria-label="Timeline">
+                    <nav class="exp-jumpnav" aria-label="Jump to chapter">
+                        <div class="card tight exp-jumpnav-card">
+                            <Kicker>{copy.timelineJumpKicker}</Kicker>
+                            <ul class="exp-jumpnav-list" role="list">
+                                {
+                                    rendered.map(({ entry, current, slug, firstYear }) => (
+                                        <li>
+                                            <a
+                                                href={`#${slug}`}
+                                                class:list={[
+                                                    "exp-jumpnav-link",
+                                                    { current },
+                                                ]}
+                                                aria-current={current ? "true" : undefined}
+                                            >
+                                                {current && (
+                                                    <span class="status-dot pulse exp-jumpnav-dot" />
+                                                )}
+                                                <span class="t-mono">
+                                                    {firstYear} · <strong>{entry.data.company}</strong>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        </div>
+                    </nav>
+                    <ol class="exp-entries" role="list">
+                        {
+                            rendered.map(({ entry, Content, current, slug }) => (
+                                <li id={slug} class="exp-entry">
+                                    <article
+                                        class:list={[
+                                            "card",
+                                            "exp-entry-card",
+                                            { "tint-teal": current },
+                                        ]}
+                                    >
+                                        {current && (
+                                            <span class="sticker s-rose exp-entry-sticker">
+                                                {copy.currentLabel.toLowerCase()}
+                                            </span>
+                                        )}
+                                        <header class="exp-entry-head">
+                                            <div class="exp-entry-meta">
+                                                <div class="t-mono muted">
+                                                    {formatIntervals(entry.data.intervals)}
+                                                </div>
+                                                <h2 class="t-heading exp-entry-org">
+                                                    {entry.data.company}
+                                                    {current && (
+                                                        <span class="status-dot pulse exp-entry-dot" />
+                                                    )}
+                                                </h2>
+                                                <div class="t-body muted">
+                                                    {entry.data.title}
+                                                    {entry.data.location && (
+                                                        <>
+                                                            <span class="exp-entry-sep"> · </span>
+                                                            {entry.data.location}
+                                                        </>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            {current && (
+                                                <StatusPill
+                                                    status="building"
+                                                    label={copy.currentLabel}
+                                                />
+                                            )}
+                                        </header>
+                                        <p class="t-body exp-entry-summary">
+                                            {entry.data.summary}
+                                        </p>
+                                        <div class="t-body exp-entry-body">
+                                            <Content />
+                                        </div>
+                                        {entry.data.tech.length > 0 && (
+                                            <>
+                                                <div class="divider" />
+                                                <ul class="row-tight exp-entry-tech" role="list">
+                                                    {entry.data.tech.map((t) => (
+                                                        <li>
+                                                            <Pill>{t}</Pill>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </>
+                                        )}
+                                    </article>
+                                </li>
+                            ))
+                        }
+                    </ol>
+                </section>
+            </main>
+        </div>
+    </div>
+</BaseLayout>
+
+<style>
+    .experience-page {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+    .exp-crumbs {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 1.375rem;
+    }
+    .exp-crumb-home {
+        text-decoration: none;
+        color: inherit;
+    }
+    .exp-header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .exp-title {
+        margin-top: 0.5rem;
+    }
+    .exp-intro {
+        max-width: 36.25rem;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+    .exp-about {
+        margin-top: 1.75rem;
+    }
+    .exp-about-card {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 1.5rem;
+        align-items: center;
+        padding: 1.375rem;
+    }
+    .exp-about-heading {
+        font-size: 1.375rem;
+        line-height: 1.35;
+        margin-top: 0.5rem;
+    }
+    .exp-about-pills {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        justify-content: flex-end;
+        gap: 0.375rem;
+    }
+    .exp-summary {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+        margin-top: 1.75rem;
+    }
+    .exp-summary-card {
+        padding: 1rem;
+        gap: 0.375rem;
+    }
+    .exp-summary-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.125rem;
+        margin-top: 0.25rem;
+    }
+    .exp-summary-dot {
+        flex: 0 0 auto;
+    }
+    .exp-timeline {
+        display: grid;
+        grid-template-columns: 11.25rem 1fr;
+        gap: 2.5rem;
+        margin-top: 3.5rem;
+    }
+    .exp-jumpnav {
+        position: sticky;
+        top: 5.625rem;
+        align-self: start;
+    }
+    .exp-jumpnav-card {
+        padding: 1rem;
+        gap: 0.375rem;
+    }
+    .exp-jumpnav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0.25rem 0 0;
+        display: flex;
+        flex-direction: column;
+    }
+    .exp-jumpnav-link {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.5rem 0;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 150ms ease;
+    }
+    .exp-jumpnav-link:hover,
+    .exp-jumpnav-link:focus-visible {
+        color: var(--text);
+    }
+    .exp-jumpnav-link.current {
+        color: var(--text);
+    }
+    .exp-jumpnav-dot {
+        flex: 0 0 auto;
+    }
+    .exp-entries {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .exp-entry {
+        scroll-margin-top: 5rem;
+    }
+    .exp-entry-card {
+        position: relative;
+        padding: 1.5rem;
+        gap: 0.75rem;
+    }
+    .exp-entry-sticker {
+        position: absolute;
+        top: -0.625rem;
+        left: 1.125rem;
+    }
+    .exp-entry-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .exp-entry-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .exp-entry-org {
+        margin-top: 0.25rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
+    }
+    .exp-entry-summary {
+        max-width: 40rem;
+    }
+    .exp-entry-body {
+        max-width: 40rem;
+    }
+    .exp-entry-tech {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    @media (max-width: 45rem) {
+        .exp-crumb-home-label {
+            display: none;
+        }
+        .exp-about-card {
+            grid-template-columns: 1fr;
+            gap: 0.875rem;
+        }
+        .exp-about-pills {
+            justify-content: flex-start;
+        }
+        .exp-summary {
+            grid-template-columns: 1fr 1fr;
+        }
+        .exp-timeline {
+            grid-template-columns: 1fr;
+            gap: 1.75rem;
+            margin-top: 2.5rem;
+        }
+        .exp-jumpnav {
+            position: static;
+        }
+        .exp-entry-head {
+            flex-direction: column;
+            gap: 0.625rem;
+        }
+        .exp-intro {
+            font-size: 0.9375rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .exp-jumpnav-link {
+            transition: none;
+        }
+    }
+</style>
