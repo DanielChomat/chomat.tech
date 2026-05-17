@@ -1,6 +1,15 @@
 /* Document baseline. Loaded into @layer reset. */
 
 @layer reset {
+    /* Universal box-sizing so width: 100% + padding never overflows the
+       container. Without this .page-body and other padded blocks end up
+       wider than their flex parent on narrow viewports. */
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
     html,
     body {
         margin: 0;

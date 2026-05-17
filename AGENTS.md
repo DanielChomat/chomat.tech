@@ -75,7 +75,7 @@ bottom of each `.astro` file. The design system lives in `src/styles/`.
   - JS-internal pixels in `IntersectionObserver` rootMargin (DOM API requirement).
   - Sub-pixel decoration values inside SVG data URIs.
 - **Fluid type** via `clamp(min-rem, vw-based-mid, max-rem)`. Used for
-  `.t-mega`, `.t-display`, `.t-heading`, and the Now featured `<h3>`.
+  `.t-mega`, `.t-heading`, and the Now featured `<h3>`.
 - **Intrinsic sizing.** Do **not** add `min-height: …rem` to cards. CSS Grid's
   default `align-items: stretch` keeps cards in the same row equal-height.
   Full-width cards size to content.
