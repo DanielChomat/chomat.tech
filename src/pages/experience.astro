@@ -40,15 +40,19 @@ const rendered = await Promise.all(
         <MobileMenu items={copy.nav} />
         <div class="page">
             <main class="page-body experience-page">
-                <div class="exp-crumbs">
-                    <a class="t-mono muted exp-crumb-home" href="/">
-                        <span class="accent">←</span>{" "}
+                <nav class="exp-crumbs" aria-label="Breadcrumb">
+                    <a
+                        class="t-mono muted exp-crumb-home"
+                        href="/"
+                        aria-label={copy.homeCrumb}
+                    >
+                        <span class="accent" aria-hidden="true">←</span>{" "}
                         <span class="exp-crumb-home-label">{copy.homeCrumb}</span>
                     </a>
                     <a class="t-mono accent" href="/resume.pdf">
                         ↓ {copy.resumeLink}
                     </a>
-                </div>
+                </nav>
 
                 <header class="exp-header">
                     <Kicker>{copy.kicker}</Kicker>
@@ -101,7 +105,7 @@ const rendered = await Promise.all(
                 </section>
 
                 <section class="exp-timeline" aria-label="Timeline">
-                    <aside class="exp-jumpnav">
+                    <nav class="exp-jumpnav" aria-label="Jump to chapter">
                         <div class="card tight exp-jumpnav-card">
                             <Kicker>{copy.timelineJumpKicker}</Kicker>
                             <ul class="exp-jumpnav-list" role="list">
@@ -114,6 +118,7 @@ const rendered = await Promise.all(
                                                     "exp-jumpnav-link",
                                                     { current },
                                                 ]}
+                                                aria-current={current ? "true" : undefined}
                                             >
                                                 {current && (
                                                     <span class="status-dot pulse exp-jumpnav-dot" />
@@ -127,7 +132,7 @@ const rendered = await Promise.all(
                                 }
                             </ul>
                         </div>
-                    </aside>
+                    </nav>
                     <ol class="exp-entries" role="list">
                         {
                             rendered.map(({ entry, Content, current, slug }) => (
