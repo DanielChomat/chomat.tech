@@ -205,11 +205,15 @@ Decorative SVGs get `aria-hidden="true"` and `focusable="false"`.
 ### Build & verify
 - `yarn check:astro` — Astro type/diagnostic check.
 - `yarn check:ts` — TypeScript only.
+- `yarn check:lint` — Biome lint + format. Auto-fix with `yarn check:fix`.
+- `yarn check:code` — runs all three above in sequence. The CI workflow
+  (`.github/workflows/check.yml`) runs this on every PR.
 - `yarn build` — production build (also catches MDX/schema errors).
-- `npx biome check .` — lint + format. Auto-fix with
-  `npx biome check . --write`. `astro` files emit many `noUnusedImports`
-  false positives (Biome can't see template-only usage of imported
-  components) — ignore those.
+
+Biome's `noUnusedImports` and `noUnusedVariables` rules are turned off
+for `.astro` files via a `biome.json` override: Biome can't see
+template-only usage of imports and props in Astro frontmatter, so the
+rules would otherwise emit a wave of false positives.
 
 ### What *not* to do
 - Don't merge a PR before CodeRabbit finishes (unless rate-limited).

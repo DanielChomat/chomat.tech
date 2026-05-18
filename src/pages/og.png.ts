@@ -5,10 +5,10 @@
 // /og/[slug].png) can land later — for now a single static image
 // covers every share, which is plenty for v1.
 
-import type { APIRoute } from "astro";
-import { Resvg } from "@resvg/resvg-js";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { Resvg } from "@resvg/resvg-js";
+import type { APIRoute } from "astro";
 import satori from "satori";
 
 // Resolve from process.cwd() (the project root, both for `astro dev`
@@ -93,7 +93,8 @@ export const GET: APIRoute = async () => {
                                             maxWidth: "900px",
                                             lineHeight: 1.3,
                                         },
-                                        children: "Mobile & front-end engineer. Six years for banks, health startups, and agencies — now building my own.",
+                                        children:
+                                            "Mobile & front-end engineer. Six years for banks, health startups, and agencies — now building my own.",
                                     },
                                 },
                             ],

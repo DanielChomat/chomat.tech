@@ -1,0 +1,35 @@
+name: check
+
+on:
+    pull_request:
+    push:
+        branches: [V2-redesign]
+
+# Cancel a still-running run when a new commit lands on the same ref.
+concurrency:
+    group: check-${{ github.ref }}
+    cancel-in-progress: true
+
+permissions:
+    contents: read
+
+jobs:
+    check:
+        name: lint, types, build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+
+            - uses: actions/setup-node@v6
+              with:
+                  node-version-file: .nvmrc
+                  cache: yarn
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Lint, type-check, Astro check
+              run: yarn check:code
+
+            - name: Production build
+              run: yarn build
