@@ -35,7 +35,7 @@ const rendered = await Promise.all(
     <NavCapsule items={copy.nav} active={copy.navActiveIndex} />
     <MobileMenu items={copy.nav} active={copy.navActiveIndex} />
     <div class="page">
-        <main id="top" class="page-body experience-page">
+        <main id="main" class="page-body experience-page">
                 <nav class="exp-crumbs" aria-label="Breadcrumb">
                     <a
                         class="t-mono muted exp-crumb-home"
@@ -197,7 +197,7 @@ const rendered = await Promise.all(
                         }
                     </ol>
                 </section>
-        <SiteFooter backToTopHref="#top" />
+        <SiteFooter backToTopHref="#main" />
         </main>
     </div>
 </BaseLayout>
