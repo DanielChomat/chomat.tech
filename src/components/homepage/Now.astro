@@ -2,7 +2,6 @@
 import { getCollection, render } from "astro:content";
 import { stickerClass, tintClass } from "../../data/format.ts";
 import { SITE } from "../../data/site.ts";
-import HandArrow from "../primitives/HandArrow.astro";
 import Kicker from "../primitives/Kicker.astro";
 import MiniUI from "../primitives/MiniUI.astro";
 import Pill from "../primitives/Pill.astro";
@@ -75,11 +74,13 @@ const tints: Record<string, string> = {
                 <ul class="row-tight featured-tech">
                     {featured.data.tech.map((t) => <li><Pill>{t}</Pill></li>)}
                 </ul>
-                <div class="featured-cta">
+                {/* "case study" CTA → /projects/[slug]. Disabled until
+                    the case-study route ships; tracking in #79. */}
+                {/* <div class="featured-cta">
                     <a class="btn accent" href={`/projects/${featured.id}`}>
                         {now.featuredCtaLabel} <HandArrow size={14} />
                     </a>
-                </div>
+                </div> */}
             </div>
             <div class="now-thumbs-grid">
                 <Placeholder h={260}>home</Placeholder>
