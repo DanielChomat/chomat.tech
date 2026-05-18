@@ -20,20 +20,20 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
-    "@fontsource-variable/geist": "^5.2.8",
-    "@fontsource-variable/geist-mono": "^5.2.7",
+    "@fontsource-variable/geist": "^5.2.9",
+    "@fontsource-variable/geist-mono": "^5.2.8",
     "@resvg/resvg-js": "^2.6.2",
-    "astro": "^5.18.1",
+    "astro": "^6.3.3",
     "satori": "^0.26.0"
   },
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610",
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/mdx": "^5.0.6",
     "@biomejs/biome": "2.4.15",
     "@playwright/test": "^1.60.0",
     "prettier": "3.8.3",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vitest": "^4.1.6",
     "zod": "^4.4.3"
   },
