@@ -58,6 +58,55 @@
             }
         }
 
+        /* Theme toggle — same chip styling as sound-toggle, parked to its
+           left so the two form a small cluster bottom-right. The right
+           offset (sound-toggle width + gap) keeps them paired across
+           breakpoints. */
+        & .theme-toggle {
+            position: fixed;
+            right: calc(1.375rem + 2.75rem + 0.5rem);
+            bottom: calc(1.375rem + env(safe-area-inset-bottom, 0px));
+            z-index: 6;
+            width: 2.75rem;
+            height: 2.75rem;
+            padding: 0;
+            appearance: none;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            box-shadow: var(--shadow);
+            transition: color 150ms ease, background 150ms ease;
+
+            & .theme-toggle__icon {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 0;
+            }
+            & .theme-toggle__icon--moon { display: none; }
+
+            &:hover,
+            &:focus-visible {
+                color: var(--text);
+            }
+
+            @media (max-width: 45rem) {
+                width: 2.5rem;
+                height: 2.5rem;
+                right: calc(1rem + 2.5rem + 0.5rem);
+                bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            & .theme-toggle { transition: none; }
+        }
+
         & .ph {
             background:
                 repeating-linear-gradient(135deg, var(--line-2) 0 1px, transparent 1px 0.5625rem),
@@ -76,5 +125,12 @@
             overflow: hidden;
             height: var(--ph-h, 7.5rem);
         }
+    }
+
+    /* Dark: hide the sun, reveal the moon. Selector parents the .wf so
+       the toggle remains scoped to the design-system root. */
+    html[data-theme="dark"] .wf {
+        & .theme-toggle .theme-toggle__icon--sun  { display: none; }
+        & .theme-toggle .theme-toggle__icon--moon { display: inline-flex; }
     }
 }

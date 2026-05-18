@@ -10,12 +10,14 @@ import Work from "../components/homepage/Work.astro";
 import MobileMenu from "../components/nav/MobileMenu.astro";
 import NavCapsule from "../components/nav/NavCapsule.astro";
 import SoundToggle from "../components/nav/SoundToggle.astro";
+import ThemeToggle from "../components/nav/ThemeToggle.astro";
 import { SITE } from "../data/site.ts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
     <div class="wf v3 pal-newsprint">
+        <ThemeToggle />
         <SoundToggle />
         <NavCapsule items={SITE.nav} />
         <MobileMenu items={SITE.nav} />

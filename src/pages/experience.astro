@@ -4,6 +4,7 @@ import SiteFooter from "../components/homepage/SiteFooter.astro";
 import MobileMenu from "../components/nav/MobileMenu.astro";
 import NavCapsule from "../components/nav/NavCapsule.astro";
 import SoundToggle from "../components/nav/SoundToggle.astro";
+import ThemeToggle from "../components/nav/ThemeToggle.astro";
 import Kicker from "../components/primitives/Kicker.astro";
 import Pill from "../components/primitives/Pill.astro";
 import StatusPill from "../components/primitives/StatusPill.astro";
@@ -36,6 +37,7 @@ const rendered = await Promise.all(
     description="Six years across one agency, one bank (twice), and one freelance umbrella in between. The long version."
 >
     <div class="wf v3 pal-newsprint">
+        <ThemeToggle />
         <SoundToggle />
         <NavCapsule items={copy.nav} active={copy.navActiveIndex} />
         <MobileMenu items={copy.nav} active={copy.navActiveIndex} />

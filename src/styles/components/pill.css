@@ -70,4 +70,11 @@
         70%  { box-shadow: 0 0 0 0.625rem transparent; }
         100% { box-shadow: 0 0 0 0 transparent; }
     }
+
+    /* Dark mode: the sticker's box-shadow is `var(--text)` (a near-black
+       smudge), which disappears against the dark bg. Swap to a light
+       wash so the offset shadow stays visible. */
+    html[data-theme="dark"] .wf .sticker {
+        box-shadow: 2px 2px 0 rgba(255, 250, 235, 0.5);
+    }
 }

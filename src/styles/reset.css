@@ -19,6 +19,15 @@
         color: #16140f;
     }
 
+    /* Pre-token paint colors for dark mode — applied before .wf tokens
+       resolve so the page never flashes light. The inline theme script
+       in BaseLayout sets [data-theme] before first paint. */
+    html[data-theme="dark"],
+    html[data-theme="dark"] body {
+        background: #0e0d0a;
+        color: #ece8de;
+    }
+
     @media (prefers-reduced-motion: no-preference) {
         html {
             scroll-behavior: smooth;
