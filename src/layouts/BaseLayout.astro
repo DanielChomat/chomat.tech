@@ -1,4 +1,6 @@
 ---
+import SoundToggle from "../components/nav/SoundToggle.astro";
+import ThemeToggle from "../components/nav/ThemeToggle.astro";
 import { SITE } from "../data/site.ts";
 import "../styles/global.css";
 
@@ -51,6 +53,10 @@ const { title = SITE.meta.title, description = SITE.meta.description } = Astro.p
         </script>
     </head>
     <body>
-        <slot />
+        <div class="wf v3 pal-newsprint">
+            <ThemeToggle />
+            <SoundToggle />
+            <slot />
+        </div>
     </body>
 </html>

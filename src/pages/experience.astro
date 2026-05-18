@@ -3,8 +3,6 @@ import { getCollection, render } from "astro:content";
 import SiteFooter from "../components/homepage/SiteFooter.astro";
 import MobileMenu from "../components/nav/MobileMenu.astro";
 import NavCapsule from "../components/nav/NavCapsule.astro";
-import SoundToggle from "../components/nav/SoundToggle.astro";
-import ThemeToggle from "../components/nav/ThemeToggle.astro";
 import Kicker from "../components/primitives/Kicker.astro";
 import Pill from "../components/primitives/Pill.astro";
 import StatusPill from "../components/primitives/StatusPill.astro";
@@ -14,9 +12,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const copy = SITE.experiencePage;
 
-const entries = (await getCollection("experience")).sort(
-    (a, b) => a.data.order - b.data.order
-);
+const entries = (await getCollection("experience")).sort((a, b) => a.data.order - b.data.order);
 
 const rendered = await Promise.all(
     entries.map(async (entry) => {
@@ -36,13 +32,10 @@ const rendered = await Promise.all(
     title="Experience — Daniel Chomat"
     description="Six years across one agency, one bank (twice), and one freelance umbrella in between. The long version."
 >
-    <div class="wf v3 pal-newsprint">
-        <ThemeToggle />
-        <SoundToggle />
-        <NavCapsule items={copy.nav} active={copy.navActiveIndex} />
-        <MobileMenu items={copy.nav} active={copy.navActiveIndex} />
-        <div class="page">
-            <main id="top" class="page-body experience-page">
+    <NavCapsule items={copy.nav} active={copy.navActiveIndex} />
+    <MobileMenu items={copy.nav} active={copy.navActiveIndex} />
+    <div class="page">
+        <main id="top" class="page-body experience-page">
                 <nav class="exp-crumbs" aria-label="Breadcrumb">
                     <a
                         class="t-mono muted exp-crumb-home"
@@ -204,9 +197,8 @@ const rendered = await Promise.all(
                         }
                     </ol>
                 </section>
-                <SiteFooter backToTopHref="#top" />
-            </main>
-        </div>
+        <SiteFooter backToTopHref="#top" />
+        </main>
     </div>
 </BaseLayout>
 
