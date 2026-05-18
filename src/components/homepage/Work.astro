@@ -67,9 +67,11 @@ const cards = (
 
     <div class="row row-between work-footer">
         <span class="t-mono muted">{work.footerNote}</span>
-        <a class="btn" href={work.linkHref}>
+        {/* "See all twelve" → /projects gallery. Disabled until the
+            gallery page ships; tracking in #79. */}
+        {/* <a class="btn" href={work.linkHref}>
             {work.linkLabel} <HandArrow size={14} />
-        </a>
+        </a> */}
     </div>
 </section>
 
