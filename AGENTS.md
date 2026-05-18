@@ -11,12 +11,13 @@ The canonical product spec lives in `TECHNICAL_ROADMAP.md`; this file is the
 
 ## Stack at a glance
 
-- **Astro 5.x** (static generation, Content Collections, `<ClientRouter />`).
+- **Astro 6.x** (static generation, Content Collections, `<ClientRouter />`).
+  Collection config lives at `src/content.config.ts` (the legacy
+  `src/content/config.ts` location was removed in v6).
 - **TypeScript** everywhere, strict mode.
 - **Vanilla CSS** with PostCSS (no preprocessor, no Tailwind). Native nesting +
   `@layer` cascade.
-- **MDX 4** for content (`@astrojs/mdx@^4`; v5 needs Astro 6, do not bump in
-  isolation).
+- **MDX 5** for content (`@astrojs/mdx@^5`, paired with Astro 6).
 - **Yarn** is the active package manager (lockfile = `yarn.lock`). The spec
   mentions pnpm; don't switch without asking.
 - **Node 22 LTS** on Netlify (`.nvmrc`); some deps (`sitemap@9`) require ≥20.19.5.
@@ -221,8 +222,8 @@ rules would otherwise emit a wave of false positives.
 - Don't add `min-height` to cards to enforce row alignment — that's grid's job.
 - Don't write inline `style=""` attributes; use scoped `<style>`.
 - Don't add a tablet breakpoint without a concrete reason.
-- Don't bump `@astrojs/mdx` to 5 or `@astrojs/react` to 5 — both require
-  Astro 6, which we are not on.
+- Don't reintroduce React (no `@astrojs/react`). v2 is deliberately
+  vanilla-script-island only.
 - Don't fabricate URLs or generate documentation files unless explicitly
   asked.
 

@@ -1,5 +1,6 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
+import { z } from "zod";
 
 const stickerTone = z.enum(["butter", "sage", "rose", "sky", "lavender", "teal"]);
 const bentoSize = z.enum(["sm", "md", "lg", "xl"]);
@@ -16,8 +17,8 @@ const projects = defineCollection({
         tech: z.array(z.string()).default([]),
         links: z
             .object({
-                live: z.string().url().optional(),
-                repo: z.string().url().optional(),
+                live: z.url().optional(),
+                repo: z.url().optional(),
                 caseStudy: z.string().optional(),
             })
             .optional(),
@@ -64,7 +65,7 @@ const companies = defineCollection({
     schema: z.object({
         name: z.string(),
         logo: z.string().optional(),
-        url: z.string().url().optional(),
+        url: z.url().optional(),
         order: z.number().default(0),
     }),
 });
