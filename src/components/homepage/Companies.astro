@@ -25,4 +25,12 @@ const companies = (await getCollection("companies")).sort(
     .companies-card {
         padding: 1.25rem 1.75rem;
     }
+    /* V3Companies overrides the base `.logo` per-instance to a taller,
+       slightly larger label (28px / 11px vs the partial's 22px / 10px).
+       Scope the bump here so the partial defaults stay correct for any
+       future logo-strip usage. */
+    .companies-card :global(.logo-strip .logo) {
+        height: 1.75rem;
+        font-size: 0.6875rem;
+    }
 </style>

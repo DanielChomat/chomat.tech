@@ -55,8 +55,12 @@
             & .t-mega {
                 /* Floor lowered to 2rem so "Daniel Chomat*" fits the hero on
                    ~320px-wide phones (Geist medium needs ~3rem of real estate
-                   per char × 13 chars; the 14vw curve takes over above 230px). */
-                font-size: clamp(2rem, 14vw, 8.25rem);
+                   per char × 13 chars; the 14vw curve takes over above 230px).
+                   Max is parameterised via --t-mega-max so individual pages can
+                   bump the cap without rewriting the clamp — V4bHero sets 10rem
+                   (160px) on the homepage, the v3 default of 8.25rem (132px)
+                   stays put for /experience and /404. */
+                font-size: clamp(2rem, 14vw, var(--t-mega-max, 8.25rem));
                 line-height: 0.86;
                 letter-spacing: -0.045em;
                 font-weight: 500;
