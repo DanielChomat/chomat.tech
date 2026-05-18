@@ -56,31 +56,32 @@
                 "ss02" on,
                 "cv11" on;
         }
-    }
 
-    /* Dark mode — declared after the light palettes so it wins the cascade.
-       Selector wraps everything: any palette modifier on .wf is overridden
-       once html[data-theme="dark"] is present. Tints are deepened versions
-       that still read warm. */
-    html[data-theme="dark"] .wf,
-    html[data-theme="dark"] .wf.pal-newsprint {
-        --bg: #0e0d0a;
-        --surface: #15140f;
-        --surface-2: #1a1914;
-        --text: #ece8de;
-        --muted: #8e8a80;
-        --faint: #4d4942;
-        --line: rgba(255, 250, 235, 0.1);
-        --line-2: rgba(255, 250, 235, 0.05);
-        --accent: #2cada3;
-        --accent-ink: #0e0d0a;
-        --shadow:
-            0 1px 0 rgba(0, 0, 0, 0.3),
-            0 12px 28px -16px rgba(0, 0, 0, 0.6);
-        --tint-butter: #4a3e1a;
-        --tint-sage: #2a3a25;
-        --tint-rose: #482620;
-        --tint-sky: #1f2e3e;
-        --tint-lavender: #2c2640;
+        /* Dark mode — nested so the dark block + any .pal-* palette
+           modifier are overridden by the same parent. `&,&.pal-newsprint`
+           covers both the bare .wf and the newsprint palette currently
+           applied site-wide. Tints are deepened versions that still read
+           warm. */
+        html[data-theme="dark"] &,
+        html[data-theme="dark"] &.pal-newsprint {
+            --bg: #0e0d0a;
+            --surface: #15140f;
+            --surface-2: #1a1914;
+            --text: #ece8de;
+            --muted: #8e8a80;
+            --faint: #4d4942;
+            --line: rgba(255, 250, 235, 0.1);
+            --line-2: rgba(255, 250, 235, 0.05);
+            --accent: #2cada3;
+            --accent-ink: #0e0d0a;
+            --shadow:
+                0 1px 0 rgba(0, 0, 0, 0.3),
+                0 12px 28px -16px rgba(0, 0, 0, 0.6);
+            --tint-butter: #4a3e1a;
+            --tint-sage: #2a3a25;
+            --tint-rose: #482620;
+            --tint-sky: #1f2e3e;
+            --tint-lavender: #2c2640;
+        }
     }
 }

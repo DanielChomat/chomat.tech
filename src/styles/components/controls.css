@@ -125,12 +125,11 @@
             overflow: hidden;
             height: var(--ph-h, 7.5rem);
         }
-    }
 
-    /* Dark: hide the sun, reveal the moon. Selector parents the .wf so
-       the toggle remains scoped to the design-system root. */
-    html[data-theme="dark"] .wf {
-        & .theme-toggle .theme-toggle__icon--sun  { display: none; }
-        & .theme-toggle .theme-toggle__icon--moon { display: inline-flex; }
+        /* Dark: hide the sun, reveal the moon. */
+        html[data-theme="dark"] & {
+            & .theme-toggle .theme-toggle__icon--sun  { display: none; }
+            & .theme-toggle .theme-toggle__icon--moon { display: inline-flex; }
+        }
     }
 }

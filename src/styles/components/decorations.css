@@ -92,31 +92,31 @@
                 z-index: 5;
             }
         }
-    }
 
-    /* Dark mode: marker highlights look opaque-yellow on dark — replace
-       with subtle tinted washes that read on the dark bg. Grain blend
-       flips from multiply (dark-on-light) to screen (light-on-dark). */
-    html[data-theme="dark"] .wf {
-        & .marker {
-            background: linear-gradient(
-                180deg,
-                transparent 50%,
-                color-mix(in oklab, var(--tint-butter) 70%, transparent) 50%
-            );
-            color: var(--text);
-        }
-        & .marker-sage {
-            background: linear-gradient(
-                180deg,
-                transparent 50%,
-                color-mix(in oklab, var(--tint-sage) 70%, transparent) 50%
-            );
-            color: var(--text);
-        }
-        &.v3::after {
-            mix-blend-mode: screen;
-            opacity: 0.08;
+        /* Dark: marker highlights would read as opaque-yellow on dark, so
+           switch to subtle tinted washes; the v3 grain blend flips from
+           multiply (dark-on-light) to screen (light-on-dark). */
+        html[data-theme="dark"] & {
+            & .marker {
+                background: linear-gradient(
+                    180deg,
+                    transparent 50%,
+                    color-mix(in oklab, var(--tint-butter) 70%, transparent) 50%
+                );
+                color: var(--text);
+            }
+            & .marker-sage {
+                background: linear-gradient(
+                    180deg,
+                    transparent 50%,
+                    color-mix(in oklab, var(--tint-sage) 70%, transparent) 50%
+                );
+                color: var(--text);
+            }
+            &.v3::after {
+                mix-blend-mode: screen;
+                opacity: 0.08;
+            }
         }
     }
 }
