@@ -58,6 +58,18 @@
             }
         }
 
+        /* Dark mode: in light, `.inked` swaps fg/bg to print white-on-black.
+           In dark that double-inverts back to near-invisible, so use a
+           lifted surface that contrasts gently with the page bg instead. */
+        html[data-theme="dark"] & .card.inked {
+            background: var(--surface-2);
+            color: var(--text);
+            border-color: var(--line);
+
+            & .t-mono { color: var(--muted); }
+            & .muted  { color: var(--muted); }
+        }
+
         & .card-head {
             display: flex;
             align-items: baseline;

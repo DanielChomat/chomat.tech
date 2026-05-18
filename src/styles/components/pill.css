@@ -63,6 +63,13 @@
             &.s-sky    { background: var(--tint-sky);    color: var(--text); }
             &.s-lav    { background: var(--tint-lavender); color: var(--text); }
         }
+
+        /* Dark: the sticker's box-shadow is var(--text) — a near-black
+           smudge that disappears against the dark bg. Swap to a light
+           wash so the offset shadow stays visible. */
+        html[data-theme="dark"] & .sticker {
+            box-shadow: 2px 2px 0 rgba(255, 250, 235, 0.5);
+        }
     }
 
     @keyframes wf-pulse {

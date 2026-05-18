@@ -1,5 +1,11 @@
 /* Design tokens — .wf root + active palette + v3 font features.
-   Loaded into @layer base. */
+   Loaded into @layer base.
+
+   Dark mode: gated by [data-theme="dark"] on <html>. A blocking inline
+   script in BaseLayout sets that attribute before paint based on
+   localStorage('theme') ?? prefers-color-scheme. The dark token block
+   re-declares the same custom properties (incl. tints) so it wins over
+   any active .pal-* palette modifier. */
 
 @layer base {
     .wf {
@@ -49,6 +55,33 @@
                 "ss01" on,
                 "ss02" on,
                 "cv11" on;
+        }
+
+        /* Dark mode — nested so the dark block + any .pal-* palette
+           modifier are overridden by the same parent. `&,&.pal-newsprint`
+           covers both the bare .wf and the newsprint palette currently
+           applied site-wide. Tints are deepened versions that still read
+           warm. */
+        html[data-theme="dark"] &,
+        html[data-theme="dark"] &.pal-newsprint {
+            --bg: #0e0d0a;
+            --surface: #15140f;
+            --surface-2: #1a1914;
+            --text: #ece8de;
+            --muted: #8e8a80;
+            --faint: #4d4942;
+            --line: rgba(255, 250, 235, 0.1);
+            --line-2: rgba(255, 250, 235, 0.05);
+            --accent: #2cada3;
+            --accent-ink: #0e0d0a;
+            --shadow:
+                0 1px 0 rgba(0, 0, 0, 0.3),
+                0 12px 28px -16px rgba(0, 0, 0, 0.6);
+            --tint-butter: #4a3e1a;
+            --tint-sage: #2a3a25;
+            --tint-rose: #482620;
+            --tint-sky: #1f2e3e;
+            --tint-lavender: #2c2640;
         }
     }
 }

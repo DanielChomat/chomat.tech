@@ -1,7 +1,6 @@
 ---
 import MobileMenu from "../components/nav/MobileMenu.astro";
 import NavCapsule from "../components/nav/NavCapsule.astro";
-import SoundToggle from "../components/nav/SoundToggle.astro";
 import Kicker from "../components/primitives/Kicker.astro";
 import { SITE } from "../data/site.ts";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -13,12 +12,10 @@ const { notFound } = SITE;
     title="404 — Daniel Chomat"
     description="This URL doesn't resolve to anything I've built — yet."
 >
-    <div class="wf v3 pal-newsprint">
-        <SoundToggle />
-        <NavCapsule items={notFound.nav} />
-        <MobileMenu items={notFound.nav} />
-        <div class="page">
-            <main class="page-body not-found">
+    <NavCapsule items={notFound.nav} />
+    <MobileMenu items={notFound.nav} />
+    <div class="page">
+        <main class="page-body not-found">
                 <div class="nf-glyph" aria-hidden="true">
                     <span class="nf-glyph-digit">
                         4
@@ -58,8 +55,7 @@ const { notFound } = SITE;
                         >{notFound.footnoteLink}</a
                     >{notFound.footnoteTrail}
                 </p>
-            </main>
-        </div>
+        </main>
     </div>
 </BaseLayout>
 

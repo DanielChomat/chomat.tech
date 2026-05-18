@@ -1,4 +1,6 @@
 ---
+import SoundToggle from "../components/nav/SoundToggle.astro";
+import ThemeToggle from "../components/nav/ThemeToggle.astro";
 import { SITE } from "../data/site.ts";
 import "../styles/global.css";
 
@@ -17,12 +19,44 @@ const { title = SITE.meta.title, description = SITE.meta.description } = Astro.p
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#f8f5ec" />
-        <meta name="color-scheme" content="light" />
+        <meta name="color-scheme" content="light dark" />
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content={description} />
         <title>{title}</title>
+        <script is:inline>
+            // Resolve theme before paint to avoid a light→dark flash.
+            // Order: stored choice → OS preference → light fallback.
+            // Mirrors the writes in ThemeToggle.astro.
+            (function () {
+                try {
+                    var stored = localStorage.getItem("theme");
+                    var prefersDark =
+                        window.matchMedia &&
+                        window.matchMedia("(prefers-color-scheme: dark)").matches;
+                    var theme =
+                        stored === "dark" || stored === "light"
+                            ? stored
+                            : prefersDark
+                              ? "dark"
+                              : "light";
+                    document.documentElement.dataset.theme = theme;
+                    var meta = document.querySelector('meta[name="theme-color"]');
+                    if (meta)
+                        meta.setAttribute(
+                            "content",
+                            theme === "dark" ? "#0e0d0a" : "#f8f5ec"
+                        );
+                } catch (err) {
+                    document.documentElement.dataset.theme = "light";
+                }
+            })();
+        </script>
     </head>
     <body>
-        <slot />
+        <div class="wf v3 pal-newsprint">
+            <ThemeToggle />
+            <SoundToggle />
+            <slot />
+        </div>
     </body>
 </html>
