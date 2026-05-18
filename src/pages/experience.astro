@@ -386,6 +386,45 @@ const rendered = await Promise.all(
         .exp-jumpnav {
             position: static;
         }
+        /* Mobile: the design canvas reframes "Jump to" as a horizontal
+           chip strip (wf-mobile-experience.jsx → MobileJumpChips). Drop
+           the card chrome, scrap the vertical list, render each link
+           as a pill-shaped chip that wraps. */
+        .exp-jumpnav-card {
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            padding: 0;
+        }
+        .exp-jumpnav-list {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0.375rem;
+            margin-top: 0.5rem;
+        }
+        .exp-jumpnav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.375rem 0.625rem;
+            border: 1px solid var(--line);
+            border-radius: 9999rem;
+            background: transparent;
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+        }
+        .exp-jumpnav-link.current {
+            background: var(--surface);
+            color: var(--text);
+        }
+        .exp-jumpnav-link .t-mono {
+            font-size: inherit;
+            letter-spacing: inherit;
+            color: inherit;
+        }
         .exp-entry-head {
             flex-direction: column;
             gap: 0.625rem;
