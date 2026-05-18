@@ -29,7 +29,7 @@ export const SITE = {
         statusBold: "Partners Bank",
         statusTrail: " — mobile engineer.",
         statusMuted: "Open to interesting projects, freelance, conversations.",
-        ctaPrimary: "See what I'm building",
+        ctaPrimary: "See what I’m building",
         ctaPrimaryHref: "#now",
         ctaSecondary: "Resume.pdf",
         ctaSecondaryHref: "/resume.pdf",
@@ -53,7 +53,7 @@ export const SITE = {
         link: { label: "full timeline", href: "/experience" },
         headingMain: "Six years,",
         headingMuted: "three chapters.",
-        intro: "Web → mobile, agency → product, contractor → in-house. Partners Bank twice on purpose.",
+        intro: "Web → mobile, agency → product, contractor → in-house. Partners Bank twice on purpose.",
         currentLabel: "Currently here",
     },
     work: {
@@ -109,7 +109,7 @@ export const SITE = {
         kicker: "Contact",
         note: "prefers async",
         headingMain: "Reach out.",
-        headingMuted: "I'm probably building.",
+        headingMuted: "I’m probably building.",
         cards: {
             github: {
                 href: "https://github.com/DanielChomat",
@@ -149,7 +149,7 @@ export const SITE = {
         about: {
             kicker: "§ About · short version",
             headingLead: "Half-nomadic — ",
-            headingMark: "working from wherever the surf's decent",
+            headingMark: "working from wherever the surf’s decent",
             headingTrail: ". Run most mornings, build things most evenings.",
             pills: ["nomad", "surf", "run", "build"],
         },
@@ -190,8 +190,8 @@ export const SITE = {
     },
     notFound: {
         kicker: "error / not_found",
-        headingMark: "This URL doesn't resolve",
-        headingTrail: " to anything I've built — yet.",
+        headingMark: "This URL doesn’t resolve",
+        headingTrail: " to anything I’ve built — yet.",
         body: "Could be a stale link, a future page, or a typo. The site is small enough that you can probably find what you wanted from one of these.",
         cards: [
             {
