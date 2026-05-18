@@ -7,9 +7,29 @@ import "../styles/global.css";
 type Props = {
     title?: string;
     description?: string;
+    ogType?: "website" | "article" | "profile";
 };
 
-const { title = SITE.meta.title, description = SITE.meta.description } = Astro.props;
+const {
+    title = SITE.meta.title,
+    description = SITE.meta.description,
+    ogType = "website",
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageUrl = new URL("/og.png", Astro.site).toString();
+
+const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Daniel Chomat",
+    url: Astro.site?.toString(),
+    jobTitle: "Mobile & front-end engineer",
+    sameAs: [
+        "https://github.com/DanielChomat",
+        "https://linkedin.com/in/danielchomat",
+    ],
+};
 ---
 
 <!doctype html>
@@ -22,7 +42,27 @@ const { title = SITE.meta.title, description = SITE.meta.description } = Astro.p
         <meta name="color-scheme" content="light dark" />
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalUrl} />
+
+        <meta property="og:type" content={ogType} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="chomat.tech" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:image" content={ogImageUrl} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImageUrl} />
+
         <title>{title}</title>
+        <script
+            is:inline
+            type="application/ld+json"
+            set:html={JSON.stringify(personSchema)}
+        />
         <script is:inline>
             // Resolve theme before paint to avoid a light→dark flash.
             // Order: stored choice → OS preference → light fallback.
@@ -54,9 +94,40 @@ const { title = SITE.meta.title, description = SITE.meta.description } = Astro.p
     </head>
     <body>
         <div class="wf v3 pal-newsprint">
+            <a class="skip-link" href="#main">Skip to content</a>
             <ThemeToggle />
             <SoundToggle />
             <slot />
         </div>
     </body>
 </html>
+
+<style>
+    .skip-link {
+        position: absolute;
+        top: 0.5rem;
+        left: 0.5rem;
+        z-index: 1000;
+        padding: 0.5rem 0.75rem;
+        background: var(--text);
+        color: var(--bg);
+        text-decoration: none;
+        border-radius: var(--radius-sm);
+        font-family: var(--font-sans);
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.2;
+        transform: translateY(-200%);
+        transition: transform 180ms ease;
+    }
+    .skip-link:focus-visible {
+        transform: translateY(0);
+        outline: 0.125rem solid var(--accent);
+        outline-offset: 0.125rem;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .skip-link {
+            transition: none;
+        }
+    }
+</style>
