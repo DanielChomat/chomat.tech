@@ -1,0 +1,103 @@
+# Netlify configuration for chomat.tech.
+#
+# Build command + publish dir come from the Astro static adapter
+# defaults; they're declared here so they're version-controlled
+# alongside everything else.
+
+[build]
+    command = "yarn build"
+    publish = "dist"
+
+# ─── Headers ────────────────────────────────────────────────────────
+# Security headers applied to every response. CSP is deliberately
+# omitted: Astro inlines five small <script> blocks (the BaseLayout
+# theme bootstrap + three component module scripts + the JSON-LD
+# Person schema). A strict CSP would need a SHA-256 hash for each
+# and would invalidate on every script edit — too brittle for the
+# value. A relaxed CSP with 'unsafe-inline' provides little
+# protection over no CSP at all, so neither is set for now.
+#
+# Revisit if/when the site gains user input, forms, or any external
+# script source.
+
+[[headers]]
+    for = "/*"
+    [headers.values]
+        Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options    = "nosniff"
+        X-Frame-Options           = "DENY"
+        Referrer-Policy           = "strict-origin-when-cross-origin"
+        Permissions-Policy        = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+
+# ─── Cache ──────────────────────────────────────────────────────────
+# Astro emits content-hashed filenames under /_astro/, so they can be
+# cached forever and replaced atomically by a new deploy.
+
+[[headers]]
+    for = "/_astro/*"
+    [headers.values]
+        Cache-Control = "public, max-age=31536000, immutable"
+
+# Fonts the OG-image route doesn't need at runtime (build-time only),
+# but the favicon and PWA icons do — cache them aggressively.
+
+[[headers]]
+    for = "/apple-touch-icon.png"
+    [headers.values]
+        Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+    for = "/favicon-32.png"
+    [headers.values]
+        Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+    for = "/icon-192.png"
+    [headers.values]
+        Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+    for = "/icon-512.png"
+    [headers.values]
+        Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+    for = "/favicon.svg"
+    [headers.values]
+        Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+    for = "/og.png"
+    [headers.values]
+        Cache-Control = "public, max-age=2592000"
+
+# HTML pages: revalidate on every request so deploys go live fast,
+# but allow stale-while-revalidate for instant subsequent loads.
+
+[[headers]]
+    for = "/*.html"
+    [headers.values]
+        Cache-Control = "public, max-age=0, must-revalidate"
+
+# Sitemap, robots, manifest: revalidate often (one hour); they're
+# small and we want crawler / browser refreshes to pick up changes.
+
+[[headers]]
+    for = "/robots.txt"
+    [headers.values]
+        Cache-Control = "public, max-age=3600"
+
+[[headers]]
+    for = "/sitemap-index.xml"
+    [headers.values]
+        Cache-Control = "public, max-age=3600"
+
+[[headers]]
+    for = "/sitemap-*.xml"
+    [headers.values]
+        Cache-Control = "public, max-age=3600"
+
+[[headers]]
+    for = "/site.webmanifest"
+    [headers.values]
+        Cache-Control = "public, max-age=3600"
