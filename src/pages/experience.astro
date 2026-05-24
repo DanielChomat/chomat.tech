@@ -64,11 +64,11 @@ const rendered = await Promise.all(
                     <article class="card tint-teal exp-about-card">
                         <div class="exp-about-text">
                             <Kicker>{copy.about.kicker}</Kicker>
-                            <p class="t-heading exp-about-heading">
+                            <h2 class="t-heading exp-about-heading">
                                 {copy.about.headingLead}<span class="marker"
                                     >{copy.about.headingMark}</span
                                 >{copy.about.headingTrail}
-                            </p>
+                            </h2>
                         </div>
                         <ul class="row-tight exp-about-pills" role="list">
                             {copy.about.pills.map((p) => (
@@ -87,13 +87,13 @@ const rendered = await Promise.all(
                             return (
                                 <div class:list={["card", c.tint, "exp-summary-card"]}>
                                     <Kicker>{c.kicker}</Kicker>
-                                    <div class="t-title exp-summary-title">
+                                    <h3 class="t-title exp-summary-title">
                                         {hasDot && (
                                             <span class="status-dot pulse exp-summary-dot" />
                                         )}
                                         {c.title}
-                                    </div>
-                                    <div class="t-body muted">{c.blurb}</div>
+                                    </h3>
+                                    <p class="t-body muted">{c.blurb}</p>
                                 </div>
                             );
                         })

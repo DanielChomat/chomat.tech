@@ -1,5 +1,7 @@
 ---
-import SoundToggle from "../components/nav/SoundToggle.astro";
+// SoundToggle is built but parked: there's no audio feature yet, so it's not
+// rendered (see body). Re-enable the import + the element together.
+// import SoundToggle from "../components/nav/SoundToggle.astro";
 import ThemeToggle from "../components/nav/ThemeToggle.astro";
 import { SITE } from "../data/site.ts";
 import "../styles/global.css";
@@ -96,7 +98,7 @@ const personSchema = {
         <div class="wf v3 pal-newsprint">
             <a class="skip-link" href="#main">Skip to content</a>
             <ThemeToggle />
-            <SoundToggle />
+            {/* SoundToggle parked until an audio feature exists — see import. */}
             <slot />
         </div>
     </body>
