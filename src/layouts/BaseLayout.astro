@@ -40,7 +40,12 @@ const personSchema = {
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#f8f5ec" />
+        <!-- Two declarative metas so iOS Safari paints the URL bar / toolbar
+             tint correctly on first frame, before the bootstrap script
+             runs. The toggle script later flips their `media` attributes
+             when the user picks a theme that doesn't match the OS. -->
+        <meta name="theme-color" content="#f3efe4" media="(prefers-color-scheme: light)" data-theme-color="light" />
+        <meta name="theme-color" content="#0e0d0a" media="(prefers-color-scheme: dark)" data-theme-color="dark" />
         <meta name="color-scheme" content="light dark" />
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content={description} />
@@ -82,12 +87,22 @@ const personSchema = {
                               ? "dark"
                               : "light";
                     document.documentElement.dataset.theme = theme;
-                    var meta = document.querySelector('meta[name="theme-color"]');
-                    if (meta)
-                        meta.setAttribute(
-                            "content",
-                            theme === "dark" ? "#0e0d0a" : "#f8f5ec"
+                    // If a stored choice overrides the OS preference, swap
+                    // the theme-color metas so the iOS chrome matches the
+                    // page. When the stored theme matches the OS, the two
+                    // (prefers-color-scheme) metas already do the right thing.
+                    if (stored && (stored === "dark") !== prefersDark) {
+                        var lm = document.querySelector(
+                            'meta[name="theme-color"][data-theme-color="light"]'
                         );
+                        var dm = document.querySelector(
+                            'meta[name="theme-color"][data-theme-color="dark"]'
+                        );
+                        if (lm && dm) {
+                            lm.media = theme === "dark" ? "not all" : "all";
+                            dm.media = theme === "dark" ? "all" : "not all";
+                        }
+                    }
                 } catch (err) {
                     document.documentElement.dataset.theme = "light";
                 }
@@ -95,7 +110,7 @@ const personSchema = {
         </script>
     </head>
     <body>
-        <div class="wf v3 pal-newsprint">
+        <div class="wf v3 pal-spritz">
             <a class="skip-link" href="#main">Skip to content</a>
             <ThemeToggle />
             {/* SoundToggle parked until an audio feature exists — see import. */}

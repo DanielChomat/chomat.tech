@@ -4,10 +4,11 @@ import HandArrow from "../primitives/HandArrow.astro";
 import Kicker from "../primitives/Kicker.astro";
 
 const { hero } = SITE;
+const { status } = hero;
 ---
 
-<section id="hero">
-    <div class="hero-stack">
+<section id="hero" class="bento hero-bento">
+    <div class="col-8 hero-stack">
         <Kicker>{hero.kicker}</Kicker>
         <h1 class="t-mega">
             {hero.name}<span class="accent">*</span>
@@ -20,21 +21,37 @@ const { hero } = SITE;
         </p>
     </div>
 
-    <div class="hero-cta-row">
-        <div class="row hero-status">
+    <aside class="col-4 card hero-status-card" aria-label="What I'm working on now">
+        <div class="row row-between">
+            <Kicker>{status.kicker}</Kicker>
             <span class="status-dot pulse hero-status-dot"></span>
-            <span class="t-body">
-                {hero.statusLead}<strong>{hero.statusBold}</strong>{hero.statusTrail}
-                <span class="muted hero-status-muted">{hero.statusMuted}</span>
-            </span>
         </div>
-        <div class="row-tight">
-            <a class="btn accent" href={hero.ctaPrimaryHref}>
-                {hero.ctaPrimary} <HandArrow />
+
+        <div class="hero-status-block">
+            <h3 class="t-title hero-status-h">
+                {status.roleLead}<strong>{status.roleBold}</strong>{status.roleTrail}
+            </h3>
+            <p class="t-body muted hero-status-sub">{status.roleBody}</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="hero-status-block">
+            <h3 class="t-title hero-status-h">
+                {status.buildingLead}<strong>{status.buildingBold}</strong>{status.buildingTrail}
+            </h3>
+            <p class="t-body hero-status-body">{status.buildingBody}</p>
+        </div>
+
+        <p class="t-body muted hero-status-avail">{status.availability}</p>
+
+        <div class="row-tight hero-status-cta">
+            <a class="btn accent" href={status.ctaPrimaryHref}>
+                {status.ctaPrimary} <HandArrow />
             </a>
-            <a class="btn" href={hero.ctaSecondaryHref}>{hero.ctaSecondary}</a>
+            <a class="btn" href={status.ctaSecondaryHref}>{status.ctaSecondary}</a>
         </div>
-    </div>
+    </aside>
 </section>
 
 <style>
@@ -49,37 +66,41 @@ const { hero } = SITE;
         line-height: 1.55;
         margin-top: 0.375rem;
     }
-    .hero-status {
-        gap: 0.875rem;
+    /* Size the card to its own content instead of stretching to match the
+       tall mega-name column it sits beside. */
+    .hero-status-card {
+        align-self: start;
     }
     .hero-status-dot {
         width: 0.625rem;
         height: 0.625rem;
     }
-    .hero-status-muted {
-        margin-left: 0.25rem;
+    /* Group each block so its heading and caption hug (0.25rem), while the
+       card's own 0.75rem flex gap spaces the blocks, divider, and CTAs. */
+    .hero-status-block {
+        display: grid;
+        gap: 0.25rem;
+    }
+    .hero-status-sub,
+    .hero-status-avail {
+        font-size: 0.8125rem;
+    }
+    .hero-status-cta {
+        margin-top: 0.25rem;
     }
 
     @media (max-width: 45rem) {
-        .hero-status {
-            align-items: flex-start;
+        /* On phones the card stacks under the name (the .col-* collapse in
+           utilities.css); let the CTAs go full-width like the old hero row. */
+        .hero-status-cta {
+            width: 100%;
+            flex-direction: column;
+            align-items: stretch;
             gap: 0.5rem;
-            padding: 0.75rem 0.875rem;
-            background: color-mix(in oklab, var(--accent) 14%, var(--surface));
-            border: 1px solid color-mix(in oklab, var(--accent) 30%, var(--line));
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
         }
-        .hero-status-dot {
-            margin-top: 0.3125rem;
-        }
-        .hero-status-muted {
-            display: block;
-            margin-left: 0;
-            margin-top: 0.125rem;
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
-            letter-spacing: 0.04em;
+        .hero-status-cta .btn {
+            width: 100%;
+            justify-content: center;
         }
     }
 </style>

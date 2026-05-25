@@ -4,6 +4,7 @@ import { formatIntervals, isCurrent, tintClass } from "../../data/format.ts";
 import { SITE } from "../../data/site.ts";
 import HandArrow from "../primitives/HandArrow.astro";
 import Kicker from "../primitives/Kicker.astro";
+import LogoMark from "../primitives/LogoMark.astro";
 import StatusPill from "../primitives/StatusPill.astro";
 
 const { experience: copy } = SITE;
@@ -36,7 +37,8 @@ const entries = (await getCollection("experience")).sort((a, b) => a.data.order 
         {
             entries.map((x, i) => {
                 const current = isCurrent(x.data.intervals);
-                const tint = x.data.tint ? tintClass(x.data.tint) : "";
+                // Only the current role gets a tinted card; past roles stay neutral.
+                const tint = current && x.data.tint ? tintClass(x.data.tint) : "";
                 return (
                     <div class="col-4">
                         <article class:list={["card", tint]}>
@@ -47,8 +49,13 @@ const entries = (await getCollection("experience")).sort((a, b) => a.data.order 
                                 )}
                             </div>
                             <div class="t-mono">{formatIntervals(x.data.intervals)}</div>
-                            <h3 class="t-title">{x.data.company}</h3>
-                            <div class="t-body muted">{x.data.title}</div>
+                            <div class="row experience-id">
+                                <LogoMark name={x.data.company} />
+                                <div class="experience-id-text">
+                                    <h3 class="t-title">{x.data.company}</h3>
+                                    <div class="t-mono muted">{x.data.title}</div>
+                                </div>
+                            </div>
                             <p class="t-body pull-bottom">{x.data.summary}</p>
                         </article>
                     </div>
@@ -68,5 +75,14 @@ const entries = (await getCollection("experience")).sort((a, b) => a.data.order 
     }
     .bento-pad-top {
         margin-top: 1.375rem;
+    }
+    .experience-id {
+        gap: 0.625rem;
+        margin-top: 0.5rem;
+    }
+    .experience-id-text {
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
     }
 </style>

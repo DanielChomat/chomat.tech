@@ -55,7 +55,22 @@ const experience = defineCollection({
         tech: z.array(z.string()).default([]),
         nda: z.boolean().default(false),
         summary: z.string(),
-        tint: z.enum(["butter", "sage", "rose", "sky", "lavender", "teal", ""]).default(""),
+        tint: z
+            .enum([
+                "butter",
+                "sage",
+                "rose",
+                "sky",
+                "lavender",
+                "mint",
+                "blossom",
+                "coral",
+                "peach",
+                "lime",
+                "teal",
+                "",
+            ])
+            .default(""),
         order: z.number().default(0),
     }),
 });

@@ -62,9 +62,28 @@
         // Nothing more to do — the inline pre-paint script in BaseLayout
         // already established the theme.
     } else {
-        const themeColors = { light: "#f8f5ec", dark: "#0e0d0a" } as const;
+        // Toggle the `media` attribute on the two theme-color metas so iOS
+        // Safari picks the right one. `explicit=true` forces a specific
+        // theme regardless of OS preference; `explicit=false` restores the
+        // natural (prefers-color-scheme) queries.
+        const lightMeta = document.querySelector<HTMLMetaElement>(
+            'meta[name="theme-color"][data-theme-color="light"]'
+        );
+        const darkMeta = document.querySelector<HTMLMetaElement>(
+            'meta[name="theme-color"][data-theme-color="dark"]'
+        );
+        const applyThemeColor = (theme: "light" | "dark", explicit: boolean) => {
+            if (!lightMeta || !darkMeta) return;
+            if (explicit) {
+                lightMeta.media = theme === "dark" ? "not all" : "all";
+                darkMeta.media = theme === "dark" ? "all" : "not all";
+            } else {
+                lightMeta.media = "(prefers-color-scheme: light)";
+                darkMeta.media = "(prefers-color-scheme: dark)";
+            }
+        };
 
-        const sync = (theme: "light" | "dark") => {
+        const syncButton = (theme: "light" | "dark") => {
             const isDark = theme === "dark";
             button.setAttribute("aria-pressed", isDark ? "true" : "false");
             button.setAttribute(
@@ -72,14 +91,9 @@
                 isDark ? "Switch to light mode" : "Switch to dark mode"
             );
             button.setAttribute("title", isDark ? "Dark" : "Light");
-            const meta = document.querySelector<HTMLMetaElement>(
-                'meta[name="theme-color"]'
-            );
-            if (meta) meta.setAttribute("content", themeColors[theme]);
         };
 
-        const current = (root.dataset.theme === "dark" ? "dark" : "light");
-        sync(current);
+        syncButton(root.dataset.theme === "dark" ? "dark" : "light");
 
         button.addEventListener("click", () => {
             const next = root.dataset.theme === "dark" ? "light" : "dark";
@@ -89,7 +103,8 @@
             } catch {
                 /* storage disabled — fall through */
             }
-            sync(next);
+            syncButton(next);
+            applyThemeColor(next, true);
         });
 
         // Track OS preference changes while no explicit choice is stored.
@@ -102,7 +117,8 @@
             }
             const next = event.matches ? "dark" : "light";
             root.dataset.theme = next;
-            sync(next);
+            syncButton(next);
+            applyThemeColor(next, false);
         };
         mq.addEventListener("change", onChange);
     }

@@ -25,14 +25,26 @@ export const SITE = {
         bioMid: ", and agencies. Now turning that ",
         bioMarkAlt: "toward my own products",
         bioAfter: " — and writing about it as I go.",
-        statusLead: "Back at ",
-        statusBold: "Partners Bank",
-        statusTrail: " — mobile engineer.",
-        statusMuted: "Open to interesting projects, freelance, conversations.",
-        ctaPrimary: "See what I’m building",
-        ctaPrimaryHref: "#now",
-        ctaSecondary: "Resume.pdf",
-        ctaSecondaryHref: "/resume.pdf",
+        status: {
+            // All status-card copy lives here so Hero.astro stays render-only:
+            // the eyebrow kicker, the two status blocks (each a lead/bold/trail
+            // heading + body line), the availability line, and the two CTAs.
+            kicker: "/now · May 2026",
+            roleLead: "Back at ",
+            roleBold: "Partners Bank",
+            roleTrail: ".",
+            roleBody: "Mobile engineer on v2 of the Czech app-only retail bank.",
+            buildingLead: "Building ",
+            buildingBold: "Moments",
+            buildingTrail: ".",
+            buildingBody:
+                "A pocket camcorder for the small ones — retro grain, no feed, no algorithm. A Spanish tax tool and a pregnancy companion are in flight too.",
+            availability: "Open to freelance and good async conversations.",
+            ctaPrimary: "See what I’m building",
+            ctaPrimaryHref: "#now",
+            ctaSecondary: "Resume.pdf",
+            ctaSecondaryHref: "/resume.pdf",
+        },
     },
     now: {
         number: "01",
@@ -55,6 +67,10 @@ export const SITE = {
         headingMuted: "three chapters.",
         intro: "Web → mobile, agency → product, contractor → in-house. Partners Bank twice on purpose.",
         currentLabel: "Currently here",
+    },
+    companies: {
+        label: "Worked with",
+        range: "2019 → now",
     },
     work: {
         number: "§03",
