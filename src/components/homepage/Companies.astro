@@ -7,7 +7,7 @@ const companies = (await getCollection("companies")).sort((a, b) => a.data.order
 const { companies: copy } = SITE;
 ---
 
-<section class="companies-section" aria-label="Companies I've worked with">
+<section aria-label="Companies I've worked with">
     <div class="card companies-card">
         <div class="companies-label">
             <span class="t-mono accent">● {copy.label}</span>
@@ -27,13 +27,8 @@ const { companies: copy } = SITE;
 </section>
 
 <style>
-    /* Coda to the Work/projects section: pull the thin strip up out of the
-       6.25rem section-stack gap so it hugs projects, and trim the gap below
-       (to Tech) too — otherwise the strip floats in whitespace on both sides. */
-    .companies-section {
-        margin-top: -4rem;
-        margin-bottom: -3.5rem;
-    }
+    /* The strip sits in the normal section-stack rhythm (the stack's own
+       6.25rem gap), same as every other section — no margin hacks. */
     /* .card defaults to a column; lay the strip out as label + logos row.
        Faint single-hue wash (neutral surface-2 → a touch of cool sky) so the
        strip reads as a calm distinct band, not a rainbow. Token-driven, so it
@@ -80,11 +75,6 @@ const { companies: copy } = SITE;
     }
 
     @media (max-width: 45rem) {
-        /* Smaller stack gap on mobile (2.5rem), so a gentler pull on both sides. */
-        .companies-section {
-            margin-top: -0.75rem;
-            margin-bottom: -0.75rem;
-        }
         .companies-card {
             flex-direction: column;
             align-items: flex-start;

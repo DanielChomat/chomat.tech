@@ -28,25 +28,22 @@ const { status } = hero;
         </div>
 
         <div class="hero-status-block">
-            <h2 class="t-title hero-status-h">Back at <strong>Partners Bank</strong>.</h2>
-            <p class="t-body muted hero-status-sub">
-                Mobile engineer on v2 of the Czech app-only retail bank.
-            </p>
+            <h3 class="t-title hero-status-h">
+                {status.roleLead}<strong>{status.roleBold}</strong>{status.roleTrail}
+            </h3>
+            <p class="t-body muted hero-status-sub">{status.roleBody}</p>
         </div>
 
         <div class="divider"></div>
 
         <div class="hero-status-block">
-            <h2 class="t-title hero-status-h">Building <strong>Moments</strong>.</h2>
-            <p class="t-body hero-status-body">
-                A pocket camcorder for the small ones — retro grain, no feed, no
-                algorithm. A Spanish tax tool and a pregnancy companion are in flight too.
-            </p>
+            <h3 class="t-title hero-status-h">
+                {status.buildingLead}<strong>{status.buildingBold}</strong>{status.buildingTrail}
+            </h3>
+            <p class="t-body hero-status-body">{status.buildingBody}</p>
         </div>
 
-        <p class="t-body muted hero-status-avail">
-            Open to freelance and good async conversations.
-        </p>
+        <p class="t-body muted hero-status-avail">{status.availability}</p>
 
         <div class="row-tight hero-status-cta">
             <a class="btn accent" href={status.ctaPrimaryHref}>
