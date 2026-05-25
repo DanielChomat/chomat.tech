@@ -50,6 +50,36 @@
             --tint-lavender: #bfb1d5;
         }
 
+        /* Spritz — softer pastel set used by v6. Dialed-back chroma so the
+           tints read as colorful accents, not a riot. The site-wide palette. */
+        &.pal-spritz {
+            --bg: #f3efe4;
+            --surface: #fbf7eb;
+            --surface-2: #ebe5d4;
+            --line: rgba(40, 28, 12, 0.12);
+            --line-2: rgba(40, 28, 12, 0.06);
+            --tint-butter: oklch(93% 0.08 95);
+            --tint-sage: oklch(91% 0.07 145);
+            --tint-mint: oklch(91% 0.06 175);
+            --tint-sky: oklch(91% 0.06 230);
+            --tint-lavender: oklch(89% 0.07 295);
+            --tint-blossom: oklch(89% 0.07 350);
+            --tint-rose: oklch(89% 0.08 35);
+            --tint-coral: oklch(88% 0.09 22);
+            --tint-peach: oklch(91% 0.08 60);
+            --tint-lime: oklch(93% 0.1 120);
+        }
+
+        /* Warm wash — two low-contrast pastel blobs anchored to opposite
+           corners of the full-height root. Light mode only: the dark-token
+           selector below resets background to a flat var(--bg). */
+        html:not([data-theme="dark"]) &.pal-spritz {
+            background:
+                radial-gradient(75rem 56.25rem at 8% 0%, oklch(95% 0.07 80 / 0.55), transparent 60%),
+                radial-gradient(62.5rem 50rem at 100% 100%, oklch(94% 0.07 290 / 0.4), transparent 60%),
+                var(--bg);
+        }
+
         &.v3 {
             font-feature-settings:
                 "ss01" on,
@@ -63,7 +93,8 @@
            applied site-wide. Tints are deepened versions that still read
            warm. */
         html[data-theme="dark"] &,
-        html[data-theme="dark"] &.pal-newsprint {
+        html[data-theme="dark"] &.pal-newsprint,
+        html[data-theme="dark"] &.pal-spritz {
             --bg: #0e0d0a;
             --surface: #15140f;
             --surface-2: #1a1914;
@@ -82,6 +113,11 @@
             --tint-rose: #482620;
             --tint-sky: #1f2e3e;
             --tint-lavender: #2c2640;
+            --tint-mint: #1f3a32;
+            --tint-blossom: #3e1f2e;
+            --tint-coral: #4a2620;
+            --tint-peach: #4a3a1a;
+            --tint-lime: #2f3a1a;
         }
     }
 }

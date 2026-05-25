@@ -53,10 +53,25 @@ const TINT_MAP: Record<string, string> = {
     rose: "tint-rose",
     sky: "tint-sky",
     lavender: "tint-lavender",
+    mint: "tint-mint",
+    blossom: "tint-blossom",
+    coral: "tint-coral",
+    peach: "tint-peach",
+    lime: "tint-lime",
     teal: "tint-teal",
 };
 
 export function tintClass(tone?: string): string {
     if (!tone) return "";
     return TINT_MAP[tone] ?? "";
+}
+
+/** Up-to-two-letter monogram from a name: "Partners Bank" → "PB". */
+export function initials(name: string): string {
+    return name
+        .split(/\s+/)
+        .map((w) => w[0] ?? "")
+        .join("")
+        .slice(0, 2)
+        .toUpperCase();
 }

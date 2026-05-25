@@ -21,6 +21,7 @@
 @import "./tokens.css";                 /* @layer base       */
 @import "./type.css";                   /* @layer base       */
 @import "./components/card.css";        /* @layer components */
+@import "./components/logomark.css";    /* @layer components */
 @import "./components/pill.css";        /* @layer components */
 @import "./components/controls.css";    /* @layer components */
 @import "./components/nav.css";         /* @layer components */

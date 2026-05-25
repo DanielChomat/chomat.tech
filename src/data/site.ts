@@ -25,14 +25,15 @@ export const SITE = {
         bioMid: ", and agencies. Now turning that ",
         bioMarkAlt: "toward my own products",
         bioAfter: " — and writing about it as I go.",
-        statusLead: "Back at ",
-        statusBold: "Partners Bank",
-        statusTrail: " — mobile engineer.",
-        statusMuted: "Open to interesting projects, freelance, conversations.",
-        ctaPrimary: "See what I’m building",
-        ctaPrimaryHref: "#now",
-        ctaSecondary: "Resume.pdf",
-        ctaSecondaryHref: "/resume.pdf",
+        status: {
+            // The card's prose is authored as markup in Hero.astro; only the
+            // eyebrow kicker and the two CTAs (link config) live here.
+            kicker: "/now · May 2026",
+            ctaPrimary: "See what I’m building",
+            ctaPrimaryHref: "#now",
+            ctaSecondary: "Resume.pdf",
+            ctaSecondaryHref: "/resume.pdf",
+        },
     },
     now: {
         number: "01",
@@ -55,6 +56,10 @@ export const SITE = {
         headingMuted: "three chapters.",
         intro: "Web → mobile, agency → product, contractor → in-house. Partners Bank twice on purpose.",
         currentLabel: "Currently here",
+    },
+    companies: {
+        label: "Worked with",
+        range: "2019 → now",
     },
     work: {
         number: "§03",

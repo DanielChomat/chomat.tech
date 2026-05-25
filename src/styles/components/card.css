@@ -38,6 +38,26 @@
                 background: var(--tint-lavender);
                 border-color: color-mix(in oklab, var(--tint-lavender) 60%, var(--line));
             }
+            &.tint-mint {
+                background: var(--tint-mint);
+                border-color: color-mix(in oklab, var(--tint-mint) 60%, var(--line));
+            }
+            &.tint-blossom {
+                background: var(--tint-blossom);
+                border-color: color-mix(in oklab, var(--tint-blossom) 60%, var(--line));
+            }
+            &.tint-coral {
+                background: var(--tint-coral);
+                border-color: color-mix(in oklab, var(--tint-coral) 60%, var(--line));
+            }
+            &.tint-peach {
+                background: var(--tint-peach);
+                border-color: color-mix(in oklab, var(--tint-peach) 60%, var(--line));
+            }
+            &.tint-lime {
+                background: var(--tint-lime);
+                border-color: color-mix(in oklab, var(--tint-lime) 60%, var(--line));
+            }
             &.tint-teal {
                 background: color-mix(in oklab, var(--accent) 14%, var(--surface));
                 border-color: color-mix(in oklab, var(--accent) 30%, var(--line));
