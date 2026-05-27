@@ -6,8 +6,8 @@ export const SITE = {
     meta: {
         title: "Daniel Chomat — Mobile & front-end engineer",
         description:
-            "Daniel Chomat. Six years shipping production apps for banks, health startups, and agencies. Now turning that toward my own products.",
-        siglum: "chomat.tech · v2 · MMXXVI",
+            "Daniel Chomat. Six years shipping production-ready apps for banks, health startups, and agencies. Now turning that toward my own products.",
+        siglum: "chomat.tech · v2",
     },
     nav: [
         { label: "Now", short: "now", href: "#now" },
@@ -17,18 +17,20 @@ export const SITE = {
         { label: "Contact", short: "contact", href: "#contact" },
     ],
     hero: {
-        kicker: "chomat.tech · v2 · MMXXVI",
+        kicker: "chomat.tech · v2",
         name: "Daniel Chomat",
-        identityMono: "* Mobile & front-end engineer · Czechia · he/him.",
-        bioBefore: "Six years shipping production apps for ",
+        identityMono: "* Mobile & front-end engineer · Czechia",
+        bioBefore: "Six years shipping production-ready apps for ",
         bioMark: "banks, health startups",
         bioMid: ", and agencies. Now turning that ",
         bioMarkAlt: "toward my own products",
-        bioAfter: " — and writing about it as I go.",
+        bioAfter: ".",
         status: {
             // All status-card copy lives here so Hero.astro stays render-only:
-            // the eyebrow kicker, the two status blocks (each a lead/bold/trail
-            // heading + body line), the availability line, and the two CTAs.
+            // the aside's accessible label, the eyebrow kicker, the two status
+            // blocks (each a lead/bold/trail heading + body line), the
+            // availability line, and the two CTAs.
+            ariaLabel: "What I'm working on now",
             kicker: "/now · May 2026",
             roleLead: "Back at ",
             roleBold: "Partners Bank",
@@ -69,6 +71,7 @@ export const SITE = {
         currentLabel: "Currently here",
     },
     companies: {
+        ariaLabel: "Companies I've worked with",
         label: "Worked with",
         range: "2019 → now",
     },
@@ -138,7 +141,7 @@ export const SITE = {
                 href: "https://linkedin.com/in/danielchomat",
                 kicker: "LinkedIn",
                 handle: "/in/danielchomat",
-                blurb: "Public-facing CV, occasional posts.",
+                blurb: "Public-facing CV.",
                 foot: "connect",
             },
             resume: {

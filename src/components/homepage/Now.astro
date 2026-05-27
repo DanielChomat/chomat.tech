@@ -92,14 +92,12 @@ const tints: Record<string, string> = {
 
     <div class="now-small-grid">
         {
-            smallContents.map(({ p, Content }) => (
-                <article
-                    class:list={[
-                        "card",
-                        "now-small",
-                        tints[p.id] ?? tintClass(p.data.sticker?.tone),
-                    ]}
-                >
+            smallContents.map(({ p, Content }) => {
+                const tint = tints[p.id] ?? tintClass(p.data.sticker?.tone);
+                const cardKicker = now.cardKickers[p.id] ?? p.data.tagline;
+                const miniKind = miniKindBySlug[p.id];
+                return (
+                <article class:list={["card", "now-small", tint]}>
                     {p.data.sticker && (
                         <div class="now-small-sticker">
                             <span class:list={["sticker", stickerClass(p.data.sticker.tone)]}>
@@ -107,12 +105,12 @@ const tints: Record<string, string> = {
                             </span>
                         </div>
                     )}
-                    <Kicker>{now.cardKickers[p.id] ?? p.data.tagline}</Kicker>
+                    <Kicker>{cardKicker}</Kicker>
                     <h3 class="t-title">{p.data.title}</h3>
                     <div class="t-body">
                         <Content />
                     </div>
-                    {miniKindBySlug[p.id] && <MiniUI kind={miniKindBySlug[p.id]} />}
+                    {miniKind && <MiniUI kind={miniKind} />}
                     <div class="card-foot">
                         <ul class="row-tight">
                             {p.data.tech.map((t) => (
@@ -124,7 +122,8 @@ const tints: Record<string, string> = {
                         <span class="t-mono accent" aria-hidden="true">→</span>
                     </div>
                 </article>
-            ))
+                );
+            })
         }
     </div>
 </section>

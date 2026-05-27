@@ -7,7 +7,7 @@ const companies = (await getCollection("companies")).sort((a, b) => a.data.order
 const { companies: copy } = SITE;
 ---
 
-<section aria-label="Companies I've worked with">
+<section aria-label={copy.ariaLabel}>
     <div class="card companies-card">
         <div class="companies-label">
             <span class="t-mono accent">● {copy.label}</span>
@@ -15,10 +15,10 @@ const { companies: copy } = SITE;
         </div>
         <ul class="companies-strip">
             {
-                companies.map((c) => (
+                companies.map((company) => (
                     <li class="companies-item">
-                        <LogoMark name={c.data.name} size={56} />
-                        <span class="t-mono muted companies-name">{c.data.name}</span>
+                        <LogoMark name={company.data.name} size={56} />
+                        <span class="t-mono muted companies-name">{company.data.name}</span>
                     </li>
                 ))
             }

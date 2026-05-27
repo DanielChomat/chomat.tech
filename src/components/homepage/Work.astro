@@ -32,11 +32,11 @@ const cards = (
     <div class="bento bento-pad-top">
         {
             cards.map((p) => {
-                const big = p.data.bentoSize === "lg" || p.data.bentoSize === "xl";
+                const isBig = ["lg", "xl"].includes(p.data.bentoSize);
                 const sticker = p.data.sticker;
                 return (
                     <div class={bentoCol(p.data.bentoSize)}>
-                        <article class:list={["card", "work-card", big && "work-card-lg"]}>
+                        <article class:list={["card", "work-card", isBig && "work-card-lg"]}>
                             {sticker && (
                                 <div class="work-sticker">
                                     <span class:list={["sticker", stickerClass(sticker.tone)]}>
@@ -44,9 +44,9 @@ const cards = (
                                     </span>
                                 </div>
                             )}
-                            <Placeholder h={big ? 200 : 110}>{p.data.title}</Placeholder>
+                            <Placeholder h={isBig ? 200 : 110}>{p.data.title}</Placeholder>
                             <div class="card-head work-head">
-                                <h3 class:list={["t-title", big && "t-title-lg"]}>
+                                <h3 class:list={["t-title", isBig && "t-title-lg"]}>
                                     {p.data.title}
                                 </h3>
                                 <span class="t-mono muted">{p.data.year}</span>

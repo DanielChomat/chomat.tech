@@ -2,23 +2,19 @@
 
 export type Interval = { start: Date; end: Date | "present" };
 
-function year(d: Date): number {
-    return d.getFullYear();
-}
+const year = (d: Date): number => d.getFullYear();
 
-export function formatInterval(iv: Interval): string {
+export const formatInterval = (iv: Interval): string => {
     const startY = year(iv.start);
     if (iv.end === "present") return `${startY}–now`;
     return `${startY}–${year(iv.end)}`;
-}
+};
 
-export function formatIntervals(intervals: readonly Interval[]): string {
-    return intervals.map(formatInterval).join(" · ");
-}
+export const formatIntervals = (intervals: readonly Interval[]): string =>
+    intervals.map(formatInterval).join(" · ");
 
-export function isCurrent(intervals: readonly Interval[]): boolean {
-    return intervals.some((iv) => iv.end === "present");
-}
+export const isCurrent = (intervals: readonly Interval[]): boolean =>
+    intervals.some((iv) => iv.end === "present");
 
 const BENTO_TO_COL: Record<string, string> = {
     sm: "col-4",
@@ -27,13 +23,11 @@ const BENTO_TO_COL: Record<string, string> = {
     xl: "col-12",
 };
 
-export function bentoCol(size: "sm" | "md" | "lg" | "xl"): string {
-    return BENTO_TO_COL[size] ?? "col-4";
-}
+export const bentoCol = (size: "sm" | "md" | "lg" | "xl"): string => BENTO_TO_COL[size] ?? "col-4";
 
 const STICKER_PREFIX = "s-";
 
-export function stickerClass(tone?: string): string {
+export const stickerClass = (tone?: string): string => {
     if (!tone) return "";
     // Internal palette tokens use single-letter ("lav") for lavender.
     const map: Record<string, string> = {
@@ -45,7 +39,7 @@ export function stickerClass(tone?: string): string {
         teal: "s-teal",
     };
     return map[tone] ?? `${STICKER_PREFIX}${tone}`;
-}
+};
 
 const TINT_MAP: Record<string, string> = {
     butter: "tint-butter",
@@ -61,17 +55,16 @@ const TINT_MAP: Record<string, string> = {
     teal: "tint-teal",
 };
 
-export function tintClass(tone?: string): string {
+export const tintClass = (tone?: string): string => {
     if (!tone) return "";
     return TINT_MAP[tone] ?? "";
-}
+};
 
 /** Up-to-two-letter monogram from a name: "Partners Bank" → "PB". */
-export function initials(name: string): string {
-    return name
+export const initials = (name: string): string =>
+    name
         .split(/\s+/)
         .map((w) => w[0] ?? "")
         .join("")
         .slice(0, 2)
         .toUpperCase();
-}

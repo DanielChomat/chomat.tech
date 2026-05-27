@@ -160,6 +160,10 @@ Decorative SVGs get `aria-hidden="true"` and `focusable="false"`.
 - **Display formatting** (interval strings, sticker class, tint class,
   bento col map) lives in `src/data/format.ts`. Add helpers there rather
   than inline.
+- **Helper style:** define module-level helpers as arrow-function
+  expressions (`export const fn = (x): T => …`), not `function`
+  declarations. Single-expression bodies stay concise; use a block body
+  only when there's branching or local state.
 - Project frontmatter mirrors the spec: `status`, `kind`, `tech[]`,
   `bentoSize`, `featured`, `startDate`/`endDate`, `sticker.{tone,text}`,
   `homeLabel`, `year`. See `src/content/config.ts`.

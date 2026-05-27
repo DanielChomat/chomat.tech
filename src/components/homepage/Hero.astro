@@ -21,7 +21,7 @@ const { status } = hero;
         </p>
     </div>
 
-    <aside class="col-4 card hero-status-card" aria-label="What I'm working on now">
+    <aside class="col-4 card hero-status-card" aria-label={status.ariaLabel}>
         <div class="row row-between">
             <Kicker>{status.kicker}</Kicker>
             <span class="status-dot pulse hero-status-dot"></span>
