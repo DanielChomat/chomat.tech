@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatIntervals, isCurrent, tintClass } from "../../data/format.ts";
+import LogoMark from "./LogoMark.astro";
+import StatusPill from "./StatusPill.astro";
+
+type Props = {
+    entry: CollectionEntry<"experience">;
+    /** Zero-based position; rendered as the §NN line number. */
+    index: number;
+    currentLabel: string;
+};
+
+const { entry, index, currentLabel } = Astro.props as Props;
+
+const current = isCurrent(entry.data.intervals);
+// Only the current role gets a tinted card; past roles stay neutral.
+const tint = current && entry.data.tint ? tintClass(entry.data.tint) : "";
+const lineno = `§${String(index + 1).padStart(2, "0")}`;
+---
+
+<article class:list={["card", tint]}>
+    <div class="row row-between">
+        <span class="lineno">{lineno}</span>
+        {current && <StatusPill status="building" label={currentLabel} />}
+    </div>
+    <div class="t-mono">{formatIntervals(entry.data.intervals)}</div>
+    <div class="row experience-id">
+        <LogoMark name={entry.data.company} />
+        <div class="experience-id-text">
+            <h3 class="t-title">{entry.data.company}</h3>
+            <div class="t-mono muted">{entry.data.title}</div>
+        </div>
+    </div>
+    <p class="t-body pull-bottom">{entry.data.summary}</p>
+</article>
+
+<style>
+    .experience-id {
+        gap: 0.625rem;
+        margin-top: 0.5rem;
+    }
+    .experience-id-text {
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+    }
+</style>

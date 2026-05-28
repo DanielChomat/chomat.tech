@@ -92,7 +92,6 @@ const about = defineCollection({
         languages: z.array(
             z.object({
                 code: z.string(),
-                level: z.string().optional(),
             })
         ),
     }),

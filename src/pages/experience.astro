@@ -42,12 +42,13 @@ const rendered = await Promise.all(
                         href="/"
                         aria-label={copy.homeCrumb}
                     >
-                        <span class="accent" aria-hidden="true">←</span>{" "}
+                        <span class="accent" aria-hidden="true">←</span>
                         <span class="exp-crumb-home-label">{copy.homeCrumb}</span>
                     </a>
-                    <a class="t-mono accent" href="/resume.pdf">
+                    {/* Resume link parked until /resume.pdf ships — restore with the nav links. */}
+                    {/* <a class="t-mono accent" href="/resume.pdf">
                         <span aria-hidden="true">↓</span> {copy.resumeLink}
-                    </a>
+                    </a> */}
                 </nav>
 
                 <header class="exp-header">
@@ -85,7 +86,7 @@ const rendered = await Promise.all(
                         copy.summary.map((c) => {
                             const hasDot = "dot" in c && c.dot === true;
                             return (
-                                <div class:list={["card", c.tint, "exp-summary-card"]}>
+                                <article class:list={["card", c.tint, "exp-summary-card"]}>
                                     <Kicker>{c.kicker}</Kicker>
                                     <h3 class="t-title exp-summary-title">
                                         {hasDot && (
@@ -94,7 +95,7 @@ const rendered = await Promise.all(
                                         {c.title}
                                     </h3>
                                     <p class="t-body muted">{c.blurb}</p>
-                                </div>
+                                </article>
                             );
                         })
                     }
@@ -156,7 +157,7 @@ const rendered = await Promise.all(
                                                         <span class="status-dot pulse exp-entry-dot" />
                                                     )}
                                                 </h2>
-                                                <div class="t-body muted">
+                                                <p class="t-body muted">
                                                     {entry.data.title}
                                                     {entry.data.location && (
                                                         <>
@@ -164,7 +165,7 @@ const rendered = await Promise.all(
                                                             {entry.data.location}
                                                         </>
                                                     )}
-                                                </div>
+                                                </p>
                                             </div>
                                             {current && (
                                                 <StatusPill

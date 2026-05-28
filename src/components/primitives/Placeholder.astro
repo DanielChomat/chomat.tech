@@ -5,7 +5,7 @@ type Props = {
     dark?: boolean;
     class?: string;
 };
-const { h = 120, dark = false, class: className = "" } = Astro.props;
+const { h = 120, dark = false, class: className = "" } = Astro.props as Props;
 const heightRem = `${h / 16}rem`;
 ---
 

@@ -11,10 +11,9 @@ type Props = {
      * item is computed dynamically from section visibility.
      */
     active?: number;
-    resumeHref?: string;
 };
 
-const { items, active = -1, resumeHref = "/resume.pdf" } = Astro.props;
+const { items, active = -1 } = Astro.props;
 ---
 
 <div class="mobile-menu" data-mobile-menu data-open="false">
@@ -48,7 +47,6 @@ const { items, active = -1, resumeHref = "/resume.pdf" } = Astro.props;
                         <a
                             href={item.href}
                             data-mobile-menu-link
-                            data-section={item.href.replace(/^#/, "")}
                             class:list={{ active: isCurrent }}
                             aria-current={isCurrent ? "page" : undefined}
                         >
@@ -62,19 +60,19 @@ const { items, active = -1, resumeHref = "/resume.pdf" } = Astro.props;
                 })
             }
         </ul>
-        <div class="mobile-menu__divider" aria-hidden="true"></div>
-        <a
-            class="mobile-menu__resume"
-            href={resumeHref}
-            data-mobile-menu-link
-        >
+        {/* Resume link parked until /resume.pdf ships — restore the
+            divider + anchor (and the resumeHref prop) together. */}
+        {/* <div class="mobile-menu__divider" aria-hidden="true"></div>
+        <a class="mobile-menu__resume" href={resumeHref} data-mobile-menu-link>
             <span>resume.pdf</span>
             <span aria-hidden="true">↓</span>
-        </a>
+        </a> */}
     </nav>
 </div>
 
 <script>
+    import { mapLinksToSections, trackActiveSection } from "../../scripts/section-nav.ts";
+
     const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
     if (menu) {
         const trigger = menu.querySelector<HTMLButtonElement>(
@@ -126,65 +124,18 @@ const { items, active = -1, resumeHref = "/resume.pdf" } = Astro.props;
             }
         });
 
-        // Mirror NavCapsule's active-section tracking: highlight the menu
-        // entry whose section is the bottommost one inside the top 30% of
-        // the viewport. End-of-content forces the last item.
-        const linkBySection = new Map<HTMLElement, HTMLAnchorElement>();
-        for (const link of sectionLinks) {
-            const id = link.dataset.section;
-            if (!id) continue;
-            const section = document.getElementById(id);
-            if (section) linkBySection.set(section, link);
-        }
-
-        const setActive = (next: HTMLAnchorElement | null) => {
-            for (const l of sectionLinks) l.classList.remove("active");
-            if (next) next.classList.add("active");
-        };
-
-        const visible = new Set<Element>();
-        let endReached = false;
-
-        const orderedLinks = Array.from(linkBySection.values());
-        const update = () => {
-            if (endReached) {
-                setActive(orderedLinks[orderedLinks.length - 1] ?? null);
-                return;
-            }
-            let chosen: HTMLAnchorElement | null = null;
-            let maxTop = Number.NEGATIVE_INFINITY;
-            for (const section of visible) {
-                const top = section.getBoundingClientRect().top;
-                if (top > maxTop) {
-                    maxTop = top;
-                    chosen = linkBySection.get(section as HTMLElement) ?? null;
-                }
-            }
-            setActive(chosen);
-        };
-
-        const sectionObs = new IntersectionObserver(
-            (entries) => {
-                for (const entry of entries) {
-                    if (entry.isIntersecting) visible.add(entry.target);
-                    else visible.delete(entry.target);
-                }
-                update();
+        // Active-section highlighting — same logic as NavCapsule, so the
+        // scroll/observer machinery is shared. The menu just toggles a class
+        // (no sliding pill), so that's all this onActiveChange does.
+        const { linkBySection, sections } = mapLinksToSections(sectionLinks);
+        trackActiveSection({
+            sections,
+            onActiveChange: (section) => {
+                for (const l of sectionLinks) l.classList.remove("active");
+                const link = section ? linkBySection.get(section) : null;
+                if (link) link.classList.add("active");
             },
-            { rootMargin: "0px 0px -70% 0px", threshold: 0 }
-        );
-        for (const section of linkBySection.keys()) sectionObs.observe(section);
-
-        const footer = document.querySelector<HTMLElement>("footer");
-        if (footer) {
-            const endObs = new IntersectionObserver(
-                ([entry]) => {
-                    endReached = entry.isIntersecting;
-                    update();
-                },
-                { threshold: 0 }
-            );
-            endObs.observe(footer);
-        }
+            footer: document.querySelector<HTMLElement>("footer"),
+        });
     }
 </script>

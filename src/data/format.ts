@@ -60,6 +60,18 @@ export const tintClass = (tone?: string): string => {
     return TINT_MAP[tone] ?? "";
 };
 
+// Per-project display overrides for the "Now" bento. Keyed by project
+// slug: which MiniUI mock to render, and a tint override for the card.
+export const miniKindBySlug: Record<string, "igic" | "pregnancy"> = {
+    igic: "igic",
+    companion: "pregnancy",
+};
+
+export const nowTintBySlug: Record<string, string> = {
+    igic: "tint-butter",
+    companion: "tint-sage",
+};
+
 /** Up-to-two-letter monogram from a name: "Partners Bank" → "PB". */
 export const initials = (name: string): string =>
     name

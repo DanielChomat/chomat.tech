@@ -7,7 +7,7 @@ type Props = {
     label?: string;
 };
 
-const { status, label } = Astro.props;
+const { status, label } = Astro.props as Props;
 
 const MAP: Record<Status, { dot: "pulse" | "shipped" | "archived"; text: string }> = {
     building: { dot: "pulse", text: "Building" },

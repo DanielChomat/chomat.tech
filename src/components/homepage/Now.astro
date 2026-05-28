@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
-import { stickerClass, tintClass } from "../../data/format.ts";
+import { miniKindBySlug, nowTintBySlug, stickerClass, tintClass } from "../../data/format.ts";
 import { SITE } from "../../data/site.ts";
 import Kicker from "../primitives/Kicker.astro";
 import MiniUI from "../primitives/MiniUI.astro";
@@ -24,16 +24,6 @@ const FeaturedContent = (await render(featured)).Content;
 const smallContents = await Promise.all(
     smalls.map(async (p) => ({ p, Content: (await render(p)).Content }))
 );
-
-const miniKindBySlug: Record<string, "igic" | "pregnancy"> = {
-    igic: "igic",
-    companion: "pregnancy",
-};
-
-const tints: Record<string, string> = {
-    igic: "tint-butter",
-    companion: "tint-sage",
-};
 ---
 
 <section id="now">
@@ -93,7 +83,7 @@ const tints: Record<string, string> = {
     <div class="now-small-grid">
         {
             smallContents.map(({ p, Content }) => {
-                const tint = tints[p.id] ?? tintClass(p.data.sticker?.tone);
+                const tint = nowTintBySlug[p.id] ?? tintClass(p.data.sticker?.tone);
                 const cardKicker = now.cardKickers[p.id] ?? p.data.tagline;
                 const miniKind = miniKindBySlug[p.id];
                 return (
@@ -131,9 +121,6 @@ const tints: Record<string, string> = {
 <style>
     .now-eyebrow {
         gap: 0.875rem;
-    }
-    .section-heading {
-        margin-top: 0.375rem;
     }
     .featured-sticker {
         position: absolute;

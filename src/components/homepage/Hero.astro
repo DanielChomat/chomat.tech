@@ -14,8 +14,9 @@ const { status } = hero;
             {hero.name}<span class="accent">*</span>
         </h1>
         <p class="t-body hero-bio">
-            <span class="t-mono muted">{hero.identityMono}</span>{" "}
-            {hero.bioBefore}<span class="marker">{hero.bioMark}</span>{hero.bioMid}<span
+            <span class="t-mono muted">{hero.identityMono}</span>{hero.bioBefore}<span
+                class="marker">{hero.bioMark}</span
+            >{hero.bioMid}<span
                 class="marker-sage">{hero.bioMarkAlt}</span
             >{hero.bioAfter}
         </p>
@@ -49,7 +50,8 @@ const { status } = hero;
             <a class="btn accent" href={status.ctaPrimaryHref}>
                 {status.ctaPrimary} <HandArrow />
             </a>
-            <a class="btn" href={status.ctaSecondaryHref}>{status.ctaSecondary}</a>
+            {/* Resume CTA parked until /resume.pdf ships — restore with the nav links. */}
+            {/* <a class="btn" href={status.ctaSecondaryHref}>{status.ctaSecondary}</a> */}
         </div>
     </aside>
 </section>

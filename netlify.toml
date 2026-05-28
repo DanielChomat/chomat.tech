@@ -30,6 +30,17 @@
         Permissions-Policy        = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
 
 # ─── Cache ──────────────────────────────────────────────────────────
+# Page documents — including extensionless routes like / and
+# /experience, which a "/*.html" rule would miss: revalidate on every
+# request so deploys go live fast. This broad rule sits first; the
+# more-specific asset/icon/sitemap rules below override Cache-Control
+# for their own paths (Netlify applies the most specific match).
+
+[[headers]]
+    for = "/*"
+    [headers.values]
+        Cache-Control = "public, max-age=0, must-revalidate"
+
 # Astro emits content-hashed filenames under /_astro/, so they can be
 # cached forever and replaced atomically by a new deploy.
 
@@ -70,14 +81,6 @@
     for = "/og.png"
     [headers.values]
         Cache-Control = "public, max-age=2592000"
-
-# HTML pages: revalidate on every request so deploys go live fast,
-# but allow stale-while-revalidate for instant subsequent loads.
-
-[[headers]]
-    for = "/*.html"
-    [headers.values]
-        Cache-Control = "public, max-age=0, must-revalidate"
 
 # Sitemap, robots, manifest: revalidate often (one hour); they're
 # small and we want crawler / browser refreshes to pick up changes.

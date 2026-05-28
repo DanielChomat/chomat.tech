@@ -10,6 +10,7 @@ import { resolve } from "node:path";
 import { Resvg } from "@resvg/resvg-js";
 import type { APIRoute } from "astro";
 import satori from "satori";
+import { SITE } from "../data/site.ts";
 
 // Resolve from process.cwd() (the project root, both for `astro dev`
 // and `astro build`). `import.meta.url` points at the bundled route
@@ -53,7 +54,7 @@ export const GET: APIRoute = async () => {
                                 textTransform: "uppercase",
                                 fontWeight: 400,
                             },
-                            children: "chomat.tech · v2 · MMXXVI",
+                            children: `${SITE.meta.siglum} · MMXXVI`,
                         },
                     },
                     {
@@ -72,7 +73,7 @@ export const GET: APIRoute = async () => {
                                             display: "flex",
                                         },
                                         children: [
-                                            "Daniel Chomat",
+                                            SITE.hero.name,
                                             {
                                                 type: "span",
                                                 props: {
@@ -93,8 +94,7 @@ export const GET: APIRoute = async () => {
                                             maxWidth: "900px",
                                             lineHeight: 1.3,
                                         },
-                                        children:
-                                            "Mobile & front-end engineer. Six years for banks, health startups, and agencies — now building my own.",
+                                        children: SITE.meta.ogTagline,
                                     },
                                 },
                             ],
@@ -122,7 +122,7 @@ export const GET: APIRoute = async () => {
                                             letterSpacing: "0.04em",
                                             textTransform: "uppercase",
                                         },
-                                        children: "Czechia · he/him",
+                                        children: SITE.meta.ogLocale,
                                     },
                                 },
                             ],
