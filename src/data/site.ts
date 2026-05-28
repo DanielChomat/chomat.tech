@@ -156,7 +156,58 @@ export const SITE = {
       { label: "/experience — full timeline", href: "/experience" },
       { label: "/projects — shipped & experimental", href: "/projects" },
     ],
+  },experiencePage: {
+  homeCrumb: "chomat.tech / home",
+  resumeLink: "resume.pdf",
+  kicker: "§ Experience · the long version",
+  headingMain: "Six years.",
+  headingMark: "*",
+  intro:
+    "Front-end first, React Native next. Agency work, fintech, healthcare, and client projects — with ownership across requirements, architecture, delivery, and deployment.",
+  introMarkLead: "*",
+  about: {
+    kicker: "§ About · short version",
+    headingLead: "Product-minded engineer — ",
+    headingMark: "building mobile apps with real users and real constraints",
+    headingTrail:
+      ". Based in Czechia, working across React Native, TypeScript, and modern front-end.",
+    pills: ["React Native", "TypeScript", "mobile", "product"],
   },
+  summary: [
+    {
+      kicker: "Currently",
+      title: "Partners Bank",
+      blurb: "Mobile engineer · Prague",
+      tint: "tint-teal",
+      dot: true,
+    },
+    {
+      kicker: "Stack",
+      title: "RN · TS · Expo",
+      blurb: "Skia · Storybook · mobile delivery",
+      tint: "tint-butter",
+    },
+    {
+      kicker: "Experience",
+      title: "Fintech · healthcare",
+      blurb: "agency · startup · product teams",
+      tint: "tint-sage",
+    },
+    {
+      kicker: "Open to",
+      title: "Selected work",
+      blurb: "freelance · async conversations",
+      tint: "tint-rose",
+    },
+  ],
+  timelineJumpKicker: "Jump to",
+  currentLabel: "Currently here",
+  nav: [
+    { label: "Home", short: "home", href: "/" },
+    { label: "Experience", short: "exp", href: "/experience" },
+  ],
+  navActiveIndex: 1,
+},
   footer: {
     copyright: "© Daniel Chomat · 2026",
     setIn: "Geist",
