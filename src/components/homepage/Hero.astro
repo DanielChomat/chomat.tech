@@ -1,10 +1,16 @@
 ---
+import { getCollection } from "astro:content";
 import { SITE } from "../../data/site.ts";
 import HandArrow from "../primitives/HandArrow.astro";
 import Kicker from "../primitives/Kicker.astro";
 
 const { hero } = SITE;
 const { status } = hero;
+
+// The "See what I'm building" CTA jumps to #now — only worth showing when
+// something is actually building, otherwise it lands on the empty state.
+const hasBuilding =
+    (await getCollection("projects", (p) => p.data.status === "building")).length > 0;
 ---
 
 <section id="hero" class="bento hero-bento">
@@ -46,13 +52,18 @@ const { status } = hero;
 
         <p class="t-body muted hero-status-avail">{status.availability}</p>
 
-        <div class="row-tight hero-status-cta">
-            <a class="btn accent" href={status.ctaPrimaryHref}>
-                {status.ctaPrimary} <HandArrow />
-            </a>
-            {/* Resume CTA parked until /resume.pdf ships — restore with the nav links. */}
-            {/* <a class="btn" href={status.ctaSecondaryHref}>{status.ctaSecondary}</a> */}
-        </div>
+        {
+            hasBuilding && (
+                <div class="row-tight hero-status-cta">
+                    <a class="btn accent" href={status.ctaPrimaryHref}>
+                        {status.ctaPrimary} <HandArrow />
+                    </a>
+                    {/* Resume CTA parked until /resume.pdf ships — restore with the nav links.
+                        When restored, lift it out of the hasBuilding guard so it shows regardless. */}
+                    {/* <a class="btn" href={status.ctaSecondaryHref}>{status.ctaSecondary}</a> */}
+                </div>
+            )
+        }
     </aside>
 </section>
 
