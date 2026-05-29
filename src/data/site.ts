@@ -6,7 +6,7 @@ export const SITE = {
     meta: {
         title: "Daniel Chomat — Senior React Native Engineer",
         description:
-            "React Native engineer focused on production mobile apps, product thinking, and modern front-end architecture. Experience across fintech, healthcare, and startup products.",
+            "I'm a React Native engineer focused on production mobile apps, product thinking, and modern front-end architecture — with six years across fintech, healthcare, and startups.",
         siglum: "chomat.tech · v2",
         // Open Graph card copy (rendered by src/pages/og.png.ts). Kept here
         // so the share image stays a render-only consumer of site content.
@@ -25,9 +25,9 @@ export const SITE = {
         kicker: "chomat.tech · v2",
         name: "Daniel Chomat",
         identityMono: "* Senior React Native engineer · Czechia ",
-        bioBefore: "Six years building production-ready applications across ",
+        bioBefore: "I've spent six years building production apps across ",
         bioMark: "fintech, healthcare, and digital products",
-        bioMid: ". Started in front-end development before moving deeper into ",
+        bioMid: ". I started in front-end, then went deeper into ",
         bioMarkAlt: "React Native and mobile product engineering",
         bioAfter: ".",
         status: {
@@ -37,13 +37,13 @@ export const SITE = {
             roleBold: "Partners Bank",
             roleTrail: ".",
             roleBody:
-                "Helping build a Czech mobile-only bank, with focus on React Native, product quality, and reliable delivery.",
+                "Back helping build a Czech mobile-only bank — React Native, product quality, and reliable delivery.",
             buildingLead: "Building ",
             buildingBold: "side products",
             buildingTrail: ".",
             buildingBody:
-                "Experimenting with small mobile apps around parenting, travel, and everyday utility tools — simple, focused, and useful.",
-            availability: "Open to selected freelance opportunities and good async conversations.",
+                "Small mobile apps in evenings and weekends — parenting, travel, and everyday utilities. Simple, focused, useful.",
+            availability: "Open to selected freelance and good async conversations.",
             ctaPrimary: "See what I’m building",
             ctaPrimaryHref: "#now",
             ctaSecondary: "Resume.pdf",
@@ -74,7 +74,7 @@ export const SITE = {
         link: { label: "full timeline", href: "/experience" },
         headingMain: "Six years, ",
         headingMuted: "from web to mobile.",
-        intro: "Started with front-end and agency work, moved into React Native, and took on broader ownership across architecture, delivery, deployment, and product implementation.",
+        intro: "I started in front-end and agency work, moved into React Native, and took on broader ownership across architecture, delivery, deployment, and product.",
         currentLabel: "Currently here",
     },
     companies: {
@@ -178,11 +178,11 @@ export const SITE = {
         kicker: "§ Experience · the long version",
         headingMain: "Six years.",
         headingMark: "*",
-        intro: "Front-end first, React Native next. Agency work, fintech, healthcare, and client projects — with ownership across requirements, architecture, delivery, and deployment.",
+        intro: "Front-end first, React Native next. Agency work, fintech, healthcare, and client projects — owning requirements, architecture, delivery, and deployment.",
         introMarkLead: "*",
         about: {
             kicker: "§ About · short version",
-            headingLead: "Product-minded engineer — ",
+            headingLead: "I'm a product-minded engineer — ",
             headingMark: "building mobile apps with real users and real constraints",
             headingTrail:
                 ". Based in Czechia, working across React Native, TypeScript, and modern front-end.",
