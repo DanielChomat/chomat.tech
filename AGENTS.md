@@ -123,7 +123,7 @@ bottom of each `.astro` file. The design system lives in `src/styles/`.
 - Quote multi-word *and* single-word font names in `font-family` for
   consistency (`"Menlo"`, not `Menlo`).
 - Border-radius pill shape uses `9999rem`, not `999px` (rem-first).
-- iOS Safari chrome bands: `<meta name="theme-color" content="#f8f5ec">` +
+- iOS Safari chrome bands: `<meta name="theme-color" content="#f3efe4">` +
   `viewport-fit=cover`. Fixed UI uses `env(safe-area-inset-{top,bottom})`.
 
 ---
