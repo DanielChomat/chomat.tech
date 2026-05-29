@@ -217,7 +217,7 @@ export const SITE = {
         ],
         timelineJumpKicker: "Jump to",
         currentLabel: "Currently here",
-        nav: [{ label: "Home", short: "home", href: "/" }],
+        nav: [{ label: "Experience", short: "exp", href: "/experience" }],
         navActiveIndex: 0,
     },
     notFound: {
