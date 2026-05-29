@@ -1,7 +1,5 @@
 ---
-import { Image } from "astro:assets";
 import { getEntry, render } from "astro:content";
-import portrait from "../../../content/assets/profile-pic.jpeg";
 import { SITE } from "../../data/site.ts";
 import Kicker from "../primitives/Kicker.astro";
 import Pill from "../primitives/Pill.astro";
@@ -84,7 +82,6 @@ const { Content: AboutContent } = await render(aboutEntry);
         <div class="col-4">
             <div class="card tint-rose about-card">
                 <Kicker>{tech.aboutKicker}</Kicker>
-                <Image src={portrait} alt="Daniel Chomat" class="about-portrait" width={480} />
                 <div class="t-body">
                     <AboutContent />
                 </div>
