@@ -17,19 +17,18 @@ CodeRabbit review.
 
 ### SEO
 
-- [ ] **Add Open Graph + Twitter meta to `BaseLayout.astro`**
-      Currently only `<title>` + `<meta description>`. Need `og:title`,
-      `og:description`, `og:image`, `og:url`, `og:type`, `twitter:card`,
-      `twitter:image`. Image source: Satori-rendered per-page (see below).
-- [ ] **Add canonical URL** to `BaseLayout.astro`:
-      `<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />`
+- [x] **Add Open Graph + Twitter meta to `BaseLayout.astro`**
+      Done — `og:title/description/image/url/type` + `twitter:card/image`
+      in BaseLayout.astro, with `/og.png` resolved from `Astro.site`.
+- [x] **Add canonical URL** to `BaseLayout.astro`:
+      Done — `<link rel="canonical">` from `new URL(Astro.url.pathname, Astro.site)`.
 - [x] **Reference sitemap from `robots.txt`**
       Done — `src/pages/robots.txt.ts` generates `robots.txt` from
       `Astro.site`, emitting a `Sitemap:` line (replaced the static
       `public/robots.txt`).
-- [ ] **JSON-LD `Person` schema** in `<head>` — name, url, jobTitle, and
-      `sameAs: ["https://github.com/DanielChomat",
-      "https://linkedin.com/in/danielchomat"]`.
+- [x] **JSON-LD `Person` schema** in `<head>` — name, url, jobTitle, and
+      `sameAs: [GitHub, LinkedIn]`. Done — inline `application/ld+json`
+      in BaseLayout.astro.
 - [ ] **Per-page titles & descriptions** — audit `experience.astro`,
       `404.astro`, and any project/experience MDX to ensure they pass
       real `title`/`description` to `BaseLayout` (not the SITE defaults).
@@ -136,7 +135,7 @@ this terminal.
       finishes.
 - [ ] **First post-deploy smoke test**: every nav link, dark/light
       toggle, mobile menu open/close, 404 page, sitemap loads,
-      `/og` image (if Satori route ships).
+      `/og.png` returns 200 (Satori route — `src/pages/og.png.ts`).
 - [ ] **Submit sitemap to Google Search Console** (and Bing Webmaster
       if you care). One-time.
 

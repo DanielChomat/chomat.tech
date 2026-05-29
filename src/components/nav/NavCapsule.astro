@@ -4,15 +4,18 @@ type NavItem = { label: string; short?: string; href: string };
 type Props = {
     items: readonly NavItem[];
     active?: number;
+    /** Back-to-top target. Defaults to "#hero" (homepage); subpages with
+        no hero pass their own top anchor, e.g. "#main". */
+    topHref?: string;
 };
 
-const { items, active = -1 } = Astro.props;
+const { items, active = -1, topHref = "#hero" } = Astro.props;
 ---
 
 <nav class="pill-nav" aria-label="Section navigation" data-nav-capsule>
     <a
         class="to-top"
-        href="#hero"
+        href={topHref}
         aria-label="Back to top"
         data-back-to-top
     >
@@ -104,17 +107,18 @@ const { items, active = -1 } = Astro.props;
             if (staticActive) activateLink(staticActive);
         }
 
-        // Back-to-top: reveal once the hero scrolls out of view.
+        // Back-to-top: reveal once its target (own href) scrolls out of view.
         const toTop = nav.querySelector<HTMLAnchorElement>("[data-back-to-top]");
-        const hero = document.getElementById("hero");
-        if (toTop && hero) {
-            const heroObs = new IntersectionObserver(
+        const topId = toTop?.getAttribute("href")?.replace(/^#/, "");
+        const topTarget = topId ? document.getElementById(topId) : null;
+        if (toTop && topTarget) {
+            const topObs = new IntersectionObserver(
                 ([entry]) => {
                     toTop.toggleAttribute("data-visible", !entry.isIntersecting);
                 },
                 { rootMargin: "-50px 0px 0px 0px" }
             );
-            heroObs.observe(hero);
+            topObs.observe(topTarget);
         }
     }
 </script>
