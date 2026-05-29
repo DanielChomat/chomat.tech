@@ -36,28 +36,32 @@ The canonical product spec lives in `TECHNICAL_ROADMAP.md`; this file is the
 src/
 ├── components/
 │   ├── homepage/          one component per section (Hero, Now, Experience, …)
-│   ├── nav/               NavCapsule, MobileMenu, SoundToggle
-│   └── primitives/        small reusable bits (Pill, HandArrow, Placeholder, …)
+│   ├── nav/               NavCapsule, MobileMenu, SoundToggle, ThemeToggle
+│   └── primitives/        small reusable bits (Pill, HandArrow, LogoMark, Placeholder, …)
 ├── content/
-│   ├── config.ts          Zod schemas for projects/experience/companies/about
 │   ├── projects/*.mdx     one project per file
 │   ├── experience/*.mdx   one role/company per file (Partners Bank has 2 intervals)
 │   ├── companies/*.json   logo-strip data
 │   └── about/index.mdx    bio + languages
+├── content.config.ts      Zod schemas for projects/experience/companies/about (Astro 6 location)
 ├── data/
-│   ├── site.ts            ALL site-level prose (hero, section headers, contact, footer)
-│   └── format.ts          display helpers (formatIntervals, bentoCol, stickerClass, tintClass)
+│   ├── site.ts            ALL site-level prose (hero, section headers, contact, footer, notFound)
+│   └── format.ts          display helpers (formatIntervals, bentoCol, stickerClass, tintClass, initials)
 ├── layouts/
-│   └── BaseLayout.astro   <html>, <head>, theme-color, viewport, fonts
+│   └── BaseLayout.astro   <html>, <head>, theme-color metas, viewport, fonts
 ├── pages/
-│   └── index.astro        composes the homepage sections; reads nav from SITE
+│   ├── index.astro        composes the homepage sections; reads nav from SITE
+│   ├── experience.astro   long-form /experience subpage
+│   ├── 404.astro          sketched not-found page (copy from SITE.notFound)
+│   ├── og.png.ts          static /og.png (Satori + Resvg)
+│   └── robots.txt.ts      robots rules + sitemap reference
 └── styles/
     ├── global.css         manifest: @layer order + @import partials
     ├── reset.css
-    ├── tokens.css         .wf root + .wf.pal-newsprint + .wf.v3
+    ├── tokens.css         .wf root + .wf.pal-newsprint / .wf.pal-spritz + .wf.v3; dark via html[data-theme="dark"]
     ├── type.css
     ├── utilities.css      bento grid, flex helpers, dividers
-    └── components/        card / pill / controls / nav / layout / decorations
+    └── components/        card / pill / controls / nav / layout / decorations / logomark
 ```
 
 Component-local layout/visual tweaks go in scoped `<style>` blocks at the
@@ -123,8 +127,11 @@ bottom of each `.astro` file. The design system lives in `src/styles/`.
 - Quote multi-word *and* single-word font names in `font-family` for
   consistency (`"Menlo"`, not `Menlo`).
 - Border-radius pill shape uses `9999rem`, not `999px` (rem-first).
-- iOS Safari chrome bands: `<meta name="theme-color" content="#f3efe4">` +
-  `viewport-fit=cover`. Fixed UI uses `env(safe-area-inset-{top,bottom})`.
+- iOS Safari chrome bands: two `<meta name="theme-color">` tags gated by
+  `prefers-color-scheme` — light `#f3efe4` (the active `pal-spritz` bg),
+  dark `#0e0d0a`. A small script in `BaseLayout` syncs them to the resolved
+  `data-theme`. Pair with `viewport-fit=cover`; fixed UI uses
+  `env(safe-area-inset-{top,bottom})`.
 
 ---
 
@@ -152,8 +159,8 @@ Decorative SVGs get `aria-hidden="true"` and `focusable="false"`.
 
 - **Project / experience / company / about content** lives in Content
   Collections under `src/content/`. Validated by Zod schemas in
-  `src/content/config.ts`. The legacy location (`src/content/config.ts`, not
-  `src/content.config.ts`) is intentional and matches the spec.
+  `src/content.config.ts` (the Astro 6 location; the legacy
+  `src/content/config.ts` was removed in v6 — see "Stack at a glance").
 - **Site-level prose** (hero copy, section headings, contact cards, footer)
   lives in `src/data/site.ts` as one big typed object. Components import
   from `SITE`.
@@ -166,7 +173,7 @@ Decorative SVGs get `aria-hidden="true"` and `focusable="false"`.
   only when there's branching or local state.
 - Project frontmatter mirrors the spec: `status`, `kind`, `tech[]`,
   `bentoSize`, `featured`, `startDate`/`endDate`, `sticker.{tone,text}`,
-  `homeLabel`, `year`. See `src/content/config.ts`.
+  `homeLabel`, `year`. See `src/content.config.ts`.
 
 ---
 
@@ -177,7 +184,7 @@ Decorative SVGs get `aria-hidden="true"` and `focusable="false"`.
   the document is already parsed when the module runs.
 - `NodeListOf<T>` doesn't implement `Symbol.iterator` under Astro's TS lib
   config. Wrap in `Array.from(…)` before `for…of`.
-- Astro Content Collections in v5 use the `glob()` loader from
+- Astro Content Collections (v6) use the `glob()` loader from
   `astro/loaders`. Render MDX bodies via `const { Content } = await render(entry)`.
 - Astro Image — `<Image>` with explicit dimensions is the canonical path.
   Sharp is auto-installed.
