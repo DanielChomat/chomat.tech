@@ -23,9 +23,10 @@ CodeRabbit review.
       `twitter:image`. Image source: Satori-rendered per-page (see below).
 - [ ] **Add canonical URL** to `BaseLayout.astro`:
       `<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />`
-- [ ] **Reference sitemap from `robots.txt`**
-      Currently `public/robots.txt` is permissive but has no
-      `Sitemap: https://chomat.tech/sitemap-index.xml` line.
+- [x] **Reference sitemap from `robots.txt`**
+      Done — `src/pages/robots.txt.ts` generates `robots.txt` from
+      `Astro.site`, emitting a `Sitemap:` line (replaced the static
+      `public/robots.txt`).
 - [ ] **JSON-LD `Person` schema** in `<head>` — name, url, jobTitle, and
       `sameAs: ["https://github.com/DanielChomat",
       "https://linkedin.com/in/danielchomat"]`.

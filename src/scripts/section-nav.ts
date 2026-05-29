@@ -18,6 +18,16 @@ export type SectionTrackerOptions = {
      * reach the trigger band on its own.
      */
     footer?: HTMLElement | null;
+    /**
+     * Section→link map. When provided, clicking a link pins ("locks") the
+     * active section to its target until the next user-initiated scroll.
+     * Without it, clicking a near-bottom link on a short page scrolls to
+     * the page end, the footer turns up, and the last section is forced
+     * active instead of the one just clicked — the click-scroll lands at
+     * the exact same position you'd reach by scrolling there manually, so
+     * geometry alone can't tell them apart; only the click can.
+     */
+    linkBySection?: Map<HTMLElement, HTMLAnchorElement>;
 };
 
 /**
@@ -30,15 +40,19 @@ export const trackActiveSection = ({
     sections,
     onActiveChange,
     footer,
+    linkBySection,
 }: SectionTrackerOptions): void => {
     if (sections.length === 0) return;
 
     const visible = new Set<HTMLElement>();
     let endReached = false;
     let current: HTMLElement | null = null;
+    // Set on nav-link click; suppresses observer-driven changes until the
+    // next real scroll so the click-scroll can't snap to another section.
+    let locked: HTMLElement | null = null;
 
     const emit = (next: HTMLElement | null) => {
-        if (next === current) return;
+        if (locked || next === current) return;
         current = next;
         onActiveChange(next);
     };
@@ -81,6 +95,37 @@ export const trackActiveSection = ({
             { threshold: 0 }
         );
         endObs.observe(footer);
+    }
+
+    if (linkBySection) {
+        const unlock = () => {
+            if (!locked) return;
+            locked = null;
+            update();
+        };
+        for (const [section, link] of linkBySection) {
+            link.addEventListener("click", () => {
+                locked = section;
+                current = section;
+                onActiveChange(section);
+            });
+        }
+        // A user-initiated scroll (wheel/touch/keyboard) releases the lock;
+        // the programmatic smooth-scroll from the click fires none of these.
+        const scrollKeys = new Set([
+            "ArrowDown",
+            "ArrowUp",
+            "PageDown",
+            "PageUp",
+            "Home",
+            "End",
+            " ",
+        ]);
+        window.addEventListener("wheel", unlock, { passive: true });
+        window.addEventListener("touchmove", unlock, { passive: true });
+        window.addEventListener("keydown", (event) => {
+            if (scrollKeys.has(event.key)) unlock();
+        });
     }
 };
 

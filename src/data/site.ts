@@ -62,6 +62,11 @@ export const SITE = {
             companion: "Personal · family",
         } as Record<string, string>,
         featuredCtaLabel: "case study",
+        empty: {
+            kicker: "Workshop",
+            title: "Quiet on the bench right now.",
+            body: "I'm between builds — new experiments will show up here as they take shape.",
+        },
     },
     experience: {
         number: "§02",
@@ -76,6 +81,7 @@ export const SITE = {
         ariaLabel: "Companies I've worked with",
         label: "Worked with",
         range: "2019 → now",
+        countLabel: "companies",
     },
     work: {
         number: "§03",
@@ -86,6 +92,10 @@ export const SITE = {
         footerNote: "// more projects, experiments, and unfinished ideas live in /projects",
         linkLabel: "See all projects",
         linkHref: "/projects",
+        empty: {
+            title: "Nothing shipped here yet.",
+            body: "Selected production work will land here as projects go live.",
+        },
     },
     tech: {
         number: "§04",

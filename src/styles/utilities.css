@@ -4,27 +4,31 @@
 @layer utilities {
     .wf {
         & .bento {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
+            display: flex;
+            flex-wrap: wrap;
             gap: 0.875rem;
 
             @media (max-width: 45rem) {
-                grid-template-columns: 1fr;
                 gap: 0.75rem;
             }
         }
 
-        /* Only the column spans actually consumed by the bento layouts in
-           the current home page are defined. Add more here when needed. */
-        & .col-4  { grid-column: span 4; }
-        & .col-5  { grid-column: span 5; }
-        & .col-7  { grid-column: span 7; }
-        & .col-8  { grid-column: span 8; }
-        & .col-12 { grid-column: span 12; }
+        /* Flex weights mirror the old 12-col spans. flex-grow lets a row
+           that doesn't fill the full width stretch its items to span it
+           (e.g. the two Contact cards, or a lone trailing Work card) while
+           the basis keeps wrap points close to the grid, so relative widths
+           still read — a lg card stays wider than an sm one.
+           Only the spans actually used by the current home page are defined;
+           add more here when needed. */
+        & .col-4  { flex: 4 1 calc(33.333% - 0.875rem); }
+        & .col-5  { flex: 5 1 calc(41.667% - 0.875rem); }
+        & .col-7  { flex: 7 1 calc(58.333% - 0.875rem); }
+        & .col-8  { flex: 8 1 calc(66.667% - 0.875rem); }
+        & .col-12 { flex: 12 1 100%; }
 
         @media (max-width: 45rem) {
             & :is(.col-4, .col-5, .col-7, .col-8, .col-12) {
-                grid-column: 1 / -1;
+                flex-basis: 100%;
             }
         }
 

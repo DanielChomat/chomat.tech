@@ -11,7 +11,7 @@ const { companies: copy } = SITE;
     <div class="card companies-card">
         <div class="companies-label">
             <span class="t-mono accent">● {copy.label}</span>
-            <span class="t-mono muted">{copy.range} · {companies.length} companies</span>
+            <span class="t-mono muted">{copy.range} · {companies.length} {copy.countLabel}</span>
         </div>
         <ul class="companies-strip">
             {

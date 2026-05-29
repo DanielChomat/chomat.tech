@@ -37,6 +37,10 @@
             &.pulse {
                 box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 60%, transparent);
                 animation: wf-pulse 2.4s ease-out infinite;
+
+                @media (prefers-reduced-motion: reduce) {
+                    animation: none;
+                }
             }
             &.shipped { background: var(--muted); }
             &.archived { background: var(--faint); }

@@ -143,6 +143,8 @@ Prefer the correct element over a `<div>` with classes:
 - `<main>` for the primary page content (one per page).
 - `<article>` for each project / experience / work card.
 - `<h1>`–`<h6>` for section headings (`.t-title` → `<h3>`, `.t-heading` → `<h2>`).
+  Deliberate exceptions use `.t-heading` on an `<h3>` for visual weight at a
+  subordinate outline level: the Now featured card and the ContactCard handles.
 - `<p>` for prose paragraphs (body copy, taglines).
 - `<ul>/<li>` for lists of items (tech pills, wormholes, logo strip, mobile menu).
 - `<button type="button">` for interactive controls (sound toggle, mobile menu

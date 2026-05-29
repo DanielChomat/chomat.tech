@@ -27,6 +27,37 @@ const TEXT = "#16140f";
 const MUTED = "#74706a";
 const ACCENT = "#0f6b66";
 
+// Roman-numeral year for the masthead stamp. Derived from the build date
+// (this route renders at build time) so it tracks each release instead of
+// going stale as a hardcoded literal.
+const toRomanYear = (year: number): string => {
+    const numerals: [number, string][] = [
+        [1000, "M"],
+        [900, "CM"],
+        [500, "D"],
+        [400, "CD"],
+        [100, "C"],
+        [90, "XC"],
+        [50, "L"],
+        [40, "XL"],
+        [10, "X"],
+        [9, "IX"],
+        [5, "V"],
+        [4, "IV"],
+        [1, "I"],
+    ];
+    let remaining = year;
+    let out = "";
+    for (const [value, symbol] of numerals) {
+        while (remaining >= value) {
+            out += symbol;
+            remaining -= value;
+        }
+    }
+    return out;
+};
+const ogYear = toRomanYear(new Date().getFullYear());
+
 export const GET: APIRoute = async () => {
     const svg = await satori(
         {
@@ -54,7 +85,7 @@ export const GET: APIRoute = async () => {
                                 textTransform: "uppercase",
                                 fontWeight: 400,
                             },
-                            children: `${SITE.meta.siglum} · MMXXVI`,
+                            children: `${SITE.meta.siglum} · ${ogYear}`,
                         },
                     },
                     {

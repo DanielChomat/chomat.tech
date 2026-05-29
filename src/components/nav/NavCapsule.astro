@@ -86,6 +86,7 @@ const { items, active = -1 } = Astro.props;
             onActiveChange: (section) =>
                 activateLink(section ? (linkBySection.get(section) ?? null) : null),
             footer: document.querySelector<HTMLElement>("footer"),
+            linkBySection,
         });
 
         // Subpage mode: no observable in-page sections (their #ids don't
