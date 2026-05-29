@@ -1,9 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import { getEntry, render } from "astro:content";
+import portrait from "../../../content/assets/profile-pic.jpeg";
 import { SITE } from "../../data/site.ts";
 import Kicker from "../primitives/Kicker.astro";
 import Pill from "../primitives/Pill.astro";
-import Placeholder from "../primitives/Placeholder.astro";
 
 const { tech } = SITE;
 
@@ -83,7 +84,7 @@ const { Content: AboutContent } = await render(aboutEntry);
         <div class="col-4">
             <div class="card tint-rose about-card">
                 <Kicker>{tech.aboutKicker}</Kicker>
-                <Placeholder h={120}>portrait · or workspace photo</Placeholder>
+                <Image src={portrait} alt="Daniel Chomat" class="about-portrait" width={480} />
                 <div class="t-body">
                     <AboutContent />
                 </div>
@@ -113,5 +114,12 @@ const { Content: AboutContent } = await render(aboutEntry);
     }
     .about-card {
         height: 100%;
+    }
+    .about-portrait {
+        width: 100%;
+        height: 8.75rem;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        display: block;
     }
 </style>
