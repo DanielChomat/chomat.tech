@@ -218,7 +218,7 @@ export const SITE = {
         timelineJumpKicker: "Jump to",
         currentLabel: "Currently here",
         nav: [{ label: "Home", short: "home", href: "/" }],
-        navActiveIndex: 1,
+        navActiveIndex: 0,
     },
     notFound: {
         kicker: "error / not_found",
