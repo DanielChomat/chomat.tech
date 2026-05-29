@@ -7,7 +7,7 @@ const companies = (await getCollection("companies")).sort((a, b) => a.data.order
 const { companies: copy } = SITE;
 ---
 
-<section aria-label={copy.ariaLabel}>
+<section id="companies" aria-label={copy.ariaLabel}>
     <div class="card companies-card">
         <div class="companies-label">
             <span class="t-mono accent">● {copy.label}</span>

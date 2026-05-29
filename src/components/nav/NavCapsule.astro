@@ -24,6 +24,7 @@ const { items, active = -1 } = Astro.props;
             <a
                 href={it.href}
                 class:list={{ active: i === active }}
+                aria-current={i === active ? "page" : undefined}
             >
                 {it.label}
             </a>
@@ -56,13 +57,17 @@ const { items, active = -1 } = Astro.props;
         let firstMove = true;
         // Highlight a link and slide the pill under it (null = hide the pill).
         const activateLink = (link: HTMLAnchorElement | null) => {
-            for (const l of links) l.classList.remove("active");
+            for (const l of links) {
+                l.classList.remove("active");
+                l.removeAttribute("aria-current");
+            }
             if (!indicator) return;
             if (!link) {
                 indicator.style.opacity = "0";
                 return;
             }
             link.classList.add("active");
+            link.setAttribute("aria-current", "page");
             const move = () => {
                 indicator.style.transform = `translateX(${link.offsetLeft}px)`;
                 indicator.style.width = `${link.offsetWidth}px`;

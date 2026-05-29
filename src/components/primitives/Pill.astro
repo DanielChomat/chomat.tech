@@ -7,10 +7,9 @@ type Props = {
 };
 
 const { kind = "", dot, class: className = "" } = Astro.props;
-const pillClass = ["pill", kind, className].filter(Boolean).join(" ");
 ---
 
-<span class={pillClass}>
+<span class:list={["pill", kind, className]}>
     {dot !== undefined && <span class={`status-dot ${dot}`} />}
     <slot />
 </span>
