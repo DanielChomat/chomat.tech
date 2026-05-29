@@ -1,0 +1,121 @@
+---
+import { getEntry, render } from "astro:content";
+import { SITE } from "../../data/site.ts";
+import Kicker from "../primitives/Kicker.astro";
+import Pill from "../primitives/Pill.astro";
+
+const { tech } = SITE;
+
+const aboutEntry = await getEntry("about", "index");
+if (!aboutEntry) throw new Error("Tech: missing src/content/about/index.mdx");
+const { Content: AboutContent } = await render(aboutEntry);
+---
+
+<section id="tech">
+    <div class="section-mark">
+        <span class="lineno">{tech.number}</span>
+    </div>
+    <header>
+        <div class="row row-between row-baseline">
+            <Kicker>{tech.kicker}</Kicker>
+            <span class="t-mono muted">{tech.snapshotDate}</span>
+        </div>
+        <h2 class="t-heading section-heading">
+            {tech.headingMain} <span class="muted">{tech.headingMuted}</span>
+        </h2>
+        <div class="section-divider"></div>
+    </header>
+
+    <div class="bento bento-pad-top">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-head">
+                    <Kicker>Stack</Kicker>
+                    <span class="t-mono muted">{tech.listingNote}</span>
+                </div>
+                <div class="tech-stack-grid">
+                    <div>
+                        <div class="t-mono accent stack-group-label">
+                            {tech.groupLabels.now}
+                        </div>
+                        <ul class="row-tight">
+                            {tech.techNow.map((t) => (
+                                <li>
+                                    <Pill kind="accent">{t}</Pill>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="t-mono stack-group-label">
+                            {tech.groupLabels.production}
+                        </div>
+                        <ul class="row-tight">
+                            {tech.techProduction.map((t) => (
+                                <li>
+                                    <Pill>{t}</Pill>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="t-mono muted stack-group-label">
+                            {tech.groupLabels.curious}
+                        </div>
+                        <ul class="row-tight">
+                            {tech.techCurious.map((t) => (
+                                <li>
+                                    <Pill kind="ghost">{t}</Pill>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+                <div class="divider stack-bottom-divider"></div>
+                <div class="t-mono muted stack-footnote">
+                    <span class="accent" aria-hidden="true">→</span>&nbsp;&nbsp; {tech.footnote.lead}<strong class="footnote-tool">{tech.footnote.tool}</strong>
+                    {tech.footnote.trail}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card tint-rose about-card">
+                <Kicker>{tech.aboutKicker}</Kicker>
+                <div class="t-body">
+                    <AboutContent />
+                </div>
+                <ul class="row-tight pull-bottom">
+                    {
+                        aboutEntry.data.languages.map((lang) => (
+                            <li>
+                                <Pill>{lang.code}</Pill>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .stack-group-label {
+        margin-bottom: 0.5rem;
+    }
+    .stack-bottom-divider {
+        margin-top: 0.875rem;
+    }
+    .footnote-tool {
+        color: var(--text);
+    }
+    .about-card {
+        height: 100%;
+    }
+    .about-portrait {
+        width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        display: block;
+    }
+</style>

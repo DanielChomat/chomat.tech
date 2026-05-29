@@ -1,0 +1,46 @@
+---
+import { SITE } from "../../data/site.ts";
+import ContactCard from "../primitives/ContactCard.astro";
+import HandArrow from "../primitives/HandArrow.astro";
+import Kicker from "../primitives/Kicker.astro";
+
+const { contact } = SITE;
+---
+
+<section id="contact">
+    <div class="section-mark">
+        <span class="lineno">{contact.number}</span>
+    </div>
+    <header>
+        <div class="row row-between row-baseline">
+            <Kicker>{contact.kicker}</Kicker>
+            <span class="t-mono muted">{contact.note}</span>
+        </div>
+        <h2 class="t-heading section-heading">
+            <span>{contact.headingMain}</span><span class="muted">{contact.headingMuted}</span>
+        </h2>
+        <div class="section-divider"></div>
+    </header>
+
+    <div class="bento bento-pad-top">
+        {
+            contact.cards.map((card) => (
+                <div class="col-4">
+                    <ContactCard {...card} />
+                </div>
+            ))
+        }
+    </div>
+
+    <ul class="wormhole-list">
+        {
+            contact.wormholes.map((w) => (
+                <li>
+                    <a class="wormhole" href={w.href}>
+                        {w.label} <HandArrow size={14} />
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</section>

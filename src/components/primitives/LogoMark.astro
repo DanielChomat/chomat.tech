@@ -1,0 +1,21 @@
+---
+import { initials, tintClass } from "../../data/format.ts";
+
+type Props = {
+    /** Company / brand name; the monogram is derived from its initials. */
+    name: string;
+    /** Tile size in design-px units; rendered as rem (px / 16). Default 36. */
+    size?: number;
+    /** Tint token (butter, sage, sky, …); falls back to the neutral surface. */
+    tint?: string;
+};
+
+const { name, size, tint } = Astro.props;
+const mono = initials(name);
+const sizeRem = size ? `${size / 16}rem` : undefined;
+---
+
+<span
+    class:list={["logomark", tintClass(tint)]}
+    style={sizeRem ? `--logo-size: ${sizeRem};` : undefined}
+    aria-hidden="true">{mono}</span>

@@ -1,0 +1,36 @@
+---
+import Kicker from "./Kicker.astro";
+
+type Props = {
+    href: string;
+    kicker: string;
+    handle: string;
+    blurb: string;
+    foot: string;
+    /** Card palette class, e.g. "tint-sky" / "inked". */
+    tint: string;
+    /** Corner arrow glyph, e.g. "↗" / "↓". */
+    glyph: string;
+    /** Dim the blurb + foot (used by the resume card). */
+    muted?: boolean;
+};
+
+const { href, kicker, handle, blurb, foot, tint, glyph, muted = false } = Astro.props as Props;
+---
+
+<a class:list={["card", tint, "contact-card"]} href={href}>
+    <Kicker>{kicker}</Kicker>
+    <h3 class="t-heading">{handle}</h3>
+    <p class:list={["t-body", muted && "muted"]}>{blurb}</p>
+    <div class="card-foot">
+        <span class:list={["t-mono", muted && "muted"]}>{foot}</span>
+        <span class="t-mono accent" aria-hidden="true">{glyph}</span>
+    </div>
+</a>
+
+<style>
+    .contact-card {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>

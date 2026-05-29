@@ -1,0 +1,123 @@
+/* Design tokens — .wf root + active palette + v3 font features.
+   Loaded into @layer base.
+
+   Dark mode: gated by [data-theme="dark"] on <html>. A blocking inline
+   script in BaseLayout sets that attribute before paint based on
+   localStorage('theme') ?? prefers-color-scheme. The dark token block
+   re-declares the same custom properties (incl. tints) so it wins over
+   any active .pal-* palette modifier. */
+
+@layer base {
+    .wf {
+        --bg: #f6f3ec;
+        --surface: #fdfbf6;
+        --surface-2: #efece4;
+        --text: #16140f;
+        --muted: #74706a;
+        --faint: #b8b2a8;
+        --line: rgba(20, 18, 12, 0.1);
+        --line-2: rgba(20, 18, 12, 0.06);
+        --accent: #0f6b66; /* teal */
+        --accent-ink: #ffffff;
+        --shadow:
+            0 1px 0 rgba(20, 18, 12, 0.04),
+            0 8px 24px -16px rgba(20, 18, 12, 0.18);
+        --radius: 0.875rem;
+        --radius-sm: 0.5rem;
+
+        --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+        --font-mono: "Geist Mono Variable", ui-monospace, "JetBrains Mono", "Menlo", monospace;
+
+        font-family: var(--font-sans);
+        color: var(--text);
+        background: var(--bg);
+        width: 100%;
+        min-height: 100%;
+        font-size: 0.875rem;
+        line-height: 1.45;
+        letter-spacing: -0.005em;
+        position: relative;
+
+        &.pal-newsprint {
+            --bg: #f8f5ec;
+            --surface: #fffcef;
+            --surface-2: #ece8d8;
+            --line: rgba(20, 18, 12, 0.12);
+            --tint-butter: #f6e090;
+            --tint-sage: #b9cf95;
+            --tint-rose: #dfa890;
+            --tint-sky: #aac0d5;
+            --tint-lavender: #bfb1d5;
+        }
+
+        /* Spritz — softer pastel set used by v6. Dialed-back chroma so the
+           tints read as colorful accents, not a riot. The site-wide palette. */
+        &.pal-spritz {
+            --bg: #f3efe4;
+            --surface: #fbf7eb;
+            --surface-2: #ebe5d4;
+            --line: rgba(40, 28, 12, 0.12);
+            --line-2: rgba(40, 28, 12, 0.06);
+            --tint-butter: oklch(93% 0.08 95);
+            --tint-sage: oklch(91% 0.07 145);
+            --tint-mint: oklch(91% 0.06 175);
+            --tint-sky: oklch(91% 0.06 230);
+            --tint-lavender: oklch(89% 0.07 295);
+            --tint-blossom: oklch(89% 0.07 350);
+            --tint-rose: oklch(89% 0.08 35);
+            --tint-coral: oklch(88% 0.09 22);
+            --tint-peach: oklch(91% 0.08 60);
+            --tint-lime: oklch(93% 0.1 120);
+        }
+
+        /* Warm wash — two low-contrast pastel blobs anchored to opposite
+           corners of the full-height root. Light mode only: the dark-token
+           selector below resets background to a flat var(--bg). */
+        html:not([data-theme="dark"]) &.pal-spritz {
+            background:
+                radial-gradient(75rem 56.25rem at 8% 0%, oklch(95% 0.07 80 / 0.55), transparent 60%),
+                radial-gradient(62.5rem 50rem at 100% 100%, oklch(94% 0.07 290 / 0.4), transparent 60%),
+                var(--bg);
+        }
+
+        &.v3 {
+            font-feature-settings:
+                "ss01" on,
+                "ss02" on,
+                "cv11" on;
+        }
+
+        /* Dark mode — nested so the dark block + any .pal-* palette
+           modifier are overridden by the same parent. `&,&.pal-newsprint`
+           covers both the bare .wf and the newsprint palette currently
+           applied site-wide. Tints are deepened versions that still read
+           warm. */
+        html[data-theme="dark"] &,
+        html[data-theme="dark"] &.pal-newsprint,
+        html[data-theme="dark"] &.pal-spritz {
+            --bg: #0e0d0a;
+            --surface: #15140f;
+            --surface-2: #1a1914;
+            --text: #ece8de;
+            --muted: #8e8a80;
+            --faint: #4d4942;
+            --line: rgba(255, 250, 235, 0.1);
+            --line-2: rgba(255, 250, 235, 0.05);
+            --accent: #2cada3;
+            --accent-ink: #0e0d0a;
+            --shadow:
+                0 1px 0 rgba(0, 0, 0, 0.3),
+                0 12px 28px -16px rgba(0, 0, 0, 0.6);
+            --tint-butter: #4a3e1a;
+            --tint-sage: #2a3a25;
+            --tint-rose: #482620;
+            --tint-sky: #1f2e3e;
+            --tint-lavender: #2c2640;
+            --tint-mint: #1f3a32;
+            --tint-blossom: #3e1f2e;
+            --tint-coral: #4a2620;
+            --tint-peach: #4a3a1a;
+            --tint-lime: #2f3a1a;
+        }
+    }
+}

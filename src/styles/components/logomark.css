@@ -1,0 +1,40 @@
+/* Monogram tile — initials in a bordered, optionally-tinted square.
+   Stands in for a real wordmark. Used by the Experience cards and the
+   Companies "worked with" strip. Loaded into @layer components.
+
+   Size is driven by the `--logo-size` custom property: the component sets
+   it inline only when overriding the default (the single dynamic-var
+   exception to the no-inline-styles rule, per AGENTS.md). */
+
+@layer components {
+    .wf {
+        & .logomark {
+            --logo-size: 2.25rem;
+            width: var(--logo-size);
+            height: var(--logo-size);
+            flex: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            background: var(--surface-2);
+            font-family: var(--font-mono);
+            font-weight: 500;
+            font-size: calc(var(--logo-size) * 0.36);
+            letter-spacing: -0.02em;
+            color: var(--text);
+
+            &.tint-butter { background: var(--tint-butter); }
+            &.tint-sage { background: var(--tint-sage); }
+            &.tint-rose { background: var(--tint-rose); }
+            &.tint-sky { background: var(--tint-sky); }
+            &.tint-lavender { background: var(--tint-lavender); }
+            &.tint-mint { background: var(--tint-mint); }
+            &.tint-blossom { background: var(--tint-blossom); }
+            &.tint-coral { background: var(--tint-coral); }
+            &.tint-peach { background: var(--tint-peach); }
+            &.tint-lime { background: var(--tint-lime); }
+        }
+    }
+}

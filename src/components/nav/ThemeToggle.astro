@@ -1,0 +1,125 @@
+---
+// Theme toggle — flips between light and dark, persists to
+// localStorage('theme'), and updates <meta name="theme-color"> so iOS
+// Safari's chrome band matches. Initial state is set before paint by
+// the inline script in BaseLayout, so this button only handles the
+// click and the post-render sync of its own aria-pressed/title.
+---
+
+<button
+    type="button"
+    class="theme-toggle"
+    aria-pressed="false"
+    aria-label="Switch to dark mode"
+    title="Light"
+    data-theme-toggle
+>
+    <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">
+        <svg
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+        >
+            <circle cx="12" cy="12" r="4" fill="currentcolor"></circle>
+            <g stroke="currentcolor" stroke-width="1.6" stroke-linecap="round">
+                <path d="M12 2v3"></path>
+                <path d="M12 19v3"></path>
+                <path d="M2 12h3"></path>
+                <path d="M19 12h3"></path>
+                <path d="M4.5 4.5l2.1 2.1"></path>
+                <path d="M17.4 17.4l2.1 2.1"></path>
+                <path d="M4.5 19.5l2.1-2.1"></path>
+                <path d="M17.4 6.6l2.1-2.1"></path>
+            </g>
+        </svg>
+    </span>
+    <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">
+        <svg
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+        >
+            <path
+                d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"
+                fill="currentcolor"
+            ></path>
+        </svg>
+    </span>
+</button>
+
+<script>
+    const root = document.documentElement;
+    const button = document.querySelector<HTMLButtonElement>(
+        "[data-theme-toggle]"
+    );
+    if (!button) {
+        // Nothing more to do — the inline pre-paint script in BaseLayout
+        // already established the theme.
+    } else {
+        // Toggle the `media` attribute on the two theme-color metas so iOS
+        // Safari picks the right one. `explicit=true` forces a specific
+        // theme regardless of OS preference; `explicit=false` restores the
+        // natural (prefers-color-scheme) queries.
+        const lightMeta = document.querySelector<HTMLMetaElement>(
+            'meta[name="theme-color"][data-theme-color="light"]'
+        );
+        const darkMeta = document.querySelector<HTMLMetaElement>(
+            'meta[name="theme-color"][data-theme-color="dark"]'
+        );
+        const applyThemeColor = (theme: "light" | "dark", explicit: boolean) => {
+            if (!lightMeta || !darkMeta) return;
+            if (explicit) {
+                lightMeta.media = theme === "dark" ? "not all" : "all";
+                darkMeta.media = theme === "dark" ? "all" : "not all";
+            } else {
+                lightMeta.media = "(prefers-color-scheme: light)";
+                darkMeta.media = "(prefers-color-scheme: dark)";
+            }
+        };
+
+        const syncButton = (theme: "light" | "dark") => {
+            const isDark = theme === "dark";
+            button.setAttribute("aria-pressed", isDark ? "true" : "false");
+            button.setAttribute(
+                "aria-label",
+                isDark ? "Switch to light mode" : "Switch to dark mode"
+            );
+            button.setAttribute("title", isDark ? "Dark" : "Light");
+        };
+
+        syncButton(root.dataset.theme === "dark" ? "dark" : "light");
+
+        button.addEventListener("click", () => {
+            const next = root.dataset.theme === "dark" ? "light" : "dark";
+            root.dataset.theme = next;
+            try {
+                localStorage.setItem("theme", next);
+            } catch {
+                /* storage disabled — fall through */
+            }
+            syncButton(next);
+            applyThemeColor(next, true);
+        });
+
+        // Track OS preference changes while no explicit choice is stored.
+        const mq = window.matchMedia("(prefers-color-scheme: dark)");
+        const onChange = (event: MediaQueryListEvent) => {
+            try {
+                if (localStorage.getItem("theme")) return;
+            } catch {
+                /* storage disabled — still follow the OS */
+            }
+            const next = event.matches ? "dark" : "light";
+            root.dataset.theme = next;
+            syncButton(next);
+            applyThemeColor(next, false);
+        };
+        mq.addEventListener("change", onChange);
+    }
+</script>

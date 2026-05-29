@@ -1,0 +1,177 @@
+---
+import { getCollection, render } from "astro:content";
+import { miniKindBySlug, nowTintBySlug, stickerClass, tintClass } from "../../data/format.ts";
+import { SITE } from "../../data/site.ts";
+import Kicker from "../primitives/Kicker.astro";
+import MiniUI from "../primitives/MiniUI.astro";
+import Pill from "../primitives/Pill.astro";
+import Placeholder from "../primitives/Placeholder.astro";
+
+const { now } = SITE;
+
+const building = (await getCollection("projects", (p) => p.data.status === "building")).sort(
+    (a, b) => a.data.order - b.data.order
+);
+
+// Feature the XL card when there is one, else the first building project.
+// smalls = everything except the featured entry, filtered by id so a second
+// XL doesn't silently vanish. No building projects → render the empty state.
+const featured = building.find((p) => p.data.bentoSize === "xl") ?? building[0];
+const smalls = featured ? building.filter((p) => p.id !== featured.id) : [];
+
+const FeaturedContent = featured ? (await render(featured)).Content : null;
+const smallContents = await Promise.all(
+    smalls.map(async (p) => ({ p, Content: (await render(p)).Content }))
+);
+---
+
+<section id="now">
+    <header>
+        <div class="row row-between row-baseline">
+            <div class="row row-baseline now-eyebrow">
+                <span class="t-mono muted">{now.number}</span>
+                <Kicker>{now.kicker}</Kicker>
+            </div>
+            <span class="t-mono muted">{now.count}</span>
+        </div>
+        <h2 class="t-heading section-heading">
+            <span>{now.headingMain}</span>
+            <span class="muted">{now.headingMuted}</span>
+        </h2>
+        <div class="section-divider"></div>
+    </header>
+
+    {
+        featured ? (
+            <Fragment>
+                <article class="card stripe-bg now-featured">
+                    {featured.data.sticker && (
+                        <div class="featured-sticker">
+                            <span class:list={["sticker", stickerClass(featured.data.sticker.tone)]}>
+                                {featured.data.sticker.text}
+                            </span>
+                        </div>
+                    )}
+                    <div class="now-featured-grid">
+                        <div>
+                            <Kicker>{now.featuredKicker}</Kicker>
+                            <h3 class="t-heading featured-title">
+                                {featured.data.title}<span class="accent">.</span>
+                            </h3>
+                            <div class="t-body featured-body">
+                                {FeaturedContent && <FeaturedContent />}
+                            </div>
+                            <ul class="row-tight featured-tech">
+                                {featured.data.tech.map((t) => (
+                                    <li><Pill>{t}</Pill></li>
+                                ))}
+                            </ul>
+                            {/* "case study" CTA → /projects/[slug]. Disabled until
+                                the case-study route ships; tracking in #79. */}
+                            {/* <div class="featured-cta">
+                                <a class="btn accent" href={`/projects/${featured.id}`}>
+                                    {now.featuredCtaLabel} <HandArrow size={14} />
+                                </a>
+                            </div> */}
+                        </div>
+                        <div class="now-thumbs-grid">
+                            <Placeholder h={260}>home</Placeholder>
+                            <Placeholder h={260}>capture</Placeholder>
+                            <Placeholder h={260}>timeline</Placeholder>
+                        </div>
+                    </div>
+                </article>
+
+                {smallContents.length > 0 && (
+                    <div class="now-small-grid">
+                        {smallContents.map(({ p, Content }) => {
+                            const tint = nowTintBySlug[p.id] ?? tintClass(p.data.sticker?.tone);
+                            const cardKicker = now.cardKickers[p.id] ?? p.data.tagline;
+                            const miniKind = miniKindBySlug[p.id];
+                            return (
+                                <article class:list={["card", "now-small", tint]}>
+                                    {p.data.sticker && (
+                                        <div class="now-small-sticker">
+                                            <span class:list={["sticker", stickerClass(p.data.sticker.tone)]}>
+                                                {p.data.sticker.text}
+                                            </span>
+                                        </div>
+                                    )}
+                                    <Kicker>{cardKicker}</Kicker>
+                                    <h3 class="t-title">{p.data.title}</h3>
+                                    <div class="t-body">
+                                        <Content />
+                                    </div>
+                                    {miniKind && <MiniUI kind={miniKind} />}
+                                    <div class="card-foot">
+                                        <ul class="row-tight">
+                                            {p.data.tech.map((t) => (
+                                                <li>
+                                                    <Pill>{t}</Pill>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                        <span class="t-mono accent" aria-hidden="true">→</span>
+                                    </div>
+                                </article>
+                            );
+                        })}
+                    </div>
+                )}
+            </Fragment>
+        ) : (
+            <div class="card now-empty">
+                <Kicker>{now.empty.kicker}</Kicker>
+                <h3 class="t-heading now-empty-title">{now.empty.title}</h3>
+                <p class="t-body muted now-empty-body">{now.empty.body}</p>
+            </div>
+        )
+    }
+</section>
+
+<style>
+    .now-eyebrow {
+        gap: 0.875rem;
+    }
+    .now-empty {
+        margin-top: 1.375rem;
+        gap: 0.375rem;
+    }
+    .now-empty-title {
+        margin-top: 0.25rem;
+        font-size: clamp(1.5rem, 4vw, 2.25rem);
+    }
+    .now-empty-body {
+        max-width: 32rem;
+    }
+    .featured-sticker {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.75rem;
+        z-index: 1;
+    }
+    .featured-title {
+        margin-top: 0.375rem;
+        font-size: clamp(1.75rem, 6vw, 3rem);
+    }
+    .featured-body {
+        margin-top: 0.25rem;
+        font-size: 1rem;
+        max-width: 26.25rem;
+    }
+    .featured-tech {
+        margin-top: 1.125rem;
+    }
+    .featured-cta {
+        margin-top: 1rem;
+    }
+    .now-small {
+        position: relative;
+    }
+    .now-small-sticker {
+        position: absolute;
+        top: 0.875rem;
+        right: 0.875rem;
+        z-index: 1;
+    }
+</style>

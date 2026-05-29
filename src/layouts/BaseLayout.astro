@@ -1,0 +1,150 @@
+---
+// SoundToggle is built but parked: there's no audio feature yet, so it's not
+// rendered (see body). Re-enable the import + the element together.
+// import SoundToggle from "../components/nav/SoundToggle.astro";
+import ThemeToggle from "../components/nav/ThemeToggle.astro";
+import { SITE } from "../data/site.ts";
+import "../styles/global.css";
+
+type Props = {
+    title?: string;
+    description?: string;
+    ogType?: "website" | "article" | "profile";
+};
+
+const {
+    title = SITE.meta.title,
+    description = SITE.meta.description,
+    ogType = "website",
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageUrl = new URL("/og.png", Astro.site).toString();
+
+const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Daniel Chomat",
+    url: Astro.site?.toString(),
+    jobTitle: "Mobile & front-end engineer",
+    sameAs: ["https://github.com/DanielChomat", "https://linkedin.com/in/danielchomat"],
+};
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <!-- Two declarative metas so iOS Safari paints the URL bar / toolbar
+             tint correctly on first frame, before the bootstrap script
+             runs. The toggle script later flips their `media` attributes
+             when the user picks a theme that doesn't match the OS. -->
+        <meta name="theme-color" content="#f3efe4" media="(prefers-color-scheme: light)" data-theme-color="light" />
+        <meta name="theme-color" content="#0e0d0a" media="(prefers-color-scheme: dark)" data-theme-color="dark" />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalUrl} />
+
+        <meta property="og:type" content={ogType} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="chomat.tech" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:image" content={ogImageUrl} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImageUrl} />
+
+        <title>{title}</title>
+        <script
+            is:inline
+            type="application/ld+json"
+            set:html={JSON.stringify(personSchema)}
+        />
+        <script is:inline>
+            // Resolve theme before paint to avoid a light→dark flash.
+            // Order: stored choice → OS preference → light fallback.
+            // Mirrors the writes in ThemeToggle.astro.
+            (function () {
+                try {
+                    var stored = localStorage.getItem("theme");
+                    var prefersDark =
+                        window.matchMedia &&
+                        window.matchMedia("(prefers-color-scheme: dark)").matches;
+                    var theme;
+                    if (stored === "dark" || stored === "light") {
+                        theme = stored;
+                    } else {
+                        theme = prefersDark ? "dark" : "light";
+                    }
+                    document.documentElement.dataset.theme = theme;
+                    // If a stored choice overrides the OS preference, swap
+                    // the theme-color metas so the iOS chrome matches the
+                    // page. When the stored theme matches the OS, the two
+                    // (prefers-color-scheme) metas already do the right thing.
+                    if (stored && (stored === "dark") !== prefersDark) {
+                        var lm = document.querySelector(
+                            'meta[name="theme-color"][data-theme-color="light"]'
+                        );
+                        var dm = document.querySelector(
+                            'meta[name="theme-color"][data-theme-color="dark"]'
+                        );
+                        if (lm && dm) {
+                            lm.media = theme === "dark" ? "not all" : "all";
+                            dm.media = theme === "dark" ? "all" : "not all";
+                        }
+                    }
+                } catch (err) {
+                    document.documentElement.dataset.theme = "light";
+                }
+            })();
+        </script>
+    </head>
+    <body>
+        <div class="wf v3 pal-spritz">
+            <a class="skip-link" href="#main">Skip to content</a>
+            <ThemeToggle />
+            {/* SoundToggle parked until an audio feature exists — see import. */}
+            <slot />
+        </div>
+    </body>
+</html>
+
+<style>
+    .skip-link {
+        position: absolute;
+        top: 0.5rem;
+        left: 0.5rem;
+        z-index: 1000;
+        padding: 0.5rem 0.75rem;
+        background: var(--text);
+        color: var(--bg);
+        text-decoration: none;
+        border-radius: var(--radius-sm);
+        font-family: var(--font-sans);
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.2;
+        transform: translateY(-200%);
+        transition: transform 180ms ease;
+    }
+    .skip-link:focus-visible {
+        transform: translateY(0);
+        outline: 0.125rem solid var(--accent);
+        outline-offset: 0.125rem;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .skip-link {
+            transition: none;
+        }
+    }
+</style>

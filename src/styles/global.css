@@ -1,0 +1,30 @@
+/* ─────────────────────────────────────────────────────────
+   chomat.tech — design system entry point (manifest)
+   ----------------------------------------------------------
+   Type:    Geist Sans + Geist Mono
+   Color:   warm off-white / near-black + 1 teal accent
+   Sizing:  rem-first (1rem = 16px). 1px hairlines stay px.
+   Cascade: @layer reset → base → components → utilities.
+   Each partial declares its own @layer membership; this file
+   only declares the layer order and imports the partials in
+   that order. Vite inlines every @import at build time.
+   ───────────────────────────────────────────────────────── */
+
+@layer reset, base, components, utilities;
+
+/* Fonts — self-hosted via @fontsource-variable. */
+@import "@fontsource-variable/geist/wght.css";
+@import "@fontsource-variable/geist-mono/wght.css";
+
+/* Layered partials. */
+@import "./reset.css";                  /* @layer reset      */
+@import "./tokens.css";                 /* @layer base       */
+@import "./type.css";                   /* @layer base       */
+@import "./components/card.css";        /* @layer components */
+@import "./components/logomark.css";    /* @layer components */
+@import "./components/pill.css";        /* @layer components */
+@import "./components/controls.css";    /* @layer components */
+@import "./components/nav.css";         /* @layer components */
+@import "./components/layout.css";      /* @layer components */
+@import "./components/decorations.css"; /* @layer components */
+@import "./utilities.css";              /* @layer utilities  */

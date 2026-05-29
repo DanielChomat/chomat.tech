@@ -1,0 +1,124 @@
+---
+type NavItem = { label: string; short?: string; href: string };
+
+type Props = {
+    items: readonly NavItem[];
+    active?: number;
+    /** Back-to-top target. Defaults to "#hero" (homepage); subpages with
+        no hero pass their own top anchor, e.g. "#main". */
+    topHref?: string;
+};
+
+const { items, active = -1, topHref = "#hero" } = Astro.props;
+---
+
+<nav class="pill-nav" aria-label="Section navigation" data-nav-capsule>
+    <a
+        class="to-top"
+        href={topHref}
+        aria-label="Back to top"
+        data-back-to-top
+    >
+        <span aria-hidden="true">↑</span>
+    </a>
+    <span class="active-pill" data-active-pill aria-hidden="true"></span>
+    {
+        items.map((it, i) => (
+            <a
+                href={it.href}
+                class:list={{ active: i === active }}
+                aria-current={i === active ? "page" : undefined}
+            >
+                {it.label}
+            </a>
+        ))
+    }
+    {/* Resume CTA parked until /resume.pdf ships — restore the anchor
+        and the .resume-ext rule together. */}
+    {/* <a class="resume-cta" href="/resume.pdf"
+        >Resume<span class="resume-ext">.pdf</span></a
+    > */}
+</nav>
+
+<style>
+    /* .resume-ext { margin-left: 0.25rem; opacity: 0.7; } — parked with the resume CTA */
+</style>
+
+<script>
+    import { mapLinksToSections, trackActiveSection } from "../../scripts/section-nav.ts";
+
+    const nav = document.querySelector<HTMLElement>("nav[data-nav-capsule]");
+    if (nav) {
+        const indicator = nav.querySelector<HTMLElement>("[data-active-pill]");
+        const links = Array.from(
+            nav.querySelectorAll<HTMLAnchorElement>(
+                'a[href^="#"]:not([data-back-to-top])'
+            )
+        );
+        const { linkBySection, sections } = mapLinksToSections(links);
+
+        let firstMove = true;
+        // Highlight a link and slide the pill under it (null = hide the pill).
+        const activateLink = (link: HTMLAnchorElement | null) => {
+            for (const l of links) {
+                l.classList.remove("active");
+                l.removeAttribute("aria-current");
+            }
+            if (!indicator) return;
+            if (!link) {
+                indicator.style.opacity = "0";
+                return;
+            }
+            link.classList.add("active");
+            link.setAttribute("aria-current", "page");
+            const move = () => {
+                indicator.style.transform = `translateX(${link.offsetLeft}px)`;
+                indicator.style.width = `${link.offsetWidth}px`;
+                indicator.style.opacity = "1";
+            };
+            if (firstMove) {
+                // Snap into place on first reveal — don't slide from the corner.
+                indicator.style.transition = "none";
+                move();
+                // Force reflow, then re-enable transitions.
+                void indicator.offsetWidth;
+                indicator.style.transition = "";
+                firstMove = false;
+            } else {
+                move();
+            }
+        };
+
+        trackActiveSection({
+            sections,
+            onActiveChange: (section) =>
+                activateLink(section ? (linkBySection.get(section) ?? null) : null),
+            footer: document.querySelector<HTMLElement>("footer"),
+            linkBySection,
+        });
+
+        // Subpage mode: no observable in-page sections (their #ids don't
+        // exist on this page), so the tracker sits idle. Honour the
+        // server-rendered .active class and position the pill on it once.
+        if (sections.length === 0) {
+            const staticActive = nav.querySelector<HTMLAnchorElement>(
+                'a.active:not([data-back-to-top])'
+            );
+            if (staticActive) activateLink(staticActive);
+        }
+
+        // Back-to-top: reveal once its target (own href) scrolls out of view.
+        const toTop = nav.querySelector<HTMLAnchorElement>("[data-back-to-top]");
+        const topId = toTop?.getAttribute("href")?.replace(/^#/, "");
+        const topTarget = topId ? document.getElementById(topId) : null;
+        if (toTop && topTarget) {
+            const topObs = new IntersectionObserver(
+                ([entry]) => {
+                    toTop.toggleAttribute("data-visible", !entry.isIntersecting);
+                },
+                { rootMargin: "-50px 0px 0px 0px" }
+            );
+            topObs.observe(topTarget);
+        }
+    }
+</script>

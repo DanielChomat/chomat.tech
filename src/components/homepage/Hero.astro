@@ -1,0 +1,119 @@
+---
+import { getCollection } from "astro:content";
+import { SITE } from "../../data/site.ts";
+import HandArrow from "../primitives/HandArrow.astro";
+import Kicker from "../primitives/Kicker.astro";
+
+const { hero } = SITE;
+const { status } = hero;
+
+// The "See what I'm building" CTA jumps to #now — only worth showing when
+// something is actually building, otherwise it lands on the empty state.
+const hasBuilding =
+    (await getCollection("projects", (p) => p.data.status === "building")).length > 0;
+---
+
+<section id="hero" class="bento hero-bento">
+    <div class="col-8 hero-stack">
+        <Kicker>{hero.kicker}</Kicker>
+        <h1 class="t-mega">
+            {hero.name}<span class="accent">*</span>
+        </h1>
+        <p class="t-body hero-bio">
+            <span class="t-mono muted">{hero.identityMono}</span>{hero.bioBefore}<span
+                class="marker">{hero.bioMark}</span
+            >{hero.bioMid}<span
+                class="marker-sage">{hero.bioMarkAlt}</span
+            >{hero.bioAfter}
+        </p>
+    </div>
+
+    <aside class="col-4 card hero-status-card" aria-label={status.ariaLabel}>
+        <div class="row row-between">
+            <Kicker>{status.kicker}</Kicker>
+            <span class="status-dot pulse hero-status-dot"></span>
+        </div>
+
+        <div class="hero-status-block">
+            <h3 class="t-title hero-status-h">
+                {status.roleLead}<strong>{status.roleBold}</strong>{status.roleTrail}
+            </h3>
+            <p class="t-body muted hero-status-sub">{status.roleBody}</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="hero-status-block">
+            <h3 class="t-title hero-status-h">
+                {status.buildingLead}<strong>{status.buildingBold}</strong>{status.buildingTrail}
+            </h3>
+            <p class="t-body hero-status-body">{status.buildingBody}</p>
+        </div>
+
+        <p class="t-body muted hero-status-avail">{status.availability}</p>
+
+        {
+            hasBuilding && (
+                <div class="row-tight hero-status-cta">
+                    <a class="btn accent" href={status.ctaPrimaryHref}>
+                        {status.ctaPrimary} <HandArrow />
+                    </a>
+                    {/* Resume CTA parked until /resume.pdf ships — restore with the nav links.
+                        When restored, lift it out of the hasBuilding guard so it shows regardless. */}
+                    {/* <a class="btn" href={status.ctaSecondaryHref}>{status.ctaSecondary}</a> */}
+                </div>
+            )
+        }
+    </aside>
+</section>
+
+<style>
+    /* Per V4bHero in the design canvas — `style={{ fontSize: 160 }}` —
+       the homepage name renders larger than the v3 default. */
+    .t-mega {
+        --t-mega-max: 10rem;
+    }
+    .hero-bio {
+        max-width: 47.5rem;
+        font-size: 1.125rem;
+        line-height: 1.55;
+        margin-top: 0.375rem;
+    }
+    /* Size the card to its own content instead of stretching to match the
+       tall mega-name column it sits beside. */
+    .hero-status-card {
+        align-self: start;
+    }
+    .hero-status-dot {
+        width: 0.625rem;
+        height: 0.625rem;
+    }
+    /* Group each block so its heading and caption hug (0.25rem), while the
+       card's own 0.75rem flex gap spaces the blocks, divider, and CTAs. */
+    .hero-status-block {
+        display: grid;
+        gap: 0.25rem;
+    }
+    .hero-status-sub,
+    .hero-status-avail {
+        font-size: 0.8125rem;
+    }
+    .hero-status-cta {
+        margin-top: 0.25rem;
+    }
+
+    @media (max-width: 45rem) {
+        /* On phones the card stacks under the name (the .col-* collapse in
+           utilities.css); let the CTAs go full-width like the old hero row. */
+        .hero-status-cta {
+            width: 100%;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.5rem;
+        }
+        .hero-status-cta .btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>

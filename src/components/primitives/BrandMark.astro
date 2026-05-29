@@ -1,0 +1,50 @@
+---
+// chomat.tech brand mark — a curl + underline with a teal accent dot.
+// Ink strokes use `currentcolor` so the mark inherits its context (and
+// theme) color; the accent dot is the brand teal. Pair with the favicon
+// in public/favicon.svg, which mirrors this artwork as a static asset.
+type Props = {
+    /** Square size in design-px units; rendered as rem (px / 16). Default 32. */
+    size?: number;
+    /** Accessible label. Omit for a decorative mark (aria-hidden). */
+    title?: string;
+};
+
+const { size = 32, title } = Astro.props;
+const sizeRem = `${size / 16}rem`;
+---
+
+<svg
+    class="brand-mark"
+    width={sizeRem}
+    height={sizeRem}
+    viewBox="0 0 32 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    role={title ? "img" : undefined}
+    aria-label={title ?? undefined}
+    aria-hidden={title ? undefined : "true"}
+    focusable="false"
+>
+    {title && <title>{title}</title>}
+    <path
+        d="M 3 22 Q 6 13 14 13 Q 22 13 22 19 Q 22 23 18 23 Q 15 23 15 20 Q 15 18 17 18"
+        stroke="currentcolor"
+        stroke-width="2.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    />
+    <path
+        d="M 5 27 Q 11 25 17 27 T 28 27"
+        stroke="currentcolor"
+        stroke-width="2"
+        stroke-linecap="round"
+    />
+    <circle class="brand-mark__dot" cx="17" cy="18" r="1.9" />
+</svg>
+
+<style>
+    .brand-mark__dot {
+        fill: var(--accent);
+    }
+</style>

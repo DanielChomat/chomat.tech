@@ -1,0 +1,148 @@
+---
+type NavItem = { label: string; short?: string; href: string };
+
+type Props = {
+    items: readonly NavItem[];
+    /**
+     * Zero-based index of the item that represents the *current page*.
+     * Set on subpages (e.g., /experience) so the dropdown shows a
+     * persistent active dot regardless of scroll position. -1 means
+     * "no static current" — used on the homepage, where the active
+     * item is computed dynamically from section visibility.
+     */
+    active?: number;
+};
+
+const { items, active = -1 } = Astro.props;
+---
+
+<div class="mobile-menu" data-mobile-menu data-open="false">
+    <button
+        type="button"
+        class="mobile-menu__trigger"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu-panel"
+        data-mobile-menu-trigger
+    >
+        <span class="mobile-menu__label" data-mobile-menu-label>menu</span>
+        <span class="mobile-menu__icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    </button>
+    <nav
+        id="mobile-menu-panel"
+        class="mobile-menu__panel"
+        aria-label="Mobile menu"
+        data-mobile-menu-panel
+    >
+        <ul class="mobile-menu__list">
+            {
+                items.map((item, i) => {
+                    const isCurrent = i === active;
+                    return (
+                    <li>
+                        <a
+                            href={item.href}
+                            data-mobile-menu-link
+                            class:list={{ active: isCurrent }}
+                            aria-current={isCurrent ? "page" : undefined}
+                        >
+                            <span class="mobile-menu__dot" aria-hidden="true" />
+                            <span class="mobile-menu__text">
+                                {item.short ?? item.label}
+                            </span>
+                        </a>
+                    </li>
+                    );
+                })
+            }
+        </ul>
+        {/* Resume link parked until /resume.pdf ships — restore the
+            divider + anchor (and the resumeHref prop) together. */}
+        {/* <div class="mobile-menu__divider" aria-hidden="true"></div>
+        <a class="mobile-menu__resume" href={resumeHref} data-mobile-menu-link>
+            <span>resume.pdf</span>
+            <span aria-hidden="true">↓</span>
+        </a> */}
+    </nav>
+</div>
+
+<script>
+    import { mapLinksToSections, trackActiveSection } from "../../scripts/section-nav.ts";
+
+    const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
+    if (menu) {
+        const trigger = menu.querySelector<HTMLButtonElement>(
+            "[data-mobile-menu-trigger]"
+        );
+        const label = menu.querySelector<HTMLElement>(
+            "[data-mobile-menu-label]"
+        );
+        const links = Array.from(
+            menu.querySelectorAll<HTMLAnchorElement>("[data-mobile-menu-link]")
+        );
+        const sectionLinks = links.filter((l) =>
+            l.getAttribute("href")?.startsWith("#")
+        );
+
+        const setOpen = (open: boolean) => {
+            menu.dataset.open = open ? "true" : "false";
+            trigger?.setAttribute("aria-expanded", open ? "true" : "false");
+            trigger?.setAttribute(
+                "aria-label",
+                open ? "Close navigation menu" : "Open navigation menu"
+            );
+            if (label) label.textContent = open ? "close" : "menu";
+        };
+
+        trigger?.addEventListener("click", (event) => {
+            event.stopPropagation();
+            setOpen(menu.dataset.open !== "true");
+        });
+
+        for (const link of links) {
+            link.addEventListener("click", () => setOpen(false));
+        }
+
+        document.addEventListener("click", (event) => {
+            if (
+                menu.dataset.open === "true" &&
+                event.target instanceof Node &&
+                !menu.contains(event.target)
+            ) {
+                setOpen(false);
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && menu.dataset.open === "true") {
+                setOpen(false);
+                trigger?.focus();
+            }
+        });
+
+        // Active-section highlighting — same logic as NavCapsule, so the
+        // scroll/observer machinery is shared. The menu just toggles a class
+        // (no sliding pill), so that's all this onActiveChange does.
+        const { linkBySection, sections } = mapLinksToSections(sectionLinks);
+        trackActiveSection({
+            sections,
+            onActiveChange: (section) => {
+                for (const l of sectionLinks) {
+                    l.classList.remove("active");
+                    l.removeAttribute("aria-current");
+                }
+                const link = section ? linkBySection.get(section) : null;
+                if (link) {
+                    link.classList.add("active");
+                    link.setAttribute("aria-current", "page");
+                }
+            },
+            footer: document.querySelector<HTMLElement>("footer"),
+            linkBySection,
+        });
+    }
+</script>

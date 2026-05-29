@@ -1,0 +1,21 @@
+---
+import Pill from "./Pill.astro";
+
+type Status = "building" | "shipped" | "archived";
+type Props = {
+    status: Status;
+    label?: string;
+};
+
+const { status, label } = Astro.props as Props;
+
+const MAP: Record<Status, { dot: "pulse" | "shipped" | "archived"; text: string }> = {
+    building: { dot: "pulse", text: "Building" },
+    shipped: { dot: "shipped", text: "Shipped" },
+    archived: { dot: "archived", text: "Archived" },
+};
+
+const { dot, text } = MAP[status];
+---
+
+<Pill dot={dot}>{label ?? text}</Pill>

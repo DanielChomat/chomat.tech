@@ -1,0 +1,122 @@
+/* Visual flourishes — grain overlay, markers, stripe-bg, wormhole, arrow.
+   Loaded into @layer components. */
+
+@layer components {
+    .wf {
+        & .marker {
+            background: linear-gradient(
+                180deg,
+                transparent 50%,
+                color-mix(in oklab, var(--tint-butter, #f1dd8a) 90%, transparent) 50%,
+                color-mix(in oklab, var(--tint-butter, #f1dd8a) 90%, transparent) 90%,
+                transparent 90%
+            );
+            padding: 0 0.125rem;
+            border-radius: 0.125rem;
+        }
+        & .marker-sage {
+            background: linear-gradient(
+                180deg,
+                transparent 50%,
+                color-mix(in oklab, var(--tint-sage, #c2d3a3) 90%, transparent) 50%,
+                color-mix(in oklab, var(--tint-sage, #c2d3a3) 90%, transparent) 90%,
+                transparent 90%
+            );
+            padding: 0 0.125rem;
+            border-radius: 0.125rem;
+        }
+
+        & .stripe-bg {
+            background:
+                repeating-linear-gradient(
+                    -38deg,
+                    transparent 0 0.875rem,
+                    color-mix(in oklab, var(--accent) 8%, transparent) 0.875rem 1rem
+                ),
+                var(--surface);
+        }
+
+        & .arrow {
+            display: inline-block;
+            vertical-align: -0.1875rem;
+        }
+
+        & .wormhole {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid var(--line);
+            border-radius: 0.875rem;
+            background: var(--surface);
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--text);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+
+            &::before {
+                content: "";
+                position: absolute;
+                right: -0.625rem;
+                top: 50%;
+                width: 3.75rem;
+                height: 3.75rem;
+                transform: translateY(-50%);
+                background: conic-gradient(from 0deg, transparent 0%, var(--accent) 50%, transparent 100%);
+                opacity: 0.18;
+                border-radius: 50%;
+                pointer-events: none;
+            }
+        }
+
+        /* V3 grain overlay + stacking context for page-body / sound-toggle */
+        &.v3 {
+            &::after {
+                content: "";
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+                z-index: 1;
+                background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+                background-size: 13.75rem 13.75rem;
+                opacity: 0.06;
+                mix-blend-mode: multiply;
+            }
+            & .page-body {
+                position: relative;
+                z-index: 2;
+            }
+            & .sound-toggle {
+                z-index: 5;
+            }
+        }
+
+        /* Dark: marker highlights would read as opaque-yellow on dark, so
+           switch to subtle tinted washes; the v3 grain blend flips from
+           multiply (dark-on-light) to screen (light-on-dark). */
+        html[data-theme="dark"] & {
+            & .marker {
+                background: linear-gradient(
+                    180deg,
+                    transparent 50%,
+                    color-mix(in oklab, var(--tint-butter) 70%, transparent) 50%
+                );
+                color: var(--text);
+            }
+            & .marker-sage {
+                background: linear-gradient(
+                    180deg,
+                    transparent 50%,
+                    color-mix(in oklab, var(--tint-sage) 70%, transparent) 50%
+                );
+                color: var(--text);
+            }
+            &.v3::after {
+                mix-blend-mode: screen;
+                opacity: 0.08;
+            }
+        }
+    }
+}

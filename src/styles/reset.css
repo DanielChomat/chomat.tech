@@ -1,0 +1,41 @@
+/* Document baseline. Loaded into @layer reset. */
+
+@layer reset {
+    /* Universal box-sizing so width: 100% + padding never overflows the
+       container. Without this .page-body and other padded blocks end up
+       wider than their flex parent on narrow viewports. */
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        background: #f3efe4;
+        font-family: "Geist Variable", system-ui, sans-serif;
+        color: #16140f;
+    }
+
+    /* Pre-token paint colors for dark mode — applied before .wf tokens
+       resolve so the page never flashes light. The inline theme script
+       in BaseLayout sets [data-theme] before first paint. */
+    html[data-theme="dark"],
+    html[data-theme="dark"] body {
+        background: #0e0d0a;
+        color: #ece8de;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        html {
+            scroll-behavior: smooth;
+        }
+    }
+
+    section[id] {
+        scroll-margin-top: 5rem;
+        position: relative;
+    }
+}

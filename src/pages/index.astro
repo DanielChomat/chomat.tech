@@ -1,0 +1,33 @@
+---
+import Companies from "../components/homepage/Companies.astro";
+import Contact from "../components/homepage/Contact.astro";
+import Experience from "../components/homepage/Experience.astro";
+import Hero from "../components/homepage/Hero.astro";
+import Now from "../components/homepage/Now.astro";
+import SiteFooter from "../components/homepage/SiteFooter.astro";
+import Tech from "../components/homepage/Tech.astro";
+import Work from "../components/homepage/Work.astro";
+import MobileMenu from "../components/nav/MobileMenu.astro";
+import NavCapsule from "../components/nav/NavCapsule.astro";
+import { SITE } from "../data/site.ts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+    <NavCapsule items={SITE.nav} />
+    <MobileMenu items={SITE.nav} />
+    <div class="page">
+        <main id="main" class="page-body">
+            <div class="section-stack">
+                <Hero />
+                <Now />
+                <Experience />
+                <Work />
+                <Companies />
+                <Tech />
+                <Contact />
+            </div>
+            <SiteFooter />
+        </main>
+    </div>
+</BaseLayout>
