@@ -131,9 +131,15 @@ const { items, active = -1 } = Astro.props;
         trackActiveSection({
             sections,
             onActiveChange: (section) => {
-                for (const l of sectionLinks) l.classList.remove("active");
+                for (const l of sectionLinks) {
+                    l.classList.remove("active");
+                    l.removeAttribute("aria-current");
+                }
                 const link = section ? linkBySection.get(section) : null;
-                if (link) link.classList.add("active");
+                if (link) {
+                    link.classList.add("active");
+                    link.setAttribute("aria-current", "page");
+                }
             },
             footer: document.querySelector<HTMLElement>("footer"),
         });

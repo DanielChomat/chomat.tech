@@ -26,11 +26,11 @@ export type SectionTrackerOptions = {
  * viewport), or the last section once the footer is in view. Calls
  * `onActiveChange` only when the selection actually changes.
  */
-export function trackActiveSection({
+export const trackActiveSection = ({
     sections,
     onActiveChange,
     footer,
-}: SectionTrackerOptions): void {
+}: SectionTrackerOptions): void => {
     if (sections.length === 0) return;
 
     const visible = new Set<HTMLElement>();
@@ -82,23 +82,26 @@ export function trackActiveSection({
         );
         endObs.observe(footer);
     }
-}
+};
 
 /**
  * Build a section→link map from anchors whose `href` is an in-page hash
  * (`#section`), skipping any that opt out via `data-back-to-top`. Returns
  * the map plus the sections in link order (handy for the tracker).
  */
-export function mapLinksToSections(links: Iterable<HTMLAnchorElement>): {
+export const mapLinksToSections = (
+    links: Iterable<HTMLAnchorElement>
+): {
     linkBySection: Map<HTMLElement, HTMLAnchorElement>;
     sections: HTMLElement[];
-} {
+} => {
     const linkBySection = new Map<HTMLElement, HTMLAnchorElement>();
     for (const link of links) {
+        if (link.hasAttribute("data-back-to-top")) continue;
         const id = link.getAttribute("href")?.replace(/^#/, "");
         if (!id) continue;
         const section = document.getElementById(id);
         if (section) linkBySection.set(section, link);
     }
     return { linkBySection, sections: Array.from(linkBySection.keys()) };
-}
+};
