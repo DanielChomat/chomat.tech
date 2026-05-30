@@ -11,6 +11,7 @@ const { work } = SITE;
 const cards = (
     await getCollection("projects", (p) => p.data.status !== "building" && p.data.featured)
 ).sort((a, b) => a.data.order - b.data.order);
+const TEMP_STATIC_CARDS: typeof cards = []
 ---
 
 <section id="work">
@@ -28,9 +29,9 @@ const cards = (
         <div class="section-divider"></div>
     </header>
 
-    {cards.length > 0 ? (
+    {TEMP_STATIC_CARDS.length > 0 ? (
         <div class="bento bento-pad-top">
-            {cards.map((p) => {
+            {TEMP_STATIC_CARDS.map((p) => {
                 const isBig = ["lg", "xl"].includes(p.data.bentoSize);
                 const sticker = p.data.sticker;
                 return (
