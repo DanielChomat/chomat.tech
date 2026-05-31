@@ -11,7 +11,7 @@ const { work } = SITE;
 const cards = (
     await getCollection("projects", (p) => p.data.status !== "building" && p.data.featured)
 ).sort((a, b) => a.data.order - b.data.order);
-const TEMP_STATIC_CARDS: typeof cards = []
+const TEMP_STATIC_CARDS: typeof cards = [];
 ---
 
 <section id="work">

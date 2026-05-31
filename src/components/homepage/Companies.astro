@@ -17,7 +17,7 @@ const { companies: copy } = SITE;
             {
                 companies.map((company) => (
                     <li class="companies-item">
-                        <LogoMark name={company.data.name} size={56} />
+                        <LogoMark name={company.data.name} size={56} logo={company.data.logo} />
                         <span class="t-mono muted companies-name">{company.data.name}</span>
                     </li>
                 ))
