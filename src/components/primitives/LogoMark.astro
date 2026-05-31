@@ -8,14 +8,49 @@ type Props = {
     size?: number;
     /** Tint token (butter, sage, sky, …); falls back to the neutral surface. */
     tint?: string;
+    /** Optional URL to an actual brand logo image (svg / png). When provided,
+     *  renders an <img> instead of the initials monogram. */
+    logo?: string;
 };
 
-const { name, size, tint } = Astro.props;
+const { name, size, tint, logo } = Astro.props;
 const mono = initials(name);
 const sizeRem = size ? `${size / 16}rem` : undefined;
 ---
 
-<span
-    class:list={["logomark", tintClass(tint)]}
-    style={sizeRem ? `--logo-size: ${sizeRem};` : undefined}
-    aria-hidden="true">{mono}</span>
+{
+    logo ? (
+        <span
+            class:list={["logomark", "logomark--img"]}
+            style={sizeRem ? `--logo-size: ${sizeRem};` : undefined}
+        >
+            <img src={logo} alt={name} width={size ?? 36} height={size ?? 36} />
+        </span>
+    ) : (
+        <span
+            class:list={["logomark", tintClass(tint)]}
+            style={sizeRem ? `--logo-size: ${sizeRem};` : undefined}
+            aria-hidden="true"
+        >
+            {mono}
+        </span>
+    )
+}
+
+<style>
+    .logomark--img {
+        background: none;
+        border: none;
+        box-shadow: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+    .logomark--img img {
+        width: var(--logo-size, 2.25rem);
+        height: var(--logo-size, 2.25rem);
+        object-fit: contain;
+        display: block;
+    }
+</style>
