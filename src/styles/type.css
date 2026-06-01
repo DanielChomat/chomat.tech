@@ -42,6 +42,10 @@
             letter-spacing: 0;
             text-transform: uppercase;
             color: var(--muted);
+            /* Year ranges, interval counters, and the Companies strip date/count
+               all render through .t-mono — keep their digits fixed-width so the
+               columns don't jiggle as glyphs change. */
+            font-variant-numeric: tabular-nums;
         }
         & .kicker {
             font-family: var(--font-mono);

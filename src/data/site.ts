@@ -6,12 +6,12 @@ export const SITE = {
     meta: {
         title: "Daniel Chomat — Senior React Native Engineer",
         description:
-            "I'm a React Native engineer focused on production mobile apps, product thinking, and modern front-end architecture — with six years across fintech, healthcare, and startups.",
+            "I’m a React Native engineer focused on production mobile apps, product thinking, and modern front-end architecture — with six years across fintech, healthcare, and startups.",
         siglum: "chomat.tech · v2",
         // Open Graph card copy (rendered by src/pages/og.png.ts). Kept here
         // so the share image stays a render-only consumer of site content.
         ogTagline:
-            "Senior React Native engineer. Six years across fintech, healthcare, and startups.",
+            "Senior React Native engineer. Six years across fintech, healthcare, and startups.",
         ogLocale: "Czechia · he/him",
     },
     nav: [
@@ -24,20 +24,20 @@ export const SITE = {
     hero: {
         kicker: "chomat.tech · v2",
         name: "Daniel Chomat",
-        identityMono: "* Senior React Native engineer · Czechia ",
-        bioBefore: "I've spent six years building production apps across ",
+        identityMono: "* Senior React Native engineer · Czechia ",
+        bioBefore: "I’ve spent six years building production apps across ",
         bioMark: "fintech, healthcare, and digital products",
         bioMid: ". I started in front-end, then went deeper into ",
-        bioMarkAlt: "React Native and mobile product engineering",
+        bioMarkAlt: "React Native and mobile product engineering",
         bioAfter: ".",
         status: {
-            ariaLabel: "What I'm working on now",
+            ariaLabel: "What I’m working on now",
             kicker: "/now · May 2026",
             roleLead: "Currently at ",
-            roleBold: "Partners Bank",
+            roleBold: "Partners Bank",
             roleTrail: ".",
             roleBody:
-                "Back helping build a Czech mobile-only bank — React Native, product quality, and reliable delivery.",
+                "Back helping build a Czech mobile-only bank — React Native, product quality, and reliable delivery.",
             buildingLead: "Building ",
             buildingBold: "side products",
             buildingTrail: ".",
@@ -65,7 +65,7 @@ export const SITE = {
         empty: {
             kicker: "Workshop",
             title: "Quiet on the bench right now.",
-            body: "I'm between builds — new experiments will show up here as they take shape.",
+            body: "I’m between builds — new experiments will show up here as they take shape.",
         },
     },
     experience: {
@@ -74,11 +74,11 @@ export const SITE = {
         link: { label: "full timeline", href: "/experience" },
         headingMain: "Six years, ",
         headingMuted: "from web to mobile.",
-        intro: "I started in front-end and agency work, moved into React Native, and took on broader ownership across architecture, delivery, deployment, and product.",
+        intro: "I started in front-end and agency work, moved into React Native, and took on broader ownership across architecture, delivery, deployment, and product.",
         currentLabel: "Currently here",
     },
     companies: {
-        ariaLabel: "Companies I've worked with",
+        ariaLabel: "Companies I’ve worked with",
         label: "Worked with",
         range: "2019 → now",
         countLabel: "companies",
@@ -178,14 +178,14 @@ export const SITE = {
         kicker: "§ Experience · the long version",
         headingMain: "Six years.",
         headingMark: "*",
-        intro: "Front-end first, React Native next. Agency work, fintech, healthcare, and client projects — owning requirements, architecture, delivery, and deployment.",
+        intro: "Front-end first, React Native next. Agency work, fintech, healthcare, and client projects — owning requirements, architecture, delivery, and deployment.",
         introMarkLead: "*",
         about: {
             kicker: "§ About · short version",
-            headingLead: "I'm a product-minded engineer — ",
+            headingLead: "I’m a product-minded engineer — ",
             headingMark: "building mobile apps with real users and real constraints",
             headingTrail:
-                ". Based in Czechia, working across React Native, TypeScript, and modern front-end.",
+                ". Based in Czechia, working across React Native, TypeScript, and modern front-end.",
             pills: ["React Native", "TypeScript", "mobile", "product"],
         },
         summary: [
