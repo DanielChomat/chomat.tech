@@ -41,8 +41,11 @@ const { notFound } = SITE;
                         notFound.cards.map((c) => (
                             <li>
                                 <a class:list={["card", c.tint, "nf-card"]} href={c.href}>
-                                    <Kicker>{c.kicker}</Kicker>
-                                    <h3 class="t-title nf-card-title">{c.title}</h3>
+                                    <Kicker>{"glyph" in c && <span aria-hidden="true">{c.glyph} </span>}{c.kicker}</Kicker>
+                                    {/* These cards are the page's top-level navigation under
+                                        the h1, so they use h2 to avoid an h1-to-h3 skip. The
+                                        .t-title class keeps their subordinate visual weight. */}
+                                    <h2 class="t-title nf-card-title">{c.title}</h2>
                                     <p class="t-body muted">{c.blurb}</p>
                                 </a>
                             </li>

@@ -227,7 +227,10 @@ export const SITE = {
         body: "Could be a stale link, a future page, or a typo. The site is small enough that you can probably find what you wanted from one of these.",
         cards: [
             {
-                kicker: "↩ home",
+                kicker: "home",
+                // Decorative return glyph — rendered in an aria-hidden span by
+                // 404.astro so screen readers announce just "home".
+                glyph: "↩",
                 title: "chomat.tech",
                 blurb: "the index",
                 href: "/",
@@ -266,6 +269,6 @@ export const SITE = {
         setIn: "Geist",
         setInMono: "Geist Mono",
         builtWith: "Astro",
-        backToTop: "↑ back to top",
+        backToTop: "back to top",
     },
 } as const;
