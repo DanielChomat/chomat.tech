@@ -14,9 +14,17 @@ type Props = {
     logo?: string;
 };
 
+// Mirrors the `--logo-size: 2.25rem` default in logomark.css. The <Image>
+// intrinsic width/height attrs can't be a CSS var, so they need the literal
+// fallback; keeping it here ties the two together.
+const DEFAULT_SIZE = 36;
+
 const { name, size, tint, logo } = Astro.props;
 const mono = initials(name);
+// Visual size: only emit --logo-size when a size is given, otherwise let the
+// stylesheet default govern. Intrinsic Image dims always need a concrete px.
 const sizeRem = size ? `${size / 16}rem` : undefined;
+const px = size ?? DEFAULT_SIZE;
 ---
 
 {
@@ -25,7 +33,7 @@ const sizeRem = size ? `${size / 16}rem` : undefined;
             class:list={["logomark", "logomark--img"]}
             style={sizeRem ? `--logo-size: ${sizeRem};` : undefined}
         >
-            <Image src={logo} alt={name} width={size ?? 36} height={size ?? 36} />
+            <Image src={logo} alt={name} width={px} height={px} />
         </span>
     ) : (
         <span

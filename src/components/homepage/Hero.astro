@@ -34,19 +34,23 @@ const hasBuilding =
             <span class="status-dot pulse hero-status-dot"></span>
         </div>
 
+        {/* Status statements live in a complementary aside (named via its
+            aria-label) and sit directly under the page-level h1. They're
+            sentences, not outline sections, so they render as paragraphs —
+            promoting them to headings would skip the h2 level. */}
         <div class="hero-status-block">
-            <h3 class="t-title hero-status-h">
+            <p class="hero-status-text">
                 {status.roleLead}<strong>{status.roleBold}</strong>{status.roleTrail}
-            </h3>
+            </p>
             <p class="t-body muted hero-status-sub">{status.roleBody}</p>
         </div>
 
         <div class="divider"></div>
 
         <div class="hero-status-block">
-            <h3 class="t-title hero-status-h">
+            <p class="hero-status-text">
                 {status.buildingLead}<strong>{status.buildingBold}</strong>{status.buildingTrail}
-            </h3>
+            </p>
             <p class="t-body hero-status-body">{status.buildingBody}</p>
         </div>
 
@@ -88,11 +92,22 @@ const hasBuilding =
         width: 0.625rem;
         height: 0.625rem;
     }
-    /* Group each block so its heading and caption hug (0.25rem), while the
+    /* Group each block so its lead line and caption hug (0.25rem), while the
        card's own 0.75rem flex gap spaces the blocks, divider, and CTAs. */
     .hero-status-block {
         display: grid;
         gap: 0.25rem;
+    }
+    /* Status lead lines mirror the .t-title type step, but they're paragraphs,
+       not headings — kept off the heading utilities so .t-title stays mapped
+       to <h3> per the type contract. */
+    .hero-status-text {
+        font-size: 1.0625rem;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        font-weight: 500;
+        margin: 0;
+        overflow-wrap: break-word;
     }
     .hero-status-sub,
     .hero-status-avail {
