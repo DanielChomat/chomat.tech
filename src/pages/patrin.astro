@@ -1,0 +1,125 @@
+---
+const title = "Patrin";
+const description = "Your entire net worth. On your device. Nowhere else.";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content={description} />
+        <title>{title}</title>
+    </head>
+    <body>
+        <main>
+            <h1>{title}</h1>
+            <p class="tagline">{description}</p>
+            <div class="ledger-line" aria-hidden="true">
+                <span>Network requests, all time</span>
+                <strong>0</strong>
+            </div>
+            <nav aria-label="Patrin pages">
+                <a href="/patrin/privacy.html">Privacy policy</a>
+                <a href="/patrin/support.html">Support</a>
+            </nav>
+        </main>
+    </body>
+</html>
+
+<style is:global>
+    :root {
+        --surface: #fafaf8;
+        --ink: #1c1c1e;
+        --ink-secondary: #6e6e73;
+        --rule: #e3e3e0;
+        --accent: #2e5e4e;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --surface: #131315;
+            --ink: #f2f2f0;
+            --ink-secondary: #98989e;
+            --rule: #2c2c2e;
+            --accent: #7fb8a4;
+        }
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        display: flex;
+        min-height: 100svh;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.25rem;
+        background: var(--surface);
+        color: var(--ink);
+        font-family:
+            -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Roboto",
+            sans-serif;
+        line-height: 1.6;
+    }
+
+    main {
+        width: 100%;
+        max-width: 34rem;
+    }
+
+    h1 {
+        font-family: ui-serif, "New York", "Georgia", serif;
+        font-size: 2.4rem;
+        font-weight: 600;
+        letter-spacing: 0;
+    }
+
+    .tagline {
+        margin-top: 0.5rem;
+        color: var(--ink-secondary);
+        font-size: 1.05rem;
+    }
+
+    .ledger-line {
+        display: flex;
+        justify-content: space-between;
+        margin: 2rem 0;
+        padding-top: 1rem;
+        border-top: 1px solid var(--rule);
+        color: var(--ink-secondary);
+        font-variant-numeric: tabular-nums;
+        font-size: 0.9rem;
+    }
+
+    .ledger-line strong {
+        color: var(--accent);
+        font-weight: 600;
+    }
+
+    nav {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    a {
+        color: var(--accent);
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+        text-decoration: underline;
+    }
+
+    a:focus-visible {
+        border-radius: 0.125rem;
+        outline: 0.125rem solid var(--accent);
+        outline-offset: 0.1875rem;
+    }
+</style>
