@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Ledgr</title>
+<style>
+  :root {
+    --surface: #FAFAF8;
+    --ink: #1C1C1E;
+    --ink-secondary: #6E6E73;
+    --rule: #E3E3E0;
+    --accent: #2E5E4E;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface: #131315;
+      --ink: #F2F2F0;
+      --ink-secondary: #98989E;
+      --rule: #2C2C2E;
+      --accent: #7FB8A4;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--surface);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    line-height: 1.65;
+    padding: 3rem 1.25rem 4rem;
+  }
+  main { max-width: 38rem; margin: 0 auto; }
+  .eyebrow {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-secondary);
+  }
+  h1 {
+    font-family: ui-serif, "New York", Georgia, serif;
+    font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0.35rem 0 1.5rem;
+  }
+  h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 2rem 0 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+  }
+  p { margin-bottom: 0.9rem; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .contact {
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .contact strong { display: block; margin-bottom: 0.25rem; }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Ledgr</p>
+  <h1>Support</h1>
+
+  <p>Ledgr keeps all your data on your device, so there is no account to recover and no server-side help needed — but if something isn't working, or you have a question or an idea, get in touch.</p>
+
+  <div class="contact">
+    <strong>Email</strong>
+    <a href="mailto:patrinapp@protonmail.com">patrinapp@protonmail.com</a>
+  </div>
+
+  <h2>I forgot my backup passphrase</h2>
+  <p>Backup passphrases cannot be recovered — by design. Nobody, including the developer, can decrypt a backup without its passphrase. If your data is still on your device, create a new backup with a new passphrase and store it in your password manager.</p>
+
+  <h2>I got a new phone</h2>
+  <p>Ledgr's data does not travel through iCloud or device transfers — that is the privacy promise working as intended. Create an encrypted backup on your old device (Settings → Export), move the file to the new device, and import it there.</p>
+
+  <h2>Restoring a purchase</h2>
+  <p>If you've already bought the one-time unlock, open Settings → Restore Purchase on any device signed into the same Apple Account.</p>
+
+  <h2>What happened to my values after an update?</h2>
+  <p>Nothing leaves or changes without you: the app only ever shows values you entered. If a number looks wrong, check the asset's event timeline on its detail screen — every recorded value is listed there and can be edited.</p>
+</main>
+</body>
+</html>
