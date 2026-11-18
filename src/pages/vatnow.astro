@@ -1,0 +1,137 @@
+---
+const title = "DPH Hned – kalkulačka DPH";
+const description =
+    "Napíšete cenu a hned vidíte částku bez DPH i s DPH. Type a price and see it without and with VAT at once.";
+const appStoreUrl = "https://apps.apple.com/app/id6829173244";
+---
+
+<!doctype html>
+<html lang="cs">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content={description} />
+        <meta name="apple-itunes-app" content="app-id=6829173244" />
+        <title>{title}</title>
+    </head>
+    <body>
+        <main>
+            <h1>DPH Hned</h1>
+            <p class="tagline">
+                Napíšete cenu a hned vidíte částku bez DPH i s DPH. Funguje i
+                ve widgetech a ve Zkratkách.
+            </p>
+            <p class="tagline" lang="en">
+                VAT Now: type a price and see it without and with VAT at once.
+            </p>
+            <div class="ledger-line" aria-hidden="true">
+                <span>850 000 Kč s DPH → bez DPH</span>
+                <strong>702 479,34 Kč</strong>
+            </div>
+            <nav aria-label="DPH Hned">
+                <a href={appStoreUrl}>App Store</a>
+                <a href="/vatnow/support">Podpora / Support</a>
+                <a href="/vatnow/privacy">Soukromí / Privacy</a>
+            </nav>
+        </main>
+    </body>
+</html>
+
+<style is:global>
+    :root {
+        --surface: #f7f5fb;
+        --ink: #1c1c1e;
+        --ink-secondary: #6e6e73;
+        --rule: #e2deea;
+        --accent: #5b3fa8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --surface: #131215;
+            --ink: #f2f2f0;
+            --ink-secondary: #98989e;
+            --rule: #2c2a30;
+            --accent: #b4a0ec;
+        }
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        display: flex;
+        min-height: 100svh;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.25rem;
+        background: var(--surface);
+        color: var(--ink);
+        font-family:
+            -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Roboto",
+            sans-serif;
+        line-height: 1.6;
+    }
+
+    main {
+        width: 100%;
+        max-width: 34rem;
+    }
+
+    h1 {
+        font-size: 2.4rem;
+        font-weight: 700;
+        letter-spacing: 0;
+    }
+
+    .tagline {
+        margin-top: 0.5rem;
+        color: var(--ink-secondary);
+        font-size: 1.05rem;
+    }
+
+    .ledger-line {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: space-between;
+        margin: 2rem 0;
+        padding-top: 1rem;
+        border-top: 1px solid var(--rule);
+        color: var(--ink-secondary);
+        font-variant-numeric: tabular-nums;
+        font-size: 0.9rem;
+    }
+
+    .ledger-line strong {
+        color: var(--accent);
+        font-weight: 600;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    a {
+        color: var(--accent);
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+        text-decoration: underline;
+    }
+
+    a:focus-visible {
+        border-radius: 0.125rem;
+        outline: 0.125rem solid var(--accent);
+        outline-offset: 0.1875rem;
+    }
+</style>
